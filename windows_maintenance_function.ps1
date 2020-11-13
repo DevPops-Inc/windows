@@ -13,6 +13,7 @@ function Windows-Maintenance {
     defrag c: /u
     Write-Output "Please save your documents and close applications."
     pause
+    shutdown /r /0
 }
 
 # call function
