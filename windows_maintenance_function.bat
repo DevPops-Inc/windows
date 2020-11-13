@@ -10,7 +10,7 @@ Dism /Online /Cleanup-Image /ScanHealth
 defrag c: /u
 echo "please save your work and close applications"
 pause
-shutdown /r
+shutdown /r /t0
 EXIT /B 0
 
 CALL :Maintenance
