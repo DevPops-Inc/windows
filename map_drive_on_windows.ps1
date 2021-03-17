@@ -1,5 +1,7 @@
 #!/bin/powershell
 
+# map drive on Windows
+
 # declare variables
 $DriveLetter = Read-Host -Prompt "What letter would you like to map the drive with? (Example: D)"
 $PathWay = Read-Host -Prompt "What is the pathway of the drive you wish to map? (Example: \\Network\Share)"
