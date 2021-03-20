@@ -2,7 +2,7 @@
 
 # Windows maintenance function
 
-# you need to elevaate permissions before this function can run: 
+# you need to elevate permissions before this function can run: 
 # Start-Process Powershell -Verb runAs 
 
 # define function
@@ -13,7 +13,7 @@ function Windows-Maintenance {
     defrag c: /u
     Write-Output "Please save your documents and close applications."
     pause
-    shutdown /r /0
+    shutdown /r /t 0
 }
 
 # call function

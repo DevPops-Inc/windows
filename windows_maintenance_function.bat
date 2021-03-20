@@ -8,9 +8,9 @@ echo y | chkdsk /f/r c:
 SFC /scannow
 Dism /Online /Cleanup-Image /ScanHealth
 defrag c: /u
-echo "please save your work and close applications"
+echo "Please save your work and close applications."
 pause
-shutdown /r /t0
+shutdown /r /t 0
 EXIT /B 0
 
 CALL :Maintenance
