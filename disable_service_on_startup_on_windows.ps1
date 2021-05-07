@@ -1,5 +1,3 @@
-#!/bin/powershell
-
 # disable service on startup on Windows
 
 # prompt user input
