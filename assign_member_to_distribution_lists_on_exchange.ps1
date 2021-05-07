@@ -1,5 +1,3 @@
-#!/bin/powershell
-
 # assign member to distribution list on Exchange
 
 # prompt user input 
