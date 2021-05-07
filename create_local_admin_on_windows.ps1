@@ -1,5 +1,3 @@
-#!/bin/powershell
-
 # create local admin on Windows
 
 # prompt user input 
