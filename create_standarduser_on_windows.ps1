@@ -1,5 +1,3 @@
-#!/bin/powershell
-
 # create standard user on Windows
 
 # prompt user input
