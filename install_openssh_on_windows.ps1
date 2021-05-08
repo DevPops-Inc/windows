@@ -25,6 +25,7 @@ function StartOpenSshServices()
     Start-Service sshd
 }
 
+# define main function 
 function InstallOpenSshOnWindows()
 {
     # get OpenSSH status
