@@ -1,20 +1,20 @@
-#!/bin/powershell
-
 # Windows maintenance function
 
-# you need to elevate permissions before this function can run: 
-# Start-Process Powershell -Verb runAs 
+# prompt user input 
+Write-Host "`nWindows maintenance function.`nYou need to elevate permissions before this function can run: Start-Process Powershell -Verb runAs"
+Pause
 
-# define function
-function Windows-Maintenance {
+# define WindowsMaintenance function
+function WindowsMaintenance()
+{
     Write-Output y | chkdsk /f/r c:
     SFC /scannow
     Dism /Online /Cleanup-Image /ScanHealth
     defrag c: /u
-    Write-Output "Please save your documents and close applications."
-    pause
+    Write-Output "`nPlease save your documents and close applications.`n"
+    Pause
     shutdown /r /t 0
 }
 
-# call function
-Windows-Maintenance
+# call WindowsMaintenance function
+WindowsMaintenance
