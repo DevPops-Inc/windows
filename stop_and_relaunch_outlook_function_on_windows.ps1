@@ -1,18 +1,21 @@
-#!/bin/powershell
-
 # stop and relaunch Outlook function on Windows
 
-# declare variables
-$ProcessName = 'OUTLOOK'
-$Seconds = 5
-$ApplicationName = 'outlook.exe'
+# prompt user input
+Write-Host "`nStop and relaunch Outlook function on Windows"
+Pause
 
-# define function
-function Stop-Relaunch-Outlook {
-    Stop-Process -processname $ProcessName
-    Start-Sleep -s $Seconds
-    Start-Process -FilePath $ApplicationName
+# declare processName, seconds, and applicationName variables
+$processName = 'OUTLOOK'
+$seconds = 5
+$applicationName = 'outlook.exe'
+
+# define StopAndRelaunchOutlook tfunction
+function StopAndRelaunchOutlook()
+{
+    Stop-Process -ProcessName $processName
+    Start-Sleep -s $seconds
+    Start-Process -FilePath $applicationName
 }
 
-# call function
-Stop-Relaunch-Outlook
+# call StopAndRelaunchOutlook function
+StopAndRelaunchOutlook
