@@ -1,7 +1,7 @@
 # disable service on startup on Windows
 
 # prompt user input
-Write-Host "`nDisable server on startup on Windows."
+Write-Host "`nDisable service on startup on Windows."
 Pause 
 
 # get list of services
