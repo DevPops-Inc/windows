@@ -6,7 +6,7 @@ Pause
 
 # declare computer, key, and service variables variables 
 $computer = Get-Content $env:Computername
-$key = Read-Host -Prompt "`n What is your Windows key? (Exampel: aaaaa-bbbbb-ccccc-ddddd-eeeee)`n"
+$key = Read-Host -Prompt "`n What is your Windows key? (Example: aaaaa-bbbbb-ccccc-ddddd-eeeee)`n"
 $service = Get-WmiObject -query "select * from SoftwareLicensingService" -Computername $computer
 
 # active Windows 
