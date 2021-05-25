@@ -1,12 +1,12 @@
 # remove computer from domain on Windows 
 
 # prompt user input 
-Write-Host "`nRemove computer from domain on Windows."
+Write-Host "`nRemove computer from domain on Windows.`nPlease run this script on the computer you wish to remove from the domain."
 Pause
 
 # declare variables
 $domain = Read-Host -Prompt "`nWhich domain do you want to remove the computer from? (Example: developers)"
-$computer= Read-Host -Prompt "`nWhich computer would you like to remove from the domain? (Example: dev123"
+$adAdmin= Read-Host -Prompt "`nPlease type the Active Directory account (Example: ad.admin): "
 
 # remove computer from domain
-Remove-Computer -UnjoinDomaincredential $domain\$computer-PassThru -Verbose -Restart
+Remove-Computer -UnjoinDomaincredential $domain\$adAdmin -PassThru -Verbose -Restart
