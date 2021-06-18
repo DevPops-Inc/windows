@@ -1,5 +1,3 @@
-rem #!/bin/batch
-
 rem Windows maintenance function
 
 rem define function

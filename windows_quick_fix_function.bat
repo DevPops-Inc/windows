@@ -1,5 +1,3 @@
-rem #!/bin/batch
-
 rem Windows quick fix function
 
 rem define function
