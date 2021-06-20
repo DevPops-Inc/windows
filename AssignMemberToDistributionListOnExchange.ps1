@@ -37,8 +37,8 @@ function AssignMemberToDistributionGroup()
 {
     Write-Host "`nAssign member to distribution list on Exchange.`n"
 
-    GetEmail
-    GetDistributionList
+    GetEmail $email
+    GetDistributionList $distributionList
 
     Add-DistributionGroupMember -Identity $distributionList -Member $email
     Get-DistributionGroupMember -Identity $distributionList
