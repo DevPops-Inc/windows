@@ -7,9 +7,6 @@ param
     , [string] [Parameter(Mandatory = $False)] $distributionList = ""
 )
 
-Write-Host "`nAssign member to distribution list on Exchange.`n"
-Pause
-
 function GetEmail([string]$email)
 {
     if (($email -eq $Null) -or ($email -eq ""))
@@ -38,11 +35,15 @@ function GetDistributionList([string]$distributionList)
 
 function AssignMemberToDistributionGroup()
 {
+    Write-Host "`nAssign member to distribution list on Exchange.`n"
+
     GetEmail
     GetDistributionList
 
     Add-DistributionGroupMember -Identity $distributionList -Member $email
     Get-DistributionGroupMember -Identity $distributionList
+
+    Write-Host ("`n{0} has been added to {1)`n" -F $email, $distributionList)
 }
 
-    AssignMemberToDistributionGroup
+AssignMemberToDistributionGroup
