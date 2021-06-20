@@ -1,16 +1,48 @@
 # assign member to distribution list on Exchange
 
+[CmdletBinding()]
+param
+(
+      [string] [Parameter(Mandatory = $False)] $email = ""
+    , [string] [Parameter(Mandatory = $False)] $distributionList = ""
+)
+
 Write-Host "`nAssign member to distribution list on Exchange.`n"
 Pause
 
-$email = Read-Host -Prompt "`nWhat email would you like to assign to the distribution list? (Example: email@domain.com)`n"
-
-$distributionList = Read-Host -Prompt "`nWhat distribution list would you like to add the email to? (Example: group@domain.com)`n"
-
-Function AssignMemberToDistributionGroup()
+function GetEmail([string]$email)
 {
+    if (($email -eq $Null) -or ($email -eq ""))
+    {
+        $email = Read-Host -Prompt "`nWhat email would you like to assign to the distribution list? (Example: email@domain.com)"
+        return $email
+    }
+    else 
+    {
+        return $email
+    }
+}
+
+function GetDistributionList([string]$distributionList)
+{
+    if (($distributionList -eq $Null) -or ($distributionList -eq ""))
+    {
+        $distributionList = Read-Host -Prompt "`nWhat distribution list would you like to add the email to? (Example: group@domain.com)"
+        return $distributionList
+    }
+    else 
+    {
+        return $distributionList
+    }
+}
+
+function AssignMemberToDistributionGroup()
+{
+    GetEmail
+    GetDistributionList
+
     Add-DistributionGroupMember -Identity $distributionList -Member $email
     Get-DistributionGroupMember -Identity $distributionList
 }
 
-AssignMemberToDistributionGroup
+    AssignMemberToDistributionGroup
