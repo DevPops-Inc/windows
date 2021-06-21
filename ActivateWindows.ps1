@@ -1,5 +1,7 @@
 # activate Windows in PowerShell
 
+# you can run the script with: .\ActivateWindows.ps1 -computerName < computer name > -licenseKey < license key >
+
 [CmdletBinding()]
 param 
 (
@@ -41,12 +43,19 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
     GetComputerName $computerName
     GetLicenseKey $licenseKey
 
-    $service = Get-WmiObject -query "select * from SoftwareLicensingService" -Computername $computerName
+    try
+    {
+        $service = Get-WmiObject -query "select * from SoftwareLicensingService" -Computername $computerName
 
-    $service.InstallProductKey($licenseKey)
-    $service.RefreshLicenseStatus()
+        $service.InstallProductKey($licenseKey)
+        $service.RefreshLicenseStatus()
 
-    Write-Host ("`nWindows has been activated on {0} using license key: {1}.`n" -F $computerName, $licenseKey)
+        Write-Host ("`nWindows has been activated on {0} with license key: {1}.`n" -F $computerName, $licenseKey)
+    }
+    catch
+    {
+        Write-Host ("`nWindows failed to activate on {0} with license key: {1}`n" -F $computerName, $licenseKey) -ForegroundColor Red
+    }
 }
 
 ActivateWindows $computerName $licenseKey
