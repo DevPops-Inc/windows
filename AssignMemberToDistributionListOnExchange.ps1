@@ -1,10 +1,12 @@
 # assign member to distribution list on Exchange
 
+# you can run this script with: .\AssignMemberToDistributionListOnExchange.ps1 -email < email > -distroList < distribution list >
+
 [CmdletBinding()]
 param
 (
       [string] [Parameter(Mandatory = $False)] $email = ""
-    , [string] [Parameter(Mandatory = $False)] $distributionList = ""
+    , [string] [Parameter(Mandatory = $False)] $distroList = ""
 )
 
 function GetEmail([string]$email)
@@ -20,30 +22,37 @@ function GetEmail([string]$email)
     }
 }
 
-function GetDistributionList([string]$distributionList)
+function GetDistroList([string]$distroList)
 {
-    if (($distributionList -eq $Null) -or ($distributionList -eq ""))
+    if (($distroList -eq $Null) -or ($distroList -eq ""))
     {
-        $distributionList = Read-Host -Prompt "`nWhat distribution list would you like to add the email to? (Example: group@domain.com)"
-        return $distributionList
+        $distroList = Read-Host -Prompt "`nWhat distribution list would you like to add the email to? (Example: group@domain.com)"
+        return $distroList
     }
     else 
     {
-        return $distributionList
+        return $distroList
     }
 }
 
-function AssignMemberToDistributionGroup([string]$email,[string]$distributionList)
+function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
 {
     Write-Host "`nAssign member to distribution list on Exchange.`n"
 
-    GetEmail $email
-    GetDistributionList $distributionList
+    $email = GetEmail $email
+    $distroList = GetDistroList $distroList
 
-    Add-DistributionGroupMember -Identity $distributionList -Member $email
-    Get-DistributionGroupMember -Identity $distributionList
-
-    Write-Host ("`n{0} has been added to {1)`n" -F $email, $distributionList)
+    try
+    {
+        Add-DistributionGroupMember -Identity $distroList -Member $email
+        Get-DistributionGroupMember -Identity $distroList
+    
+        Write-Host ("`n{0} has been added to {1)`n" -F $email, $distroList) -ForegroundColor Green
+    }
+    catch
+    {
+        Write-Host ("`n{0} failed to be added to {1)`n" -F $email, $distroList) -ForegroundColor Red
+    }
 }
 
-AssignMemberToDistributionGroup $email $distributionList
+AssignMemberToDistributionGroup $email $distroList
