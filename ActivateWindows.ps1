@@ -34,7 +34,7 @@ function GetLicenseKey([string]$licenseKey)
     }
 }
 
-function ActivateWindows()
+function ActivateWindows([string]$computerName, [string]$licenseKey)
 {
     Write-Host "`nActivate Windows in PowerShell`n"
 
@@ -49,4 +49,4 @@ function ActivateWindows()
     Write-Host ("`nWindows has been activated on {0} using license key: {1}.`n" -F $computerName, $licenseKey)
 }
 
-ActivateWindows
+ActivateWindows $computerName $licenseKey

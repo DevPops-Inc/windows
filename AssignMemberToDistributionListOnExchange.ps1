@@ -33,7 +33,7 @@ function GetDistributionList([string]$distributionList)
     }
 }
 
-function AssignMemberToDistributionGroup()
+function AssignMemberToDistributionGroup([string]$email,[string]$distributionList)
 {
     Write-Host "`nAssign member to distribution list on Exchange.`n"
 
@@ -46,4 +46,4 @@ function AssignMemberToDistributionGroup()
     Write-Host ("`n{0} has been added to {1)`n" -F $email, $distributionList)
 }
 
-AssignMemberToDistributionGroup
+AssignMemberToDistributionGroup $email $distributionList
