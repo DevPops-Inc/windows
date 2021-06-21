@@ -33,7 +33,7 @@ function GetNewPassword([string]$newPassword)
     }
 }
 
-function changeUserPasswordOnActiveDirectory()
+function ChangeUserPasswordOnActiveDirectory([string]$userName, [string]$newPassword)
 {
     Write-Host "`nChange user password on Active Directory.`n"
 
@@ -44,3 +44,5 @@ function changeUserPasswordOnActiveDirectory()
 
     Write-Host ("`nThe password for {0} has been changed.`n" -F $userName)
 }
+
+ChangeUserPasswordOnActiveDirectory $userName $newPassword

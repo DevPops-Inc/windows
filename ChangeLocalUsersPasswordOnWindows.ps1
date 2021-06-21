@@ -32,7 +32,7 @@ function GetNewPassword($newPassword)
     }
 }
 
-function ChangeLocalUsersPassword() 
+function ChangeLocalUsersPassword([string]$localUser, [string]$newPassword) 
 {
     Write-Host "`nChange local user's password on Windows.`n"
 
@@ -47,4 +47,4 @@ function ChangeLocalUsersPassword()
     Write-Host ("`nThe password for {0} has been changed.`n" -F $localUser)
 }
 
-ChangeLocalUsersPassword
+ChangeLocalUsersPassword $localUser $newPassword
