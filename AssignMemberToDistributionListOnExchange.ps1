@@ -13,7 +13,7 @@ function GetEmail([string]$email)
 {
     if (($email -eq $Null) -or ($email -eq ""))
     {
-        $email = Read-Host -Prompt "`nWhat email would you like to assign to the distribution list? (Example: email@domain.com)"
+        $email = Read-Host -Prompt "`nPlease type the email would you like to assign to the distribution list (Example: email@domain.com)"
         return $email
     }
     else 
@@ -26,7 +26,7 @@ function GetDistroList([string]$distroList)
 {
     if (($distroList -eq $Null) -or ($distroList -eq ""))
     {
-        $distroList = Read-Host -Prompt "`nWhat distribution list would you like to add the email to? (Example: group@domain.com)"
+        $distroList = Read-Host -Prompt "`nPlease type the distribution list would you like to add the email to (Example: group@domain.com)"
         return $distroList
     }
     else 
@@ -47,11 +47,11 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
         Add-DistributionGroupMember -Identity $distroList -Member $email
         Get-DistributionGroupMember -Identity $distroList
     
-        Write-Host ("`n{0} has been added to {1)`n" -F $email, $distroList) -ForegroundColor Green
+        Write-Host ("`n{0} has been added to {1}" -F $email, $distroList) -ForegroundColor Green
     }
     catch
     {
-        Write-Host ("`n{0} failed to be added to {1)`n" -F $email, $distroList) -ForegroundColor Red
+        Write-Host ("`n{0} failed to be added to {1}" -F $email, $distroList) -ForegroundColor Red
     }
 }
 
