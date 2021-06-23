@@ -66,17 +66,19 @@ function CreateLocalAdmin([string]$localAdmin, [string]$password, [string]$descr
         # set password for new user to never expire
         Set-LocalUser -Name "$localAdmin" -PasswordNeverExpires 1
 
+        Write-Host ("`nLocal admin {0} has been created.`n" -F $localAdmin) -ForegroundColor Green
+        
         # check if new user has been added
         Write-Host "`nThe users on this computer are: `n"
         Get-LocalUser
-
-        Write-Host ("`nLocal admin {0} has been created.`n" -F $localAdmin) -ForegroundColor Green
     }
     catch
     {
+        Write-Host ("`nLocal admin {0} failed to be created.`n" -F $localAdmin) -ForegroundColor Red
+
         Write-Host "`nThe users on this computer are: `n"
         Get-LocalUser
-
-        Write-Host ("`nLocal admin {0} failed to be created.`n" -F $localAdmin) -ForegroundColor Red
     }
 }
+
+CreateLocalAdmin $localAdmin $password $description
