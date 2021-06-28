@@ -1,4 +1,4 @@
-# get list of drives on Windows
+# get list of drives
 
 function GetListOfDrives()
 {
