@@ -12,7 +12,8 @@ function GetLocalAdmin([string]$localAdmin)
 {
     if (($localAdmin -eq $Null) -or ($localAdmin -eq ""))
     {
-        $localAdmin = Read-Host -Prompt "`nPlease the admin name (Example: 'Foo.Bar')"
+        $localAdmin = Read-Host -Prompt "Please the admin name (Example: 'Foo.Bar')"
+
         return $localAdmin
     }
     else
@@ -25,7 +26,8 @@ function GetPassword([string]$password)
 {
     if (($password -eq $Null) -or ($password -eq ""))
     {
-        $password = Read-Host -Prompt "`nPlease type the password (Example: 'Password1234')"
+        $password = Read-Host -Prompt "Please type the password (Example: 'Password1234')"
+
         return $password
     }
     else
@@ -38,7 +40,8 @@ function GetDescription()
 {
     if (($description -eq $Null) -or ($description -eq ""))
     {
-        $description = Read-Host -Prompt "`nPlease type the description (Example: 'Local Admin')"
+        $description = Read-Host -Prompt "Please type the description (Example: 'Local Admin')"
+
         return $description
     }
     else
@@ -47,9 +50,31 @@ function GetDescription()
     }
 }
 
+function CheckOsForWindows()
+{
+    Write-Host "`nChecking operating system..."
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "You are running this script on Windows." -ForegroundColor Green
+    }
+    else 
+    {
+        Write-Host "Your operating system is:" $hostOs
+        
+        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system.`n"
+        break
+    }
+    Write-Host "Finished checking operating system.`n"
+}
+
 function CreateLocalAdmin([string]$localAdmin, [string]$password, [string]$description)
 {
     Write-Host "`nCreate local admin on Windows.`n"
+    CheckOsForWindows
 
     $localAdmin = GetLocalAdmin $localAdmin
     $password = GetPassword $password
@@ -66,17 +91,17 @@ function CreateLocalAdmin([string]$localAdmin, [string]$password, [string]$descr
         # set password for new user to never expire
         Set-LocalUser -Name "$localAdmin" -PasswordNeverExpires 1
 
-        Write-Host ("`nLocal admin {0} has been created.`n" -F $localAdmin) -ForegroundColor Green
+        Write-Host ("Successfully created local admin {0}." -F $localAdmin) -ForegroundColor Green
         
         # check if new user has been added
-        Write-Host "`nThe users on this computer are: `n"
+        Write-Host "The users on this computer are: "
         Get-LocalUser
     }
     catch
     {
-        Write-Host ("`nLocal admin {0} failed to be created.`n" -F $localAdmin) -ForegroundColor Red
+        Write-Host ("Faild to create local admin {0}." -F $localAdmin) -ForegroundColor Red
 
-        Write-Host "`nThe users on this computer are: `n"
+        Write-Host "The users on this computer are:"
         Get-LocalUser
     }
 }
