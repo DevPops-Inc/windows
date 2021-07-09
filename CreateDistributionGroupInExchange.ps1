@@ -1,5 +1,7 @@
 # create distribution group in Exchange
 
+# you can run this script with: .\CreateDistributionGroundInExchange.ps1 -distroList < distribution group > -orgUnit < organizational unit > 
+
 [CmdletBinding()]
 param
 (
@@ -11,7 +13,8 @@ function GetDistroList([string]$distroList)
 {
     if (($distroList -eq $Null) -or ($distroList -eq ""))
     {
-        $distroList = Read-Host -Prompt "`nWhat is name of the new distribution list you would like to create? (Example: devs@vicphan.dev)`n"
+        $distroList = Read-Host -Prompt "Please type the name of the new distribution list you would like to create (Example: devs@vicphan.dev)"
+        
         return $distroList
     }
     else
@@ -24,7 +27,8 @@ function GetOrgUnit([string]$orgUnit)
 {
     if (($orgUnit -eq $Null) -or ($orgUnit -eq ""))
     {
-        $orgUnit= Read-Host -Prompt "`nWhat is organization unit you would want this new distribution list to be a part of? (Example: developers)"
+        $orgUnit= Read-Host -Prompt "Please type the organization unit you would want this new distribution list to be a part of (Example: developers)"
+        
         return $orgUnit
     }
     else
@@ -33,17 +37,46 @@ function GetOrgUnit([string]$orgUnit)
     }
 }
 
+function CheckOsForWindows()
+{
+    Write-Host "`nChecking operating system..."
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "You are running this script on Windows." -ForegroundColor Green
+    }
+    else 
+    {
+        Write-Host "Your operating system is:" $hostOs
+        
+        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system.`n"
+        break
+    }
+    Write-Host "Finished checking operating system.`n"
+}
+
 function CreateDistroGroupInExchange([string]$distroList, [string] $orgUnit)
 {
-    Write-Host "`nCreate distribution group in Exchange."
+    Write-Host "`nCreate distribution group in Exchange.`n"
+    CheckOsForWindows
 
-    GetDistroList $distroList
-    GetOrgUnit $orgUnit
+    $distroList = GetDistroList $distroList
+    $orgUnit = GetOrgUnit $orgUnit
 
-    New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
-    Set-DistributionGroup -Identity $distroList -RequireSenderAuthenticationEnabled $false
-
-    Write-Host ("`n{0} has been created.`n" -F $distroList)
+    try
+    {
+        New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
+        Set-DistributionGroup -Identity $distroList -RequireSenderAuthenticationEnabled $false
+    
+        Write-Host ("Succesfully created {0}" -F $distroList) -ForegroundColor Green
+    }
+    catch
+    {
+        Write-Host ("Failed to create {0}" -F $distroList) -ForegroundColor Red
+    }
 }
 
 CreateDistroGroupInExchange $distroList $orgUnit
