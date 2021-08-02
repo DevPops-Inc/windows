@@ -13,7 +13,7 @@ function GetComputerName([string]$computerName)
 {
     if (($computerName -eq $Null) -or ($computerName -eq ""))
     {
-        $computerName = Read-Host -Prompt "Please type the computer name (Example: Dev-PC) or press `"Ctrl`" and `"C`" keys to use the computer name from the environment"
+        $computerName = Read-Host -Prompt "Please type the computer name and press `"Enter`" key (Example: Dev-PC) or press `"Ctrl`" and `"C`" keys to use the computer name from the environment"
         
         return $computerName
     }
@@ -28,7 +28,7 @@ function GetLicenseKey([string]$licenseKey)
 {
     if (($licenseKey -eq $Null) -or ($licenseKey -eq ""))
     {
-        $licenseKey = Read-Host -Prompt "Please type the Windows key (Example: aaaaa-bbbbb-ccccc-ddddd-eeeee)"
+        $licenseKey = Read-Host -Prompt "Please type the Windows license key (Example: aaaaa-bbbbb-ccccc-ddddd-eeeee) and press `"Enter`" key"
 
         return $licenseKey
     }
@@ -45,11 +45,11 @@ function CheckOsForWindows()
 
     if ($hostOs -eq "Win32NT")
     {
-        Write-Host "You are running this script on Windows." -ForegroundColor Green
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Your operating system is:" $hostOs
+        Write-Host "Operating System:" $hostOs
         
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
@@ -69,16 +69,28 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
 
     try
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started activating Windows at: " $startDateTime
+        
         $service = Get-WmiObject -query "select * from SoftwareLicensingService" -Computername $computerName
 
         $service.InstallProductKey($licenseKey)
         $service.RefreshLicenseStatus()
 
         Write-Host ("Windows has been activated on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished activating Windows at: " $finishedDateTime
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
     }
     catch
     {
         Write-Host ("Windows failed to activate on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Red
+
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
     }
 }
 
