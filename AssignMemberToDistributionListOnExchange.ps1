@@ -13,7 +13,7 @@ function GetEmail([string]$email)
 {
     if (($email -eq $Null) -or ($email -eq ""))
     {
-        $email = Read-Host -Prompt "Please type the email would you like to assign to the distribution list (Example: email@domain.com)"
+        $email = Read-Host -Prompt "Please type the email would you like to assign to the distribution list and press `"Enter`" key (Example: email@domain.com)"
 
         return $email
     }
@@ -27,7 +27,7 @@ function GetDistroList([string]$distroList)
 {
     if (($distroList -eq $Null) -or ($distroList -eq ""))
     {
-        $distroList = Read-Host -Prompt "Please type the distribution list would you like to add the email to (Example: group@domain.com)"
+        $distroList = Read-Host -Prompt "Please type the distribution list would you like to add the email to and press `"Enter`" key (Example: group@domain.com)"
         
         return $distroList
     }
@@ -44,11 +44,11 @@ function CheckOsForWindows()
 
     if ($hostOs -eq "Win32NT")
     {
-        Write-Host "You are running this script on Windows." -ForegroundColor Green
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Your operating system is:" $hostOs
+        Write-Host "Operating System:" $hostOs
         
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
@@ -68,14 +68,29 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
 
     try
     {
+        $startTimeDate = (Get-Date)
+        
+        Write-Host "Started assignming member to distribution list on Exchange at: " $startTimeDate
+
         Add-DistributionGroupMember -Identity $distroList -Member $email
         Get-DistributionGroupMember -Identity $distroList
     
-        Write-Host ("{0} has been added to {1}" -F $email, $distroList) -ForegroundColor Green
+        Write-Host ("Successfully added {0} to {1}" -F $email, $distroList) -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        
+        Write-Host "Finished assign member to distribution list on Exchange at: " $finishedDateTime
+
+        $duration = New-TimeSpan $startTimeDate $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
     }
     catch
     {
-        Write-Host ("{0} failed to be added to {1}" -F $email, $distroList) -ForegroundColor Red
+        Write-Host ("Failed to add {0} to {1}" -F $email, $distroList) -ForegroundColor Red
+
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
     }
 }
 
