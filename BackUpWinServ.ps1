@@ -59,42 +59,41 @@ function CheckOsForWindows()
 
 function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
 {
-    Write-Host "`nWindows Server Back up."
+    Write-Host "`nWindows Server Back up.`n"
     CheckOsForWindows
-
-    $startDateTime = (Get-Date)
-    Write-Host "Starting backing up Windows server at:" $startDateTime
 
     $fileSpecPath = GetFileSpecPath $fileSpecPath
     $volumePath = GetVolumePath $volumePath
-
-    $policy = New-WBPolicy  
-    $fileSpec = New-WBFileSpec -FileSpec $fileSpecPath
-    $backupLocation = New-WBBackupTarget -VolumePath $volumePath
-    $BUpolicy = Get-WBPolicy
-
+    
     try 
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Starting backing up Windows server at:" $startDateTime
+
+        $policy = New-WBPolicy  
+        $fileSpec = New-WBFileSpec -FileSpec $fileSpecPath
+        $backupLocation = New-WBBackupTarget -VolumePath $volumePath
+        $BUpolicy = Get-WBPolicy
+
         Add-WBFileSpec -Policy $policy -FileSpec $filespec  
         Add-WBBackupTarget -Policy $policy -Target $backupLocation  
         Set-WBSchedule -Policy $policy 09:00  
         Set-WBPolicy -Policy $policy
         Start-WBBackup -Policy $BUpolicy
+        
         Write-Host "Successfully backed up Windows Server." -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "`nFinished Windows maintenance at:" $finishedDateTime
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
     }
     catch 
     {
         Write-Host "Failed to back up Windows Server." -ForegroundColor Red
         Write-Host $_ -ForegroundColor -Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
-    }
-    finally
-    {
-        $finishedDateTime = (Get-Date)
-        Write-Host "`nFinished Windows maintenance at:" $finishedDateTime
-        $duration = New-TimeSpan $startDateTime $finishedDateTime
-        
-        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
     }
 }
 
