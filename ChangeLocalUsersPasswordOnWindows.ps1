@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param (
-      [string][Parameter(Mandatory = $False)] $localUser = ""
-    , [string] [Parameter(Mandatory = $False)] $newPassword = ""
+      [string]       [Parameter(Mandatory = $False)] $localUser = ""
+    , [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null
 )
 
 function GetLocalUser([string]$localUser)
@@ -22,11 +22,11 @@ function GetLocalUser([string]$localUser)
     }
 }
 
-function GetNewPassword([string]$newPassword)
+function GetNewPassword([securestring]$newPassword)
 {
     if (($newPassword -eq $Null) -or ($newPassword -eq ""))
     {
-        $newPassword = Read-Host -Prompt "Please type the new password for the local user (Example: Password123)"
+        $newPassword = Read-Host -Prompt "Please type the new password for the local user (Example: Password123)" -AsSecureString
 
         return $newPassword
     }
@@ -43,11 +43,11 @@ function CheckOsForWindows()
 
     if ($hostOs -eq "Win32NT")
     {
-        Write-Host "You are running this script on Windows." -ForegroundColor Green
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Your operating system is:" $hostOs
+        Write-Host "Operating System:" $hostOs
         
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
@@ -57,7 +57,7 @@ function CheckOsForWindows()
     Write-Host "Finished checking operating system.`n"
 }
 
-function ChangeLocalUsersPassword([string]$localUser, [string]$newPassword) 
+function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword) 
 {
     Write-Host "`nChange local user's password on Windows.`n"
     CheckOsForWindows
@@ -70,13 +70,25 @@ function ChangeLocalUsersPassword([string]$localUser, [string]$newPassword)
 
     try
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started changing local user's password at: " $startDateTime
+
         Set-LocalUser -Name $localUser -Password (ConvertTo-SecureString -AsPlainText $newPassword -Force)
 
         Write-Host ("Successfully changed the password for {0}." -F $localUser) -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished changing local user's password at: " $finishedDateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
     }
     catch
     {
         Write-Host ("Failed to change the password for {0}." -F $localUser) -ForegroundColor Red
+
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
     }
 }
 
