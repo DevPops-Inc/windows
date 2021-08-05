@@ -12,7 +12,7 @@ function GetLocalUser([string]$localUser)
 {
     if (($localUser -eq $Null) -or ($localUser -eq ""))
     {
-        $localUser = Read-Host -Prompt "Please type the local user you would like to change the password for (Example: LocalUser)"
+        $localUser = Read-Host -Prompt "Please type the local user you would like to change the password for and press `"Enter`" key (Example: LocalUser)"
 
         return $localUser
     }
@@ -26,7 +26,7 @@ function GetNewPassword([securestring]$newPassword)
 {
     if (($newPassword -eq $Null) -or ($newPassword -eq ""))
     {
-        $newPassword = Read-Host -Prompt "Please type the new password for the local user (Example: Password123)" -AsSecureString
+        $newPassword = Read-Host -Prompt "Please type the new password for the local user and press `"Enter`" key (Example: Password123)" -AsSecureString
 
         return $newPassword
     }
