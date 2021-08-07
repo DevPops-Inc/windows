@@ -13,7 +13,7 @@ function GetDistroList([string]$distroList)
 {
     if (($distroList -eq $Null) -or ($distroList -eq ""))
     {
-        $distroList = Read-Host -Prompt "Please type the name of the new distribution list you would like to create (Example: devs@vicphan.dev)"
+        $distroList = Read-Host -Prompt "Please type the name of the new distribution list you would like to create and press `"Enter`" key (Example: devs@vicphan.dev)"
         
         return $distroList
     }
@@ -27,7 +27,7 @@ function GetOrgUnit([string]$orgUnit)
 {
     if (($orgUnit -eq $Null) -or ($orgUnit -eq ""))
     {
-        $orgUnit= Read-Host -Prompt "Please type the organization unit you would want this new distribution list to be a part of (Example: developers)"
+        $orgUnit= Read-Host -Prompt "Please type the organization unit you would want this new distribution list to be a part of and press `"Enter`" key (Example: developers)"
         
         return $orgUnit
     }
@@ -44,11 +44,11 @@ function CheckOsForWindows()
 
     if ($hostOs -eq "Win32NT")
     {
-        Write-Host "You are running this script on Windows." -ForegroundColor Green
+        Write-Host "Operating System: " (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Your operating system is:" $hostOs
+        Write-Host "Operating System:" $hostOs
         
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
@@ -68,14 +68,26 @@ function CreateDistroGroupInExchange([string]$distroList, [string] $orgUnit)
 
     try
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started creating distribution group at: " $startDateTime
+
         New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
         Set-DistributionGroup -Identity $distroList -RequireSenderAuthenticationEnabled $false
     
-        Write-Host ("Succesfully created {0}" -F $distroList) -ForegroundColor Green
+        Write-Host ("Succesfully created {0} in Exchange" -F $distroList) -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished creating distribution group at: " $finishedDateTime
+        
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
     }
     catch
     {
         Write-Host ("Failed to create {0}" -F $distroList) -ForegroundColor Red
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
     }
 }
 
