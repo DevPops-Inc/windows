@@ -6,7 +6,7 @@
 param(
       [string]       [Parameter(Mandatory = $False)] $testAdmin = "TestAdmin"
     , [securestring] [Parameter(Mandatory = $False)] $testAdminPassword = $Null
-    , [string]        [Parameter(Mandatory = $False)] $testAdminDescription = "TestAdmin"
+    , [string]       [Parameter(Mandatory = $False)] $testAdminDescription = "TestAdmin"
 )
 
 function CheckOsForWindows()
@@ -76,13 +76,13 @@ function CheckParameters([string]$testAdmin, [securestring]$testAdminPassword, [
 
     Write-Host "Finished checking parameters."
 
-    if ($valid = $True)
+    if ($valid -eq $True)
     {
         Write-Host "All parameters checks passed." -ForegroundColor Green
     }
     else 
     {
-        Write-Host "One or more paramateres are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more paramaters are incorrect, exiting script." -ForegroundColor Red
         exit $result
     }
     
