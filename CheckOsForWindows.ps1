@@ -9,13 +9,13 @@ function CheckOsForWindows()
     }
     else 
     {
-        Write-Host "Your operating system is:" $hostOs
+        Write-Host "Operating System:" $hostOs
         
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
         break
     }
+    
     Write-Host "Finished checking operating system.`n"
 }
 
