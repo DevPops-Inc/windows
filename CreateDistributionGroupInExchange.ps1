@@ -9,6 +9,27 @@ param
     , [string] [Parameter(Mandatory = $False)] $orgUnit = ""
 )
 
+function CheckOsForWindows()
+{
+    Write-Host "`nChecking operating system..."
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+        break
+    }
+    
+    Write-Host "Finished checking operating system.`n"
+}
+
 function GetDistroList([string]$distroList)
 {
     if (($distroList -eq $Null) -or ($distroList -eq ""))
@@ -37,34 +58,51 @@ function GetOrgUnit([string]$orgUnit)
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$distroList, [string]$orgUnit)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "`nStarted checking parameters..."
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "`nParameters:"
+    Write-Host "----------------------------------------"
+    Write-Host ("distroList: {0}" -F $distroList)
+    Write-Host ("orgUnit   : {0}" -F $orgUnit)
+    Write-Host "----------------------------------------"
+
+    if (($distroList -eq $Null) -or ($distroList -eq ""))
     {
-        Write-Host "Operating System: " (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "distroList is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if (($orgUnit -eq $Null) -or ($orgUnit -eq ""))
+    {
+        Write-Host "orgUnit is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    Write-Host "Finished checking parameters."
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameters checks passed.`n" -ForegroundColor -Green
     }
     else 
     {
-        Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
-        break
+        exit -1
     }
-    Write-Host "Finished checking operating system.`n"
 }
 
-function CreateDistroGroupInExchange([string]$distroList, [string] $orgUnit)
+function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
 {
     Write-Host "`nCreate distribution group in Exchange.`n"
     CheckOsForWindows
 
     $distroList = GetDistroList $distroList
     $orgUnit = GetOrgUnit $orgUnit
+    CheckParameters $distroList $orgUnit
 
     try
     {
