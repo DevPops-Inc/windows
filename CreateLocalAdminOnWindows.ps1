@@ -9,6 +9,27 @@ param(
     , [string]       [Parameter(Mandatory = $False)] $description = ""
 )
 
+function CheckOsForWindows()
+{
+    Write-Host "`nChecking operating system..."
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System: " (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system.`n"
+        break
+    }
+    Write-Host "Finished checking operating system.`n"
+}
+
 function GetLocalAdmin([string]$localAdmin)
 {
     if (($localAdmin -eq $Null) -or ($localAdmin -eq ""))
@@ -27,7 +48,7 @@ function GetPassword([securestring]$password)
 {
     if (($password -eq $Null) -or ($password -eq ""))
     {
-        $password = Read-Host -Prompt "Please type the password and press `"Enter`" key (Example: 'Password1234')"
+        $password = Read-Host -Prompt "Please type the password and press `"Enter`" key (Example: 'Password1234')" -AsSecureString
 
         return $password
     }
@@ -51,25 +72,48 @@ function GetDescription()
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$localAdmin, [securestring]$password, [string]$description)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "`nStarted checking parameters..."
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "`nParameters:"
+    Write-Host "----------------------------------------"
+    Write-Host ("localAdmin : {0}" -F $localAdmin)
+    Write-Host ("password   : {0}" -F "***")
+    Write-Host ("description: {0}" -F $description)
+    Write-Host "----------------------------------------"
+
+    if (($localAdmin -eq $Null) -or ($localAdmin -eq ""))
     {
-        Write-Host "Operating System: " (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "localAdmin is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if (($password -eq $Null) -or ($password -eq ""))
+    {
+        Write-Host "password is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if (($description -eq $Null) -or ($description -eq ""))
+    {
+        Write-Host "description is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    Write-Host "Finished checking parameters."
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameters checks passed.`n" -ForegroundColor -Green
     }
     else 
     {
-        Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
-        break
+        exit -1
     }
-    Write-Host "Finished checking operating system.`n"
 }
 
 function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]$description)
@@ -80,6 +124,7 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
     $localAdmin = GetLocalAdmin $localAdmin
     $password = GetPassword $password
     $description = GetDescription $description
+    CheckParameters $localAdmin $password $description
 
     try
     {
