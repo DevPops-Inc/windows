@@ -83,10 +83,8 @@ function CheckParameters([string]$testAdmin, [securestring]$testAdminPassword, [
     else 
     {
         Write-Host "One or more paramaters are incorrect, exiting script." -ForegroundColor Red
-        exit $result
+        exit -1
     }
-    
-    Write-Host ""
 }
 
 function CreateTestAdmin([string]$testAdmin, [securestring]$testAdminPassword, [string]$testAdminDescription)
