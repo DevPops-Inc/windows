@@ -88,10 +88,8 @@ function CheckParameters([string]$newAdUser, [securestring]$newPassword)
     else 
     {
         Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
-        exit $result
+        exit -1
     }
-
-    Write-Host ""
 }
 
 function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
