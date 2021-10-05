@@ -9,11 +9,35 @@ param(
    , [string] [Parameter(Mandatory = $False)] $oldGroup = ""
 )
 
+function CheckOsForWindows()
+{
+   Write-Host "Started checking operating system at" (Get-Date).DateTime
+   $hostOs = [System.Environment]::OSVersion.Platform
+
+   if ($hostOs -eq "Win32NT")
+   {
+      Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+      
+      Write-Host "Finished checking operating system at" (Get-Date).DateTime
+      Write-Host ""
+   }
+   else 
+   {
+      Write-Host "Operating System:" $hostOs
+       
+      Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+      Write-Host "Finished checking operating system at" (Get-Date).DateTime
+      Write-Host ""
+      break
+   }
+}
+
 function GetUserName([string]$username)
 {
    if (($username -eq $Null) -or ($username -eq ""))
    {
-      $username = Read-Host -Prompt "Please type the username you would like to move to new group"
+      $username = Read-Host -Prompt "Please type the username you would like to move to new group and press `"Enter`" key (Example: software.dev)"
 
       return $username
    }
@@ -27,7 +51,7 @@ function GetNewGroup([string]$newGroup)
 {
    if (($newGroup -eq $Null) -or ($newGroup -eq ""))
    {
-      $newGroup = Read-Host -Prompt ("Please type the new group you wish to move {0} to" -F $username)
+      $newGroup = Read-Host -Prompt ("Please type the new group you wish to move {0} to and press `"Enter`" key (Example: devs)" -F $username)
 
       return $newGroup
    }
@@ -41,7 +65,7 @@ function GetOldGroup([string]$oldGroup)
 {
    if (($oldGroup -eq $Null) -or ($oldGroup -eq ""))
    {
-      $oldGroup = Read-Host -Prompt ("Please type the old group you are moving {0} from" -F $username)
+      $oldGroup = Read-Host -Prompt ("Please type the old group you are moving {0} from (Example: sysadmins)" -F $username)
 
       return $oldGroup
    }
@@ -51,25 +75,48 @@ function GetOldGroup([string]$oldGroup)
    }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$username, [string]$newGroup, [string]$oldGroup)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+   Write-Host "Started checking parameters at" (Get-Date).DateTime
+   $valid = $True
 
-    if ($hostOs -eq "Win32NT")
-    {
-        Write-Host "You are running this script on Windows." -ForegroundColor Green
-    }
-    else 
-    {
-        Write-Host "Your operating system is:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+   Write-Host "Parameters:"
+   Write-Host "-----------------------------"
+   Write-Host ("username: {0}" -F $username)
+   Write-Host ("newGroup: {0}" -F $newGroup)
+   Write-Host ("oldGroup: {0}" -F $oldGroup)
+   Write-Host "-----------------------------"
 
-        Write-Host "Finished checking operating system.`n"
-        break
-    }
-    Write-Host "Finished checking operating system.`n"
+   if (($username -eq $Null) -or ($username -eq ""))
+   {
+      Write-Host "username is not set." -ForegroundColor Red
+      $valid = $False
+   }
+
+   if (($newGroup -eq $Null) -or ($newGroup -eq ""))
+   {
+      Write-Host "newGroup is not set." -ForegroundColor Red
+      $valid = $False
+   }
+
+   if (($oldGroup -eq $Null) -or ($oldGroup -eq ""))
+   {
+      Write-Host "oldGroup is not set." -ForegroundColor Red
+      $valid = $False
+   }
+
+   if ($valid -eq $True)
+   {
+      Write-Host "All parameter checks passed." -ForegroundColor Green
+   }
+   else 
+   {
+      Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
+
+      exit -1
+   }
+   Write-Host "Finished checking parameters at" (Get-Date).DateTime
+   Write-Host ""
 }
 
 function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, [string]$oldGroup)
@@ -80,9 +127,14 @@ function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, 
    $username = GetUserName $username
    $newGroup = GetNewGroup $newGroup
    $oldGroup = GetOldGroup $oldGroup
+   CheckParameters $username $newGroup $oldGroup
 
    try 
    {
+      $startDateTime = (Get-Date)
+      
+      Write-Host ("Started moving {0} user to {1} group at {2}" -F $username, $newGroup, $startDateTime)
+
       # do the matching, add to new group and remove from original
       Get-ADUserNames `
             -UserNamesString $username `
@@ -96,10 +148,21 @@ function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, 
             -Identity $_.ADUser}
 
       Write-Host ("Successfully moved {0} from old group {1} to new group {2}." -F $username, $oldGroup, $newGroup) -ForegroundColor Green
+
+      $finishedDateTime = (Get-Date)
+      
+      Write-Host ("Finished moving {0} user to {1} group at {2}" -F $username, $newGroup, $finishedDateTime)
+
+      $duration = New-TimeSpan $startDateTime $finishedDateTime
+
+      Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
    }
    catch 
    {
       Write-Host ("Failed to move {0} from old group {1} to new group {2}." -F $username, $oldGroup, $newGroup) -ForegroundColor Red
+      
+      Write-Host $_ -ForegroundColor Red
+      Write-Host $_.ScriptStackTrace -ForegroundColor Red
    }
 }
 
