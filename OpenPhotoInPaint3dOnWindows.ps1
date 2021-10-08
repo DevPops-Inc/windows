@@ -7,12 +7,37 @@ param(
     [string] [Parameter(Mandatory = $False)] $fileLocation = ""
 )
 
+function CheckOsForWindows()
+{
+    Write-Host "Started Checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+        break
+    }
+}
+
 function GetFileLocation([string]$fileLocation)
 {
     if (($fileLocation -eq $Null) -or ($fileLocation -eq ""))
     {
-        $fileLocation = Read-Host -Prompt "Please type the location of the file you wish to open in Paint 3D (Example: C:\Users\adminvictor\Desktop\deltatre 2019.jpg)"
+        $fileLocation = Read-Host -Prompt "Please type the location of the file you wish to open in Paint 3D and press `"Enter`" key (Example: C:\Users\adminvictor\Desktop\deltatre 2019.jpg)"
 
+        Write-Host ""
         return $fileLocation
     }
     else
@@ -21,25 +46,35 @@ function GetFileLocation([string]$fileLocation)
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$fileLocation)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "Parameters:"
+    Write-Host "-------------------------------------"
+    Write-Host ("fileLocation: {0}" -F $fileLocation)
+    Write-Host "-------------------------------------"
+
+    if (($fileLocation -eq $Null) -or ($fileLocation -eq ""))
     {
-        Write-Host "You are running this script on Windows." -ForegroundColor Green
+        Write-Host "fileLocation is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter checks passed." -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Your operating system is:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+        Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
-        break
+        exit -1
     }
-    Write-Host "Finished checking operating system.`n"
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function OpenPhotoInPaint3d([string]$fileLocation)
@@ -48,16 +83,29 @@ function OpenPhotoInPaint3d([string]$fileLocation)
     CheckOsForWindows
 
     $fileLocation = GetFileLocation $fileLocation
+    CheckParameters $fileLocation
 
     try 
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started opening photo in Paint 3D at" $startDateTime
+
         Start-Process -FilePath "mspaint" -ArgumentList """$fileLocation /ForceBootstrapPaint3D"""
 
         Write-Host ("Successfully opened {0} in Paint 3D." -F $fileLocation) -ForegroundColor Green
+
+        $finishedDateTme = (Get-Date)
+        Write-Host "Finished opening photo in Paint 3D at" $finishedDateTme
+        $duration = New-TimeSpan $startDateTime $finishedDateTme
+
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
     }
     catch
     {
         Write-Host ("Failed to open {0} in Paint 3D." -F $fileLocation) -ForegroundColor Red
+
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
     }
 }
 
