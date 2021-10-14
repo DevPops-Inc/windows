@@ -7,12 +7,37 @@ param(
     [string] [Parameter(Mandatory = $False)] $printerName = ""
 )
 
+function CheckOsForWindows()
+{
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+        break
+    }
+}
+
 function GetPrinterName([string]$printerName)
 {
     if (($printerName -eq $Null) -or ($printerName -eq ""))
     {
         $printerName = Read-Host -Prompt "Please type printer you wish to remove and press `"Enter`" key (Example: HP_printer)"
 
+        Write-Host ""
         return $printerName
     }
     else
@@ -21,25 +46,35 @@ function GetPrinterName([string]$printerName)
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$printerName)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "Parameters:"
+    Write-Host "-----------------------------------"
+    Write-Host ("printerName: {0}" -F $printerName)
+    Write-Host "-----------------------------------"
+
+    if (($printerName -eq $Null) -or ($printerName -eq ""))
     {
-        Write-Host "You are running this script on Windows." -ForegroundColor Green
+        Write-Host "printerName is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter checks passed." -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Your operating system is:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
-        break
+        exit -1
     }
-    Write-Host "Finished checking operating system.`n"
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function RemovePrinter([string]$printerName)
@@ -51,19 +86,31 @@ function RemovePrinter([string]$printerName)
     Get-Printer
 
     $printerName = GetPrinterName $printerName
+    CheckParameters $printerName
 
     try 
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started removing printer at" $startDateTime
+
         Remove-Printer -Name $printerName
         
         Write-Host ("Successfully removed {0}." -F $printerName) -ForegroundColor Green
 
         Write-Host "The printers on this computer are:"
         Get-Printer
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished removing printer at" $finishedDateTime
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours)
     }
     catch 
     {
         Write-Host ("Failed to remove {0}." -F $printerName) -ForegroundColor Red
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
 
         Write-Host "The printers on this computer are:"
         Get-Printer
