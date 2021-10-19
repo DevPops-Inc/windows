@@ -1,6 +1,6 @@
 # ping loopback IPv4 address 
 
-# you can run this script with: ./PingLoopbackIpv4Address.ps1 -loopbackIpv4Address < IPv4 loopback address > 
+# you can run this script with: ./PingLoopBackIpv4Address.ps1 -loopbackIpv4Address < IPv4 loopback address > 
 
 [CmdletBinding()]
 param(
@@ -9,7 +9,7 @@ param(
 
 function CheckOs()
 {
-    Write-Host "`Started checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
