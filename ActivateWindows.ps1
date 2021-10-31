@@ -5,9 +5,33 @@
 [CmdletBinding()]
 param 
 (
-      [string] [Parameter(Mandatory = $False)] $computerName = ""
-    , [string] [Parameter(Mandatory = $False)] $licenseKey = ""
+    [string] [Parameter(Mandatory = $False)] $computerName = "", 
+    [string] [Parameter(Mandatory = $False)] $licenseKey = ""
 )
+
+function CheckOsForWindows()
+{
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+        break
+    }
+}
 
 function GetComputerName([string]$computerName)
 {
@@ -15,6 +39,7 @@ function GetComputerName([string]$computerName)
     {
         $computerName = Read-Host -Prompt "Please type the computer name and press `"Enter`" key (Example: Dev-PC) or press `"Ctrl`" and `"C`" keys to use the computer name from the environment"
         
+        Write-Host ""
         return $computerName
     }
     else 
@@ -30,6 +55,7 @@ function GetLicenseKey([string]$licenseKey)
     {
         $licenseKey = Read-Host -Prompt "Please type the Windows license key (Example: aaaaa-bbbbb-ccccc-ddddd-eeeee) and press `"Enter`" key"
 
+        Write-Host ""
         return $licenseKey
     }
     else
@@ -38,25 +64,42 @@ function GetLicenseKey([string]$licenseKey)
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$computerName, [string]$licenseKey)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "Parameters:"
+    Write-Host "-------------------------------------"
+    Write-Host ("computerName: {0}" -F $computerName)
+    Write-Host ("licenseKey  : {0}" -F $licenseKey)
+    Write-Host "-------------------------------------"
+
+    if (($computerName -eq $Null) -or ($computerName -eq ""))
     {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "computerName is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if (($licenseKey -eq $Null) -or ($licenseKey -eq ""))
+    {
+        Write-Host "licenseKey is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter checks passed." -ForegroundColor Red
     }
     else 
     {
-        Write-Host "Operating System:" $hostOs
+        Write-Host "One or more parameter checks are incorrect." -ForegroundColor Red
         
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system.`n"
         break
     }
-    Write-Host "Finished checking operating system.`n"
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function ActivateWindows([string]$computerName, [string]$licenseKey)
@@ -66,6 +109,7 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
 
     $computerName = GetComputerName $computerName
     $licenseKey = GetLicenseKey $licenseKey
+    CheckParameters $computerName $licenseKey
 
     try
     {
@@ -81,6 +125,7 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished activating Windows at: " $finishedDateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
