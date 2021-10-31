@@ -5,9 +5,33 @@
 [CmdletBinding()]
 param
 (
-      [string] [Parameter(Mandatory = $False)] $email = ""
-    , [string] [Parameter(Mandatory = $False)] $distroList = ""
+    [string] [Parameter(Mandatory = $False)] $email = "", 
+    [string] [Parameter(Mandatory = $False)] $distroList = ""
 )
+
+function CheckOsForWindows()
+{
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+        break
+    }
+}
 
 function GetEmail([string]$email)
 {
@@ -15,6 +39,7 @@ function GetEmail([string]$email)
     {
         $email = Read-Host -Prompt "Please type the email would you like to assign to the distribution list and press `"Enter`" key (Example: email@domain.com)"
 
+        Write-Host ""
         return $email
     }
     else 
@@ -29,6 +54,7 @@ function GetDistroList([string]$distroList)
     {
         $distroList = Read-Host -Prompt "Please type the distribution list would you like to add the email to and press `"Enter`" key (Example: group@domain.com)"
         
+        Write-Host ""
         return $distroList
     }
     else 
@@ -37,25 +63,41 @@ function GetDistroList([string]$distroList)
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$email,[string]$distroList)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "Parameters:"
+    Write-Host "---------------------------------"
+    Write-Host ("email     : {0}" -F $email)
+    Write-Host ("distroList: {0}" -F $distroList)
+    Write-Host "---------------------------------"
+
+    if (($email -eq $Null) -or ($email -eq ""))
     {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "email is not set." -ForegroundColor Red
+        $valid = $False
     }
-    else 
-    {
-        Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
+    if (($distroList -eq $Null) -or ($distroList -eq ""))
+    {
+        Write-Host "distroList is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter checks passed." -ForegroundColor Green
+    }
+    else
+    {
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         break
     }
-    Write-Host "Finished checking operating system.`n"
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
@@ -65,6 +107,7 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
 
     $email = GetEmail $email
     $distroList = GetDistroList $distroList
+    CheckParameters $email $distroList
 
     try
     {

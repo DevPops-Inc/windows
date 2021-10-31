@@ -25,7 +25,7 @@ function CheckOsForWindows()
     {
         Write-Host "Operating System:" $hostOs
         
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
@@ -93,8 +93,7 @@ function CheckParameters([string]$computerName, [string]$licenseKey)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect." -ForegroundColor Red
-        
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         break
     }
 
