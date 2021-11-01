@@ -4,9 +4,33 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $fileSpecPath = ""
-    , [string] [Parameter(Mandatory = $False)] $volumePath = ""
+    [string] [Parameter(Mandatory = $False)] $fileSpecPath = "", 
+    [string] [Parameter(Mandatory = $False)] $volumePath = ""
 )
+
+function CheckOsForWindows()
+{
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+        break
+    }
+}
 
 function GetFileSpecPath([string]$fileSpecPath)
 {
@@ -14,6 +38,7 @@ function GetFileSpecPath([string]$fileSpecPath)
     {
         $fileSpecPath = Read-Host -Prompt "Please type the file spec path and press `"Enter`" key (Example: C:\important)"
 
+        Write-Host ""
         return $fileSpecPath
     }
     else
@@ -28,6 +53,7 @@ function GetVolumePath([string]$volumePath)
     {
         $volumePath = Read-Host -Prompt "Please type the volume path and press `"Enter`" key (Example: E:)"
 
+        Write-Host ""
         return $volumePath
     }
     else 
@@ -36,25 +62,41 @@ function GetVolumePath([string]$volumePath)
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$fileSpecPath, [string]$volumePath)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "Parameters:"
+    Write-Host "-------------------------------------"
+    Write-Host ("fileSpecPath: {0}" -F $fileSpecPath)
+    Write-Host ("volumePath  : {0}" -F $volumePath)
+    Write-Host "-------------------------------------"
+
+    if (($fileSpecPath -eq $Null) -or ($fileSpecPath -eq ""))
     {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "fileSpecPath is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if (($volumePath -eq $Null) -or ($volumePath -eq ""))
+    {
+        Write-Host "volumePath is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter checks passed." -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system.`n"
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         break
     }
-    Write-Host "Finished checking operating system.`n"
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
@@ -64,6 +106,7 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
 
     $fileSpecPath = GetFileSpecPath $fileSpecPath
     $volumePath = GetVolumePath $volumePath
+    CheckParameters $fileSpecPath $volumePath
     
     try 
     {
@@ -85,6 +128,7 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
 
         $finishedDateTime = (Get-Date)
         Write-Host "`nFinished Windows maintenance at:" $finishedDateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
