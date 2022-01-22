@@ -5,8 +5,8 @@
 [CmdletBinding()]
 param 
 (
-    [string] [Parameter(Mandatory = $False)] $computerName = "", 
-    [string] [Parameter(Mandatory = $False)] $licenseKey = ""
+    [string] [Parameter(Mandatory = $False)] $computerName = "", # you can set the computer name here
+    [string] [Parameter(Mandatory = $False)] $licenseKey = "" # you can set the license key here
 )
 
 function CheckOsForWindows()
@@ -29,6 +29,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+        
         break
     }
 }
@@ -120,7 +121,7 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
         $service.InstallProductKey($licenseKey)
         $service.RefreshLicenseStatus()
 
-        Write-Host ("Windows has been activated on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Green
+        Write-Host ("Successfully activated Windows on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished activating Windows at: " $finishedDateTime
@@ -128,13 +129,17 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host ("Windows failed to activate on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Red
+        Write-Host ("Failed to activate Windows on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+
+        Write-Host ""
     }
 }
 
