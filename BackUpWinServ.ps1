@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $fileSpecPath = "", 
-    [string] [Parameter(Mandatory = $False)] $volumePath = ""
+    [string] [Parameter(Mandatory = $False)] $fileSpecPath = "", # you can set the file spec path here
+    [string] [Parameter(Mandatory = $False)] $volumePath = "" # you can set the volume path here
 )
 
 function CheckOsForWindows()
@@ -28,6 +28,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -132,12 +133,15 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to back up Windows Server." -ForegroundColor Red
         Write-Host $_ -ForegroundColor -Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
