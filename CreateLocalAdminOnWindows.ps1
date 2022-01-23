@@ -4,19 +4,22 @@
 
 [CmdletBinding()]
 param(
-      [string]       [Parameter(Mandatory = $False)] $localAdmin = ""
-    , [securestring] [Parameter(Mandatory = $False)] $password = $Null
-    , [string]       [Parameter(Mandatory = $False)] $description = ""
+    [string]       [Parameter(Mandatory = $False)] $localAdmin = "", # you can set the local admin here
+    [securestring] [Parameter(Mandatory = $False)] $password = $Null, # you can set the password here
+    [string]       [Parameter(Mandatory = $False)] $description = "" # you can set the description here
 )
 
 function CheckOsForWindows()
 {
-    Write-Host "`nChecking operating system..."
+    Write-Host "Stared checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System: " (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
@@ -24,10 +27,11 @@ function CheckOsForWindows()
         
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-    Write-Host "Finished checking operating system.`n"
 }
 
 function GetLocalAdmin([string]$localAdmin)
@@ -36,6 +40,7 @@ function GetLocalAdmin([string]$localAdmin)
     {
         $localAdmin = Read-Host -Prompt "Please the admin name and press `"Enter`" key (Example: 'Foo.Bar')"
 
+        Write-Host ""
         return $localAdmin
     }
     else
@@ -50,6 +55,7 @@ function GetPassword([securestring]$password)
     {
         $password = Read-Host -Prompt "Please type the password and press `"Enter`" key (Example: 'Password1234')" -AsSecureString
 
+        Write-Host ""
         return $password
     }
     else
@@ -64,6 +70,7 @@ function GetDescription()
     {
         $description = Read-Host -Prompt "Please type the description and press `"Enter`" key (Example: 'Local Admin')"
 
+        Write-Host ""
         return $description
     }
     else
@@ -74,15 +81,15 @@ function GetDescription()
 
 function CheckParameters([string]$localAdmin, [securestring]$password, [string]$description)
 {
-    Write-Host "`nStarted checking parameters..."
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "-----------------------------------"
     Write-Host ("localAdmin : {0}" -F $localAdmin)
     Write-Host ("password   : {0}" -F "***")
     Write-Host ("description: {0}" -F $description)
-    Write-Host "----------------------------------------"
+    Write-Host "-----------------------------------"
 
     if (($localAdmin -eq $Null) -or ($localAdmin -eq ""))
     {
@@ -102,18 +109,18 @@ function CheckParameters([string]$localAdmin, [securestring]$password, [string]$
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters."
-
     if ($valid -eq $True)
     {
-        Write-Host "All parameters checks passed.`n" -ForegroundColor -Green
+        Write-Host "All parameters checks passed." -ForegroundColor -Green
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
-
-        exit -1
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        break
     }
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]$description)
@@ -147,6 +154,8 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -157,6 +166,7 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
 
         Write-Host "The users on this computer are:"
         Get-LocalUser
+        Write-Host ""
     }
 }
 
