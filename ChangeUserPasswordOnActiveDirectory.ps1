@@ -5,9 +5,34 @@
 [CmdletBinding()]
 param
 (
-      [string]       [Parameter(Mandatory = $False)] $userName = ""
-    , [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null
+    [string]       [Parameter(Mandatory = $False)] $userName = "", # you can set the username here
+    [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null # you can set the new password here
 )
+
+function CheckOsForWindows()
+{
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "WinNT32")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        
+        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
+    }
+}
 
 function GetUserName([string]$userName)
 {
@@ -15,6 +40,7 @@ function GetUserName([string]$userName)
     {
         $userName = Read-Host -Prompt "Please type the username you would like to password for and press `"Enter`" key (Example: ADUser)"
         
+        Write-Host ""
         return $userName
     }
     else
@@ -29,6 +55,7 @@ function GetNewPassword([securestring]$newPassword)
     {
         $newPassword = Read-Host -Prompt "Please type the new password and press `"Enter`" key (Example: Password123)" -AsSecureString
         
+        Write-Host ""
         return $newPassword
     }
     else
@@ -37,34 +64,51 @@ function GetNewPassword([securestring]$newPassword)
     }
 }
 
-function CheckOsForWindows()
+function CheckParameters([string]$userName, [securestring]$newPassword)
 {
-    Write-Host "`nChecking operating system..."
-    $hostOs = [System.Environment]::OSVersion.Platform
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    $valid = $True
 
-    if ($hostOs -eq "Win32NT")
+    Write-Host "Parameters:"
+    Write-Host "----------------------------------"
+    Write-Host ("userName   : {0}" -F $userName)
+    Write-Host ("newPassword: {0}" -F "***")
+    Write-Host "----------------------------------"
+
+    if (($userName -eq $Null) -or ($userName -eq ""))
     {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "userName is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if (($newPassword -eq $Null) -or ($newPassword -eq ""))
+    {
+        Write-Host "newPassword is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter checks passed." -ForegroundColor Green
     }
     else 
     {
-        Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system.`n"
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         break
     }
-    Write-Host "Finished checking operating system.`n"
+
+    Write-Host "Finished checking operating system at" (Get-Date).DateTime
+    Write-Host ""
 }
 
-function ChangeUserPasswordOnActiveDirectory([string]$userName, [securestring]$newPassword)
+function ChangeUserPasswordOnAd([string]$userName, [securestring]$newPassword)
 {
     Write-Host "`nChange user password on Active Directory.`n"
     CheckOsForWindows
 
     $userName = GetUserName $userName
     $newPassword = GetNewPassword $newPassword
+    CheckParameters $userName $newPassword
 
     try
     {
@@ -83,6 +127,8 @@ function ChangeUserPasswordOnActiveDirectory([string]$userName, [securestring]$n
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -90,7 +136,8 @@ function ChangeUserPasswordOnActiveDirectory([string]$userName, [securestring]$n
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
-ChangeUserPasswordOnActiveDirectory $userName $newPassword
+ChangeUserPasswordOnAd $userName $newPassword
