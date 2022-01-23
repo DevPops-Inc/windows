@@ -5,29 +5,33 @@
 [CmdletBinding()]
 param
 (
-      [string] [Parameter(Mandatory = $False)] $distroList = ""
-    , [string] [Parameter(Mandatory = $False)] $orgUnit = ""
+    [string] [Parameter(Mandatory = $False)] $distroList = "", # you can set the distribution list here
+    [string] [Parameter(Mandatory = $False)] $orgUnit = "" # you can set the organizational unit here
 )
 
 function CheckOsForWindows()
 {
-    Write-Host "`nChecking operating system..."
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "Operating System:" $hostOs
         
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
+        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
 
         break
     }
-    
-    Write-Host "Finished checking operating system.`n"
 }
 
 function GetDistroList([string]$distroList)
@@ -36,6 +40,7 @@ function GetDistroList([string]$distroList)
     {
         $distroList = Read-Host -Prompt "Please type the name of the new distribution list you would like to create and press `"Enter`" key (Example: devs@vicphan.dev)"
         
+        Write-Host ""
         return $distroList
     }
     else
@@ -50,6 +55,7 @@ function GetOrgUnit([string]$orgUnit)
     {
         $orgUnit= Read-Host -Prompt "Please type the organization unit you would want this new distribution list to be a part of and press `"Enter`" key (Example: developers)"
         
+        Write-Host ""
         return $orgUnit
     }
     else
@@ -60,14 +66,14 @@ function GetOrgUnit([string]$orgUnit)
 
 function CheckParameters([string]$distroList, [string]$orgUnit)
 {
-    Write-Host "`nStarted checking parameters..."
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "---------------------------------"
     Write-Host ("distroList: {0}" -F $distroList)
     Write-Host ("orgUnit   : {0}" -F $orgUnit)
-    Write-Host "----------------------------------------"
+    Write-Host "---------------------------------"
 
     if (($distroList -eq $Null) -or ($distroList -eq ""))
     {
@@ -81,18 +87,18 @@ function CheckParameters([string]$distroList, [string]$orgUnit)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters."
-
     if ($valid -eq $True)
     {
-        Write-Host "All parameters checks passed.`n" -ForegroundColor -Green
+        Write-Host "All parameters checks passed." -ForegroundColor -Green
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
-
-        exit -1
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        break
     }
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
@@ -112,7 +118,7 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
         New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
         Set-DistributionGroup -Identity $distroList -RequireSenderAuthenticationEnabled $false
     
-        Write-Host ("Succesfully created {0} in Exchange" -F $distroList) -ForegroundColor Green
+        Write-Host ("Succesfully created {0} in Exchange." -F $distroList) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished creating distribution group at: " $finishedDateTime
@@ -120,12 +126,15 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to create {0}" -F $distroList) -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
