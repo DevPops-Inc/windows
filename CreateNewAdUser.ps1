@@ -4,18 +4,21 @@
 
 [CmdletBinding()]
 param(
-      [string]       [Parameter(Mandatory = $False)] $newAdUser = ""
-    , [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null
+    [string]       [Parameter(Mandatory = $False)] $newAdUser = "", # you can set new AD username here
+    [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null # you can set the new AD password here
 )
 
 function CheckOsForWindows()
 {
-    Write-Host "`nChecking operating system..."
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System: " (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
@@ -23,7 +26,9 @@ function CheckOsForWindows()
         
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
         
-        Write-Host "Finished checking operating system.`n"
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
 }
@@ -34,6 +39,7 @@ function GetNewAdUser([string]$newAdUser)
     {
         $newAdUser = Read-Host -Prompt "Please type the username of the new Active Directory user and press `"Enter`" key (Example: software.developer)"
         
+        Write-Host ""
         return $newAdUser
     }
     else
@@ -48,6 +54,7 @@ function GetNewPassword([securestring]$newPassword)
     {
         $newPassword = Read-Host -Prompt "Please type the password for the new user and press `"Enter`" key (Example: Password123)" -AsSecureString
         
+        Write-Host ""
         return $newPassword
     }
     else
@@ -58,14 +65,14 @@ function GetNewPassword([securestring]$newPassword)
 
 function CheckParameters([string]$newAdUser, [securestring]$newPassword)
 {
-    Write-Host "`nStarted checking parameters..."
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "---------------------------------"
     Write-Host ("newAdUser  : {0}" -F $newAdUser)
     Write-Host ("newPassword: {0}" -F "***")
-    Write-Host "----------------------------------------"
+    Write-Host "---------------------------------"
 
     if (($newAdUser -eq $Null) -or ($newAdUser -eq ""))
     {
@@ -79,17 +86,18 @@ function CheckParameters([string]$newAdUser, [securestring]$newPassword)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters."
-
     if ($valid -eq $True)
     {
         Write-Host "All parameters checks passed." -ForegroundColor -Green
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
-        exit -1
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        break
     }
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
@@ -120,6 +128,8 @@ function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -127,6 +137,7 @@ function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
