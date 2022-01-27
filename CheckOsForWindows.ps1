@@ -1,3 +1,5 @@
+# check operating system for Windows
+
 function CheckOsForWindows()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
