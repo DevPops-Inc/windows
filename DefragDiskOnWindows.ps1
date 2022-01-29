@@ -2,7 +2,7 @@
 
 function CheckOsForWindows()
 {
-    Write-Host "`nStarted checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOS = [System.Environment]::OSVersion.Platform
 
     if ($hostOS -eq "Win32NT")
@@ -20,13 +20,14 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
 
 function DefragDisk()
 {
-    Write-Host "`nDefrag disk on Windows`n"
+    Write-Host "Defrag disk on Windows`n"
     CheckOsForWindows
 
     try
@@ -35,19 +36,23 @@ function DefragDisk()
         Write-Host "Started defragging disk at" $startDateTime
 
         defrag c: /u
-
-        Write-Host "`nSuccessfully defragged disk.`n" -ForegroundColor Green
+        Write-Host "Successfully defragged disk." -ForegroundColor Green
+        
         $finishedDateTime = (Get-Date)
         Write-Host "Finished defragging disk at" $finishedDateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host "`nFailed to defrag disk.`n" -ForegroundColor Red
+        Write-Host "Failed to defrag disk." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
