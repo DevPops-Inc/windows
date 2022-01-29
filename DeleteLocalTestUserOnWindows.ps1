@@ -36,7 +36,7 @@ function GetTestUser([string]$testUser)
 {
     if (($testUser -eq $Null) -or ($testUser -eq ""))
     {
-        $testUser = Read-Host -Prompt "`nPlease input test username and press `"Enter`" key (Example: testuser)"
+        $testUser = Read-Host -Prompt "Please input test username and press `"Enter`" key (Example: testuser)"
 
         Write-Host ""
         return $testUser
