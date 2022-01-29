@@ -5,12 +5,12 @@
 [CmdletBinding()]
 param
 (
-    [string] [Parameter(Mandatory = $False)] $driveLetter = ""
+    [string] [Parameter(Mandatory = $False)] $driveLetter = "" # you can set your drive letter here
 )
 
 function CheckOsForWindows()
 {
-    Write-Host "`nStarted checkingn operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
@@ -28,6 +28,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -36,8 +37,9 @@ function GetDriveLetter([string]$driveLetter)
 {
     if(($driveLetter -eq $Null) -or ($driveLetter -eq ""))
     {
-        $driveLetter = Read-Host -Prompt "`nPlease type drive would you like to disable BitLocker on and press `"Enter`" key (Example: C:)"
+        $driveLetter = Read-Host -Prompt "Please type drive would you like to disable BitLocker on and press `"Enter`" key (Example: C:)"
 
+        Write-Host ""
         return $driveLetter
     }
     else 
@@ -48,13 +50,13 @@ function GetDriveLetter([string]$driveLetter)
 
 function CheckParameters([string]$driveLetter)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "`Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "-----------------------------------"
     Write-Host ("driveLetter: {0}" -F $driveLetter)
-    Write-Host "----------------------------------------"
+    Write-Host "-----------------------------------"
 
     if (($driveLetter -eq $Null) -or ($driveLetter -eq ""))
     {
@@ -62,18 +64,18 @@ function CheckParameters([string]$driveLetter)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter checks passed." -ForegroundColor Green
     }
     else 
     {
-        Write-Host "One or more parameteres are incorrect, exiting script." -ForegroundColor Red
-
-        exit -1
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        break
     }
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function DisableBitLocker([string]$driveLetter)
@@ -84,6 +86,17 @@ function DisableBitLocker([string]$driveLetter)
     $driveLetter = GetDriveLetter $driveLetter
     CheckParameters $driveLetter
 
+    if ((Test-Path $driveLetter -eq $True))
+    {
+        Write-Host ("Found {0} drive." -F $driveLetter) -ForegroundColor Green
+    }
+    else 
+    {
+        Write-Host ("Cannot find {0} drive." -F $driveLetter) -ForegroundColor Red
+
+        break
+    }
+
     try
     {
         $startDateTime = (Get-Date)
@@ -91,20 +104,24 @@ function DisableBitLocker([string]$driveLetter)
 
         Disable-BitLocker -MountPoint "$driveLetter"
 
-        Write-Host ("`nSuccessfully disabled BitLocker on {0} drive.`n" -F $driveLetter) -ForegroundColor Green
+        Write-Host ("Successfully disabled BitLocker on {0} drive." -F $driveLetter) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished disabled BitLocker at" $finishedDateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host ("`nFailed to disable BitLocker on {0} drive.`n" -F $driveLetter) -ForegroundColor Red
+        Write-Host ("Failed to disable BitLocker on {0} drive." -F $driveLetter) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
