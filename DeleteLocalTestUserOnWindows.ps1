@@ -94,9 +94,6 @@ function DeleteTestUser([string]$testUser)
 
         Write-Host ("Successfuly deleted test user: {0}" -F $testUser) -ForegroundColor Green
 
-        Write-Host "The users on this computer are:"
-        Get-LocalUser
-
         $finishedDateTime = (Get-Date)
         Write-Host "Finished deleting local user at" $finishedDateTime
 
@@ -105,6 +102,9 @@ function DeleteTestUser([string]$testUser)
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
         Write-Host ""
+
+        Write-Host "The users on this computer are:"
+        Get-LocalUser
     }
     catch
     {
@@ -115,7 +115,6 @@ function DeleteTestUser([string]$testUser)
         
         Write-Host "The users on this computer are:"
         Get-LocalUser
-        Write-Host ""
     }
 }
 

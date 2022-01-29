@@ -4,19 +4,22 @@
 
 [CmdletBinding()]
 param(
-      [string]       [Parameter(Mandatory = $False)] $testAdmin = "TestAdmin"
-    , [securestring] [Parameter(Mandatory = $False)] $testAdminPassword = $Null
-    , [string]       [Parameter(Mandatory = $False)] $testAdminDescription = "TestAdmin"
+    [string]       [Parameter(Mandatory = $False)] $testAdmin = "TestAdmin", # you can set test admin username here
+    [securestring] [Parameter(Mandatory = $False)] $testAdminPassword = $Null, # you can set test admin password here
+    [string]       [Parameter(Mandatory = $False)] $testAdminDescription = "TestAdmin" # you can set test admin description here
 )
 
 function CheckOsForWindows()
 {
-    Write-Host "`nChecking operating system..."
+    Write-Host "Start checking operating system at" (Get-Date.DateTime)
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
@@ -24,18 +27,35 @@ function CheckOsForWindows()
         
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-    Write-Host "Finished checking operating system.`n"
 }
 
-function GetTestAdminPassword()
+function GetTestAdmin([string]$testAdmin)
+{
+    if (($testAdmin -eq $Null) -or ($testAdmin -eq ""))
+    {
+        $testAdmin = Read-Host -Prompt "Please type test admin username and press `"Enter`" key (Example: TestAdmin)"
+
+        Write-Host ""
+        return $testAdmin
+    }
+    else 
+    {
+        return $testAdmin
+    }
+}
+
+function GetTestAdminPassword([securestring]$testAdminPassword)
 {
     if (($testAdminPassword -eq $Null) -or ($testAdminPassword -eq ""))
     {
         $testAdminPassword = Read-Host -Prompt "Please create password for TestAdmin and press `"Enter`" key (Example: Password123)" -AsSecureString
         
+        Write-Host ""
         return $testAdminPassword
     }
     else
@@ -44,17 +64,19 @@ function GetTestAdminPassword()
     }
 }
 
-function CheckParameters([string]$testAdmin, [securestring]$testAdminPassword, [string]$testAdminDescription)
+function CheckParameters([string]      $testAdmin, 
+                         [securestring]$testAdminPassword, 
+                         [string]      $testAdminDescription)
 {
-    Write-Host "`nStarted checking parameters..."
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "-----------------------------------------------------"
     Write-Host ("testAdmin           : {0}" -F $testAdmin)
     Write-Host ("testAdminPassword   : {0}" -F "***")
     Write-Host ("testAdminDescription: {0}" -F $testAdminDescription)
-    Write-Host "----------------------------------------"
+    Write-Host "-----------------------------------------------------"
 
     if (($testAdmin -eq $Null) -or ($testAdmin -eq ""))
     {
@@ -74,8 +96,6 @@ function CheckParameters([string]$testAdmin, [securestring]$testAdminPassword, [
         $valid = $True
     }
 
-    Write-Host "Finished checking parameters."
-
     if ($valid -eq $True)
     {
         Write-Host "All parameters checks passed." -ForegroundColor Green
@@ -83,11 +103,16 @@ function CheckParameters([string]$testAdmin, [securestring]$testAdminPassword, [
     else 
     {
         Write-Host "One or more paramaters are incorrect, exiting script." -ForegroundColor Red
-        exit -1
+        break
     }
+
+    Write-Host "Finished checking parameters."
+    Write-Host ""
 }
 
-function CreateTestAdmin([string]$testAdmin, [securestring]$testAdminPassword, [string]$testAdminDescription)
+function CreateTestAdmin([string]      $testAdmin, 
+                         [securestring]$testAdminPassword, 
+                         [string]      $testAdminDescription)
 {
     Write-Host "`nCreate local TestAdmin on Windows.`n"
     CheckOsForWindows
@@ -108,15 +133,17 @@ function CreateTestAdmin([string]$testAdmin, [securestring]$testAdminPassword, [
 
         Write-Host ("Successfully created {0} account." -F $testAdmin) -ForegroundColor Green
 
-        Write-Host "The users on this computer are: "
-        Get-LocalUser
-
         $finishedDateTime = (Get-Date)
         Write-Host "Finished creating testAdmin account at: " $finishedDateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours, {1} minutes, {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
+
+        Write-Host "The users on this computer are: "
+        Get-LocalUser
     }
     catch 
     {

@@ -144,9 +144,6 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
         Set-LocalUser -Name "$localAdmin" -PasswordNeverExpires 1
 
         Write-Host ("Successfully created local admin {0}." -F $localAdmin) -ForegroundColor Green
-        
-        Write-Host "The users on this computer are: "
-        Get-LocalUser
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished creating local admin at: " $finishedDateTime
@@ -156,6 +153,9 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
         Write-Host ""
+
+        Write-Host "The users on this computer are: "
+        Get-LocalUser
     }
     catch
     {
@@ -166,7 +166,6 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
 
         Write-Host "The users on this computer are:"
         Get-LocalUser
-        Write-Host ""
     }
 }
 
