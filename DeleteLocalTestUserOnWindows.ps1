@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $testUser = ""
+    [string] [Parameter(Mandatory = $False)] $testUser = "" # you can set the test user here
 )
 
 function CheckOsForWindows()
@@ -27,6 +27,8 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
+        break
     }
 }
 
@@ -36,6 +38,7 @@ function GetTestUser([string]$testUser)
     {
         $testUser = Read-Host -Prompt "`nPlease input test username and press `"Enter`" key (Example: testuser)"
 
+        Write-Host ""
         return $testUser
     }
     else 
@@ -46,13 +49,13 @@ function GetTestUser([string]$testUser)
 
 function CheckParameters([string]$testUser)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "-----------------------------"
     Write-Host ("testUser: {0}" -F $testUser)
-    Write-Host "----------------------------------------"
+    Write-Host "-----------------------------"
 
     if (($testUser -eq $Null) -or ($testUser -eq ""))
     {
@@ -60,18 +63,18 @@ function CheckParameters([string]$testUser)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter checks passed." -ForegroundColor Green
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor -Red
-
-        exit -1
+        Write-Host "One or more parameters are incorrect." -ForegroundColor -Red
+        break
     }
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function DeleteTestUser([string]$testUser)
@@ -89,16 +92,19 @@ function DeleteTestUser([string]$testUser)
 
         Remove-LocalUser -Name "$testUser"
 
-        Write-Host ("`nSuccessfuly deleted test user: {0}`n" -F $testUser) -ForegroundColor Green
+        Write-Host ("Successfuly deleted test user: {0}" -F $testUser) -ForegroundColor Green
 
-        Write-Host "The users on this computer are: `n"
+        Write-Host "The users on this computer are:"
         Get-LocalUser
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished deleting local user at" $finishedDateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -107,8 +113,9 @@ function DeleteTestUser([string]$testUser)
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         
-        Write-Host "The users on this computer are: `n"
+        Write-Host "The users on this computer are:"
         Get-LocalUser
+        Write-Host ""
     }
 }
 
