@@ -92,7 +92,7 @@ function CheckParameters([string]$computerName, [string]$licenseKey)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Red
+        Write-Host "All parameter checks passed." -ForegroundColor Green
     }
     else 
     {
@@ -122,7 +122,6 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
 
         $service.InstallProductKey($licenseKey)
         $service.RefreshLicenseStatus()
-
         Write-Host ("Successfully activated Windows on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
@@ -140,7 +139,6 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
-
         Write-Host ""
     }
 }
