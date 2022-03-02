@@ -9,7 +9,7 @@ param(
 
 function CheckOsForWindows()
 {
-    Write-Host "`nStarted checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
@@ -27,6 +27,8 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
+        break
     }
 }
 
@@ -34,7 +36,7 @@ function GetLocalAdmin([string]$localAdmin)
 {
     if (($localAdmin -eq $Null) -or ($localAdmin -eq ""))
     {
-        Write-Host "`nThe users on this computer are: `n"
+        Write-Host "The users on this computer are: "
         Get-LocalUser 
 
         $localAdmin = Read-Host -Prompt "`nPlease type the admin who you would like to disable password expiration for and press `"Enter`" key (Example: Local.Admin)"
@@ -49,13 +51,13 @@ function GetLocalAdmin([string]$localAdmin)
 
 function CheckParameters([string]$localAdmin)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "---------------------------------"
     Write-Host ("localAdmin: {0}" -F $localAdmin)
-    Write-Host "----------------------------------------"
+    Write-Host "---------------------------------"
 
     if (($localAdmin -eq $Null) -or ($localAdmin -eq ""))
     {
@@ -65,13 +67,19 @@ function CheckParameters([string]$localAdmin)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         
-        exit -1
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
 }
 
@@ -90,17 +98,19 @@ function DisablePwExpForAdmin([string]$localAdmin)
 
         Set-LocalUser -Name "$localAdmin" -PasswordNeverExpires 1
      
-        Write-Host ("`nSucceessfully disabled password expiration for admin: {0}.`n" -F $localAdmin) -ForegroundColor Green
+        Write-Host ("Succeessfully disabled password expiration for admin: {0}." -F $localAdmin) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished disabling password expiration for admin at" $finishedDateTime
         $duration = New-TimeSpan $startDatetime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host ("`nFailed to disable password expiration for admin: {0}.`n" -F $localAdmin) -ForegroundColor Red
+        Write-Host ("Failed to disable password expiration for admin: {0}." -F $localAdmin) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
