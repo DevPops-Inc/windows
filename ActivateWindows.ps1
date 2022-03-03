@@ -8,7 +8,7 @@
 param 
 (
     [string] [Parameter(Mandatory = $False)] $computerName = "", # you can set the computer name here
-    [string] [Parameter(Mandatory = $False)] $licenseKey = "" # you can set the license key here
+    [string] [Parameter(Mandatory = $False)] $licenseKey   = "" # you can set the license key here
 )
 
 function CheckOsForWindows()
@@ -93,15 +93,19 @@ function CheckParameters([string]$computerName, [string]$licenseKey)
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function ActivateWindows([string]$computerName, [string]$licenseKey)
@@ -110,7 +114,7 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
     CheckOsForWindows
 
     $computerName = GetComputerName $computerName
-    $licenseKey = GetLicenseKey $licenseKey
+    $licenseKey   = GetLicenseKey $licenseKey
     CheckParameters $computerName $licenseKey
 
     try
