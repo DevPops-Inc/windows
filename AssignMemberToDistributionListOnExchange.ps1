@@ -7,7 +7,7 @@
 [CmdletBinding()]
 param
 (
-    [string] [Parameter(Mandatory = $False)] $email = "", # you can set the email here 
+    [string] [Parameter(Mandatory = $False)] $email      = "", # you can set the email here 
     [string] [Parameter(Mandatory = $False)] $distroList = "" # you can set the distribution list here
 )
 
@@ -92,15 +92,19 @@ function CheckParameters([string]$email,[string]$distroList)
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
@@ -108,7 +112,7 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
     Write-Host "`nAssign member to distribution list on Exchange.`n"
     CheckOsForWindows
 
-    $email = GetEmail $email
+    $email      = GetEmail $email
     $distroList = GetDistroList $distroList
     CheckParameters $email $distroList
 
