@@ -5,7 +5,7 @@
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $fileSpecPath = "", # you can set the file spec path here
-    [string] [Parameter(Mandatory = $False)] $volumePath = "" # you can set the volume path here
+    [string] [Parameter(Mandatory = $False)] $volumePath   = "" # you can set the volume path here
 )
 
 function CheckOsForWindows()
@@ -89,15 +89,19 @@ function CheckParameters([string]$fileSpecPath, [string]$volumePath)
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
@@ -106,7 +110,7 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
     CheckOsForWindows
 
     $fileSpecPath = GetFileSpecPath $fileSpecPath
-    $volumePath = GetVolumePath $volumePath
+    $volumePath   = GetVolumePath $volumePath
     CheckParameters $fileSpecPath $volumePath
     
     try 
@@ -114,10 +118,10 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
         $startDateTime = (Get-Date)
         Write-Host "Starting backing up Windows server at:" $startDateTime
 
-        $policy = New-WBPolicy  
-        $fileSpec = New-WBFileSpec -FileSpec $fileSpecPath
+        $policy         = New-WBPolicy  
+        $fileSpec       = New-WBFileSpec -FileSpec $fileSpecPath
         $backupLocation = New-WBBackupTarget -VolumePath $volumePath
-        $BUpolicy = Get-WBPolicy
+        $BUpolicy       = Get-WBPolicy
 
         Add-WBFileSpec -Policy $policy -FileSpec $filespec  
         Add-WBBackupTarget -Policy $policy -Target $backupLocation  
