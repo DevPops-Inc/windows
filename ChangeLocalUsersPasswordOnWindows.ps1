@@ -4,9 +4,33 @@
 
 [CmdletBinding()]
 param (
-      [string]       [Parameter(Mandatory = $False)] $localUser = "" # you can set the local user here
+      [string]       [Parameter(Mandatory = $False)] $localUser   = "" # you can set the local user here
     , [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null # you can set the new password here
 )
+
+function CheckOsForWindows()
+{
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
+    }
+}
 
 function GetLocalUser([string]$localUser)
 {
@@ -38,41 +62,16 @@ function GetNewPassword([securestring]$newPassword)
     }
 }
 
-function CheckOsForWindows()
-{
-    Write-Host "Started checking operating system at" (Get-Date).DateTime
-    $hostOs = [System.Environment]::OSVersion.Platform
-
-    if ($hostOs -eq "Win32NT")
-    {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-    }
-    else 
-    {
-        Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
-    }
-}
-
 function CheckParameters([string]$localUser, [securestring]$newPassword)
 {
     Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
     Write-Host "Parameters:"
-    Write-Host "--------------------------------"
+    Write-Host "---------------------------------"
     Write-Host ("localUser  : {0}" -F $localUser)
     Write-Host ("newPassword: {0}" -F "***")
-    Write-Host "--------------------------------"
+    Write-Host "---------------------------------"
 
     if (($localUser -eq $Null) -or ($localUser -eq ""))
     {
@@ -89,15 +88,19 @@ function CheckParameters([string]$localUser, [securestring]$newPassword)
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passsed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameteres at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking parameteres at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameteres at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword) 
@@ -108,7 +111,7 @@ function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword
     Write-Host "The local users on this computer are:"
     Get-LocalUser
 
-    $localUser = GetLocalUser $localUser
+    $localUser   = GetLocalUser $localUser
     $newPassword = GetNewPassword $newPassword
     CheckParameters $localUser $newPassword
 
