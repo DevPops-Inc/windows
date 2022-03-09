@@ -5,7 +5,7 @@
 [CmdletBinding()]
 param
 (
-    [string]       [Parameter(Mandatory = $False)] $userName = "", # you can set the username here
+    [string]       [Parameter(Mandatory = $False)] $userName    = "", # you can set the username here
     [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null # you can set the new password here
 )
 
@@ -24,7 +24,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -70,10 +69,10 @@ function CheckParameters([string]$userName, [securestring]$newPassword)
     $valid = $True
 
     Write-Host "Parameters:"
-    Write-Host "----------------------------------"
+    Write-Host "--------------------------------"
     Write-Host ("userName   : {0}" -F $userName)
     Write-Host ("newPassword: {0}" -F "***")
-    Write-Host "----------------------------------"
+    Write-Host "--------------------------------"
 
     if (($userName -eq $Null) -or ($userName -eq ""))
     {
@@ -90,15 +89,19 @@ function CheckParameters([string]$userName, [securestring]$newPassword)
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+        
         break
     }
-
-    Write-Host "Finished checking operating system at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function ChangeUserPasswordOnAd([string]$userName, [securestring]$newPassword)
@@ -106,7 +109,7 @@ function ChangeUserPasswordOnAd([string]$userName, [securestring]$newPassword)
     Write-Host "`nChange user password on Active Directory.`n"
     CheckOsForWindows
 
-    $userName = GetUserName $userName
+    $userName    = GetUserName $userName
     $newPassword = GetNewPassword $newPassword
     CheckParameters $userName $newPassword
 
