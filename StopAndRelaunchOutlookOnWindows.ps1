@@ -2,8 +2,8 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $processName = "OUTLOOK", 
-    [int]    [Parameter(Mandatory = $False)] $seconds = 5, 
+    [string] [Parameter(Mandatory = $False)] $processName     = "OUTLOOK", 
+    [int]    [Parameter(Mandatory = $False)] $seconds         = 5, 
     [string] [Parameter(Mandatory = $False)] $applicationName = "outlook.exe"
 )
 
@@ -22,11 +22,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -111,19 +111,20 @@ function CheckParameters([string]$processName,
     if ($valid -eq $True)
     {
         Write-Host "All parameters checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
         
-        exit -1
+        break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
-
-
 
 function StopAndRelaunchOutlook([string]$processName, 
                                 [int]   $seconds, 
@@ -132,8 +133,8 @@ function StopAndRelaunchOutlook([string]$processName,
     Write-Host "`nStop and relaunch Outlook on Windows.`n"
     CheckOsForWindows
 
-    $processName = GetProcessName $processName
-    $seconds = GetSeconds $seconds
+    $processName     = GetProcessName $processName
+    $seconds         = GetSeconds $seconds
     $applicationName = GetApplicationName $applicationName
     CheckParameters $processName $seconds $applicationName
      
@@ -155,13 +156,15 @@ function StopAndRelaunchOutlook([string]$processName,
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host "Failed to stop and restart Outlook" -ForegroundColor Red
-
+        Write-Host "Failed to stop and restart Outlook." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
