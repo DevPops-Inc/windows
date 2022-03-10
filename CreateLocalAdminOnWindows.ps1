@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param(
-    [string]       [Parameter(Mandatory = $False)] $localAdmin = "", # you can set the local admin here
-    [securestring] [Parameter(Mandatory = $False)] $password = $Null, # you can set the password here
+    [string]       [Parameter(Mandatory = $False)] $localAdmin  = "", # you can set the local admin here
+    [securestring] [Parameter(Mandatory = $False)] $password    = $Null, # you can set the password here
     [string]       [Parameter(Mandatory = $False)] $description = "" # you can set the description here
 )
 
@@ -24,7 +24,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -112,15 +111,19 @@ function CheckParameters([string]$localAdmin, [securestring]$password, [string]$
     if ($valid -eq $True)
     {
         Write-Host "All parameters checks passed." -ForegroundColor -Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]$description)
@@ -128,8 +131,8 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
     Write-Host "`nCreate local admin on Windows.`n"
     CheckOsForWindows
 
-    $localAdmin = GetLocalAdmin $localAdmin
-    $password = GetPassword $password
+    $localAdmin  = GetLocalAdmin $localAdmin
+    $password    = GetPassword $password
     $description = GetDescription $description
     CheckParameters $localAdmin $password $description
 

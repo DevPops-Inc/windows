@@ -6,7 +6,7 @@
 param
 (
     [string] [Parameter(Mandatory = $False)] $distroList = "", # you can set the distribution list here
-    [string] [Parameter(Mandatory = $False)] $orgUnit = "" # you can set the organizational unit here
+    [string] [Parameter(Mandatory = $False)] $orgUnit    = "" # you can set the organizational unit here
 )
 
 function CheckOsForWindows()
@@ -24,7 +24,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -90,15 +89,19 @@ function CheckParameters([string]$distroList, [string]$orgUnit)
     if ($valid -eq $True)
     {
         Write-Host "All parameters checks passed." -ForegroundColor -Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+        
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
@@ -107,7 +110,7 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
     CheckOsForWindows
 
     $distroList = GetDistroList $distroList
-    $orgUnit = GetOrgUnit $orgUnit
+    $orgUnit    = GetOrgUnit $orgUnit
     CheckParameters $distroList $orgUnit
 
     try

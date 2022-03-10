@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param(
-    [string]       [Parameter(Mandatory = $False)] $testAdmin = "TestAdmin", # you can set test admin username here
-    [securestring] [Parameter(Mandatory = $False)] $testAdminPassword = $Null, # you can set test admin password here
+    [string]       [Parameter(Mandatory = $False)] $testAdmin            = "TestAdmin", # you can set test admin username here
+    [securestring] [Parameter(Mandatory = $False)] $testAdminPassword    = $Null, # you can set test admin password here
     [string]       [Parameter(Mandatory = $False)] $testAdminDescription = "TestAdmin" # you can set test admin description here
 )
 
@@ -24,7 +24,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -99,15 +98,19 @@ function CheckParameters([string]      $testAdmin,
     if ($valid -eq $True)
     {
         Write-Host "All parameters checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more paramaters are incorrect, exiting script." -ForegroundColor Red
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameters."
-    Write-Host ""
 }
 
 function CreateTestAdmin([string]      $testAdmin, 
