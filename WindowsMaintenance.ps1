@@ -1,4 +1,4 @@
-# Windows maintenance function
+# Windows maintenance 
 
 function CheckOsForWindows()
 {
@@ -15,11 +15,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+        
         break
     }
 }
@@ -78,16 +78,22 @@ function WindowsMaintenance()
         CheckDisk
         SystemsFileCheck
         ScanWindowsImage
-        DefragDisk
-        
+
+        $disk = Get-PhysicalDisk
+
+        if ($disk.MediaType -eq "HDD")
+        {
+            DefragDisk
+        }
+
         Write-Host "`nSuccessfully performed maintenance on Windows." -ForegroundColor Green
     }
     catch
     {
         Write-Host "`nFailed to perform maintenance on Windows." -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
     finally
     {
@@ -98,9 +104,11 @@ function WindowsMaintenance()
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
+        Write-Host ""
+
         Read-Host -Prompt "Please save your documents and close applications.`nPress any key to restart your computer"
         
-        shutdown /r /t 0
+        Restart-Computer
     }
 }
 
