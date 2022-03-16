@@ -15,7 +15,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
