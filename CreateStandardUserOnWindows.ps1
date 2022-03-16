@@ -5,8 +5,8 @@
 [CmdletBinding()]
 param(
   [string]       [Parameter(Mandatory = $False)] $standardUser = "", # you can set the username here 
-  [securestring] [Parameter(Mandatory = $False)] $password = $Null, # you can set the password here 
-  [string]       [Parameter(Mandatory = $False)] $description = "" # you can 
+  [securestring] [Parameter(Mandatory = $False)] $password     = $Null, # you can set the password here 
+  [string]       [Parameter(Mandatory = $False)] $description  = "" # you can 
 )
 
 function CheckOsForWindows()
@@ -24,7 +24,6 @@ function CheckOsForWindows()
   else 
   {
     Write-Host "Operating System:" $hostOs 
-
     Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
 
     Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -114,15 +113,19 @@ function CheckParameters([string]      $standardUser,
   if ($valid -eq $True)
   {
     Write-Host "All parameter checks passed.`n"  -ForegroundColor Green
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
   }
   else 
   {
     Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host ""
+
     break
   }
-
-  Write-Host "Finished checking parameters at" (Get-Date).DateTime
-  Write-Host ""
 }
 
 function CreateStandardUser([string]$standardUser, [securestring]$password, [string]$description)
@@ -131,8 +134,8 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
   CheckOsForWindows
 
   $standardUser = GetStandardUser $standardUser
-  $password = GetPassword $password
-  $description = GetDescription $description
+  $password     = GetPassword $password
+  $description  = GetDescription $description
   CheckParameters $standardUser $password $description
 
   try 
@@ -140,13 +143,10 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
     $startDateTime = (Get-Date)
     Write-Host "Started creating standard user at" $startDateTime
 
-    # create new user and set password
     New-LocalUser $standardUser -Password $sassword -FullName $standardUser -Description $description
 
-    # set password for new user to never expire
     Set-LocalUser -Name $standardUser -PasswordNeverExpires 1
-
-    # check if new user has been added
+    
     Write-Host ("Successfully created standard user: {0}" -F $standardUser) -ForegroundColor Green
 
     Write-Host "The users on the this computer are:"

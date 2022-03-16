@@ -4,9 +4,9 @@
 
 [CmdletBinding()]
 param(
-    [string]       [Parameter(Mandatory = $False)] $newAdUser = "", # you can set the new Active Directory username here 
+    [string]       [Parameter(Mandatory = $False)] $newAdUser   = "", # you can set the new Active Directory username here 
     [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null, # you can set the password here
-    [string]       [Parameter(Mandatory = $False)] $groupName = "" # you can set the group here
+    [string]       [Parameter(Mandatory = $False)] $groupName   = "" # you can set the group here
 )
 
 function CheckOsForWindows()
@@ -24,7 +24,6 @@ function CheckOsForWindows()
     else
     {
         Write-Host "Operating System: " $hostOs
-        
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
         
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -68,7 +67,7 @@ function GetGroupName([string]$groupName)
 {
     if (($groupName -eq $Null) -or ($groupName -eq ""))
     {
-        $groupName = Read-Host -Prompt "`nPlease type the group you want to assign the user to and press `"Enter`" key (example: developers)"
+        $groupName = Read-Host -Prompt "Please type the group you want to assign the user to and press `"Enter`" key (example: developers)"
         
         Write-Host ""
         return $groupName
@@ -115,15 +114,19 @@ function CheckParameters([string]      $newAdUser,
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameters are incorrect" -ForegroundColor Red 
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function CreateNewAdUser([string]      $newAdUser, 
@@ -133,9 +136,9 @@ function CreateNewAdUser([string]      $newAdUser,
     Write-Host "`nCreate new Active Directory user and assign permissions.`n"
     CheckOsForWindows
 
-    $newAdUser = GetNewAdUser $newADUser
+    $newAdUser   = GetNewAdUser $newADUser
     $newPassword = GetNewPassword $newPassword
-    $groupName = GetGroupName $groupName
+    $groupName   = GetGroupName $groupName
     CheckParameters $newAdUser $newPassword $groupName
 
     try 

@@ -4,10 +4,10 @@
 
 [CmdletBinding()]
 param(
-    [string]       [Parameter(Mandatory = $False)] $email = "",  # you can set the new email here
-    [securestring] [Parameter(Mandatory = $False)] $password = $Null, # you can set the new password here
+    [string]       [Parameter(Mandatory = $False)] $email     = "",  # you can set the new email here
+    [securestring] [Parameter(Mandatory = $False)] $password  = $Null, # you can set the new password here
     [string]       [Parameter(Mandatory = $False)] $firstName = "", # you can set the first name here 
-    [string]       [Parameter(Mandatory = $False)] $lastName = "" # you can set the last name here 
+    [string]       [Parameter(Mandatory = $False)] $lastName  = "" # you can set the last name here 
 )
 
 function CheckOsForWindows()
@@ -25,7 +25,6 @@ function CheckOsForWindows()
     else 
     { 
         Write-Host "Operating System: " $hostOs
-
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -138,15 +137,19 @@ function CheckParameters([string]      $email,
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function CreateRemoteMailboxInExchange([string]      $email, 
@@ -157,10 +160,10 @@ function CreateRemoteMailboxInExchange([string]      $email,
     Write-Host "`nCreate remote mailbox in Exchange.`n"
     CheckOsForWindows
 
-    $email = GetEmail $email
-    $password = GetPassword $password
+    $email     = GetEmail $email
+    $password  = GetPassword $password
     $firstName = GetFirstName $firstName
-    $lastName = GetLastName $lastName
+    $lastName  = GetLastName $lastName
     CheckParameters $email $password $firstName $lastName
 
     try 
