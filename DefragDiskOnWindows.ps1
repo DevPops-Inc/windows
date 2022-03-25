@@ -32,20 +32,28 @@ function DefragDisk()
 
     try
     {
-        $startDateTime = (Get-Date)
-        Write-Host "Started defragging disk at" $startDateTime
-
-        defrag c: /u
-        Write-Host "Successfully defragged disk." -ForegroundColor Green
-        
-        $finishedDateTime = (Get-Date)
-        Write-Host "Finished defragging disk at" $finishedDateTime
-        
-        $duration = New-TimeSpan $startDateTime $finishedDateTime
-
-        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
-
-        Write-Host ""
+        if ($disk.MediaType -eq "HDD")
+        {
+            $startDateTime = (Get-Date)
+            Write-Host "Started defragging disk at" $startDateTime
+    
+            defrag c: /u
+            Write-Host "Successfully defragged disk." -ForegroundColor Green
+            
+            $finishedDateTime = (Get-Date)
+            Write-Host "Finished defragging disk at" $finishedDateTime
+            
+            $duration = New-TimeSpan $startDateTime $finishedDateTime
+    
+            Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+    
+            Write-Host ""
+        } 
+        else 
+        {
+            Write-Host "SSD drives don't need defragging." -ForegroundColor Red
+            break
+        }
     }
     catch
     {
