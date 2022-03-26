@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $deletePath = "C:\Users\Public\Desktop\*.lnk", 
+    [string] [Parameter(Mandatory = $False)] $deletePath  = "C:\Users\Public\Desktop\*.lnk", 
     [string] [Parameter(Mandatory = $False)] $excludePath = "" # you can set the .lnk file you wish to exclude from deletion here
 )
 
@@ -89,15 +89,19 @@ function CheckParameters([string]$deletePath, [string]$excludePath)
     if ($valid -eq $True)
     {
         Write-Host "All parameter checks passsed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+        
         break
     }
-
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function DeleteShortcuts([string]$deletePath, [string]$excludePath)
@@ -105,7 +109,7 @@ function DeleteShortcuts([string]$deletePath, [string]$excludePath)
     Write-Host "`nDelete all shortcuts except one on Windows.`n"
     CheckOsForWindows
 
-    $deletePath = GetDeletePath $deletePath
+    $deletePath  = GetDeletePath $deletePath
     $excludePath = GetExcludePath $excludePath
     CheckParameters $deletePath $excludePath
 
