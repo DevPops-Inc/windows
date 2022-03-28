@@ -16,7 +16,7 @@ function CheckOsForWindows()
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
 	
-	Write-Host "Finished checking operating system at" (Get-Date).DateTime
+	    Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
@@ -27,6 +27,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -35,7 +36,7 @@ function GetNetworkAdapter([string]$networkAdapter)
 {
     if (($networkAdapter -eq $Null) -or ($networkAdapter -eq ""))
     {
-        Write-Host "`nThe current network adapters on this computer are: `n"
+        Write-Host "The current network adapters on this computer are: "
         Get-NetAdapter | Format-Table
 
         $networkAdapter = Read-Host -Prompt "Please type the network adapter you want to disable and press `"Enter`" key"
@@ -50,10 +51,10 @@ function GetNetworkAdapter([string]$networkAdapter)
 
 function CheckParameters([string]$networkAdapter)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "Parameters:"
     Write-Host "----------------------------------------"
     Write-Host ("networkAdapter: {0}" -F $networkAdapter)
     Write-Host "----------------------------------------"
@@ -68,13 +69,19 @@ function CheckParameters([string]$networkAdapter)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
 }
 
@@ -93,9 +100,9 @@ function DisableNetworkAdapter([string]$networkAdapter)
 
         Disable-NetAdapter -Name $networkAdapter -Confirm:$false
 
-        Write-Host ("`nSuccessfully disabled {0} network adapter.`n" -F $networkAdapter) -ForegroundColor Green
+        Write-Host ("Successfully disabled {0} network adapter." -F $networkAdapter) -ForegroundColor Green
 
-        Write-Host "The network adapters on this computer are: `n"
+        Write-Host "The network adapters on this computer are: "
         Get-NetAdapter | Format-Table
 
         $finishedDateTime = (Get-Date)
@@ -103,15 +110,17 @@ function DisableNetworkAdapter([string]$networkAdapter)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host ("`nFailed to disable {0} network adapter.`n" -F $networkAdapter) -ForegroundColor Red
+        Write-Host ("Failed to disable {0} network adapter." -F $networkAdapter) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
 
-        Write-Host "The network adapters on this computer are: `n"
+        Write-Host "The network adapters on this computer are: "
         Get-NetAdapter | Format-Table
     }
 }
