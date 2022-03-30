@@ -9,7 +9,7 @@ param(
 
 function CheckOsForWindows()
 {
-    Write-Host "`nStarted checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
@@ -27,6 +27,8 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+	    
+        break
     }
 }
 
@@ -34,17 +36,17 @@ function GetServiceOnStartUp([string]$serviceName)
 {
     if (($serviceName -eq $Null) -or ($serviceName -eq ""))
     {
-        Write-Host "`nHere are services running on this computer: "
+        Write-Host "Here are services running on this computer: "
         Get-Service 
 
-        $serviceName = Read-Host -Prompt "`nPlease type the service would you like to disable on startup"
+        $serviceName = Read-Host -Prompt "Please type the service would you like to disable on startup and press `"Enter`" key"
 
         Get-Service -Name $serviceName        
         return $serviceName
     }
     else
     {
-        Write-Host "`n{0} service will be disabled on startup.`n" -F $serviceName
+        Write-Host "{0} service will be disabled on startup." -F $serviceName
         Get-Service -Name $serviceName
         return $serviceName
     }
@@ -52,13 +54,13 @@ function GetServiceOnStartUp([string]$serviceName)
 
 function CheckParameters([string]$serviceName)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
-    Write-Host "----------------------------------------"
+    Write-Host "Parameters:"
+    Write-Host "-----------------------------------"
     Write-Host ("serviceName: {0}" -F $serviceName)
-    Write-Host "----------------------------------------"
+    Write-Host "-----------------------------------"
 
     if (($serviceName -eq $Null) -or ($serviceName -eq ""))
     {
@@ -68,19 +70,25 @@ function CheckParameters([string]$serviceName)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter checks passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
 }
 
 function DisableServiceOnStartUp([string]$serviceName)
 {
-    Write-Host "`nDisable service on startup on Windows.`n"
+    Write-Host "Disable service on startup on Windows."
     CheckOsForWindows
 
     $serviceName = GetServiceOnStartUp $serviceName
@@ -102,14 +110,17 @@ function DisableServiceOnStartUp([string]$serviceName)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host ("`nFailed to disable {0} service on startup.`n" -F $serviceName) -ForegroundColor Red
+        Write-Host ("Failed to disable {0} service on startup." -F $serviceName) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Get-Service -Name $serviceName
+        Write-Host ""
     }
 }
 
