@@ -2,7 +2,7 @@
 
 function CheckOsForWindows()
 {
-    Write-Host "`nStarted checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
@@ -15,11 +15,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -48,7 +48,7 @@ function DisableWindows10Notifications()
             Invoke-Command -ComputerName $win10 -ScriptBlock $disableNotificationsInWinReg
         }
 
-        Write-Host "`nSuccessfully disabled Windows 10 notifications.`n" -ForegroundColor Green
+        Write-Host "Successfully disabled Windows 10 notifications." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished disabling Windows 10 notifications at" $finishedDateTime
@@ -56,13 +56,15 @@ function DisableWindows10Notifications()
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host "`nFailed to disable Windows 10 notifications.`n" -Foreground Red
-        
+        Write-Host "Failed to disable Windows 10 notifications." -Foreground Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
