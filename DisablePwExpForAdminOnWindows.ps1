@@ -39,7 +39,7 @@ function GetLocalAdmin([string]$localAdmin)
         Write-Host "The users on this computer are: "
         Get-LocalUser 
 
-        $localAdmin = Read-Host -Prompt "`nPlease type the admin who you would like to disable password expiration for and press `"Enter`" key (Example: Local.Admin)"
+        $localAdmin = Read-Host -Prompt "Please type the admin who you would like to disable password expiration for and press `"Enter`" key (Example: Local.Admin)"
         
         return $localAdmin
     }
@@ -114,6 +114,7 @@ function DisablePwExpForAdmin([string]$localAdmin)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
