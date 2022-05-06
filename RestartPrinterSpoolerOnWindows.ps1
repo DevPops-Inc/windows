@@ -1,5 +1,7 @@
 # restart printer spooler on Windows 
 
+# run this script as admin: Start-Process Powershell -verb RunAs
+
 function CheckOsForWindows()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -10,16 +12,16 @@ function CheckOsForWindows()
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host "'"
+        Write-Host ""
     }
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -32,20 +34,25 @@ function RestartPrinterSpooler()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started restarting printer at" $startDateTime
+        Write-Host "Started restarting printer spooler at" $startDateTime
 
         Restart-Service -Name Spooler -Force
 
         Write-Host "Successfully restarted printer spooler." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date).DateTime
-        Write-Host "Finished restarting printer at" $finishedDateTime
+        Write-Host "Finished restarting printer spooler at" $finishedDateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to restart printer spooler." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
