@@ -1,23 +1,24 @@
 # install Windows updates
 
+# run this script as admin: Start-Process Powershell -Verb runAs
+
 function CheckOsForWindows()
 {
-    Write-Host "Started Checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
-    if ($hostOs -eq "Win32NT")
+    if ($hostOS -eq "Win32NT")
     {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "Operating System: " (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
-        Write-Host "Operating System is:" $hostOs
+        Write-Host "Operating System: " $hostOs
+        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
         
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
         break
@@ -26,7 +27,7 @@ function CheckOsForWindows()
 
 function InstallWinUpdates()
 {
-    Write-Host "`nInstall Windows Updates.`n"
+    Write-Host "`nInstall Windows Updates`n"
     CheckOsForWindows
 
     try 
@@ -34,19 +35,25 @@ function InstallWinUpdates()
         $startDateTime = (Get-Date)
         Write-Host "Started installing Windows updates at" $startDateTime
 
-        Get-WindowsUpdate -Install -AcceptAll
+        Install-Module PSWindowsUpdate -Force
+        Get-WindowsUpdate -AcceptAll -Install -AutoReboot
+        Write-Host "Successfully installed Windows updates." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished installing Windows updates at" $finishedDateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
-        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $durations.Seconds)
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
-    catch 
+    catch
     {
-        Write-Host "Failed to install Windows updates" -Foreground Red
+        Write-Host "Failed to install Windows updates." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
