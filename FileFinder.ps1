@@ -1,11 +1,11 @@
 # file finder
 
-# you can run this script with: ./FileFinderOnWindows.ps1 -drive < drive > -filename < filename > 
+# you can run this script with: .\FileFinder.ps1 -drive < drive > -filename < filename > 
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $drive = ""
-    , [string] [Parameter(Mandatory = $False)] $filename = ""
+    [string] [Parameter(Mandatory = $False)] $drive    = "", 
+    [string] [Parameter(Mandatory = $False)] $filename = ""
 )
 
 function CheckOs()
@@ -21,7 +21,6 @@ function CheckOs()
     {
         Write-Host "Operating System:" $hostOs -ForegroundColor Green
     }
-
     Write-Host "Finished checking operating system at" (Get-Date).DateTime
     Write-Host ""
 }
@@ -32,6 +31,7 @@ function GetDrive([string]$drive)
     {
         $drive = Read-Host -Prompt "Please type the drive you think the file is on and press `"Enter`" key (Example: C:\ on Windows or / on Mac and Linux)"
 
+        Write-Host ""
         return $drive
     }
     else 
@@ -44,8 +44,9 @@ function GetFilename([string]$filename)
 {
     if (($filename -eq $Null) -or ($filename -eq ""))
     {
-        $filename = Read-Host -Prompt "`nPlease type the name of the file you're looked for and press `"Enter`" key (Example: devops)"
+        $filename = Read-Host -Prompt "Please type the name of the file you're looked for and press `"Enter`" key (Example: devops)"
 
+        Write-Host ""
         return $filename
     }
     else 
@@ -56,12 +57,12 @@ function GetFilename([string]$filename)
 
 function CheckParameters([string]$drive, [string]$filename)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameters at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "Parameters:"
     Write-Host "-----------------------------"
-    Write-Host ("drive: {0}" -F $drive)
+    Write-Host ("drive   : {0}" -F $drive)
     Write-Host ("filename: {0}" -F $filename)
     Write-Host "-----------------------------"
 
@@ -77,17 +78,23 @@ function CheckParameters([string]$drive, [string]$filename)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter checks passed." -ForegroundColor Green
+        
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
 }
 
@@ -96,7 +103,7 @@ function FileFinder([string]$drive, [string]$filename)
     Write-Host "`nFile finder.`n"
     CheckOs
 
-    $drive = GetDrive $drive
+    $drive    = GetDrive $drive
     $filename = GetFilename $filename
     CheckParameters $drive $filename
 
@@ -104,7 +111,10 @@ function FileFinder([string]$drive, [string]$filename)
     {
         $startDateTime = (Get-Date)
 
-        Write-Host ("Started finding file {0} in {1} drive at {2}. `nPlease wait since this may this a while...`n" -F $filename, $drive, $startDateTime)
+        Write-Host ("Started finding file {0} in {1} drive at {2}." -F $filename, $drive, $startDateTime)
+
+        Write-Host "Please wait since this may this a while."
+        Write-Host ""
         
         Get-ChildItem -Path $drive -Name *$filename* -Recurse -Force
 
@@ -117,6 +127,8 @@ function FileFinder([string]$drive, [string]$filename)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -124,6 +136,7 @@ function FileFinder([string]$drive, [string]$filename)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 

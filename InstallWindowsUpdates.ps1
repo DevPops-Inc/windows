@@ -1,6 +1,6 @@
 # install Windows updates
 
-# run this script as admin: Start-Process Powershell -Verb runAs
+# run this script as admin: Start-Process PowerShell -Verb runAs
 
 function CheckOsForWindows()
 {
@@ -35,6 +35,8 @@ function InstallWinUpdates()
         $startDateTime = (Get-Date)
         Write-Host "Started installing Windows updates at" $startDateTime
 
+        Write-Host "Please save your documents and close your application since the computer will restart after updates are installed." -ForegroundColor Yellow
+        
         Install-Module PSWindowsUpdate -Force
         Get-WindowsUpdate -AcceptAll -Install -AutoReboot
         Write-Host "Successfully installed Windows updates." -ForegroundColor Green
