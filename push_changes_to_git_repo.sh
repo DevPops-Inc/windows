@@ -10,7 +10,7 @@ commitMessage=$2
 check_os() {
     echo "Started checking operating system at $(date)"
 
-    if [ $OSTYPE == 'darwin'* ]; then 
+    if [[ $OSTYPE == 'darwin'* ]]; then 
         tput setaf 2; echo -e "Operating system:\n$(sw_vers)"; tput sgr0
         
         echo "Finished checking operating system at $(date)"
@@ -24,7 +24,7 @@ check_os() {
 }
 
 get_staged_changes() {
-    if [ -z $stagedChanges ]; then 
+    if [ -z "${stagedChanges}" ]; then 
         git status
         
         if [ $OSTYPE != 'msys' ]; then 
@@ -36,12 +36,12 @@ get_staged_changes() {
         fi
 
     else 
-        echo "$stagedChanges" &>/dev/null
+        echo "${stagedChanges}" &>/dev/null
     fi
 }
 
 get_commit_message() {
-    if [ -z $commitMessage ]; then 
+    if [ -z "${commitMessage}" ]; then 
         
         if [ $OSTYPE != 'msys' ]; then 
             read -p "Please type the commit message and press \"return\" key (Example: Initial commit): " commitMessage
@@ -54,7 +54,7 @@ get_commit_message() {
         fi
     
     else 
-        echo "$commitMessage" $>/dev/null
+        echo "${commitMessage}" $>/dev/null
     fi
 }
 
@@ -64,16 +64,16 @@ check_parameters() {
 
     echo "Parameters:"
     echo "-----------------------------"
-    echo "stagedChanges: $stagedChanges"
-    echo "commitMessage: $commitMessage"
+    echo "stagedChanges: ${stagedChanges}"
+    echo "commitMessage: ${commitMessage}"
     echo "-----------------------------"
 
-    if [ -z $stagedChanges ]; then 
+    if [ -z "${stagedChanges}" ]; then 
         tput setaf 1; echo "stagedChanges is not set."; tput sgr0
         valid="false"
     fi
 
-    if [ -z $commitMessage ]; then 
+    if [ -z "${commitMessage}" ]; then 
         tput setaf 1; echo "commitMessage is not set."; tput sgr0
         valid="false"
     fi
@@ -115,7 +115,7 @@ push_git_changes() {
 
     git status
     echo ""
-    
+
     tput setaf 2; echo "Successfully pushed changes to Git repository."; tput sgr0
 
     end=$(date +%s)
