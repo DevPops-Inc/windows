@@ -86,11 +86,11 @@ function WindowsMaintenance()
             DefragDisk
         }
 
-        Write-Host "`nSuccessfully performed maintenance on Windows." -ForegroundColor Green
+        Write-Host "Successfully performed maintenance on Windows." -ForegroundColor Green
     }
     catch
     {
-        Write-Host "`nFailed to perform maintenance on Windows." -ForegroundColor Red
+        Write-Host "Failed to perform maintenance on Windows." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
