@@ -1,5 +1,7 @@
 #!/bin/python
 
+# check Terraform in Python 
+
 import colorama, os, sys, subprocess, traceback
 from colorama import Fore, Style
 from datetime import datetime
@@ -31,39 +33,40 @@ def checkOs():
     print("")
     return operatingSystem
 
-def checkCowsay(): 
-    print("\nCheck Cowsay in Python.\n")
+def checkTerraform(): 
+    print("\nCheck Terraform in Python.\n")
     operatingSystem = checkOs()
 
     try:
         startDateTime = datetime.now()
         
-        print("Started checking Cowsay at", startDateTime.strftime("%Y-%m-%d %H:%M %p"))
+        print("Started checking Terraform at", startDateTime.strftime("%Y-%m-%d %H:%M %p"))
 
         FNULL = open(os.devnull,'w')
 
         if operatingSystem == "macOS" or operatingSystem == "Linux":
 
-            checkCowsayOnMacOrLinux = subprocess.call(['which', 'cowsay'], stdout=FNULL)
+            checkTerraformOnMacOrLinux = subprocess.call(['which', 'terraform'], stdout=FNULL) 
 
-            if checkCowsayOnMacOrLinux == 0:
-                os.system('cowsay "Cowsay is installed"')
-                print(Fore.GREEN + "Successfully checked cowsay." + Style.RESET_ALL)
+            if checkTerraformOnMacOrLinux == 0:
+                print(Fore.GREEN + "Terraform is installed."+ Style.RESET_ALL)
+                os.system('terraform --version')
+                print(Fore.GREEN + "Successfully checked terraform." + Style.RESET_ALL)
 
                 finishedDateTime = datetime.now()
 
-                print("Finished checking Cowsay at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
+                print("Finished checking Terraform at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
 
                 duration = finishedDateTime - startDateTime
                 print("Total execution time: {0} second(s)".format(duration.seconds))
                 print("")
 
             else: 
-                print(Fore.RED + "Cowsay is not installed." + Style.RESET_ALL)
+                print(Fore.RED + "Terraform is not installed." + Style.RESET_ALL)
                 
                 finishedDateTime = datetime.now()
 
-                print("Finished checking Cowsay at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
+                print("Finished checking Terraform at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
 
                 duration = finishedDateTime - startDateTime
                 print("Total execution time: {0} second(s)".format(duration.seconds))
@@ -71,35 +74,36 @@ def checkCowsay():
 
         elif operatingSystem == "Windows": 
             
-            checkCowsayOnWindows = subprocess.call(['where', 'cowsay'], stdout=FNULL) 
-            
-            if checkCowsayOnWindows == 0:
-                os.system('cowsay "Cowsay is installed"')
-                print(Fore.GREEN + "Successfully checked cowsay." + Style.RESET_ALL)
+            checkTerraformOnWindows = subprocess.call(['where', 'terraform'], stdout=FNULL)
+
+            if checkTerraformOnWindows == 0:
+                print(Fore.GREEN + "Terraform is installed."+ Style.RESET_ALL)
+                os.system('terraform --version')
+                print(Fore.GREEN + "Successfully checked terraform." + Style.RESET_ALL)
 
                 finishedDateTime = datetime.now()
 
-                print("Finished checking Cowsay at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
+                print("Finished checking Terraform at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
 
                 duration = finishedDateTime - startDateTime
                 print("Total execution time: {0} second(s)".format(duration.seconds))
                 print("")
-                
+
             else: 
-                print(Fore.RED + "Cowsay is not installed." + Style.RESET_ALL)
+                print(Fore.RED + "Terraform is not installed." + Style.RESET_ALL)
                 
                 finishedDateTime = datetime.now()
 
-                print("Finished checking Cowsay at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
+                print("Finished checking Terraform at", finishedDateTime.strftime("%Y-%m-%d %H:%M %p"))
 
                 duration = finishedDateTime - startDateTime
                 print("Total execution time: {0} second(s)".format(duration.seconds))
                 exit("")
-
+                
     except Exception as e: 
-        print(Fore.RED + "Failed to check Cowsay in Python.")
+        print(Fore.RED + "Failed to check Terraform in Python.")
         print(e)
         print(traceback.print_stack)
         exit("" + Style.RESET_ALL)
 
-checkCowsay()
+checkTerraform()
