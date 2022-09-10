@@ -9,30 +9,35 @@ from colorama import Fore, Style
 from datetime import datetime
 colorama.init()
 
+
 def checkOs():
     print("Started checking operating system at ", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
     if sys.platform == "win32": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('ver'))
+        os.system('ver')
         print(Style.RESET_ALL)
         operatingSystem = "Windows"
+
     elif sys.platform == "darwin": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('sw_vers'))
+        os.system('sw_vers')
         print(Style.RESET_ALL)
         operatingSystem = "macOS"
+
     else: 
         print(Fore.RED + "Sorry but this script only runs on Windows or macOS." + Style.RESET_ALL)
 
         print("Finished checking operating system at ", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
         exit("")
+
     print("Finished checking operating system at ", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
     print("")
     return operatingSystem
     
+
 def runWindowsMaintenance():
     startDateTime = datetime.now()
     
@@ -63,6 +68,7 @@ def runWindowsMaintenance():
     str(input("Press any key to continue."))
     os.system('shutdown /r /t 0')
 
+
 def runMacMaintenance():
     startDateTime = datetime.now()
     
@@ -80,6 +86,7 @@ def runMacMaintenance():
     if answer == "1": 
         os.system('diskutil verifyVolume "Macintosh HD"')
         os.system('diskutil repairVolume "Macintosh HD"')
+
     elif answer == "2": 
         os.system('diskutil verifyVolume MacOS')
         os.system('diskutil repairVolume MacOS')
@@ -98,6 +105,7 @@ def runMacMaintenance():
     str(input("Press any key to restart Mac."))
     os.system('reboot')
 
+
 def computerMaintenance():
     print("\nRun computer maintenance.\n")
     operatingSystem = checkOs()
@@ -110,6 +118,7 @@ def computerMaintenance():
             print(e)
             print(traceback.print_stack)
             exit("" + Style.RESET_ALL)
+            
     elif operatingSystem == "macOS":
         try: 
             runMacMaintenance()
@@ -118,5 +127,6 @@ def computerMaintenance():
             print(e)
             print(traceback.print_stack)
             exit("" + Style.RESET_ALL)
+
 
 computerMaintenance()
