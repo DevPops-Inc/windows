@@ -7,12 +7,13 @@ from colorama import Fore, Style
 from datetime import datetime
 colorama.init()
 
+
 def checkOsForWindows():
     print("Start checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
     if sys.platform == "win32": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('ver'))
+        os.system('ver')
 
         print(Style.RESET_ALL + "Finished checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
@@ -24,6 +25,7 @@ def checkOsForWindows():
         print("Finished checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
         exit("")
+
 
 def getHardDriveInfo():
     print("\nGet Hard Drive Info on Windows.\n")
@@ -49,5 +51,6 @@ def getHardDriveInfo():
         print(e)
         print(traceback.print_stack)
         exit("" + Style.RESET_ALL)
+        
 
 getHardDriveInfo()

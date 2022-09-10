@@ -1,28 +1,31 @@
 #!/bin/python
 
+# check Cowsay in Python
+
 import colorama, os, sys, subprocess, traceback
 from colorama import Fore, Style
 from datetime import datetime
 colorama.init()
 
+
 def checkOs():
-    print("Started checking operating system at", datetime.now().strftime("%Y-%m-"))
+    print("Started checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
     if sys.platform == "win32": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('ver'))
+        os.system('ver')
         print(Style.RESET_ALL)
         operatingSystem = "Windows"
 
     elif sys.platform == "darwin": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('sw_vers'))
+        os.system('sw_vers')
         print(Style.RESET_ALL)
         operatingSystem = "macOS"
 
     elif sys.platform == "linux": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('uname -r'))
+        os.system('uname -r')
         print(Style.RESET_ALL)
         operatingSystem = "Linux"
 
@@ -30,6 +33,7 @@ def checkOs():
 
     print("")
     return operatingSystem
+
 
 def checkCowsay(): 
     print("\nCheck Cowsay in Python.\n")
@@ -48,7 +52,7 @@ def checkCowsay():
 
             if checkCowsayOnMacOrLinux == 0:
                 os.system('cowsay "Cowsay is installed"')
-                print(Fore.GREEN + "Successfully checked cowsay." + Style.RESET_ALL)
+                print(Fore.GREEN + "Successfully checked Cowsay." + Style.RESET_ALL)
 
                 finishedDateTime = datetime.now()
 
@@ -75,7 +79,7 @@ def checkCowsay():
             
             if checkCowsayOnWindows == 0:
                 os.system('cowsay "Cowsay is installed"')
-                print(Fore.GREEN + "Successfully checked cowsay." + Style.RESET_ALL)
+                print(Fore.GREEN + "Successfully checked Cowsay." + Style.RESET_ALL)
 
                 finishedDateTime = datetime.now()
 
@@ -101,5 +105,6 @@ def checkCowsay():
         print(e)
         print(traceback.print_stack)
         exit("" + Style.RESET_ALL)
+
 
 checkCowsay()

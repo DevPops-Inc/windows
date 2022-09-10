@@ -10,12 +10,13 @@ from colorama import Fore, Style
 from datetime import datetime
 colorama.init()
 
+
 def checkOsForWindows(): 
     print("Started checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
     if sys.platform == "win32": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('ver'))
+        os.system('ver')
         print(Style.RESET_ALL)
 
         print("Finished checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
@@ -28,6 +29,7 @@ def checkOsForWindows():
         print("Finished checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
         exit("")
+
 
 def checkDiskAndRestartWindows():
     print("\nCheck disk and restart Windows.\n")
@@ -57,5 +59,6 @@ def checkDiskAndRestartWindows():
         print(e)
         print(traceback.print_stack)
         exit("" + Style.RESET_ALL)
+
 
 checkDiskAndRestartWindows()

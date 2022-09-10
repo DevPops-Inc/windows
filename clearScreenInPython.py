@@ -7,24 +7,25 @@ from colorama import Fore, Style
 from datetime import datetime
 colorama.init()
 
+
 def checkOs(): 
     print("Started checking operating system at", datetime.now().strftime("%Y-%m-%d %H:%M %p"))
 
     if sys.platform == "win32":
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('ver'))
+        os.system('ver')
         print(Style.RESET_ALL)
         operatingSystem = "Windows"
 
     elif sys.platform == "darwin": 
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('sw_vers'))
+        os.system('sw_vers')
         print(Style.RESET_ALL)
         operatingSystem = "macOS"
 
     elif sys.platform == "linux":
         print(Fore.GREEN + "Operating System: ")
-        print(os.system('uname -r'))
+        os.system('uname -r')
         print(Style.RESET_ALL)
         operatingSystem = "Linux"
 
@@ -32,6 +33,7 @@ def checkOs():
 
     print("")
     return operatingSystem
+
 
 def clearScreen():
     print("\nClear screen in Python.\n")
@@ -61,5 +63,6 @@ def clearScreen():
         print(e)
         print(traceback.print_stack)
         exit("" + Style.RESET_ALL)
+
 
 clearScreen()
