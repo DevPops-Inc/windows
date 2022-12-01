@@ -71,7 +71,8 @@ function GetWinPrograms()
         }
     }
 
-    Write-Host "Succussfully got Windows programs" -ForegroundColor Green
+    Write-Host ($winProgramsList -join "`n") -ForegroundColor Blue
+    Write-Host "Successfully got Windows programs" -ForegroundColor Green
 
     Write-Host "Finished getting Windows programs at" (Get-Date).DateTime
     Write-Host ""
