@@ -65,10 +65,10 @@ function GetVolumePath([string]$volumePath)
 
 function CheckParameters([string]$fileSpecPath, [string]$volumePath)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------------------"
     Write-Host ("fileSpecPath: {0}" -F $fileSpecPath)
     Write-Host ("volumePath  : {0}" -F $volumePath)
@@ -88,16 +88,16 @@ function CheckParameters([string]$fileSpecPath, [string]$volumePath)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -116,7 +116,7 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Starting backing up Windows server at:" $startDateTime
+        Write-Host "Starting backing up Windows server at:" $startDateTime.DateTime
 
         $policy         = New-WBPolicy  
         $fileSpec       = New-WBFileSpec -FileSpec $fileSpecPath
@@ -132,7 +132,7 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
         Write-Host "Successfully backed up Windows Server." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "`nFinished Windows maintenance at:" $finishedDateTime
+        Write-Host "Finished Windows maintenance at:" $finishedDateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
