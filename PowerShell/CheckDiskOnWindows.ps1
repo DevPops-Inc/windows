@@ -32,13 +32,13 @@ function CheckDisk()
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started checking disk at: " $startDateTime
+        Write-Host "Started checking disk at: " $startDateTime.DateTime
 
         Write-Output y | chkdsk /f/r c:
         Write-Host "Successfully checked disk." -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished checking disk at: " $finishedDateTime
+        Write-Host "Finished checking disk at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
