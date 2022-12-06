@@ -65,10 +65,10 @@ function GetNewPassword([securestring]$newPassword)
 
 function CheckParameters([string]$userName, [securestring]$newPassword)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "--------------------------------"
     Write-Host ("userName   : {0}" -F $userName)
     Write-Host ("newPassword: {0}" -F "***")
@@ -88,16 +88,16 @@ function CheckParameters([string]$userName, [securestring]$newPassword)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
         
         break
@@ -117,7 +117,7 @@ function ChangeUserPasswordOnAd([string]$userName, [securestring]$newPassword)
     {
         $startDateTime = (Get-Date)
         
-        Write-Host "Started changing user password on Active Directory at: " $startDateTime
+        Write-Host "Started changing user password on Active Directory at: " $startDateTime.DateTime
 
         Set-ADAccountPassword -Identity $userName -NewPassword (ConvertTo-SecureString -AsPlainText $newPassword -Force)
 
@@ -125,7 +125,7 @@ function ChangeUserPasswordOnAd([string]$userName, [securestring]$newPassword)
 
         $finishedDateTime = (Get-Date)
 
-        Write-Host "Finished changing user password on Active Directory at: " $finishedDateTime
+        Write-Host "Finished changing user password on Active Directory at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
