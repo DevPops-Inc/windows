@@ -40,7 +40,7 @@ function GetComputerName([string]$computerName)
 {
     if (($computerName -eq $Null) -or ($computerName -eq ""))
     {
-        $computerName = Read-Host -Prompt "Please type the computer name and press `"Enter`" key (Example: Dev-PC) or press `"Ctrl`" and `"C`" keys to use the computer name from the environment"
+        $computerName = Read-Host -Prompt "Please type the computer name and press the `"Enter`" key (Example: Dev-PC) or press the `"Ctrl`" and `"C`" keys to use the computer name from the environment"
         
         Write-Host ""
         return $computerName
@@ -56,7 +56,7 @@ function GetLicenseKey([string]$licenseKey)
 {
     if (($licenseKey -eq $Null) -or ($licenseKey -eq ""))
     {
-        $licenseKey = Read-Host -Prompt "Please type the Windows license key (Example: aaaaa-bbbbb-ccccc-ddddd-eeeee) and press `"Enter`" key"
+        $licenseKey = Read-Host -Prompt "Please type the Windows license key (Example: aaaaa-bbbbb-ccccc-ddddd-eeeee) and press the `"Enter`" key"
 
         Write-Host ""
         return $licenseKey
@@ -69,10 +69,10 @@ function GetLicenseKey([string]$licenseKey)
 
 function CheckParameters([string]$computerName, [string]$licenseKey)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------------------"
     Write-Host ("computerName: {0}" -F $computerName)
     Write-Host ("licenseKey  : {0}" -F $licenseKey)
@@ -92,16 +92,16 @@ function CheckParameters([string]$computerName, [string]$licenseKey)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -120,16 +120,17 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started activating Windows at: " $startDateTime
+        Write-Host "Started activating Windows at: " $startDateTime.DateTime
         
         $service = Get-WmiObject -query "select * from SoftwareLicensingService" -Computername $computerName
 
         $service.InstallProductKey($licenseKey)
         $service.RefreshLicenseStatus()
+        
         Write-Host ("Successfully activated Windows on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished activating Windows at: " $finishedDateTime
+        Write-Host "Finished activating Windows at: " $finishedDateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
