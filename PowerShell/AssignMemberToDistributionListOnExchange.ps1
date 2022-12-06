@@ -1,6 +1,6 @@
 # assign member to distribution list on Exchange
 
-# run this script as admin: Start-Process Powershell -Verb runAs
+# run this script as admin: Start-Process PowerShell -Verb runAs
 
 # you can run this script with: .\AssignMemberToDistributionListOnExchange.ps1 -email < email > -distroList < distribution list >
 
@@ -26,7 +26,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -66,12 +65,12 @@ function GetDistroList([string]$distroList)
     }
 }
 
-function CheckParameters([string]$email,[string]$distroList)
+function CheckParameters([string]$email, [string]$distroList)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------"
     Write-Host ("email     : {0}" -F $email)
     Write-Host ("distroList: {0}" -F $distroList)
@@ -91,16 +90,16 @@ function CheckParameters([string]$email,[string]$distroList)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -120,7 +119,7 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
     {
         $startTimeDate = (Get-Date)
         
-        Write-Host "Started assignming member to distribution list on Exchange at: " $startTimeDate
+        Write-Host "Started assignming member to distribution list on Exchange at: " $startTimeDate.DateTime
 
         Add-DistributionGroupMember -Identity $distroList -Member $email
         Get-DistributionGroupMember -Identity $distroList
@@ -129,7 +128,7 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished assign member to distribution list on Exchange at: " $finishedDateTime
+        Write-Host "Finished assign member to distribution list on Exchange at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startTimeDate $finishedDateTime
         
