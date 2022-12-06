@@ -82,10 +82,10 @@ function GetWinPrograms()
 
 function CheckParameters([string]$checkProgram)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $true
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------------------"
     Write-Host ("checkProgram: {0}" -F $checkProgram)
     Write-Host "-------------------------------------"
@@ -100,14 +100,14 @@ function CheckParameters([string]$checkProgram)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -126,6 +126,7 @@ function CheckProgram()
     try
     {
         $startDateTime = (Get-Date)
+
         Write-Host ("Started checking {0} at {1}" -F $checkProgram, $startDateTime.DateTime)
 
         if ($winProgramsList -contains $checkProgram)
@@ -140,6 +141,7 @@ function CheckProgram()
         Write-Host ("Successfully checked {0}." -F $checkProgram) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
+        
         Write-Host ("Finished checking {0} at {1}" -F $checkProgram, $finishedDateTime.DateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
