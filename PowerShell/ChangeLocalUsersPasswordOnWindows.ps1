@@ -64,10 +64,10 @@ function GetNewPassword([securestring]$newPassword)
 
 function CheckParameters([string]$localUser, [securestring]$newPassword)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------"
     Write-Host ("localUser  : {0}" -F $localUser)
     Write-Host ("newPassword: {0}" -F "***")
@@ -87,16 +87,16 @@ function CheckParameters([string]$localUser, [securestring]$newPassword)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passsed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passsed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameteres at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        Write-Host "Finished checking parameteres at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -118,14 +118,15 @@ function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started changing local user's password at: " $startDateTime
+        Write-Host "Started changing local user's password at: " $startDateTime.DateTime
 
         Set-LocalUser -Name $localUser -Password (ConvertTo-SecureString -AsPlainText $newPassword -Force)
 
         Write-Host ("Successfully changed the password for {0}." -F $localUser) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished changing local user's password at: " $finishedDateTime
+        
+        Write-Host "Finished changing local user's password at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
