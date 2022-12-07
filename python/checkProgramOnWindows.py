@@ -39,7 +39,7 @@ def checkParameters(program):
     print("Started checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
     valid = "true"
 
-    print("Parameters:")
+    print("Parameter(s):")
     print("----------------------------")
     print("program: {0}".format(program))
     print("----------------------------")

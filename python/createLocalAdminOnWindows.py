@@ -41,10 +41,10 @@ def getLocalAdminPassword():
 
 
 def checkParameters(localAdmin, localAdminPassword): 
-	print("Started checking parameters at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+	print("Started checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 	valid = "true"
 
-	print("Parameters:")
+	print("Parameter(s):")
 	print("------------------------------------------")
 	print("localAdmin        : {0}".format(localAdmin))
 	print("localAdminPassword: {0}".format("***"))
@@ -59,9 +59,9 @@ def checkParameters(localAdmin, localAdminPassword):
 		valid = "false"
 
 	if valid == "true": 
-		print(Fore.GREEN + "All parameter checks passed." + Style.RESET_ALL)
+		print(Fore.GREEN + "All parameter check(s) passed." + Style.RESET_ALL)
 
-		print("Finished checking parameters at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+		print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 		print("")
 
 	else: 
