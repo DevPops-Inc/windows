@@ -99,10 +99,10 @@ function CheckParameters([string]      $email,
                          [string]      $firstName, 
                          [string]      $lastName)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "Parameter(s):"
     Write-Host "------------------------------"
     Write-Host ("email    : {0}" -F $email)
     Write-Host ("password : {0}" -F "***")
@@ -136,16 +136,16 @@ function CheckParameters([string]      $email,
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -169,7 +169,7 @@ function CreateRemoteMailboxInExchange([string]      $email,
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating remote mailbox at" $startDateTime
+        Write-Host "Started creating remote mailbox at" $startDateTime.DateTime
 
         New-Mailbox -UserPrincipalName $email  -Name $firstName$lastName -OrganizationalUnit Users -Password $password -FirstName $firstName -LastName $lastName -DisplayName "$firstName $lastName" -ResetPasswordOnNextLogon $false    
 
@@ -177,7 +177,7 @@ function CreateRemoteMailboxInExchange([string]      $email,
 
         $finishedDateTime = (Get-Date)
 
-        Write-Host "Finished creating remote mailbox at" $finishedDateTime
+        Write-Host "Finished creating remote mailbox at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
@@ -187,7 +187,6 @@ function CreateRemoteMailboxInExchange([string]      $email,
     catch 
     {
         Write-Host ("Failed to create remote mailbox {0}" -F $email) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
