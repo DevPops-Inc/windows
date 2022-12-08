@@ -15,7 +15,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOS
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -27,33 +26,34 @@ function CheckOsForWindows()
 
 function DefragDisk()
 {
-    Write-Host "Defrag disk on Windows`n"
+    Write-Host "`nDefrag disk on Windows`n"
     CheckOsForWindows
 
     try
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started defragging disk at" $startDateTime.DateTime
+
+        $disk = Get-PhysicalDisk
+
         if ($disk.MediaType -eq "HDD")
         {
-            $startDateTime = (Get-Date)
-            Write-Host "Started defragging disk at" $startDateTime
-    
             defrag c: /u
             Write-Host "Successfully defragged disk." -ForegroundColor Green
-            
-            $finishedDateTime = (Get-Date)
-            Write-Host "Finished defragging disk at" $finishedDateTime
-            
-            $duration = New-TimeSpan $startDateTime $finishedDateTime
-    
-            Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
-    
-            Write-Host ""
         } 
         else 
         {
             Write-Host "SSD drives don't need defragging." -ForegroundColor Red
-            break
         }
+        
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished defragging disk at" $finishedDateTime.DateTime
+        
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
