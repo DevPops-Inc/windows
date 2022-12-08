@@ -82,10 +82,10 @@ function CheckParameters([string]      $standardUser,
                          [securestring]$password, 
                          [string]      $description)
 {
-  Write-Host "Started checking parameters at" (Get-Date).DateTime
+  Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
   $valid = $True
 
-  Write-Host "Parameters:"
+  Write-Host "Parameter(s):"
   Write-Host "-------------------------------------"
   Write-Host ("standardUser: {0}" -F $standardUser)
   Write-Host ("password    : {0}" -F "***")
@@ -112,16 +112,16 @@ function CheckParameters([string]      $standardUser,
 
   if ($valid -eq $True)
   {
-    Write-Host "All parameter checks passed.`n"  -ForegroundColor Green
+    Write-Host "All parameter check(s) passed.`n"  -ForegroundColor Green
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
   }
   else 
   {
     Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 
     break
@@ -141,7 +141,7 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
   try 
   {
     $startDateTime = (Get-Date)
-    Write-Host "Started creating standard user at" $startDateTime
+    Write-Host "Started creating standard user at" $startDateTime.DateTime
 
     New-LocalUser $standardUser -Password $sassword -FullName $standardUser -Description $description
 
@@ -153,7 +153,7 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
     Get-LocalUser
 
     $finishedDateTime = (Get-Date)
-    Write-Host "Finished creating standard user at" $finishedDateTime
+    Write-Host "Finished creating standard user at" $finishedDateTime.DateTime
     
     $duration = New-TimeSpan $startDateTime $finishedDateTime
 
