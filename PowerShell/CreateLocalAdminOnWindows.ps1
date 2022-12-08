@@ -80,10 +80,10 @@ function GetDescription()
 
 function CheckParameters([string]$localAdmin, [securestring]$password, [string]$description)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("localAdmin : {0}" -F $localAdmin)
     Write-Host ("password   : {0}" -F "***")
@@ -110,16 +110,16 @@ function CheckParameters([string]$localAdmin, [securestring]$password, [string]$
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameters checks passed." -ForegroundColor -Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor -Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -139,7 +139,7 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating local admin at: " $startDateTime
+        Write-Host "Started creating local admin at: " $startDateTime.DateTime
 
         New-LocalUser "$localAdmin" -Password $password -FullName "$localAdmin" -Description "$description"
 
@@ -149,7 +149,7 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
         Write-Host ("Successfully created local admin {0}." -F $localAdmin) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating local admin at: " $finishedDateTime
+        Write-Host "Finished creating local admin at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -163,7 +163,6 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
     catch
     {
         Write-Host ("Faild to create local admin {0}." -F $localAdmin) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
 
