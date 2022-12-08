@@ -65,10 +65,10 @@ function GetOrgUnit([string]$orgUnit)
 
 function CheckParameters([string]$distroList, [string]$orgUnit)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------"
     Write-Host ("distroList: {0}" -F $distroList)
     Write-Host ("orgUnit   : {0}" -F $orgUnit)
@@ -88,16 +88,16 @@ function CheckParameters([string]$distroList, [string]$orgUnit)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameters checks passed." -ForegroundColor -Green
+        Write-Host "All parameter(s) checks passed." -ForegroundColor -Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
         
         break
@@ -116,15 +116,16 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating distribution group at: " $startDateTime
+        Write-Host "Started creating distribution group at: " $startDateTime.DateTime
 
         New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
+
         Set-DistributionGroup -Identity $distroList -RequireSenderAuthenticationEnabled $false
     
         Write-Host ("Succesfully created {0} in Exchange." -F $distroList) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating distribution group at: " $finishedDateTime
+        Write-Host "Finished creating distribution group at: " $finishedDateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
