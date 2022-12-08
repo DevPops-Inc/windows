@@ -83,10 +83,10 @@ function CheckParameters([string]      $newAdUser,
                          [securestring]$newPassword, 
                          [string]      $groupName)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------"
     Write-Host ("newAdUser  : {0}" -F $newAdUser)
     Write-Host ("newPassword: {0}" -F "***")
@@ -113,16 +113,16 @@ function CheckParameters([string]      $newAdUser,
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else
     {
         Write-Host "One or more parameters are incorrect" -ForegroundColor Red 
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -145,7 +145,7 @@ function CreateNewAdUser([string]      $newAdUser,
     {
         $startDateTime = (Get-Date)
         
-        Write-Host "Started creating new Active Directory user and assigning permissions at: " $startDateTime
+        Write-Host "Started creating new Active Directory user and assigning permissions at: " $startDateTime.DateTime
 
         New-ADUser $newAdUser 
 
@@ -157,7 +157,7 @@ function CreateNewAdUser([string]      $newAdUser,
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished creating new Active Directory user and assigning permissions at: " $finishedDateTime
+        Write-Host "Finished creating new Active Directory user and assigning permissions at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
