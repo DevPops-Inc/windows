@@ -67,10 +67,10 @@ function CheckParameters([string]      $testAdmin,
                          [securestring]$testAdminPassword, 
                          [string]      $testAdminDescription)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------------------------"
     Write-Host ("testAdmin           : {0}" -F $testAdmin)
     Write-Host ("testAdminPassword   : {0}" -F "***")
@@ -97,14 +97,14 @@ function CheckParameters([string]      $testAdmin,
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameters checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
-        Write-Host "One or more paramaters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more paramaters are incorrect." -ForegroundColor Red
 
         Write-Host "Finished checking parameters at" (Get-Date).DateTime
         Write-Host ""
@@ -126,7 +126,7 @@ function CreateTestAdmin([string]      $testAdmin,
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating testAdmin account at: " $startDateTime
+        Write-Host "Started creating testAdmin account at: " $startDateTime.DateTime
 
         New-LocalUser "$testAdmin" -Password $testAdminPassword -FullName "$testAdmin" -Description "$testAdminDescription"
 
@@ -137,7 +137,7 @@ function CreateTestAdmin([string]      $testAdmin,
         Write-Host ("Successfully created {0} account." -F $testAdmin) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating testAdmin account at: " $finishedDateTime
+        Write-Host "Finished creating testAdmin account at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -151,7 +151,6 @@ function CreateTestAdmin([string]      $testAdmin,
     catch 
     {
         Write-Host ("Failed to create {0} account." -F $testAdmin) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         
