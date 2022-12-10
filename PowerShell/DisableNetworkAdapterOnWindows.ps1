@@ -22,7 +22,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -107,6 +106,7 @@ function DisableNetworkAdapter([string]$networkAdapter)
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished disabling network adapter at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
