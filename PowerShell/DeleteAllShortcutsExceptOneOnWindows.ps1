@@ -2,6 +2,8 @@
 
 # run this script as admin: Start-Process Powershell -Verb runAs
 
+# you can run this script with: .\DeleteAllShortcutsExceptOneOnWindows.ps1 -excludePath < exclude path > 
+
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $deletePath  = "C:\Users\Public\Desktop\*.lnk", 
@@ -23,10 +25,9 @@ function CheckOsForWindows()
     else
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system at" (Get-Date).Date
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
 
         break
