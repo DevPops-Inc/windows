@@ -48,10 +48,10 @@ function GetDistroGroup([string]$distroGroup)
 
 function CheckParameters([string]$distroGroup)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("distroGroup: {0}" -F $distroGroup)
     Write-Host "-----------------------------------"
@@ -64,7 +64,7 @@ function CheckParameters([string]$distroGroup)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -73,7 +73,7 @@ function CheckParameters([string]$distroGroup)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -88,14 +88,14 @@ function RemoveDistroGroup([string]$distroGroup)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing distribution group at" $startDateTime
+        Write-Host "Started removing distribution group at" $startDateTime.DateTime
 
         Remove-DistributionGroup -Identity "$distroGroup"
         
         Write-Host ("Successfully removed {0} from Exchange." -F $distroGroup) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing distribution group at" $finishedDateTime
+        Write-Host "Finished removing distribution group at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

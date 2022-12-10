@@ -32,12 +32,12 @@ function LogOutProfile()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started logging out of profile at" $startDateTime
+        Write-Host "Started logging out of profile at" $startDateTime.DateTime
 
         logoff /v
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished logging out of profile at" $finishedDateTime
+        Write-Host "Finished logging out of profile at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

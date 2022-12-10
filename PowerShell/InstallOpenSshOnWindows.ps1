@@ -73,7 +73,7 @@ function InstallOpenSsh()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started installing OpenSSH at" $startDateTime
+        Write-Host "Started installing OpenSSH at" $startDateTime.DateTime
 
         Get-WindowsCapability -Online | ? Name -like 'OpenSSH*'
         
@@ -88,7 +88,7 @@ function InstallOpenSsh()
         Get-User
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished installing OpenSSH at" $finishedDateTime
+        Write-Host "Finished installing OpenSSH at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

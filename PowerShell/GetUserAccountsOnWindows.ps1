@@ -32,7 +32,7 @@ function GetUserAccounts()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting user accounts at" $startDateTime
+        Write-Host "Started getting user accounts at" $startDateTime.DateTime
 
         Write-Host "The user accounts on this computer are:"
         Get-LocalUser
@@ -40,7 +40,7 @@ function GetUserAccounts()
         Write-Host "Successfully got user accounts." -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished getting user accounts at" $finishedDateTime
+        Write-Host "Finished getting user accounts at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

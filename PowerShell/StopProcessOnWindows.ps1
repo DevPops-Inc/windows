@@ -45,10 +45,10 @@ else
 
 function CheckParameters([string]$processName)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("processName: {0}" -F $processName)
     Write-Host "-----------------------------------"
@@ -61,7 +61,7 @@ function CheckParameters([string]$processName)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -70,7 +70,7 @@ function CheckParameters([string]$processName)
         break
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -89,7 +89,7 @@ function StopProcess([string]$processName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started stopping process at" $startDateTime
+        Write-Host "Started stopping process at" $startDateTime.DateTime
 
         Stop-Process -processname $processName
 
@@ -98,7 +98,7 @@ function StopProcess([string]$processName)
         Get-Process -Name $processName
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished stopping process at" $finishedDateTime
+        Write-Host "Finished stopping process at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

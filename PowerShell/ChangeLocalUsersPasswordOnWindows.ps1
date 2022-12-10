@@ -118,7 +118,7 @@ function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started changing local user's password at: " $startDateTime.DateTime
+        Write-Host "Started changing local user's password at: " $startDateTime.DateTime.DateTime
 
         Set-LocalUser -Name $localUser -Password (ConvertTo-SecureString -AsPlainText $newPassword -Force)
 
@@ -126,7 +126,7 @@ function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished changing local user's password at: " $finishedDateTime.DateTime
+        Write-Host "Finished changing local user's password at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

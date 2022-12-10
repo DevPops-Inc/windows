@@ -54,10 +54,10 @@ function GetServiceOnStartUp([string]$serviceName)
 
 function CheckParameters([string]$serviceName)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("serviceName: {0}" -F $serviceName)
     Write-Host "-----------------------------------"
@@ -70,16 +70,16 @@ function CheckParameters([string]$serviceName)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -97,7 +97,7 @@ function DisableServiceOnStartUp([string]$serviceName)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started disabling service at" $startDateTime
+        Write-Host "Started disabling service at" $startDateTime.DateTime
 
         Set-Service $serviceName -StartupType Disabled
 
@@ -106,7 +106,7 @@ function DisableServiceOnStartUp([string]$serviceName)
         Get-Service -Name $serviceName
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished disabling service at" $finishedDateTime
+        Write-Host "Finished disabling service at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

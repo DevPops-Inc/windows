@@ -48,10 +48,10 @@ function GetAdUser([string]$adUser)
 
 function CheckParameters([string]$adUser)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------"
     Write-Host ("adUser: {0}" -F $adUser)
     Write-Host "-------------------------"
@@ -63,7 +63,7 @@ function CheckParameters([string]$adUser)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -72,7 +72,7 @@ function CheckParameters([string]$adUser)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -87,7 +87,7 @@ function SetPwToNeverExpireInActiveDirectory([string]$adUser)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started setting password to never expire at" $startDateTime
+        Write-Host "Started setting password to never expire at" $startDateTime.DateTime
 
         Set-LocalUser -Name "$adUser" -PasswordNeverExpires 1
         
@@ -95,7 +95,7 @@ function SetPwToNeverExpireInActiveDirectory([string]$adUser)
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished setting password to never expire at" $finishedDateTime
+        Write-Host "Finished setting password to never expire at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

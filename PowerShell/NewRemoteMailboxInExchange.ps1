@@ -19,7 +19,7 @@ function CheckOsForWindows()
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         write-Host ""
     }
     else 
@@ -94,10 +94,10 @@ function CheckParameters([string]      $email,
                          [string]      $firstName, 
                          [string]      $lastName)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------------"
     Write-Host ("email    : {0}" -F $email)
     Write-Host ("password : {0}" -F "***")
@@ -131,7 +131,7 @@ function CheckParameters([string]      $email,
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else
     {
@@ -140,7 +140,7 @@ function CheckParameters([string]      $email,
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 }
 
 function NewRemoteMailboxInExchange([string]      $email, 
@@ -160,7 +160,7 @@ function NewRemoteMailboxInExchange([string]      $email,
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating remote mailbox at" $startDateTime
+        Write-Host "Started creating remote mailbox at" $startDateTime.DateTime
 
         New-Mailbox -UserPrincipalName $email  -Name $firstName$lastName -OrganizationalUnit Users -Password $password -FirstName $firstName -LastName $lastName -DisplayName "$firstName $lastName" -ResetPasswordOnNextLogon $false
 

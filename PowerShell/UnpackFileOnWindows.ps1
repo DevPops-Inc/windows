@@ -64,10 +64,10 @@ function GetDestinationPath([string]$destinationPath)
 
 function CheckParameters([string]$sourceFilePath, [string]$destinationPath)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------------------------"
     Write-Host ("sourceFilePath : {0}" -F $sourceFilePath)
     Write-Host ("destinationPath: {0}" -F $destinationPath)
@@ -87,7 +87,7 @@ function CheckParameters([string]$sourceFilePath, [string]$destinationPath)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -96,7 +96,7 @@ function CheckParameters([string]$sourceFilePath, [string]$destinationPath)
         break
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -112,7 +112,7 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started unpacking file at" $startDateTime
+        Write-Host "Started unpacking file at" $startDateTime.DateTime
 
         Expand-Archive -LiteralPath $sourceFilePath -destinationPath $destinationPath
 
@@ -121,7 +121,7 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
         Get-ChildItem-Path $destinationPath
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished unpacking file at" $finishedDateTime
+        Write-Host "Finished unpacking file at" $finishedDateTime.DateTime
     }
     catch
     {

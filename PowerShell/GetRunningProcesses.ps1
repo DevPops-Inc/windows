@@ -26,7 +26,7 @@ function GetRunningProcesses()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting running processes at" $startDateTime
+        Write-Host "Started getting running processes at" $startDateTime.DateTime
 
         Write-Host "The Processes running on this computer are: "
         Get-Process
@@ -34,7 +34,7 @@ function GetRunningProcesses()
         Write-Host "`nSuccessfully got processes on this computer.`n" -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished getting running processes at" $finishedDateTime
+        Write-Host "Finished getting running processes at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

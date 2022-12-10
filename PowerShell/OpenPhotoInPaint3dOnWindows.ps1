@@ -48,10 +48,10 @@ function GetFileLocation([string]$fileLocation)
 
 function CheckParameters([string]$fileLocation)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------------------"
     Write-Host ("fileLocation: {0}" -F $fileLocation)
     Write-Host "-------------------------------------"
@@ -64,7 +64,7 @@ function CheckParameters([string]$fileLocation)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -73,7 +73,7 @@ function CheckParameters([string]$fileLocation)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -88,7 +88,7 @@ function OpenPhotoInPaint3d([string]$fileLocation)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started opening photo in Paint 3D at" $startDateTime
+        Write-Host "Started opening photo in Paint 3D at" $startDateTime.DateTime
 
         Start-Process -FilePath "mspaint" -ArgumentList """$fileLocation /ForceBootstrapPaint3D"""
 

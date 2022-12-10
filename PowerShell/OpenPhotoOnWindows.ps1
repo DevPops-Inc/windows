@@ -48,10 +48,10 @@ function GetPhotoLocation([string]$photoLocation)
 
 function CheckParameters([string]$photoLocation)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $true
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------------"
     Write-Host ("photoLocation: {0}" -F $photoLocation)
     Write-Host "---------------------------------------"
@@ -64,7 +64,7 @@ function CheckParameters([string]$photoLocation)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -73,7 +73,7 @@ function CheckParameters([string]$photoLocation)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -94,14 +94,14 @@ function OpenPhoto([string]$photoLocation)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started opening photo at" $startDateTime
+        Write-Host "Started opening photo at" $startDateTime.DateTime
 
         Start-Process -Path $photoLocation
 
         Write-Host ("Successfully opened photo: {0}" -F $photoLocation) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished opening photo at" $finishedDateTime
+        Write-Host "Finished opening photo at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

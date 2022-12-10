@@ -31,14 +31,14 @@ function EnableWsl()
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started enabling Windows Subsystem for Linux at" $startDateTime
+        Write-Host "Started enabling Windows Subsystem for Linux at" $startDateTime.DateTime
 
         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -Force
         
         Write-Host "`nSuccessfully enabled Windows Subsystem for Linux.`n" -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished enabling Windows Subsystem for Linux at" $finishedDateTime
+        Write-Host "Finished enabling Windows Subsystem for Linux at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

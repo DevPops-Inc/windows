@@ -82,10 +82,10 @@ function CheckParameters([string]$contactName,
                          [string]$externalEmail, 
                          [string]$orgUnit)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------------"
     Write-Host ("contactName  : {0}" -F $contactName)
     Write-Host ("externalEmail: {0}" -F $externalEmail)
@@ -112,7 +112,7 @@ function CheckParameters([string]$contactName,
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else
     {
@@ -121,7 +121,7 @@ function CheckParameters([string]$contactName,
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -140,14 +140,14 @@ function NewContactInExchange([string]$contactName,
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating new contact at" $startDateTime
+        Write-Host "Started creating new contact at" $startDateTime.DateTime
 
         New-MailContact -Name $contactName -ExternalEmailAddress $externalEmail -OrganizationalUnit $orgUnit
 
         Write-Host ("Successfully created contact {0}, {1} in group: {2}." -F $contactName, $externalEmail, $orgUnit) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating new contact at" $finishedDateTime
+        Write-Host "Finished creating new contact at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

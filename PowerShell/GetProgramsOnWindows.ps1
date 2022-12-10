@@ -33,14 +33,14 @@ function GetPrograms()
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting programs at" $startDateTime
+        Write-Host "Started getting programs at" $startDateTime.DateTime
 
         Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName | Format-Table -Autosize
 
         Write-Host "Successfully got programs." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished getting programs at" $finishedDateTime
+        Write-Host "Finished getting programs at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

@@ -47,10 +47,10 @@ function GetDriveLetter([string]$driveLetter)
 
 function CheckParameters([string]$driveLetter)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
     
-    Write-Host "`nParameters:"
+    Write-Host "`nParameter(s):"
     Write-Host "----------------------------------------"
     Write-Host ("driveLetter: {0}" -F $driveLetter)
     Write-Host "----------------------------------------"
@@ -61,11 +61,11 @@ function CheckParameters([string]$driveLetter)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passed.`n" -ForegroundColor Green
     }
     else 
     {
@@ -87,14 +87,14 @@ function EnableBitLocker([string]$driveLetter)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started enabling BitLocker at" $startDateTime
+        Write-Host "Started enabling BitLocker at" $startDateTime.DateTime
 
         Enable-BitLocker -MountPoint "$driveLetter"
 
         Write-Host ("`nSuccessfully enabled BitLocker on drive {0}.`n" -F $driveLetter) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished enabling BitLocker at" $finishedDateTime
+        Write-Host "Finished enabling BitLocker at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

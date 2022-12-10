@@ -48,10 +48,10 @@ function GetServiceName([string]$serviceName)
 
 function CheckParameters([string]$serviceName)
 {
-    Write-Host "Start checking parameters at" (Get-Date).DateTime
+    Write-Host "Start checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("serviceName: {0}" -F $serviceName)
     Write-Host "-----------------------------------"
@@ -64,7 +64,7 @@ function CheckParameters([string]$serviceName)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -73,7 +73,7 @@ function CheckParameters([string]$serviceName)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -92,7 +92,7 @@ function SetServiceToAutoStart([string]$serviceName)
     {
         $startDateTime = (Get-Date)
         
-        Write-Host "Started setting service to automatic startup at" $startDateTime
+        Write-Host "Started setting service to automatic startup at" $startDateTime.DateTime
 
         Set-Service $serviceName -StartupType Automatic
 
@@ -102,7 +102,7 @@ function SetServiceToAutoStart([string]$serviceName)
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished setting service to automatic startup at" $finishedDateTime
+        Write-Host "Finished setting service to automatic startup at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

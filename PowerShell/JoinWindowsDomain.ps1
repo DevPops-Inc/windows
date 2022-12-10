@@ -60,10 +60,10 @@ function GetDomainAdmin([string]$domainAdmin)
 
 function CheckParameters([string]$domainName, [string]$domainAdmin)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "`nParameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("domainName : {0}" -F $domainName)
     Write-Host ("domainAdmin: {0}" -F $domainAdmin)
@@ -83,7 +83,7 @@ function CheckParameters([string]$domainName, [string]$domainAdmin)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -92,7 +92,7 @@ function CheckParameters([string]$domainName, [string]$domainAdmin)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 }
 
 function JoinWindowsDomain([string]$domainName, [string]$domainAdmin)

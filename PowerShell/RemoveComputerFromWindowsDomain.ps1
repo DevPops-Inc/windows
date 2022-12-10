@@ -64,10 +64,10 @@ function GetAdAdmin([string]$adAdmin)
 
 function CheckParameters([string]$domain, [string]$adAdmin)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------"
     Write-Host ("domain : {0}" -F $domain)
     Write-Host ("adAdmin: {0}" -F $adAdmin)
@@ -87,7 +87,7 @@ function CheckParameters([string]$domain, [string]$adAdmin)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else
     {
@@ -96,7 +96,7 @@ function CheckParameters([string]$domain, [string]$adAdmin)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -112,14 +112,14 @@ function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing computer at" $startDateTime
+        Write-Host "Started removing computer at" $startDateTime.DateTime
 
         Remove-Computer -UnjoinDomaincredential $domain\$adAdmin -PassThru -Verbose -Restart
 
         Write-Host ("Sucessfully removed computer from {0} domain." -F $domain) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing computer at" $finishedDateTime
+        Write-Host "Finished removing computer at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

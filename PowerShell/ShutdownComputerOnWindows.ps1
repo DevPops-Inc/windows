@@ -34,14 +34,14 @@ function ShutdownComputer()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started shutting down computer at" $startDateTime
+        Write-Host "Started shutting down computer at" $startDateTime.DateTime
 
         Stop-Computer -ComputerName localhost
         
         Write-Host "Succesfully shutting down computer now." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished shutting down computer at" $finishedDateTime
+        Write-Host "Finished shutting down computer at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

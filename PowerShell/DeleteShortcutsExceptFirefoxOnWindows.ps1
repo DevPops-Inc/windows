@@ -65,10 +65,10 @@ function GetExcludePath([string]$excludePath)
 
 function CheckParameters([string]$deletePath, [string]$excludePath)
 {
-    Write-Host "Started checking parameteres at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("deletePath : {0}" -F $deletePath)
     Write-Host ("excludePath: {0}" -F $excludePath)
@@ -88,16 +88,16 @@ function CheckParameters([string]$deletePath, [string]$excludePath)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passsed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passsed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -116,13 +116,13 @@ function DeleteShortcuts([string]$deletePath, [string]$excludePath)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started deleting shortcuts at" $startDateTime
+        Write-Host "Started deleting shortcuts at" $startDateTime.DateTime
 
         Remove-Item $deletePath -Exclude $excludePath -Force
         Write-Host "Successfully deleted shortcuts." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished deleting shortcuts at" $finishedDateTime
+        Write-Host "Finished deleting shortcuts at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

@@ -77,10 +77,10 @@ function GetDriverName([string]$driverName)
 
 function CheckParameters([string]$ipAddress, [string]$printerName, [string]$driverName)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "`nParameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("ipAddress  : {0}" -F $ipAddress)
     Write-Host ("printerName: {0}" -F $printerName)
@@ -107,7 +107,7 @@ function CheckParameters([string]$ipAddress, [string]$printerName, [string]$driv
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passed.`n" -ForegroundColor Green
     }
     else 
     {
@@ -116,7 +116,7 @@ function CheckParameters([string]$ipAddress, [string]$printerName, [string]$driv
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 }
 
 function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$driverName)

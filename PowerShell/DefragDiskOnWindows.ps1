@@ -32,7 +32,7 @@ function DefragDisk()
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started defragging disk at" $startDateTime.DateTime
+        Write-Host "Started defragging disk at" $startDateTime.DateTime.DateTime
 
         $disk = Get-PhysicalDisk
 
@@ -47,7 +47,7 @@ function DefragDisk()
         }
         
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished defragging disk at" $finishedDateTime.DateTime
+        Write-Host "Finished defragging disk at" $finishedDateTime.DateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

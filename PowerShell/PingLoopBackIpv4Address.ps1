@@ -42,10 +42,10 @@ function GetLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
 
 function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $true
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------------------------"
     Write-Host ("loopbackIpv4Address: {0}" -F $loopbackIpv4Address)
     Write-Host "---------------------------------------------------"
@@ -58,7 +58,7 @@ function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -67,7 +67,7 @@ function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -82,14 +82,14 @@ function PingLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started pinging loopback IPv4 address at" $startDateTime
+        Write-Host "Started pinging loopback IPv4 address at" $startDateTime.DateTime
 
         Test-Connection $loopbackIpv4Address
         
         Write-Host "Successfully pinged loopback IPv4 address." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished pinging loopback IPv4 address at" $finishedDateTime
+        Write-Host "Finished pinging loopback IPv4 address at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

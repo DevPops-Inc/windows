@@ -47,10 +47,10 @@ function GetNewName([string]$newName)
 
 function CheckParameters([string]$newName)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------"
     Write-Host ("newName: {0}" -F $newName)
     Write-Host "---------------------------"
@@ -63,7 +63,7 @@ function CheckParameters([string]$newName)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -72,7 +72,7 @@ function CheckParameters([string]$newName)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 
@@ -87,14 +87,14 @@ function RenameComputer([string]$newName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started renaming computer at" $startDateTime
+        Write-Host "Started renaming computer at" $startDateTime.DateTime
 
         Rename-Computer -NewName "$newName" -DomainCredential Domain01\Admin01 -Restart
 
         Write-Host ("Successfully renamed computer to {0}." -F $newName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished renaming computer at" $finishedDateTime
+        Write-Host "Finished renaming computer at" $finishedDateTime.DateTime
     }
     catch
     {

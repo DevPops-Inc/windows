@@ -32,7 +32,7 @@ function GetPrinterPortsOnWindows()
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting printer ports at" $startDateTime
+        Write-Host "Started getting printer ports at" $startDateTime.DateTime
 
         Write-Host "The printer ports on this computer are: "
         Get-PrinterPort
@@ -40,7 +40,7 @@ function GetPrinterPortsOnWindows()
         Write-Host "Successfuly got printer ports on this computer.`n" -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished getting printer ports at" $finishedDateTime
+        Write-Host "Finished getting printer ports at" $finishedDateTime.DateTime
     }
     catch
     {

@@ -25,14 +25,14 @@ function GetListOfDrives()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting list of drives at" $startDateTime
+        Write-Host "Started getting list of drives at" $startDateTime.DateTime
 
         Get-PSDrive
 
         Write-Host "`nSuccessfully got list of drives on this computer" -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished getting list of drives at" $finishedDateTime
+        Write-Host "Finished getting list of drives at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

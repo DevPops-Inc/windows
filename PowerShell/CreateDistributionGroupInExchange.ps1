@@ -116,7 +116,7 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating distribution group at: " $startDateTime.DateTime
+        Write-Host "Started creating distribution group at: " $startDateTime.DateTime.DateTime
 
         New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
 
@@ -125,7 +125,7 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
         Write-Host ("Succesfully created {0} in Exchange." -F $distroList) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating distribution group at: " $finishedDateTime.DateTime
+        Write-Host "Finished creating distribution group at: " $finishedDateTime.DateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

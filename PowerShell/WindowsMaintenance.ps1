@@ -73,7 +73,7 @@ function WindowsMaintenance()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started Windows maintenance at:" $startDateTime
+        Write-Host "Started Windows maintenance at:" $startDateTime.DateTime
 
         CheckDisk
         SystemsFileCheck
@@ -98,7 +98,7 @@ function WindowsMaintenance()
     finally
     {
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished Windows maintenance at:" $finishedDateTime
+        Write-Host "Finished Windows maintenance at:" $finishedDateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

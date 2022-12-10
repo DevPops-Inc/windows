@@ -49,10 +49,10 @@ function GetTestUser([string]$testUser)
 
 function CheckParameters([string]$testUser)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------"
     Write-Host ("testUser: {0}" -F $testUser)
     Write-Host "-----------------------------"
@@ -65,16 +65,16 @@ function CheckParameters([string]$testUser)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor -Red
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break
@@ -92,14 +92,14 @@ function DeleteTestUser([string]$testUser)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started deleting local test user at" $startDateTime
+        Write-Host "Started deleting local test user at" $startDateTime.DateTime
 
         Remove-LocalUser -Name "$testUser"
 
         Write-Host ("Successfuly deleted test user: {0}" -F $testUser) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished deleting local user at" $finishedDateTime
+        Write-Host "Finished deleting local user at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
