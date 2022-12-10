@@ -1,6 +1,6 @@
 # delete shortcuts except Firefox on Windows
 
-# run this script as admin: Start-Process Powershell -Verb runAs
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 
 [CmdletBinding()]
 param(
@@ -23,7 +23,6 @@ function CheckOsForWindows()
     else
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).Date
