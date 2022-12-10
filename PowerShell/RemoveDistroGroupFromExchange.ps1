@@ -48,10 +48,10 @@ function GetDistroGroup([string]$distroGroup)
 
 function CheckParameters([string]$distroGroup)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("distroGroup: {0}" -F $distroGroup)
     Write-Host "-----------------------------------"
@@ -64,7 +64,7 @@ function CheckParameters([string]$distroGroup)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -73,7 +73,7 @@ function CheckParameters([string]$distroGroup)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 

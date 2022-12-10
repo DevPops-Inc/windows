@@ -65,10 +65,10 @@ function GetExcludePath([string]$excludePath)
 
 function CheckParameters([string]$deletePath, [string]$excludePath)
 {
-    Write-Host "Started checking parameteres at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("deletePath : {0}" -F $deletePath)
     Write-Host ("excludePath: {0}" -F $excludePath)
@@ -88,16 +88,16 @@ function CheckParameters([string]$deletePath, [string]$excludePath)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passsed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passsed." -ForegroundColor Green
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect." -ForegroundColor Red
         
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break

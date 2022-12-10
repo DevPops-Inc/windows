@@ -62,10 +62,10 @@ function GetFileDestination([string]$fileDestination)
 
 function CheckParameters([string]$systemInfoFile, [string]$fileDestination)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "`nParameter(s):"
     Write-Host "-------------------------------------------"
     Write-Host ("systemInfoFile : {0}" -F $systemInfoFile)
     Write-Host ("fileDestination: {0}" -F $fileDestination)
@@ -83,11 +83,11 @@ function CheckParameters([string]$systemInfoFile, [string]$fileDestination)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passed.`n" -ForegroundColor Green
     }
     else 
     {

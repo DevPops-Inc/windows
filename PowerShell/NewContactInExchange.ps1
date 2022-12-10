@@ -82,10 +82,10 @@ function CheckParameters([string]$contactName,
                          [string]$externalEmail, 
                          [string]$orgUnit)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------------"
     Write-Host ("contactName  : {0}" -F $contactName)
     Write-Host ("externalEmail: {0}" -F $externalEmail)
@@ -112,7 +112,7 @@ function CheckParameters([string]$contactName,
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else
     {
@@ -121,7 +121,7 @@ function CheckParameters([string]$contactName,
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 

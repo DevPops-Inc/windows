@@ -48,10 +48,10 @@ function GetPhotoLocation([string]$photoLocation)
 
 function CheckParameters([string]$photoLocation)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $true
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------------"
     Write-Host ("photoLocation: {0}" -F $photoLocation)
     Write-Host "---------------------------------------"
@@ -64,7 +64,7 @@ function CheckParameters([string]$photoLocation)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -73,7 +73,7 @@ function CheckParameters([string]$photoLocation)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 

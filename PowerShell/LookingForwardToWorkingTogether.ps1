@@ -41,10 +41,10 @@ function GetBuddy([string]$buddy)
 
 function CheckParameters([string]$buddy)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "`nParameter(s):"
     Write-Host "-----------------------"
     Write-Host ("buddy: {0}" -F $buddy)
     Write-Host "-----------------------"
@@ -57,7 +57,7 @@ function CheckParameters([string]$buddy)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -66,7 +66,7 @@ function CheckParameters([string]$buddy)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 

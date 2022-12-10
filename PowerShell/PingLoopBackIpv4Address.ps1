@@ -42,10 +42,10 @@ function GetLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
 
 function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $true
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------------------------"
     Write-Host ("loopbackIpv4Address: {0}" -F $loopbackIpv4Address)
     Write-Host "---------------------------------------------------"
@@ -58,7 +58,7 @@ function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passed." -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
     }
     else 
     {
@@ -67,7 +67,7 @@ function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 

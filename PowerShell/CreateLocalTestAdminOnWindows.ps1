@@ -106,7 +106,7 @@ function CheckParameters([string]      $testAdmin,
     {
         Write-Host "One or more paramaters are incorrect." -ForegroundColor Red
 
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
 
         break

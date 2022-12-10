@@ -40,10 +40,10 @@ function GetApp([string]$app)
 
 function CheckParameters([string]$newAlias, [string]$app)
 {
-    Write-Host "Started checking parameters at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "Parameters:"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------------"
     Write-Host ("newAlias    : {0}" -F $newAlias)
     Write-Host ("app        : {0}" -F $app)
@@ -72,7 +72,7 @@ function CheckParameters([string]$newAlias, [string]$app)
         exit -1
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
     Write-Host ""
 }
 

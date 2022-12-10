@@ -64,10 +64,10 @@ function GetPath([string]$path)
 
 function CheckParameters([string]$driveLetter, [string]$path)
 {
-    Write-Host "`nStarted checking parameters at" (Get-Date).DateTime
+    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameters:"
+    Write-Host "`nParameter(s):"
     Write-Host "----------------------------------------"
     Write-Host ("driveLetter: {0}" -F $driveLetter)   
     Write-Host ("path       : {0}" -F $path)
@@ -85,11 +85,11 @@ function CheckParameters([string]$driveLetter, [string]$path)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameters at" (Get-Date).DateTime
+    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter checks passsed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passsed.`n" -ForegroundColor Green
     }
     else 
     {
