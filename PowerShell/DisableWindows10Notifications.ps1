@@ -31,8 +31,6 @@ $disableNotificationsInWinReg =
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
 }
 
-$windows10 = Get-ADComputer -Filter { OperatingSystem -Like '*Windows 10*' } | Select-Object -ExpandProperty Name
-
 function DisableWindows10Notifications()
 {
     Write-Host "`nDisable Windows 10 notifications.`n"
@@ -42,6 +40,8 @@ function DisableWindows10Notifications()
     {
         $startDateTime = (Get-Date)
         Write-Host "Started disabling Windows 10 notifications at" $startDateTime.DateTime
+
+        $windows10 = Get-ADComputer -Filter { OperatingSystem -Like '*Windows 10*' } | Select-Object -ExpandProperty Name
 
         foreach($win in $windows10)
         {
