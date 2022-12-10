@@ -89,7 +89,7 @@ function StopProcess([string]$processName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started stopping process at" $startDateTime
+        Write-Host "Started stopping process at" $startDateTime.DateTime
 
         Stop-Process -processname $processName
 
@@ -98,7 +98,7 @@ function StopProcess([string]$processName)
         Get-Process -Name $processName
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished stopping process at" $finishedDateTime
+        Write-Host "Finished stopping process at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

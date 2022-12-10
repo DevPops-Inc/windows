@@ -116,7 +116,7 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Starting backing up Windows server at:" $startDateTime.DateTime
+        Write-Host "Starting backing up Windows server at:" $startDateTime.DateTime.DateTime
 
         $policy         = New-WBPolicy  
         $fileSpec       = New-WBFileSpec -FileSpec $fileSpecPath
@@ -132,7 +132,7 @@ function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
         Write-Host "Successfully backed up Windows Server." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished Windows maintenance at:" $finishedDateTime.DateTime
+        Write-Host "Finished Windows maintenance at:" $finishedDateTime.DateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

@@ -132,7 +132,7 @@ function DeleteShortcutsAndUnpinApps([string]$deletePath)
     {
         $startDateTime = (Get-Date)
 
-        Write-Host "Started deleting shortcuts and unpinning appsat" $startDateTime
+        Write-Host "Started deleting shortcuts and unpinning appsat" $startDateTime.DateTime
 
         DeleteShortcuts $deletePath 
         UnpinAppsFromTaskbar
@@ -141,7 +141,7 @@ function DeleteShortcutsAndUnpinApps([string]$deletePath)
 
         $finishedDateTime = (Get-Date)
 
-        Write-Host "Finished deleting shortcuts and unpinning apps at" $finishedDateTime
+        Write-Host "Finished deleting shortcuts and unpinning apps at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

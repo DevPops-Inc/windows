@@ -32,12 +32,12 @@ function ImportPSWindowsUpdateModule()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started importing PSWindowsUpdate module at" $startDateTime
+        Write-Host "Started importing PSWindowsUpdate module at" $startDateTime.DateTime
 
         Import-Module PSWindowsUpdate
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished importing PSWindowsUpdate module at" $finishedDateTime
+        Write-Host "Finished importing PSWindowsUpdate module at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

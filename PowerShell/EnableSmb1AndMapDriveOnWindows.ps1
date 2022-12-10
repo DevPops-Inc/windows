@@ -111,7 +111,7 @@ function EnableSmb1AndMapDrive([string]$driveLetter, [string]$path)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started enabling SMB1 and mapping drive at" $startDateTime
+        Write-Host "Started enabling SMB1 and mapping drive at" $startDateTime.DateTime
 
         Enable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol" -All
 
@@ -123,7 +123,7 @@ function EnableSmb1AndMapDrive([string]$driveLetter, [string]$path)
         Get-PSDrive
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished enabling SMB1 and mapping drive at" $finishedDateTime
+        Write-Host "Finished enabling SMB1 and mapping drive at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

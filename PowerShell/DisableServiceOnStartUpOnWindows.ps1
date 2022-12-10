@@ -97,7 +97,7 @@ function DisableServiceOnStartUp([string]$serviceName)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started disabling service at" $startDateTime
+        Write-Host "Started disabling service at" $startDateTime.DateTime
 
         Set-Service $serviceName -StartupType Disabled
 
@@ -106,7 +106,7 @@ function DisableServiceOnStartUp([string]$serviceName)
         Get-Service -Name $serviceName
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished disabling service at" $finishedDateTime
+        Write-Host "Finished disabling service at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

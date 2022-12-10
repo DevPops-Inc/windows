@@ -120,7 +120,7 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started activating Windows at: " $startDateTime.DateTime
+        Write-Host "Started activating Windows at: " $startDateTime.DateTime.DateTime
         
         $service = Get-WmiObject -query "select * from SoftwareLicensingService" -Computername $computerName
 
@@ -130,7 +130,7 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
         Write-Host ("Successfully activated Windows on {0} with license key: {1}" -F $computerName, $licenseKey) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished activating Windows at: " $finishedDateTime.DateTime
+        Write-Host "Finished activating Windows at: " $finishedDateTime.DateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

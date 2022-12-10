@@ -160,7 +160,7 @@ function NewRemoteMailboxInExchange([string]      $email,
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating remote mailbox at" $startDateTime
+        Write-Host "Started creating remote mailbox at" $startDateTime.DateTime
 
         New-Mailbox -UserPrincipalName $email  -Name $firstName$lastName -OrganizationalUnit Users -Password $password -FirstName $firstName -LastName $lastName -DisplayName "$firstName $lastName" -ResetPasswordOnNextLogon $false
 

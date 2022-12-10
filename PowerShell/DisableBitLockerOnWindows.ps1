@@ -104,14 +104,14 @@ function DisableBitLocker([string]$driveLetter)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started disabling BitLocker at" $startDateTime
+        Write-Host "Started disabling BitLocker at" $startDateTime.DateTime
 
         Disable-BitLocker -MountPoint "$driveLetter"
 
         Write-Host ("Successfully disabled BitLocker on {0} drive." -F $driveLetter) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished disabled BitLocker at" $finishedDateTime
+        Write-Host "Finished disabled BitLocker at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

@@ -87,7 +87,7 @@ function SetPwToNeverExpireInActiveDirectory([string]$adUser)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started setting password to never expire at" $startDateTime
+        Write-Host "Started setting password to never expire at" $startDateTime.DateTime
 
         Set-LocalUser -Name "$adUser" -PasswordNeverExpires 1
         
@@ -95,7 +95,7 @@ function SetPwToNeverExpireInActiveDirectory([string]$adUser)
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished setting password to never expire at" $finishedDateTime
+        Write-Host "Finished setting password to never expire at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

@@ -32,7 +32,7 @@ function GetApps()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting applications on Windows at" $startDateTime
+        Write-Host "Started getting applications on Windows at" $startDateTime.DateTime
 
         Write-Host "The applications on this computer are:"
         Get-ChildItem -Path "C:\Program Files*" -Name "*exe" -Recurse -Force
@@ -41,7 +41,7 @@ function GetApps()
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished getting applications on Windows at" $finishedDateTime
+        Write-Host "Finished getting applications on Windows at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

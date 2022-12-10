@@ -88,7 +88,7 @@ function OpenPhotoInPaint3d([string]$fileLocation)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started opening photo in Paint 3D at" $startDateTime
+        Write-Host "Started opening photo in Paint 3D at" $startDateTime.DateTime
 
         Start-Process -FilePath "mspaint" -ArgumentList """$fileLocation /ForceBootstrapPaint3D"""
 

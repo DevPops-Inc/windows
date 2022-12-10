@@ -41,7 +41,7 @@ function DisableWindows10Notifications()
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started disabling Windows 10 notifications at" $startDateTime
+        Write-Host "Started disabling Windows 10 notifications at" $startDateTime.DateTime
 
         foreach($win in $windows10)
         {
@@ -51,7 +51,7 @@ function DisableWindows10Notifications()
         Write-Host "Successfully disabled Windows 10 notifications." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished disabling Windows 10 notifications at" $finishedDateTime
+        Write-Host "Finished disabling Windows 10 notifications at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

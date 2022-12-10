@@ -31,13 +31,13 @@ function EnableSmb2OnWindows()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started enabling SMB2 at" $startDateTime
+        Write-Host "Started enabling SMB2 at" $startDateTime.DateTime
 
         Get-SmbServerConfiguration | Select-Object EnableSMB2Protocol
 
         Write-Host "`nSuccessfully enabled SMB2.`n" -ForegroundColor Green
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished enabling SMB2 at" $finishedDateTime
+        Write-Host "Finished enabling SMB2 at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

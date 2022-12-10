@@ -91,7 +91,7 @@ function RemoveNetworkShare([string]$driveLetter)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing network share at" $startDateTime
+        Write-Host "Started removing network share at" $startDateTime.DateTime
 
         Remove-PSDrive -Name $driveLetter
 
@@ -101,7 +101,7 @@ function RemoveNetworkShare([string]$driveLetter)
         Get-PSDrive
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing network share at" $finishedDateTime
+        Write-Host "Finished removing network share at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

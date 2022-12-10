@@ -86,7 +86,7 @@ function DownloadAndInstallChrome([string]$chromeUrl)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started downloading and installing Chrome at: " $startDateTime
+        Write-Host "Started downloading and installing Chrome at: " $startDateTime.DateTime
 
         mkdir -Path $env:temp\chromeinstall -ErrorAction SilentlyContinue | Out-Null
         $Download = Join-Path $env:temp\chromeinstall chrome_installer.exe
@@ -98,7 +98,7 @@ function DownloadAndInstallChrome([string]$chromeUrl)
         Write-Host "Successfully downloaded and installed Chrome." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished downloading and installing Chrome at: " $finishedDateTime
+        Write-Host "Finished downloading and installing Chrome at: " $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

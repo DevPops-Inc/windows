@@ -81,7 +81,7 @@ function LookingForward()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started looking forward to you at" $startDateTime
+        Write-Host "Started looking forward to you at" $startDateTime.DateTime
         
         $colors = 'White', 'DarkRed', 'Red', 'Yellow', 'DarkYellow', 'Green', 'DarkGreen', 'DarkBlue', 'Blue', 'DarkCyan', 'Cyan', 'Magenta', 'DarkMagenta', 'Black'
 
@@ -93,7 +93,7 @@ function LookingForward()
         }
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished looking forward to working together at" $finishedDateTime
+        Write-Host "Finished looking forward to working together at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

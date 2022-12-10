@@ -28,7 +28,7 @@ function HelloWorld()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started running Hello World exercise at" $startDateTime
+        Write-Host "Started running Hello World exercise at" $startDateTime.DateTime
 
         foreach ($color in $colors)
         {
@@ -38,7 +38,7 @@ function HelloWorld()
         Write-Host "Successfully ran Hello World exercise!" -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished running Hello World exercise at" $finishedDateTime
+        Write-Host "Finished running Hello World exercise at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

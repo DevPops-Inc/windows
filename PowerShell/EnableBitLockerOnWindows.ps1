@@ -87,14 +87,14 @@ function EnableBitLocker([string]$driveLetter)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started enabling BitLocker at" $startDateTime
+        Write-Host "Started enabling BitLocker at" $startDateTime.DateTime
 
         Enable-BitLocker -MountPoint "$driveLetter"
 
         Write-Host ("`nSuccessfully enabled BitLocker on drive {0}.`n" -F $driveLetter) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished enabling BitLocker at" $finishedDateTime
+        Write-Host "Finished enabling BitLocker at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

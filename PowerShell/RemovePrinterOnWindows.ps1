@@ -91,7 +91,7 @@ function RemovePrinter([string]$printerName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing printer at" $startDateTime
+        Write-Host "Started removing printer at" $startDateTime.DateTime
 
         Remove-Printer -Name $printerName
         
@@ -101,7 +101,7 @@ function RemovePrinter([string]$printerName)
         Get-Printer
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing printer at" $finishedDateTime
+        Write-Host "Finished removing printer at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours)

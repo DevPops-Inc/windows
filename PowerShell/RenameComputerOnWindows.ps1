@@ -87,14 +87,14 @@ function RenameComputer([string]$newName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started renaming computer at" $startDateTime
+        Write-Host "Started renaming computer at" $startDateTime.DateTime
 
         Rename-Computer -NewName "$newName" -DomainCredential Domain01\Admin01 -Restart
 
         Write-Host ("Successfully renamed computer to {0}." -F $newName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished renaming computer at" $finishedDateTime
+        Write-Host "Finished renaming computer at" $finishedDateTime.DateTime
     }
     catch
     {

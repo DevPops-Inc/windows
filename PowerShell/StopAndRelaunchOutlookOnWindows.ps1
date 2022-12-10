@@ -141,7 +141,7 @@ function StopAndRelaunchOutlook([string]$processName,
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started stopping and relaunching Outlook at" $startDateTime
+        Write-Host "Started stopping and relaunching Outlook at" $startDateTime.DateTime
 
         Stop-Process -ProcessName $processName
         Start-Sleep -Seconds $seconds
@@ -151,7 +151,7 @@ function StopAndRelaunchOutlook([string]$processName,
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished stopping and relaunching Outlook at" $finishedDateTime
+        Write-Host "Finished stopping and relaunching Outlook at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

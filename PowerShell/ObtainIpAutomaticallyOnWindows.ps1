@@ -87,7 +87,7 @@ function ObtainIpAutomatically([string]$ipType)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started optaining IP address automatically at" $startDateTime
+        Write-Host "Started optaining IP address automatically at" $startDateTime.DateTime
 
         $adapter = Get-NetAdapter | ? {$_.Status -eq "up"}
         $interface = $adapter | Get-NetIPInterface -AddressFamily $ipType
@@ -111,7 +111,7 @@ function ObtainIpAutomatically([string]$ipType)
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished obtaining IP address automatically at" $finishedDateTime
+        Write-Host "Finished obtaining IP address automatically at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

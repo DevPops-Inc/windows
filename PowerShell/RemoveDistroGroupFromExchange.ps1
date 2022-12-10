@@ -88,14 +88,14 @@ function RemoveDistroGroup([string]$distroGroup)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing distribution group at" $startDateTime
+        Write-Host "Started removing distribution group at" $startDateTime.DateTime
 
         Remove-DistributionGroup -Identity "$distroGroup"
         
         Write-Host ("Successfully removed {0} from Exchange." -F $distroGroup) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing distribution group at" $finishedDateTime
+        Write-Host "Finished removing distribution group at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

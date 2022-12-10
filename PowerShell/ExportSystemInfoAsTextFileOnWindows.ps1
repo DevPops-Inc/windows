@@ -109,7 +109,7 @@ function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestin
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started exporting system info to text file at" $startDateTime
+        Write-Host "Started exporting system info to text file at" $startDateTime.DateTime
 
         systeminfo | Out-File $fileDestination + "\" $systemInfoFile
 
@@ -118,7 +118,7 @@ function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestin
         Get-ChildItem -Path $fileDestination
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished exporting systme info to text file at" $finishedDateTime
+        Write-Host "Finished exporting systme info to text file at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

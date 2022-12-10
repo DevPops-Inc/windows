@@ -112,7 +112,7 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started unpacking file at" $startDateTime
+        Write-Host "Started unpacking file at" $startDateTime.DateTime
 
         Expand-Archive -LiteralPath $sourceFilePath -destinationPath $destinationPath
 
@@ -121,7 +121,7 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
         Get-ChildItem-Path $destinationPath
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished unpacking file at" $finishedDateTime
+        Write-Host "Finished unpacking file at" $finishedDateTime.DateTime
     }
     catch
     {

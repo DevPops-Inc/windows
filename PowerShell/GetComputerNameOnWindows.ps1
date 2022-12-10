@@ -32,14 +32,14 @@ function GetComputerName()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting computer name at" $startDateTime
+        Write-Host "Started getting computer name at" $startDateTime.DateTime
 
         $hostName = $Env:COMPUTERNAME     
         Write-Host "Successfully got your computer name." -ForegroundColor Green
         Write-Host "Your computer name is:" $hostName
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished getting computer name at" $finishedDateTime
+        Write-Host "Finished getting computer name at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

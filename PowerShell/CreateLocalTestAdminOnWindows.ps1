@@ -126,7 +126,7 @@ function CreateTestAdmin([string]      $testAdmin,
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating testAdmin account at: " $startDateTime.DateTime
+        Write-Host "Started creating testAdmin account at: " $startDateTime.DateTime.DateTime
 
         New-LocalUser "$testAdmin" -Password $testAdminPassword -FullName "$testAdmin" -Description "$testAdminDescription"
 
@@ -137,7 +137,7 @@ function CreateTestAdmin([string]      $testAdmin,
         Write-Host ("Successfully created {0} account." -F $testAdmin) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating testAdmin account at: " $finishedDateTime.DateTime
+        Write-Host "Finished creating testAdmin account at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

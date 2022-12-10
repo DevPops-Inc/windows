@@ -82,14 +82,14 @@ function PingLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started pinging loopback IPv4 address at" $startDateTime
+        Write-Host "Started pinging loopback IPv4 address at" $startDateTime.DateTime
 
         Test-Connection $loopbackIpv4Address
         
         Write-Host "Successfully pinged loopback IPv4 address." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished pinging loopback IPv4 address at" $finishedDateTime
+        Write-Host "Finished pinging loopback IPv4 address at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

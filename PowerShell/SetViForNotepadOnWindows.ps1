@@ -112,14 +112,14 @@ function SetViForNotepad([string]$newAlias, [string]$app)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started setting vi for Notepad at" $startDateTime
+        Write-Host "Started setting vi for Notepad at" $startDateTime.DateTime
 
         New-Alias vi notepad
 
         Write-Host "Successfully set vi for Notepad." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished setting vi for Notepad at" $finishedDateTime
+        Write-Host "Finished setting vi for Notepad at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

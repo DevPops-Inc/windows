@@ -140,14 +140,14 @@ function NewContactInExchange([string]$contactName,
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating new contact at" $startDateTime
+        Write-Host "Started creating new contact at" $startDateTime.DateTime
 
         New-MailContact -Name $contactName -ExternalEmailAddress $externalEmail -OrganizationalUnit $orgUnit
 
         Write-Host ("Successfully created contact {0}, {1} in group: {2}." -F $contactName, $externalEmail, $orgUnit) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating new contact at" $finishedDateTime
+        Write-Host "Finished creating new contact at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

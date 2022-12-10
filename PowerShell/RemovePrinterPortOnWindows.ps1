@@ -88,14 +88,14 @@ function RemovePrinterPort([string]$ipAddress)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing printer port at" $startDateTime
+        Write-Host "Started removing printer port at" $startDateTime.DateTime
         
         Remove-PrinterPort -Name $ipAddress -PrinterHostAddress $ipAddress
         
         Write-Host ("Successfully removed printer port with this IP address: {0}" -F $ipAddress) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing printer port at" $finishedDateTime
+        Write-Host "Finished removing printer port at" $finishedDateTime.DateTime
     }
     catch 
     {

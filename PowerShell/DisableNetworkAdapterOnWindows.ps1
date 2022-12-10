@@ -96,7 +96,7 @@ function DisableNetworkAdapter([string]$networkAdapter)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started disabling network adapter at" $startDateTime
+        Write-Host "Started disabling network adapter at" $startDateTime.DateTime
 
         Disable-NetAdapter -Name $networkAdapter -Confirm:$false
 
@@ -106,7 +106,7 @@ function DisableNetworkAdapter([string]$networkAdapter)
         Get-NetAdapter | Format-Table
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished disabling network adapter at" $finishedDateTime
+        Write-Host "Finished disabling network adapter at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

@@ -117,7 +117,7 @@ function ChangeUserPasswordOnAd([string]$userName, [securestring]$newPassword)
     {
         $startDateTime = (Get-Date)
         
-        Write-Host "Started changing user password on Active Directory at: " $startDateTime.DateTime
+        Write-Host "Started changing user password on Active Directory at: " $startDateTime.DateTime.DateTime
 
         Set-ADAccountPassword -Identity $userName -NewPassword (ConvertTo-SecureString -AsPlainText $newPassword -Force)
 
@@ -125,7 +125,7 @@ function ChangeUserPasswordOnAd([string]$userName, [securestring]$newPassword)
 
         $finishedDateTime = (Get-Date)
 
-        Write-Host "Finished changing user password on Active Directory at: " $finishedDateTime.DateTime
+        Write-Host "Finished changing user password on Active Directory at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

@@ -34,14 +34,14 @@ function RestartPrinterSpooler()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started restarting printer spooler at" $startDateTime
+        Write-Host "Started restarting printer spooler at" $startDateTime.DateTime
 
         Restart-Service -Name Spooler -Force
 
         Write-Host "Successfully restarted printer spooler." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date).DateTime
-        Write-Host "Finished restarting printer spooler at" $finishedDateTime
+        Write-Host "Finished restarting printer spooler at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

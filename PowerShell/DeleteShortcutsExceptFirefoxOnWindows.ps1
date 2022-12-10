@@ -116,13 +116,13 @@ function DeleteShortcuts([string]$deletePath, [string]$excludePath)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started deleting shortcuts at" $startDateTime
+        Write-Host "Started deleting shortcuts at" $startDateTime.DateTime
 
         Remove-Item $deletePath -Exclude $excludePath -Force
         Write-Host "Successfully deleted shortcuts." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished deleting shortcuts at" $finishedDateTime
+        Write-Host "Finished deleting shortcuts at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

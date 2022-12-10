@@ -92,14 +92,14 @@ function DeleteTestUser([string]$testUser)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started deleting local test user at" $startDateTime
+        Write-Host "Started deleting local test user at" $startDateTime.DateTime
 
         Remove-LocalUser -Name "$testUser"
 
         Write-Host ("Successfuly deleted test user: {0}" -F $testUser) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished deleting local user at" $finishedDateTime
+        Write-Host "Finished deleting local user at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

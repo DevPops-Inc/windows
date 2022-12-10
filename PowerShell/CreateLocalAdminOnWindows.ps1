@@ -139,7 +139,7 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started creating local admin at: " $startDateTime.DateTime
+        Write-Host "Started creating local admin at: " $startDateTime.DateTime.DateTime
 
         New-LocalUser "$localAdmin" -Password $password -FullName "$localAdmin" -Description "$description"
 
@@ -149,7 +149,7 @@ function CreateLocalAdmin([string]$localAdmin, [securestring]$password, [string]
         Write-Host ("Successfully created local admin {0}." -F $localAdmin) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished creating local admin at: " $finishedDateTime.DateTime
+        Write-Host "Finished creating local admin at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

@@ -33,7 +33,7 @@ function CheckDiskAndRestartWindows()
     {
         $startDateTime = (Get-Date)
         
-        Write-Host "Started checking disk and restarting Windows at: " $startDateTime.DateTime
+        Write-Host "Started checking disk and restarting Windows at: " $startDateTime.DateTime.DateTime
 
         Write-Output y | chkdsk /f/r c:
 
@@ -44,7 +44,7 @@ function CheckDiskAndRestartWindows()
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished checking disk and restarting Windows at: " $finishedDateTime.DateTime
+        Write-Host "Finished checking disk and restarting Windows at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         

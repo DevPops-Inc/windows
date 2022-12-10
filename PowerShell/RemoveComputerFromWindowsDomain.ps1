@@ -112,14 +112,14 @@ function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing computer at" $startDateTime
+        Write-Host "Started removing computer at" $startDateTime.DateTime
 
         Remove-Computer -UnjoinDomaincredential $domain\$adAdmin -PassThru -Verbose -Restart
 
         Write-Host ("Sucessfully removed computer from {0} domain." -F $domain) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing computer at" $finishedDateTime
+        Write-Host "Finished removing computer at" $finishedDateTime.DateTime
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)

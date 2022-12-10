@@ -128,7 +128,7 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished assign member to distribution list on Exchange at: " $finishedDateTime.DateTime
+        Write-Host "Finished assign member to distribution list on Exchange at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startTimeDate $finishedDateTime
         

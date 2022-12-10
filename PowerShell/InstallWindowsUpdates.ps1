@@ -33,7 +33,7 @@ function InstallWinUpdates()
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started installing Windows updates at" $startDateTime
+        Write-Host "Started installing Windows updates at" $startDateTime.DateTime
 
         Write-Host "Please save your documents and close your application since the computer will restart after updates are installed." -ForegroundColor Yellow
         
@@ -42,7 +42,7 @@ function InstallWinUpdates()
         Write-Host "Successfully installed Windows updates." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished installing Windows updates at" $finishedDateTime
+        Write-Host "Finished installing Windows updates at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 

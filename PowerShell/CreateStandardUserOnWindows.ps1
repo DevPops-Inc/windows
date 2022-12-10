@@ -141,7 +141,7 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
   try 
   {
     $startDateTime = (Get-Date)
-    Write-Host "Started creating standard user at" $startDateTime.DateTime
+    Write-Host "Started creating standard user at" $startDateTime.DateTime.DateTime
 
     New-LocalUser $standardUser -Password $sassword -FullName $standardUser -Description $description
 
@@ -153,7 +153,7 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
     Get-LocalUser
 
     $finishedDateTime = (Get-Date)
-    Write-Host "Finished creating standard user at" $finishedDateTime.DateTime
+    Write-Host "Finished creating standard user at" $finishedDateTime.DateTime.DateTime
     
     $duration = New-TimeSpan $startDateTime $finishedDateTime
 

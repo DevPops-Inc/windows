@@ -92,7 +92,7 @@ function SetServiceToAutoStart([string]$serviceName)
     {
         $startDateTime = (Get-Date)
         
-        Write-Host "Started setting service to automatic startup at" $startDateTime
+        Write-Host "Started setting service to automatic startup at" $startDateTime.DateTime
 
         Set-Service $serviceName -StartupType Automatic
 
@@ -102,7 +102,7 @@ function SetServiceToAutoStart([string]$serviceName)
 
         $finishedDateTime = (Get-Date)
         
-        Write-Host "Finished setting service to automatic startup at" $finishedDateTime
+        Write-Host "Finished setting service to automatic startup at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
