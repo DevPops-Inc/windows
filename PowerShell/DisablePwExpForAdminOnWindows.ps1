@@ -22,7 +22,6 @@ function CheckOsForWindows()
     else
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -41,6 +40,7 @@ function GetLocalAdmin([string]$localAdmin)
 
         $localAdmin = Read-Host -Prompt "Please type the admin who you would like to disable password expiration for and press `"Enter`" key (Example: Local.Admin)"
         
+        Write-Host ""
         return $localAdmin
     }
     else
@@ -94,6 +94,7 @@ function DisablePwExpForAdmin([string]$localAdmin)
     try
     {
         $startDatetime = (Get-Date)
+
         Write-Host "Started disabling password expiration for admin at" $startDateTime.DateTime
 
         Set-LocalUser -Name "$localAdmin" -PasswordNeverExpires 1
@@ -101,7 +102,9 @@ function DisablePwExpForAdmin([string]$localAdmin)
         Write-Host ("Succeessfully disabled password expiration for admin: {0}." -F $localAdmin) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
+
         Write-Host "Finished disabling password expiration for admin at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDatetime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
