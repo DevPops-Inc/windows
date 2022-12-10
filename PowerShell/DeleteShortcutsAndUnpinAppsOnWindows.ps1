@@ -1,4 +1,4 @@
-# delete shortcuts except Firefox and unpin apps on Windows
+# delete shortcuts and unpin apps on Windows
 
 # run this script as admin: Start-Process Powershell -Verb runAs
 
@@ -22,7 +22,6 @@ function CheckOsForWindows()
     else
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).Date
