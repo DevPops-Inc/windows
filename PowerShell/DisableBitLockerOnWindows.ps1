@@ -23,7 +23,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -97,7 +96,6 @@ function DisableBitLocker([string]$driveLetter)
     else 
     {
         Write-Host ("Cannot find {0} drive." -F $driveLetter) -ForegroundColor Red
-
         break
     }
 
