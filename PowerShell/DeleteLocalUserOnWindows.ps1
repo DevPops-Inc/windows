@@ -1,5 +1,6 @@
 # delete local user on Windows 
 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\DeleteLocalUserOnWindows.ps1 -localUser < local user >
 
 [CmdletBinding()]
@@ -14,7 +15,7 @@ function CheckOsForWindows()
 
     if ($hostOs -eq "Win32NT")
     {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Captain -ForegroundColor Green
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
@@ -35,7 +36,7 @@ function GetLocalUser([string]$localUser)
 {
     if (($localUser -eq $Null) -or ($localUser -eq ""))
     {
-        $localUser = Read-Host -Prompt "Please type the local user you would like to delete and press `"Enter`" key (Example: LocalUser)"
+        $localUser = Read-Host -Prompt "Please type the local user you would like to delete and press the `"Enter`" key (Example: LocalUser)"
 
         Write-Host ""
         return $localUser
@@ -91,23 +92,20 @@ function DeleteLocalUser([string]$localUser)
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started deleting local user at" $startDateTime.DateTime
+        Write-Host ("Started deleting {0} at {1}" -F $localUser, $startDateTime.DateTime)
 
-        Remove-LocalUser -Name "$localUser"
-        
-        Write-Host ("Successfully deleted local user: {0}`n" -F $localUser) -ForegroundColor Green
+        Remove-LocalUser -Name "$localUser" 
+        Write-Host "The users on this computer are:" (Get-LocalUser) -ForegroundColor Blue
+        Write-Host ("Successfully deleted {0}" -F $localUser) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished deleting local user at" $finishedDateTime.DateTime
+        Write-Host ("Finished deleting {0} at {1}" -F $localUser, $finishedDateTime.DateTime)
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
         Write-Host ""
-
-        Write-Host "The users on this computer are:"
-        Get-LocalUser
     }
     catch
     {

@@ -1,5 +1,6 @@
 # create standard user on Windows
 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\CreateStandardUserOnWindows.ps1 -standardUser < standard user > -password < password > -description < description >
 
 [CmdletBinding()]
@@ -141,19 +142,15 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
   try 
   {
     $startDateTime = (Get-Date)
-    Write-Host "Started creating standard user at" $startDateTime.DateTime.DateTime
+    Write-Host ("Started creating {0} at {1}" -F $standardUser, $startDateTime.DateTime)
 
-    New-LocalUser $standardUser -Password $sassword -FullName $standardUser -Description $description
-
+    New-LocalUser $standardUser -Password $password -FullName $standardUser -Description $description
     Set-LocalUser -Name $standardUser -PasswordNeverExpires 1
-    
-    Write-Host ("Successfully created standard user: {0}" -F $standardUser) -ForegroundColor Green
-
-    Write-Host "The users on the this computer are:"
-    Get-LocalUser
+    Write-Host "The users on the this computer are:" (Get-LocalUser) -ForegroundColor Blue
+    Write-Host ("Successfully created {0}" -F $standardUser) -ForegroundColor Green
 
     $finishedDateTime = (Get-Date)
-    Write-Host "Finished creating standard user at" $finishedDateTime.DateTime.DateTime
+    Write-Host ("Finished creating {0} at {1}" -F $standardUser, $finishedDateTime.DateTime)
     
     $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -164,7 +161,6 @@ function CreateStandardUser([string]$standardUser, [securestring]$password, [str
   catch 
   {
     Write-Host ("Failed to create standard user {0}." -F $standardUser) -ForegroundColor Red
-
     Write-Host $_ -ForegroundColor Red
     Write-Host $_.ScriptStackTrace -ForegroundColor Red
     Write-Host ""
