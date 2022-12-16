@@ -1,5 +1,7 @@
 # Windows maintenance 
 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
+
 function CheckOsForWindows()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -64,9 +66,20 @@ function DefragDisk()
     Write-Host ""
 }
 
+function InstallWinUpdates()
+{
+    Write-Host "Started installing Windows updates at" (Get-Date).DateTime
+
+    Install-Module PSWindowsUpdate -Force
+    Get-WindowsUpdate -AcceptAll -Install 
+
+    Write-Host "Finished installing Windows updates at" (Get-Date).DateTime
+    Write-Host ""
+}
+
 function WindowsMaintenance()
 {
-    Write-Host "`nWindows maintenance.`nYou need to elevate permissions before running this script: Start-Process Powershell -Verb runAs`n"
+    Write-Host "`nWindows maintenance.`n"
 
     CheckOsForWindows
 
@@ -86,17 +99,9 @@ function WindowsMaintenance()
             DefragDisk
         }
 
+        InstallWinUpdates
         Write-Host "Successfully performed maintenance on Windows." -ForegroundColor Green
-    }
-    catch
-    {
-        Write-Host "Failed to perform maintenance on Windows." -ForegroundColor Red
-        Write-Host $_ -ForegroundColor Red
-        Write-Host $_.ScriptStackTrace -ForegroundColor Red
-        Write-Host ""
-    }
-    finally
-    {
+
         $finishedDateTime = (Get-Date)
         Write-Host "Finished Windows maintenance at:" $finishedDateTime.DateTime
         
@@ -106,9 +111,16 @@ function WindowsMaintenance()
 
         Write-Host ""
 
-        Read-Host -Prompt "Please save your documents and close applications.`nPress any key to restart your computer"
-        
+        Write-Host "Please save your documents and close applications."
+        Read-Host -Prompt "Press any key to restart your computer"
         Restart-Computer
+    }
+    catch
+    {
+        Write-Host "Failed to perform maintenance on Windows." -ForegroundColor Red
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
