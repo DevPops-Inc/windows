@@ -95,14 +95,14 @@ function StopService([string]$serviceName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Stopped service at" $startDateTime.DateTime
+        Write-Host ("Started stopping {0} at {1}" -F $serviceName, $startDateTime.DateTime)
 
         Stop-Service $serviceName
         Get-Service -Name $serviceName | Format-Table -AutoSize
-        Write-Host ("Successfully stopped {0} service." -F $serviceName) -ForegroundColor Green
+        Write-Host ("Successfully stopped {0}" -F $serviceName) -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished stopping service at" $finishedDateTime.DateTime
+        Write-Host ("Finished stopping {0} at {1}" -F $serviceName, $finishedDateTime.DateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
