@@ -1,5 +1,6 @@
 # start service on Windows 
 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\StartServiceOnWindows.ps1 -serviceName < service > 
 
 [CmdletBinding()]
@@ -35,7 +36,7 @@ function GetServiceName([string]$serviceName)
 {
     if (($serviceName -eq $Null) -or ($serviceName -eq ""))
     {
-        $serviceName = Read-Host -Prompt "Please type the service you wish to start and press `"Enter`" key (Example: XboxNetApiSvc)"
+        $serviceName = Read-Host -Prompt "Please type the service you wish to start and press the `"Enter`" key (Example: XboxNetApiSvc)"
 
         Write-Host ""
         return $serviceName
@@ -65,16 +66,19 @@ function CheckParameters([string]$serviceName)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function StartService([string]$serviceName)
@@ -83,7 +87,7 @@ function StartService([string]$serviceName)
     CheckOsForWindows
 
     Write-Host "The services on this computer are: "
-    Get-Service 
+    Get-Service | Format-Table -AutoSize
 
     $serviceName = GetServiceName $serviceName
     CheckParameters $serviceName
@@ -91,29 +95,28 @@ function StartService([string]$serviceName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started service at" $startDateTime.DateTime
+        Write-Host ("Started {0} at {1}" -F $serviceName, $startDateTime.DateTime)
 
         Start-Service $serviceName
-
-        Write-Host ("Successfully started {0} service." -F $serviceName) -ForegroundColor Green
-
-        Get-Service -Name $serviceName
-
+        Get-Service -Name $serviceName | Format-Table -AutoSize
+        Write-Host ("Successfully started {0}" -F $serviceName) -ForegroundColor Green
+        
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished starting service at" $finishedDateTime.DateTime
-        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        Write-Host ("Finished starting {0} at {1}" -F $serviceName, $finishedDateTime.DateTime)
 
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to start {0} service." -F $serviceName) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
 
         Write-Host "The services on this computer are: "
-        Get-Service         
+        Get-Service | Format-Table -AutoSize
     }
 }
 
