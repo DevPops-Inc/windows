@@ -95,14 +95,14 @@ function StartService([string]$serviceName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started service at" $startDateTime.DateTime
+        Write-Host ("Started {0} at {1}" -F $serviceName, $startDateTime.DateTime)
 
         Start-Service $serviceName
         Get-Service -Name $serviceName | Format-Table -AutoSize
-        Write-Host ("Successfully started {0} service." -F $serviceName) -ForegroundColor Green
+        Write-Host ("Successfully started {0}" -F $serviceName) -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished starting service at" $finishedDateTime.DateTime
+        Write-Host ("Finished starting {0} at {1}" -F $serviceName, $finishedDateTime.DateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
