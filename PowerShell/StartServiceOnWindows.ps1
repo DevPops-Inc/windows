@@ -1,5 +1,6 @@
 # start service on Windows 
 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\StartServiceOnWindows.ps1 -serviceName < service > 
 
 [CmdletBinding()]
@@ -35,7 +36,7 @@ function GetServiceName([string]$serviceName)
 {
     if (($serviceName -eq $Null) -or ($serviceName -eq ""))
     {
-        $serviceName = Read-Host -Prompt "Please type the service you wish to start and press `"Enter`" key (Example: XboxNetApiSvc)"
+        $serviceName = Read-Host -Prompt "Please type the service you wish to start and press the `"Enter`" key (Example: XboxNetApiSvc)"
 
         Write-Host ""
         return $serviceName
