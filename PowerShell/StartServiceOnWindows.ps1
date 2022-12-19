@@ -87,7 +87,7 @@ function StartService([string]$serviceName)
     CheckOsForWindows
 
     Write-Host "The services on this computer are: "
-    Get-Service 
+    Get-Service | Format-Table -AutoSize
 
     $serviceName = GetServiceName $serviceName
     CheckParameters $serviceName
@@ -98,26 +98,25 @@ function StartService([string]$serviceName)
         Write-Host "Started service at" $startDateTime.DateTime
 
         Start-Service $serviceName
-
+        Get-Service -Name $serviceName | Format-Table -AutoSize
         Write-Host ("Successfully started {0} service." -F $serviceName) -ForegroundColor Green
-
-        Get-Service -Name $serviceName
-
+        
         $finishedDateTime = (Get-Date)
         Write-Host "Finished starting service at" $finishedDateTime.DateTime
-        $duration = New-TimeSpan $startDateTime $finishedDateTime
 
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to start {0} service." -F $serviceName) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
 
         Write-Host "The services on this computer are: "
-        Get-Service         
+        Get-Service | Format-Table -AutoSize
     }
 }
 
