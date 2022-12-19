@@ -88,7 +88,7 @@ function StopService([string]$serviceName)
 
     Write-Host "The services on this computer are: "
     Get-Service | Format-Table -AutoSize
-
+    
     $serviceName = GetServiceName $serviceName
     CheckParameters $serviceName
 
