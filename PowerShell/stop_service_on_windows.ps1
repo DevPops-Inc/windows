@@ -113,6 +113,7 @@ function StopService([string]$serviceName)
         Write-Host ("Failed to start {0} service." -F $serviceName) -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
 
         Write-Host "The services on this computer are:"
         Get-Service | Format-Table -AutoSize
