@@ -1,6 +1,6 @@
 # unpack file on Windows 
 
-# you can run this script with: .\UnpackFileOnWindows.ps1 -sourceFilePath < source path > -destinationPath < destination path > 
+# you can run this script with: .\UnpackFileOnWindows.ps1 -sourceFilePath '< source path >' -destinationPath '< destination path >' 
 
 [CmdletBinding()]
 param(
@@ -23,11 +23,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -36,7 +36,7 @@ function GetSourceFilePath([string]$sourceFilePath)
 {
     if (($sourceFilePath -eq $Null) -or ($sourceFilePath -eq ""))
     {
-        $sourceFilePath = Read-Host -Prompt "Please type the filepath of the file you wish to unpack and press `"Enter`" key (Example: C:\vic.zip)"
+        $sourceFilePath = Read-Host -Prompt "Please type the filepath of the file you wish to unpack and press the `"Enter`" key (Example: C:\vic.zip)"
 
         Write-Host ""
         return $sourceFilePath
@@ -51,7 +51,7 @@ function GetDestinationPath([string]$destinationPath)
 {
     if (($destinationPath -eq $Null) -or ($destinationPath -eq ""))
     {
-        $destinationPath = Read-Host -Prompt "Please type the file path you want the contents of the file to go and press `"Enter`" key (Example: C:\)"
+        $destinationPath = Read-Host -Prompt "Please type the file path you want the contents of the file to go and press the `"Enter`" key (Example: C:\)"
 
         Write-Host ""
         return $destinationPath
@@ -88,16 +88,19 @@ function CheckParameters([string]$sourceFilePath, [string]$destinationPath)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
         break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
@@ -109,19 +112,35 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
     $destinationPath = GetDestinationPath $destinationPath
     CheckParameters $sourceFilePath $destinationPath
 
+    if (-Not (Test-Path -Path $sourceFilePath))
+        {
+            throw ("{0} isn't valid." -F $sourceFilePath)
+        }
+
+    if ((Test-Path -Path $destinationPath))
+    {
+        throw ("{0} already exists." -F $destinationPath)
+    }
+
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started unpacking file at" $startDateTime.DateTime
+        Write-Host "Started unpacking files at" $startDateTime.DateTime
 
         Expand-Archive -LiteralPath $sourceFilePath -destinationPath $destinationPath
 
-        Write-Host ("Successfully unpacked {0} in {1}" -F $sourceFilePath, $destinationPath) -ForegroundColor Green
+        Get-ChildItem -Path $destinationPath | Format-Table -AutoSize
 
-        Get-ChildItem-Path $destinationPath
+        Write-Host ("Successfully unpacked file in {0}" -F $destinationPath) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished unpacking file at" $finishedDateTime.DateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -129,6 +148,7 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
