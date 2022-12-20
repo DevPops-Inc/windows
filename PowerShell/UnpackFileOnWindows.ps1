@@ -121,17 +121,17 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
     {
         throw ("{0} already exists." -F $destinationPath)
     }
-    
+
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started unpacking file at" $startDateTime.DateTime
+        Write-Host "Started unpacking files at" $startDateTime.DateTime
 
         Expand-Archive -LiteralPath $sourceFilePath -destinationPath $destinationPath
 
         Get-ChildItem -Path $destinationPath | Format-Table -AutoSize
 
-        Write-Host ("Successfully unpacked {0} in {1}" -F $sourceFilePath, $destinationPath) -ForegroundColor Green
+        Write-Host ("Successfully unpacked file in {0}" -F $destinationPath) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished unpacking file at" $finishedDateTime.DateTime
