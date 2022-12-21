@@ -98,8 +98,8 @@ function StopProcess([string]$processName)
         Write-Host "Started stopping process at" $startDateTime.DateTime
 
         Stop-Process -processname $processName
-        Write-Host ("Successfully stopped {0} process." -F $processName) -ForegroundColor Green
         Get-Process -Name $processName | Format-Table -AutoSize
+        Write-Host ("Successfully stopped {0} process." -F $processName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished stopping process at" $finishedDateTime.DateTime
