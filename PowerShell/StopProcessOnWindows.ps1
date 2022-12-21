@@ -62,16 +62,19 @@ function CheckParameters([string]$processName)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
+        
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
 
         break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function StopProcess([string]$processName)
