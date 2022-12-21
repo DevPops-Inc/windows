@@ -1,6 +1,6 @@
 # stop process on Windows 
 
-# you can run this script with: .\StopProcessOnWindows.ps1 -processName < process > 
+# you can run this script with: .\StopProcessOnWindows.ps1 -processName '< process > '
 
 [CmdletBinding()]
 param(
