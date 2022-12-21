@@ -4,7 +4,7 @@
 param(
     [string] [Parameter(Mandatory = $False)] $processName     = "OUTLOOK", 
     [int]    [Parameter(Mandatory = $False)] $seconds         = 5, 
-    [string] [Parameter(Mandatory = $False)] $applicationName = "outlook.exe"
+    [string] [Parameter(Mandatory = $False)] $applicationName = "C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" # path to Outlook may be different on your computer
 )
 
 function CheckOsForWindows()
