@@ -33,8 +33,9 @@ function ShutdownComputer()
         $startDateTime = (Get-Date)
         Write-Host "Started shutting down computer at" $startDateTime.DateTime
 
-        Write-Host "Please save your documents and close your applications."
-        Read-Host -Prompt "Press any key to shutdown your computer."
+        Write-Host "Please save your documents and close your applications." -ForegroundColor Blue
+
+        Read-Host -Prompt "Press any key to shutdown your computer" -ForegroundColor Blue
         Write-Host "Succesfully shut down computer." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
