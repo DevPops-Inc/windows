@@ -26,14 +26,14 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
 
 function GetProcessName([string]$processName)
 {
-    $processName = Read-Host -Prompt "Please type the process you would like to stop and press `"Enter`" key (Example: outlook.exe)"
+    $processName = Read-Host -Prompt "Please type the process you would like to stop and press the `"Enter`" key (Example: outlook.exe)"
 
     Write-Host ""
     return $processName
