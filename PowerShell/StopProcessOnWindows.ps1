@@ -1,5 +1,6 @@
 # stop process on Windows 
 
+# run this script as admin: Start-Proess PowerShell -Verb RunAs
 # you can run this script with: .\StopProcessOnWindows.ps1 -processName '< process > '
 
 [CmdletBinding()]
@@ -33,14 +34,17 @@ function CheckOsForWindows()
 
 function GetProcessName([string]$processName)
 {
-    $processName = Read-Host -Prompt "Please type the process you would like to stop and press the `"Enter`" key (Example: outlook.exe)"
+    if (($processName -eq $Null) -or ($processName -eq ""))
+    {
+        $processName = Read-Host -Prompt "Please type the process you would like to stop and press the `"Enter`" key (Example: outlook.exe)"
 
-    Write-Host ""
-    return $processName
-}
-else 
-{
-    return $processName
+        Write-Host ""
+        return $processName
+    }
+    else 
+    {
+        return $processName
+    }
 }
 
 function CheckParameters([string]$processName)
