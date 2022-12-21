@@ -28,8 +28,6 @@ function ShutdownComputer()
     Write-Host "`nShutdown computer on Windows.`n"
     CheckOsForWindows
 
-    Read-Host -Prompt "Please save documents and close applications. Press any key to continue"
-
     try 
     {
         $startDateTime = (Get-Date)
