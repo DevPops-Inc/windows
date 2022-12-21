@@ -35,7 +35,7 @@ function GetProcessName([string]$processName)
 {
     if (($processName -eq $Null) -or ($processName -eq ""))
     {
-        Read-Host -Prompt "Please type the process name and press `"Enter`" key (Example: OUTLOOK)"
+        Read-Host -Prompt "Please type the process name and press the `"Enter`" key (Example: OUTLOOK)"
 
         Write-Host ""
         return $processName
@@ -50,7 +50,7 @@ function GetSeconds([int]$seconds)
 {
     if (($seconds -eq $Null) -or ($seconds -eq ""))
     {
-        Read-Host -Prompt "Please type the number of seconds and press `"Enter`" key (Example: 5)" 
+        Read-Host -Prompt "Please type the number of seconds and press the `"Enter`" key (Example: 5)" 
 
         Write-Host ""
         return $seconds
@@ -65,7 +65,7 @@ function GetApplicationName([string]$applicationName)
 {
     if (($applicationName -eq $Null) -or ($applicationName -eq ""))
     {
-        Read-Host -Prompt "Please type the application name and press `"Enter`" key (Example: outlook.exe)" 
+        Read-Host -Prompt "Please type the application name and press the `"Enter`" key (Example: outlook.exe)" 
 
         Write-Host ""
         return $applicationName
