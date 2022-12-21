@@ -1,6 +1,7 @@
 # stop process on Windows 
 
-# you can run this script with: .\StopProcessOnWindows.ps1 -processName < process > 
+# run this script as admin: Start-Proess PowerShell -Verb RunAs
+# you can run this script with: .\StopProcessOnWindows.ps1 -processName '< process > '
 
 [CmdletBinding()]
 param(
@@ -22,25 +23,28 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
 
 function GetProcessName([string]$processName)
 {
-    $processName = Read-Host -Prompt "Please type the process you would like to stop and press `"Enter`" key (Example: outlook.exe)"
+    if (($processName -eq $Null) -or ($processName -eq ""))
+    {
+        $processName = Read-Host -Prompt "Please type the process you would like to stop and press the `"Enter`" key (Example: outlook.exe)"
 
-    Write-Host ""
-    return $processName
-}
-else 
-{
-    return $processName
+        Write-Host ""
+        return $processName
+    }
+    else 
+    {
+        return $processName
+    }
 }
 
 function CheckParameters([string]$processName)
@@ -62,16 +66,19 @@ function CheckParameters([string]$processName)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
+        
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
 
         break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function StopProcess([string]$processName)
@@ -80,8 +87,7 @@ function StopProcess([string]$processName)
     CheckOsForWindows
 
     Write-Host "The processes running on this computer are:"
-    Get-Process
-    Write-Host ""
+    Get-Process | Format-Table -AutoSize
 
     $processName = GetProcessName $processName
     CheckParameters $processName
@@ -89,26 +95,28 @@ function StopProcess([string]$processName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started stopping process at" $startDateTime.DateTime
+        Write-Host ("Started stopping {0} at {1}" -F $processName, $startDateTime.DateTime)
 
         Stop-Process -processname $processName
-
-        Write-Host ("Successfully stopped {0} process." -F $processName) -ForegroundColor Green
-
-        Get-Process -Name $processName
+        Get-Process -Name $processName | Format-Table -AutoSize
+        Write-Host ("Successfully stopped {0}" -F $processName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished stopping process at" $finishedDateTime.DateTime
-        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        Write-Host ("Finished stopping {0} at {1}" -F $processName, $finishedDateTime.DateTime)
 
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        Write-Host ""
     }
     catch 
     {
-        Write-Host ("Failed to stop {0} process." -F $processName) -Foreground Red
-
+        Write-Host ("Failed to stop {0}" -F $processName) -Foreground Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
+
+        Write-Host "The processes running on this computer are:"
+        Get-Process | Format-Table -AutoSize
     }
 }
 
