@@ -4,7 +4,7 @@
 param(
     [string] [Parameter(Mandatory = $False)] $processName     = "OUTLOOK", 
     [int]    [Parameter(Mandatory = $False)] $seconds         = 5, 
-    [string] [Parameter(Mandatory = $False)] $applicationName = "outlook.exe"
+    [string] [Parameter(Mandatory = $False)] $applicationPath = "C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" # path to Outlook may be different on your computer
 )
 
 function CheckOsForWindows()
@@ -35,7 +35,7 @@ function GetProcessName([string]$processName)
 {
     if (($processName -eq $Null) -or ($processName -eq ""))
     {
-        Read-Host -Prompt "Please type the process name and press `"Enter`" key (Example: OUTLOOK)"
+        Read-Host -Prompt "Please type the process name and press the `"Enter`" key (Example: OUTLOOK)"
 
         Write-Host ""
         return $processName
@@ -50,7 +50,7 @@ function GetSeconds([int]$seconds)
 {
     if (($seconds -eq $Null) -or ($seconds -eq ""))
     {
-        Read-Host -Prompt "Please type the number of seconds and press `"Enter`" key (Example: 5)" 
+        Read-Host -Prompt "Please type the number of seconds and press the `"Enter`" key (Example: 5)" 
 
         Write-Host ""
         return $seconds
@@ -61,24 +61,24 @@ function GetSeconds([int]$seconds)
     }
 }
 
-function GetApplicationName([string]$applicationName)
+function GetApplicationName([string]$applicationPath)
 {
-    if (($applicationName -eq $Null) -or ($applicationName -eq ""))
+    if (($applicationPath -eq $Null) -or ($applicationPath -eq ""))
     {
-        Read-Host -Prompt "Please type the application name and press `"Enter`" key (Example: outlook.exe)" 
+        Read-Host -Prompt "Please type the application name and press the `"Enter`" key (Example: outlook.exe)" 
 
         Write-Host ""
-        return $applicationName
+        return $applicationPath
     }
     else 
     {
-        return $applicationName
+        return $applicationPath
     }
 }
 
 function CheckParameters([string]$processName, 
                          [int]   $seconds, 
-                         [string]$applicationName)
+                         [string]$applicationPath)
 {
     Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
@@ -87,7 +87,7 @@ function CheckParameters([string]$processName,
     Write-Host "-------------------------------------------"
     Write-Host ("processName    : {0}" -F $processName)
     Write-Host ("seconds        : {0}" -F $seconds)
-    Write-Host ("applicationName: {0}" -F $applicationName)
+    Write-Host ("applicationName: {0}" -F $applicationPath)
     Write-Host "-------------------------------------------"
     
     if (($processName -eq $Null) -or ($processName -eq ""))
@@ -102,7 +102,7 @@ function CheckParameters([string]$processName,
         $valid = $False
     }
 
-    if (($applicationName -eq $Null) -or ($applicationName -eq ""))
+    if (($applicationPath -eq $Null) -or ($applicationPath -eq ""))
     {
         Write-Host "applicationName is not set." -ForegroundColor Red
         $valid = $False
@@ -128,33 +128,42 @@ function CheckParameters([string]$processName,
 
 function StopAndRelaunchOutlook([string]$processName, 
                                 [int]   $seconds, 
-                                [string]$applicationName)
+                                [string]$applicationPath)
 {
     Write-Host "`nStop and relaunch Outlook on Windows.`n"
     CheckOsForWindows
 
     $processName     = GetProcessName $processName
     $seconds         = GetSeconds $seconds
-    $applicationName = GetApplicationName $applicationName
-    CheckParameters $processName $seconds $applicationName
-     
+    $applicationPath = GetApplicationName $applicationPath
+    CheckParameters $processName $seconds $applicationPath
+
     try 
     {
         $startDateTime = (Get-Date)
         Write-Host "Started stopping and relaunching Outlook at" $startDateTime.DateTime
 
-        Stop-Process -ProcessName $processName
-        Start-Sleep -Seconds $seconds
-        Start-Process -FilePath $applicationName 
-
+        if ($Null -ne (Get-Process $processName -ErrorAction SilentlyContinue))
+        {
+            Stop-Process -ProcessName $processName
+            Start-Sleep -Seconds $seconds   
+        }
+        
+        if (Test-Path -Path $applicationPath)
+        {
+            Start-Process -FilePath $applicationPath 
+        }
+        else
+        {
+            throw ("{0} is not a valid application path." -F $applicationPath)
+        }
+        
         Write-Host "Successfully stopped and restarted Outlook." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        
         Write-Host "Finished stopping and relaunching Outlook at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
-
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
         Write-Host ""
@@ -168,4 +177,4 @@ function StopAndRelaunchOutlook([string]$processName,
     }
 }
 
-StopAndRelaunchOutlook $processName $seconds $applicationName
+StopAndRelaunchOutlook $processName $seconds $applicationPath
