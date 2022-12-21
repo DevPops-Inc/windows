@@ -95,14 +95,14 @@ function StopProcess([string]$processName)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started stopping process at" $startDateTime.DateTime
+        Write-Host ("Started stopping {0} at {1}" -F $processName, $startDateTime.DateTime)
 
         Stop-Process -processname $processName
         Get-Process -Name $processName | Format-Table -AutoSize
-        Write-Host ("Successfully stopped {0} process." -F $processName) -ForegroundColor Green
+        Write-Host ("Successfully stopped {0}" -F $processName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished stopping process at" $finishedDateTime.DateTime
+        Write-Host ("Finished stopping {0} at {1}" -F $processName, $finishedDateTime.DateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
@@ -110,7 +110,7 @@ function StopProcess([string]$processName)
     }
     catch 
     {
-        Write-Host ("Failed to stop {0} process." -F $processName) -Foreground Red
+        Write-Host ("Failed to stop {0}" -F $processName) -Foreground Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
