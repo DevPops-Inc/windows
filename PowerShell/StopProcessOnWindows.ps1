@@ -83,8 +83,7 @@ function StopProcess([string]$processName)
     CheckOsForWindows
 
     Write-Host "The processes running on this computer are:"
-    Get-Process
-    Write-Host ""
+    Get-Process | Format-Table -AutoSize
 
     $processName = GetProcessName $processName
     CheckParameters $processName
@@ -95,23 +94,25 @@ function StopProcess([string]$processName)
         Write-Host "Started stopping process at" $startDateTime.DateTime
 
         Stop-Process -processname $processName
-
         Write-Host ("Successfully stopped {0} process." -F $processName) -ForegroundColor Green
-
         Get-Process -Name $processName
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished stopping process at" $finishedDateTime.DateTime
-        $duration = New-TimeSpan $startDateTime $finishedDateTime
 
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        Write-Host ""
     }
     catch 
     {
         Write-Host ("Failed to stop {0} process." -F $processName) -Foreground Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
+
+        Write-Host "The processes running on this computer are:"
+        Get-Process | Format-Table -AutoSize
     }
 }
 
