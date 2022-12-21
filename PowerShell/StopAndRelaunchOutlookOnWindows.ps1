@@ -146,15 +146,12 @@ function StopAndRelaunchOutlook([string]$processName,
         Stop-Process -ProcessName $processName
         Start-Sleep -Seconds $seconds
         Start-Process -FilePath $applicationName 
-
         Write-Host "Successfully stopped and restarted Outlook." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        
         Write-Host "Finished stopping and relaunching Outlook at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
-
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
         Write-Host ""
