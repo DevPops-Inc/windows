@@ -15,7 +15,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -36,21 +35,26 @@ function ShutdownComputer()
         $startDateTime = (Get-Date)
         Write-Host "Started shutting down computer at" $startDateTime.DateTime
 
-        Stop-Computer -ComputerName localhost
-        
-        Write-Host "Succesfully shutting down computer now." -ForegroundColor Green
+        Write-Host "Please save your documents and close your applications."
+        Read-Host -Prompt "Press any key to shutdown your computer."
+        Write-Host "Succesfully shut down computer." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished shutting down computer at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
+        Stop-Computer -ComputerName localhost
     }
     catch 
     {
         Write-Host "Failed to shutdown computer." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
