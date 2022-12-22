@@ -39,7 +39,8 @@ function RestartPrinterSpooler()
         Restart-Service -Name Spooler -Force
         Write-Host "Successfully restarted printer spooler." -ForegroundColor Green
 
-        $finishedDateTime = (Get-Date).DateTime
+        $finishedDateTime = (Get-Date)
+        
         Write-Host "Finished restarting printer spooler at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
