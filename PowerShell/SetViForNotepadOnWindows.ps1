@@ -12,7 +12,7 @@ function GetNewAlias([string]$newAlias)
 {
     if (($newAlias -eq $Null) -or ($newAlias -eq ""))
     {
-        Read-Host -Prompt "Please type the new alias and press `"Enter`" key (Example: vi)"
+        Read-Host -Prompt "Please type the new alias and press the `"Enter`" key (Example: vi)"
 
         Write-Host ""
         return $newAlias
@@ -27,7 +27,7 @@ function GetApp([string]$app)
 {
     if (($app -eq $Null) -or ($app -eq ""))
     {
-        Read-Host -Prompt "Please type the application you wish to create an alias for and press `"Enter`" key (Example: notebook)"
+        Read-Host -Prompt "Please type the application you wish to create an alias for and press the `"Enter`" key (Example: notebook)"
 
         Write-Host ""
         return $app
