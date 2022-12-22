@@ -5,7 +5,7 @@
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $newAlias = "vi", 
-    [string] [Parameter(Mandatory = $False)] $app = "notebook"
+    [string] [Parameter(Mandatory = $False)] $app = "notepad"
 )
 
 function GetNewAlias([string]$newAlias)
@@ -118,7 +118,8 @@ function SetViForNotepad([string]$newAlias, [string]$app)
         $startDateTime = (Get-Date)
         Write-Host "Started setting vi for Notepad at" $startDateTime.DateTime
 
-        New-Alias vi notepad
+        New-Alias -Name $newAlias -Value $app
+        Get-Alias -Name $newAlias
         Write-Host "Successfully set vi for Notepad." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
