@@ -99,7 +99,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -119,20 +119,23 @@ function SetViForNotepad([string]$newAlias, [string]$app)
         Write-Host "Started setting vi for Notepad at" $startDateTime.DateTime
 
         New-Alias vi notepad
-
         Write-Host "Successfully set vi for Notepad." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished setting vi for Notepad at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to set vi for Notepad." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
