@@ -1,6 +1,6 @@
 # restart printer spooler on Windows 
 
-# run this script as admin: Start-Process Powershell -verb RunAs
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 
 function CheckOsForWindows()
 {
@@ -37,14 +37,16 @@ function RestartPrinterSpooler()
         Write-Host "Started restarting printer spooler at" $startDateTime.DateTime
 
         Restart-Service -Name Spooler -Force
-
         Write-Host "Successfully restarted printer spooler." -ForegroundColor Green
 
-        $finishedDateTime = (Get-Date).DateTime
+        $finishedDateTime = (Get-Date)
+        
         Write-Host "Finished restarting printer spooler at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
+
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
         Write-Host ""
     }
     catch 
