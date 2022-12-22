@@ -5,14 +5,14 @@
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $newAlias = "vi", 
-    [string] [Parameter(Mandatory = $False)] $app = "notebook"
+    [string] [Parameter(Mandatory = $False)] $app = "notepad"
 )
 
 function GetNewAlias([string]$newAlias)
 {
     if (($newAlias -eq $Null) -or ($newAlias -eq ""))
     {
-        Read-Host -Prompt "Please type the new alias and press `"Enter`" key (Example: vi)"
+        Read-Host -Prompt "Please type the new alias and press the `"Enter`" key (Example: vi)"
 
         Write-Host ""
         return $newAlias
@@ -27,7 +27,7 @@ function GetApp([string]$app)
 {
     if (($app -eq $Null) -or ($app -eq ""))
     {
-        Read-Host -Prompt "Please type the application you wish to create an alias for and press `"Enter`" key (Example: notebook)"
+        Read-Host -Prompt "Please type the application you wish to create an alias for and press the `"Enter`" key (Example: notebook)"
 
         Write-Host ""
         return $app
@@ -44,10 +44,10 @@ function CheckParameters([string]$newAlias, [string]$app)
     $valid = $True
 
     Write-Host "Parameter(s):"
-    Write-Host "---------------------------------"
-    Write-Host ("newAlias    : {0}" -F $newAlias)
-    Write-Host ("app        : {0}" -F $app)
-    Write-Host "----------------------------------"
+    Write-Host "-----------------------------"
+    Write-Host ("newAlias: {0}" -F $newAlias)
+    Write-Host ("app     : {0}" -F $app)
+    Write-Host "-----------------------------"
     
     if (($newAlias -eq $Null) -or ($newAlias -eq ""))
     {
@@ -63,17 +63,20 @@ function CheckParameters([string]$newAlias, [string]$app)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameters checks passed." -ForegroundColor Green
+        Write-Host "All parameters check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function CheckOsForWindows()
@@ -96,6 +99,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -114,21 +118,25 @@ function SetViForNotepad([string]$newAlias, [string]$app)
         $startDateTime = (Get-Date)
         Write-Host "Started setting vi for Notepad at" $startDateTime.DateTime
 
-        New-Alias vi notepad
-
+        New-Alias -Name $newAlias -Value $app
+        Get-Alias -Name $newAlias
         Write-Host "Successfully set vi for Notepad." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished setting vi for Notepad at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to set vi for Notepad." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
