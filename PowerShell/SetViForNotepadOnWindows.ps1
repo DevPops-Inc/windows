@@ -44,10 +44,10 @@ function CheckParameters([string]$newAlias, [string]$app)
     $valid = $True
 
     Write-Host "Parameter(s):"
-    Write-Host "---------------------------------"
-    Write-Host ("newAlias    : {0}" -F $newAlias)
-    Write-Host ("app        : {0}" -F $app)
-    Write-Host "----------------------------------"
+    Write-Host "-----------------------------"
+    Write-Host ("newAlias: {0}" -F $newAlias)
+    Write-Host ("app     : {0}" -F $app)
+    Write-Host "-----------------------------"
     
     if (($newAlias -eq $Null) -or ($newAlias -eq ""))
     {
@@ -63,17 +63,20 @@ function CheckParameters([string]$newAlias, [string]$app)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameters checks passed." -ForegroundColor Green
+        Write-Host "All parameters check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function CheckOsForWindows()
