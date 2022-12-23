@@ -1,10 +1,10 @@
 # remove user from Active Directoy
 
-# you can run this script with: .\RemoveUserFromActiveDirectory.ps1 -username < username >
+# you can run this script with: .\RemoveUserFromActiveDirectory.ps1 -username '< username >'
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $username = ""
+    [string] [Parameter(Mandatory = $False)] $username = "" # you can set the username here
 )
 
 function CheckOsForWindows()
@@ -22,11 +22,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Your operating system is:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -35,7 +35,7 @@ function GetUsername([string]$username)
 {
     if (($username -eq $Null) -or ($username -eq ""))
     {
-        $username = Read-Host -Prompt "Please type the user would you like to remove from Active Directory and press `"Enter`" key (Example: software.developer)"
+        $username = Read-Host -Prompt "Please type the user would you like to remove from Active Directory and press the `"Enter`" key (Example: software.developer)"
 
         Write-Host ""
         return $username
@@ -65,17 +65,21 @@ function CheckParameters([string]$username)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
-    }
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
+        break
+    }
 }
+
 function RemoveUserFromAd([string]$username)
 {
     Write-Host "`nRemove user from Active Directory.`n"
@@ -87,17 +91,20 @@ function RemoveUserFromAd([string]$username)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing user at" $startDateTime.DateTime
+        Write-Host ("Started removing {0} at {1}" -F $username, $startDateTime.DateTime)
 
         Remove-ADGroupMember -Identity $username -force
 
         Write-Host ("Successfully removed {0} from Active Directory." -F $username) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing user at" $finishedDateTime.DateTime
+        Write-Host ("Finished removing {0} at {1}" -F $username, $finishedDateTime.DateTime)
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
@@ -105,6 +112,7 @@ function RemoveUserFromAd([string]$username)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
