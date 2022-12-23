@@ -94,14 +94,17 @@ function RemoveUserFromAd([string]$username)
         Write-Host "Started removing user at" $startDateTime.DateTime
 
         Remove-ADGroupMember -Identity $username -force
-
+        
         Write-Host ("Successfully removed {0} from Active Directory." -F $username) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished removing user at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
@@ -109,6 +112,7 @@ function RemoveUserFromAd([string]$username)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
