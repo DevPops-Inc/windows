@@ -1,5 +1,6 @@
 # rename computer on Windows 
 
+# haven't tested this script yet
 # run this script as admin: Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\RenameComputerOnWindows.ps1 -newName '< new computer name >'
 

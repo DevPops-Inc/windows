@@ -1,5 +1,6 @@
 # remove user from Active Directoy
 
+# haven't test this script yet
 # you can run this script with: .\RemoveUserFromActiveDirectory.ps1 -username '< username >'
 
 [CmdletBinding()]
