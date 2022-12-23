@@ -1,6 +1,7 @@
 # rename computer on Windows 
 
-# you can run this script with: .\RenameComputerOnWindows.ps1 -newName < new computer name > 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
+# you can run this script with: .\RenameComputerOnWindows.ps1 -newName '< new computer name >'
 
 [CmdletBinding()]
 param(
@@ -22,10 +23,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system.`n"
+        Write-Host "Finished checking operating system."
+        Write-Host ""
+
         break
     }
 }
@@ -34,7 +36,7 @@ function GetNewName([string]$newName)
 {
     if (($newName -eq $Null) -or ($newName -eq ""))
     {
-        $newName = Read-Host -Prompt "Please type what you wish the new compter to be and press `"Enter`" key (Example: DEV-PC)"
+        $newName = Read-Host -Prompt "Please type the new name of the computer and press the `"Enter`" key (Example: DEV-PC)"
 
         Write-Host ""
         return $newName
@@ -64,16 +66,19 @@ function CheckParameters([string]$newName)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameter checks are incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function RenameComputer([string]$newName)
@@ -91,22 +96,26 @@ function RenameComputer([string]$newName)
 
         Rename-Computer -NewName "$newName" -DomainCredential Domain01\Admin01 -Restart
 
+        $hostName = $Env:COMPUTERNAME
+        Write-Host "The computer name is:" $hostName
+
         Write-Host ("Successfully renamed computer to {0}." -F $newName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished renaming computer at" $finishedDateTime.DateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {0} minutes {1} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to rename the computer to {0}." -F $newName) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
-    }
-    finally
-    {
-        $hostName = $Env:COMPUTERNAME
-        Write-Host "The computer name is:" $hostName
+        Write-Host ""
     }
 }
 
