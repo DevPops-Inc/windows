@@ -26,7 +26,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -35,7 +35,7 @@ function GetIpAddress([string]$ipAddress)
 {
     if (($ipAddress -eq $Null) -or ($ipAddress -eq ""))
     {
-        $ipAddress = Read-Host -Prompt "Please type the IP address of the printer port you wish to remove and press `"Enter`" key (Example: 127.20.1)"
+        $ipAddress = Read-Host -Prompt "Please type the IP address of the printer port you wish to remove and press the `"Enter`" key (Example: 127.20.1)"
 
         Write-Host ""
         return $ipAddress
