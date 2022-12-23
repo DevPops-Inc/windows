@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $ipAddress = ""
+    [string] [Parameter(Mandatory = $False)] $ipAddress = "" # you can set the IP address here
 )
 
 function CheckOsForWindows()
