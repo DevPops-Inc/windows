@@ -1,6 +1,6 @@
 # remove user from Active Directoy
 
-# you can run this script with: .\RemoveUserFromActiveDirectory.ps1 -username < username >
+# you can run this script with: .\RemoveUserFromActiveDirectory.ps1 -username '< username >'
 
 [CmdletBinding()]
 param(
@@ -26,7 +26,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
