@@ -65,17 +65,21 @@ function CheckParameters([string]$username)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
-    }
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
+        break
+    }
 }
+
 function RemoveUserFromAd([string]$username)
 {
     Write-Host "`nRemove user from Active Directory.`n"
