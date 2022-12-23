@@ -35,7 +35,7 @@ function GetUsername([string]$username)
 {
     if (($username -eq $Null) -or ($username -eq ""))
     {
-        $username = Read-Host -Prompt "Please type the user would you like to remove from Active Directory and press `"Enter`" key (Example: software.developer)"
+        $username = Read-Host -Prompt "Please type the user would you like to remove from Active Directory and press the `"Enter`" key (Example: software.developer)"
 
         Write-Host ""
         return $username
