@@ -26,7 +26,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system."
         Write-Host ""
-        
+
         break
     }
 }
@@ -35,7 +35,7 @@ function GetNewName([string]$newName)
 {
     if (($newName -eq $Null) -or ($newName -eq ""))
     {
-        $newName = Read-Host -Prompt "Please type what you wish the new compter to be and press `"Enter`" key (Example: DEV-PC)"
+        $newName = Read-Host -Prompt "Please type the new name of the computer and press the `"Enter`" key (Example: DEV-PC)"
 
         Write-Host ""
         return $newName
