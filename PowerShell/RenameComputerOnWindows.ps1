@@ -95,22 +95,26 @@ function RenameComputer([string]$newName)
 
         Rename-Computer -NewName "$newName" -DomainCredential Domain01\Admin01 -Restart
 
+        $hostName = $Env:COMPUTERNAME
+        Write-Host "The computer name is:" $hostName
+
         Write-Host ("Successfully renamed computer to {0}." -F $newName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished renaming computer at" $finishedDateTime.DateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {0} minutes {1} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to rename the computer to {0}." -F $newName) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
-    }
-    finally
-    {
-        $hostName = $Env:COMPUTERNAME
-        Write-Host "The computer name is:" $hostName
+        Write-Host ""
     }
 }
 
