@@ -91,14 +91,14 @@ function RemoveUserFromAd([string]$username)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started removing user at" $startDateTime.DateTime
+        Write-Host ("Started removing {0} at {1}" -F $username, $startDateTime.DateTime)
 
         Remove-ADGroupMember -Identity $username -force
-        
+
         Write-Host ("Successfully removed {0} from Active Directory." -F $username) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished removing user at" $finishedDateTime.DateTime
+        Write-Host ("Finished removing {0} at {1}" -F $username, $finishedDateTime.DateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
