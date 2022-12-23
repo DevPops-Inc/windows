@@ -1,5 +1,6 @@
 # remove printer port on Windows
 
+# haven't tested this script against IP printer yet
 # you can run this script with: .\RemovePrinterPortOnWindows.ps1 -ipAddress < IP address > 
 
 [CmdletBinding()]
@@ -85,6 +86,9 @@ function RemovePrinterPort([string]$ipAddress)
     Write-Host "`nRemove printer port on Windows.`n"
     CheckOsForWindows
 
+    Write-Host "The printer ports are:"
+    Get-PrinterPort
+
     $ipAddress = GetIpAddress $ipAddress
     CheckParameters $ipAddress
 
@@ -95,6 +99,10 @@ function RemovePrinterPort([string]$ipAddress)
         
         Remove-PrinterPort -Name $ipAddress -PrinterHostAddress $ipAddress
         
+        Write-Host "The printer ports are:"
+        Get-PrinterPort
+        Write-Host ""
+
         Write-Host ("Successfully removed printer port with this IP address: {0}" -F $ipAddress) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
