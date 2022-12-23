@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $username = ""
+    [string] [Parameter(Mandatory = $False)] $username = "" # you can set the username here
 )
 
 function CheckOsForWindows()
