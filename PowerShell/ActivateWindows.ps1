@@ -1,6 +1,6 @@
 # activate Windows in PowerShell
 
-# run this script as admin: Start-Process Powershell -Verb runAs
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 
 # you can run this script with: .\ActivateWindows.ps1 -computerName < computer name > -licenseKey < license key >
 

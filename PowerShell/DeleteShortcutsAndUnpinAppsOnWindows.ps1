@@ -1,6 +1,6 @@
 # delete shortcuts and unpin apps on Windows
 
-# run this script as admin: Start-Process Powershell -Verb runAs
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 
 [CmdletBinding()]
 param(
