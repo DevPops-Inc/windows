@@ -1,6 +1,6 @@
 # stop service on Windows
 
-# run this script as admin: Start-Process PowerShell -Verb RunAs
+# run this script as admin:  Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\StopServiceOnWindows.ps1 -serviceName < service > 
 
 [CmdletBinding()]
