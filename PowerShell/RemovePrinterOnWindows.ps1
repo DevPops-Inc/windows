@@ -87,7 +87,7 @@ function RemovePrinter([string]$printerName)
     CheckOsForWindows
 
     Write-Host "The printers on this computer are:"
-    Get-Printer
+    Get-Printer | Format-Table -AutoSize
 
     $printerName = GetPrinterName $printerName
     CheckParameters $printerName
