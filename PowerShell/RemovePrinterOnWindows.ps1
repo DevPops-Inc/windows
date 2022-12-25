@@ -99,16 +99,18 @@ function RemovePrinter([string]$printerName)
 
         Remove-Printer -Name $printerName
         
-        Write-Host ("Successfully removed {0}." -F $printerName) -ForegroundColor Green
-
         Write-Host "The printers on this computer are:"
-        Get-Printer
+        Get-Printer | Format-Table -AutoSize
+
+        Write-Host ("Successfully removed {0}." -F $printerName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished removing printer at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours)
+        Write-Host ""
     }
     catch 
     {
@@ -117,7 +119,7 @@ function RemovePrinter([string]$printerName)
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
 
         Write-Host "The printers on this computer are:"
-        Get-Printer
+        Get-Printer | Format-Table -AutoSize
     }
 }
 
