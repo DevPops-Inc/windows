@@ -27,7 +27,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -36,7 +36,7 @@ function GetPrinterName([string]$printerName)
 {
     if (($printerName -eq $Null) -or ($printerName -eq ""))
     {
-        $printerName = Read-Host -Prompt "Please type printer you wish to remove and press `"Enter`" key (Example: HP_printer)"
+        $printerName = Read-Host -Prompt "Please type printer you wish to remove and press the `"Enter`" key (Example: HP_printer)"
 
         Write-Host ""
         return $printerName
