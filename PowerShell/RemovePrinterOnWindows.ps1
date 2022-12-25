@@ -1,5 +1,6 @@
 # remove printer on Windows
 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\RemovePrinterOnWindow.ps1 -printerName '< printer >' 
 
 [CmdletBinding()]
