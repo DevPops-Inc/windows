@@ -1,6 +1,6 @@
 # assign member to distribution list on Exchange
 
-# run this script as admin:  Start-Process PowerShell -Verb RunAs
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 
 # you can run this script with: .\AssignMemberToDistributionListOnExchange.ps1 -email < email > -distroList < distribution list >
 

@@ -1,6 +1,6 @@
 # delete local user on Windows 
 
-# run this script as admin:  Start-Process PowerShell -Verb RunAs
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 # you can run this script with: .\DeleteLocalUserOnWindows.ps1 -localUser < local user >
 
 [CmdletBinding()]

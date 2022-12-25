@@ -1,6 +1,6 @@
 # delete shortcuts except Firefox on Windows
 
-# run this script as admin:  Start-Process PowerShell -Verb RunAs
+# run this script as admin: Start-Process PowerShell -Verb RunAs
 
 [CmdletBinding()]
 param(

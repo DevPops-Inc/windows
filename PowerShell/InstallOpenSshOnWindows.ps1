@@ -66,7 +66,7 @@ function StartOpenSshServices()
 # define main function 
 function InstallOpenSsh()
 {
-    Write-Host "`nInstall OpenSSH on Windows.`n`nPowerShell has to be version 6 and up.`nPowerShell must be ran in Administrator mode:  Start-Process PowerShell -Verb RunAs`n"
+    Write-Host "`nInstall OpenSSH on Windows.`n`nPowerShell has to be version 6 and up.`nPowerShell must be ran in Administrator mode: Start-Process PowerShell -Verb RunAs`n"
 
     CheckOsForWindows
 
