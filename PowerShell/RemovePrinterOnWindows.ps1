@@ -1,6 +1,6 @@
 # remove printer on Windows
 
-# you can run this script with: .\RemovePrinterOnWindow.ps1 -printerName < printer > 
+# you can run this script with: .\RemovePrinterOnWindow.ps1 -printerName '< printer >' 
 
 [CmdletBinding()]
 param(
@@ -110,7 +110,7 @@ function RemovePrinter([string]$printerName)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
-        
+
         Write-Host ""
     }
     catch 
