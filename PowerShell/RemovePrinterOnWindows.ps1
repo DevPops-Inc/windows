@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $printerName = ""
+    [string] [Parameter(Mandatory = $False)] $printerName = "" # you can set the printer name here
 )
 
 function CheckOsForWindows()
