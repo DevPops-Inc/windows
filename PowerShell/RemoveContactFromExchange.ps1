@@ -1,10 +1,11 @@
 # remove contact from Exchange
 
+# haven't tested this script yet
 # you can run this script with: .\RemoveContactFromExchange.ps1 -contactName '< contact >'
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $contactName = ""
+    [string] [Parameter(Mandatory = $False)] $contactName = "" # you can set the contact name here
 )
 
 function GetContactName([string]$contactName)
