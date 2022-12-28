@@ -46,7 +46,7 @@ function GetContactName([string]$contactName)
     }
 }
 
-function CheckParamemeters([string]$contactName)
+function CheckParameters([string]$contactName)
 {
     Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
@@ -86,16 +86,32 @@ function RemoveContact([string]$contactName)
     CheckOsForWindows
 
     $contactName = GetContactName $contactName
+    CheckParameters $contactName
 
     try 
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started removing contact at" $startDateTime.DateTime
+
         Remove-MailContact -Identity $contactName -force
         
         Write-Host ("Successfully removed {0} from Exchange." -F $contactName) -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished removing contact at" $finishedDateTime.DateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host ("Failed to remove {0} from Exchange." -F $contactName) -ForegroundColor Red
+        Write-Host $_ -ForegroundColor Red
+        Write-host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
