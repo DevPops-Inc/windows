@@ -1,10 +1,11 @@
 # remove distribution group in Exchange
 
+# haven't tested this script yet
 # you can run this script with: .\RemoveDistroGroupFromExchange.ps1 -distroGroup < distribution group > 
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $distroGroup = ""
+    [string] [Parameter(Mandatory = $False)] $distroGroup = "" # you can set the distribution group here
 )
 
 function CheckOsForWindows()
