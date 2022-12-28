@@ -1,10 +1,11 @@
 # remove network share on Windows 
 
+# haven't tested this script yet
 # you can run this script with: .\RemoveNetworkShareOnWindows.ps1 -driveLetter < driver letter >
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $driveLetter = ""
+    [string] [Parameter(Mandatory = $False)] $driveLetter = "" # you can set the drive letter here
 )
 
 function CheckOsForWindows()
@@ -27,6 +28,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -35,7 +37,7 @@ function GetDriveLetter([string]$driveLetter)
 {
     if (($driveLetter -eq $Null) -or ($driveLetter -eq ""))
     {
-        $driveLetter = Read-Host -Prompt "Please type the letter for the network share you would like to remove and press `"Enter`" key (Example: D)"
+        $driveLetter = Read-Host -Prompt "Please type the letter for the network share you would like to remove and press the `"Enter`" key (Example: D)"
 
         Write-Host""
         return $driveLetter
@@ -65,16 +67,19 @@ function CheckParameters([string]$driveLetter)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
-    }
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
+        break
+    }
 }
 
 function RemoveNetworkShare([string]$driveLetter)
@@ -83,7 +88,7 @@ function RemoveNetworkShare([string]$driveLetter)
     CheckOsForWindows
 
     Write-Host "The drives on this computer are:"
-    Get-PSDrive
+    Get-PSDrive | Format-Table -Autosize
 
     $driveLetter = GetDriveLetter $driveLetter
     CheckParameters $driveLetter
@@ -95,26 +100,29 @@ function RemoveNetworkShare([string]$driveLetter)
 
         Remove-PSDrive -Name $driveLetter
 
-        Write-Host ("Successfully removed {0} drive." -F $driveLetter) -ForegroundColor Green
-
         Write-Host "The drives on this computer are:"
-        Get-PSDrive
+        Get-PSDrive | Format-Table -Autosize
+
+        Write-Host ("Successfully removed {0} drive." -F $driveLetter) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished removing network share at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host ("Failed to remove {0} drive." -F $driveLetter) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
 
         Write-Host "The drives on this computer are:"
-        Get-PSDrive
+        Get-PSDrive | Format-Table -AutoSize
     }
 }
 
