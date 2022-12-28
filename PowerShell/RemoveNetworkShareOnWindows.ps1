@@ -1,10 +1,11 @@
 # remove network share on Windows 
 
+# haven't tested this script yet
 # you can run this script with: .\RemoveNetworkShareOnWindows.ps1 -driveLetter < driver letter >
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $driveLetter = ""
+    [string] [Parameter(Mandatory = $False)] $driveLetter = "" # you can set the drive letter here
 )
 
 function CheckOsForWindows()
