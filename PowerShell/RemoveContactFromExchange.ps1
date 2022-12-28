@@ -46,7 +46,39 @@ function GetContactName([string]$contactName)
     }
 }
 
+function CheckParamemeters([string]$contactName)
+{
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
+    $valid = $True
 
+    Write-Host "Parameter(s):"
+    Write-Host "----------------------------------"
+    Write-Host ("contactName: {0}" -F $contactName)
+    Write-Host "----------------------------------"
+
+    if (($contactName -eq $Null) -or ($contactName -eq ""))
+    {
+        Write-Host "contactName is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else
+    {
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
+    }
+}
 
 function RemoveContact([string]$contactName)
 {
