@@ -28,7 +28,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -37,7 +37,7 @@ function GetDriveLetter([string]$driveLetter)
 {
     if (($driveLetter -eq $Null) -or ($driveLetter -eq ""))
     {
-        $driveLetter = Read-Host -Prompt "Please type the letter for the network share you would like to remove and press `"Enter`" key (Example: D)"
+        $driveLetter = Read-Host -Prompt "Please type the letter for the network share you would like to remove and press the `"Enter`" key (Example: D)"
 
         Write-Host""
         return $driveLetter
