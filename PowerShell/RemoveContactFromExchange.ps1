@@ -1,6 +1,6 @@
 # remove contact from Exchange
 
-# you can run this script with: .\RemoveContactFromExchange.ps1 -contactName < contact >
+# you can run this script with: .\RemoveContactFromExchange.ps1 -contactName '< contact >'
 
 [CmdletBinding()]
 param(
