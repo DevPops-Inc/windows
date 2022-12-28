@@ -12,7 +12,7 @@ function GetContactName([string]$contactName)
 {
     if (($contactName -eq $Null) -or ($contactName -eq ""))
     {
-        $contactName = Read-Host -Prompt "Please type the contact you wish to remove and press `"Enter`" key (Example: software.vendor)"
+        $contactName = Read-Host -Prompt "Please type the contact you wish to remove and press the `"Enter`" key (Example: software.vendor)"
 
         return $contactName
     }
