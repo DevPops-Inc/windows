@@ -1,10 +1,11 @@
 # remove distribution group in Exchange
 
+# haven't tested this script yet
 # you can run this script with: .\RemoveDistroGroupFromExchange.ps1 -distroGroup < distribution group > 
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $distroGroup = ""
+    [string] [Parameter(Mandatory = $False)] $distroGroup = "" # you can set the distribution group here
 )
 
 function CheckOsForWindows()
@@ -22,11 +23,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating system is:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -35,7 +36,7 @@ function GetDistroGroup([string]$distroGroup)
 {
     if (($distroGroup -eq $Null) -or ($distroGroup -eq ""))
     {
-        $distroGroup = Read-Host -Prompt "Please type the distribution group would you like to remove from Exchange and press `"Enter`" key (Example: devs@devs.com)"
+        $distroGroup = Read-Host -Prompt "Please type the distribution group would you like to remove from Exchange and press the `"Enter`" key (Example: devs@devs.com)"
 
         Write-Host ""
         return $distroGroup
@@ -65,16 +66,19 @@ function CheckParameters([string]$distroGroup)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host "" 
     }
     else 
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
-    }
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
+        break
+    }
 }
 
 function RemoveDistroGroup([string]$distroGroup)
@@ -96,16 +100,19 @@ function RemoveDistroGroup([string]$distroGroup)
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished removing distribution group at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host ("Failed to remove {0} from Exchange." -F $distroGroup) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
