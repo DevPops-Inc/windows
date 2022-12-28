@@ -27,7 +27,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -36,7 +36,7 @@ function GetDistroGroup([string]$distroGroup)
 {
     if (($distroGroup -eq $Null) -or ($distroGroup -eq ""))
     {
-        $distroGroup = Read-Host -Prompt "Please type the distribution group would you like to remove from Exchange and press `"Enter`" key (Example: devs@devs.com)"
+        $distroGroup = Read-Host -Prompt "Please type the distribution group would you like to remove from Exchange and press the `"Enter`" key (Example: devs@devs.com)"
 
         Write-Host ""
         return $distroGroup
