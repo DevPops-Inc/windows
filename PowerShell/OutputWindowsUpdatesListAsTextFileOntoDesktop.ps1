@@ -1,6 +1,6 @@
 # output Windows updates file
 
-# you can run this script with: .\OutputWinUpdatesFile.ps1 -filePath '< file path >' -winUpdates '< Windows update file >'
+# you can run this script with: .\OutputWinUpdatesFile.ps1 -filePath "< file path >"" -winUpdates "< Windows update file >""
 
 [CmdletBinding()]
 param (
@@ -124,7 +124,7 @@ function OutputWindowsUpdateListOntoDesktop()
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
-        Write-Host ("Total execution time: {0} hours {1} minutes {2}" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
         Write-Host ""
     }
