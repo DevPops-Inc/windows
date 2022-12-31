@@ -35,7 +35,7 @@ function GetLoopBackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
 {
     if (($loopBackIpv6Address -eq $Null) -or ($loopBackIpv6Address -eq ""))
     {
-        Read-Host -Prompt "Please type the loop back IPv6 address and press `"Enter`" key (Example: ::1)" 
+        Read-Host -Prompt "Please type the loop back IPv6 address and press the `"Enter`" key (Example: ::1)" 
 
         Write-Host ""
         return $loopBackIpv6Address
