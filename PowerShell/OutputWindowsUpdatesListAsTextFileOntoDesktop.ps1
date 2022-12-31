@@ -1,6 +1,6 @@
 # output Windows updates file
 
-# you can run this script with: .\OutputWin
+# you can run this script with: .\OutputWinUpdatesFile.ps1 -filePath '< file path >' -winUpdates '< Windows update file >'
 
 [CmdletBinding()]
 param (
