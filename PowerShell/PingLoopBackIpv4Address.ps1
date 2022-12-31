@@ -35,7 +35,7 @@ function GetLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
 {
     if (($loopbackIpv4Address -eq $Null) -or ($loopbackIpv4Address -eq ""))
     {
-        $loopbackIpv4Address = Read-Host -Prompt "Please type the IPv4 address you would like to use for loopback and press `"Enter`" key (Example: 127.0.0.1)"
+        $loopbackIpv4Address = Read-Host -Prompt "Please type the IPv4 address you would like to use for loopback and press the `"Enter`" key (Example: 127.0.0.1)"
 
         Write-Host ""
         return $loopbackIpv4Address
