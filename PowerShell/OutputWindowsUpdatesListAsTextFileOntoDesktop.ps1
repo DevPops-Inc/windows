@@ -19,7 +19,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -31,16 +31,31 @@ function OutputWindowsUpdateListOntoDesktop()
 
     try 
     {
-        Get-Hotfix | Out-File C:\Users\$env:USERNAME\Desktop\windowsupdates.txt 
-        
+        $startDateTime = (Get-Date)
+        Write-Host "Started outputing Windows update list at" $startDateTime.DateTime
+
+        $winUpdatesFile = Join-Path -Path "C:\Users\$env:USERNAME\Desktop\" -ChildPath "windowsupdates.txt"
+
+        Get-Hotfix | Out-File  $winUpdatesFile
+        Get-ChildItem $winUpdatesFile
+        notepad $winUpdatesFile
         Write-Host "Successfully output windows update list onto desktop." -ForegroundColor Green
 
-        Get-ChildItem C:\Users\$env:USERNAME\Desktop\windowsupdates.txt 
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished outputting Windows update list at" $finishedDateTime.DateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+
+        Write-Host ("Total execution time: {0} hours {1} minutes {2}" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to output Windows update list onto desktop." -ForegroundColor Red
-
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
         Get-ChildItem C:\Users\$env:USERNAME\Desktop\
     }
 }
