@@ -1,11 +1,11 @@
 # file finder
 
-# you can run this script with: .\FileFinder.ps1 -drive < drive > -filename < filename > 
+# you can run this script with: .\FileFinder.ps1 -drive "< drive >" -filename "< filename >" 
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $drive    = "", 
-    [string] [Parameter(Mandatory = $False)] $filename = ""
+    [string] [Parameter(Mandatory = $False)] $drive    = "", # you can set the drive here
+    [string] [Parameter(Mandatory = $False)] $filename = "" # you can set the filename here
 )
 
 function CheckOs()
@@ -29,7 +29,7 @@ function GetDrive([string]$drive)
 {
     if (($drive -eq $Null) -or ($drive -eq ""))
     {
-        $drive = Read-Host -Prompt "Please type the drive you think the file is on and press `"Enter`" key (Example: C:\ on Windows or / on Mac and Linux)"
+        $drive = Read-Host -Prompt "Please type the drive you think the file is on and press the `"Enter`" key (Example: C:\ on Windows or / on Mac and Linux)"
 
         Write-Host ""
         return $drive
@@ -44,7 +44,7 @@ function GetFilename([string]$filename)
 {
     if (($filename -eq $Null) -or ($filename -eq ""))
     {
-        $filename = Read-Host -Prompt "Please type the name of the file you're looked for and press `"Enter`" key (Example: devops)"
+        $filename = Read-Host -Prompt "Please type the filename you're looking for and press the `"Enter`" key (Example: devops)"
 
         Write-Host ""
         return $filename
@@ -78,8 +78,6 @@ function CheckParameters([string]$drive, [string]$filename)
         $valid = $False
     }
 
-
-
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
@@ -111,18 +109,16 @@ function FileFinder([string]$drive, [string]$filename)
     {
         $startDateTime = (Get-Date)
 
-        Write-Host ("Started finding file {0} in {1} drive at {2}." -F $filename, $drive, $startDateTime)
+        Write-Host ("Started finding file `"{0}`" in {1} drive at {2}." -F $filename, $drive, $startDateTime)
 
-        Write-Host "Please wait since this may this a while."
-        Write-Host ""
-        
+        Write-Host "Please wait since this may this a while . . . " -ForegroundColor Blue   
         Get-ChildItem -Path $drive -Name *$filename* -Recurse -Force
 
-        Write-Host ("Successfully searched for file {0} on {1}" -F $filename, $drive) -ForegroundColor Green
+        Write-Host ("Successfully searched for file `"{0}`" on {1}" -F $filename, $drive) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)        
         
-        Write-Host ("Finished finding file {0} in {1} drive at {2}" -F $filename, $drive, $finishedDateTime)
+        Write-Host ("Finished finding file `"{0}`" in {1} drive at {2}" -F $filename, $drive, $finishedDateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -132,7 +128,7 @@ function FileFinder([string]$drive, [string]$filename)
     }
     catch
     {
-        Write-Host ("Failed searching for file {0} on {1} drive" -F $filename, $drive) -ForegroundColor Red
+        Write-Host ("Failed searching for file `"{0}`" on {1} drive" -F $filename, $drive) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
