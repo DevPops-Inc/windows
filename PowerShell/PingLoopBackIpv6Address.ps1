@@ -95,20 +95,23 @@ function PingLoopbackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
         Write-Host "Started pinging loopback IPv6 address at" $startDateTime.DateTime
 
         Test-Connection $loopBackIpv6Address
-        
         Write-Host "Successfully pinged loopback IPv6 address." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished pinging loopback IPv6 address at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host "Failed to ping loopback IPv6 address." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
