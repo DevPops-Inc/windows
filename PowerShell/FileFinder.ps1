@@ -29,7 +29,7 @@ function GetDrive([string]$drive)
 {
     if (($drive -eq $Null) -or ($drive -eq ""))
     {
-        $drive = Read-Host -Prompt "Please type the drive you think the file is on and press `"Enter`" key (Example: C:\ on Windows or / on Mac and Linux)"
+        $drive = Read-Host -Prompt "Please type the drive you think the file is on and press the `"Enter`" key (Example: C:\ on Windows or / on Mac and Linux)"
 
         Write-Host ""
         return $drive
