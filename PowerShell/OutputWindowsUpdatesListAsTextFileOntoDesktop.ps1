@@ -1,5 +1,11 @@
 # output Windows updates list onto desktop
 
+[CmdletBinding()]
+param (
+    [string] [Parameter(Mandatory = $False)] $filePath   = "C:\Users\$env:USERNAME\Desktop\", 
+    [string] [Parameter(Mandatory = $False)] $winUpdates = "winUpdates.txt"
+)
+
 function CheckOsForWindows()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -34,7 +40,7 @@ function OutputWindowsUpdateListOntoDesktop()
         $startDateTime = (Get-Date)
         Write-Host "Started outputing Windows update list at" $startDateTime.DateTime
 
-        $winUpdatesFile = Join-Path -Path "C:\Users\$env:USERNAME\Desktop\" -ChildPath "windowsupdates.txt"
+        $winUpdatesFile = Join-Path -Path $filePath -ChildPath "windowsupdates.txt"
 
         Get-Hotfix | Out-File  $winUpdatesFile
         Get-ChildItem $winUpdatesFile
@@ -56,7 +62,7 @@ function OutputWindowsUpdateListOntoDesktop()
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
-        Get-ChildItem C:\Users\$env:USERNAME\Desktop\
+        Get-ChildItem $winUpdatesFile
     }
 }
 
