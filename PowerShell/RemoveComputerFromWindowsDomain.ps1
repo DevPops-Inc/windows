@@ -29,7 +29,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -38,7 +38,7 @@ function GetDomain([string]$domain)
 {
     if (($domain -eq $Null) -or ($domain -eq ""))
     {
-        $domain = Read-Host -Prompt "Please type the domain you wish to remove the computer from and press `"Enter`" key (Example: developers)"
+        $domain = Read-Host -Prompt "Please type the domain you wish to remove the computer from and press the `"Enter`" key (Example: developers)"
 
         Write-Host ""
         return $domain
@@ -53,7 +53,7 @@ function GetAdAdmin([string]$adAdmin)
 {
     if (($adAdmin -eq $Null) -or ($adAdmin -eq ""))
     {
-        $adAdmin = Read-Host -Prompt "Please type the Active Directory admin account and press `"Enter`" key (Example: ad.admin)"
+        $adAdmin = Read-Host -Prompt "Please type the Active Directory admin account and press the `"Enter`" key (Example: ad.admin)"
 
         Write-Host ""
         return $adAdmin
