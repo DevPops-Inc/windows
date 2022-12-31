@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $drive    = "", 
-    [string] [Parameter(Mandatory = $False)] $filename = ""
+    [string] [Parameter(Mandatory = $False)] $drive    = "", # you can set the drive here
+    [string] [Parameter(Mandatory = $False)] $filename = "" # you can set the filename here
 )
 
 function CheckOs()
