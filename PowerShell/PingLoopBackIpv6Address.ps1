@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopBackIpv6Address = "::1"
+    [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopBackIpv6Address = "::1" 
 )
 
 function CheckOsForWindows()
@@ -15,21 +15,27 @@ function CheckOsForWindows()
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "Operating System:" $hostOs -ForegroundColor Green
-    }
+        Write-Host "Sorry but this script only runs on Windows."
 
-    Write-Host "Finished checking operating system at" (Get-Date).DateTime
-    Write-Host ""
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
+    }
 }
 
 function GetLoopBackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
 {
     if (($loopBackIpv6Address -eq $Null) -or ($loopBackIpv6Address -eq ""))
     {
-        Read-Host -Prompt "Please type the loop back IPv6 address and press `"Enter`" key (Example: ::1)" 
+        Read-Host -Prompt "Please type the loop back IPv6 address and press the `"Enter`" key (Example: ::1)" 
 
         Write-Host ""
         return $loopBackIpv6Address
@@ -59,16 +65,19 @@ function CheckParameters([System.Net.IPAddress]$loopBackIpv6Address)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
-    }
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
+        break
+    }
 }
 
 
@@ -86,20 +95,23 @@ function PingLoopbackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
         Write-Host "Started pinging loopback IPv6 address at" $startDateTime.DateTime
 
         Test-Connection $loopBackIpv6Address
-        
         Write-Host "Successfully pinged loopback IPv6 address." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished pinging loopback IPv6 address at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host "Failed to ping loopback IPv6 address." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
