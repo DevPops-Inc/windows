@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopBackIpv6Address = "::1"
+    [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopBackIpv6Address = "::1" 
 )
 
 function CheckOsForWindows()
@@ -15,14 +15,20 @@ function CheckOsForWindows()
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "Operating System:" $hostOs -ForegroundColor Green
-    }
+        Write-Host "Sorry but this script only runs on Windows."
 
-    Write-Host "Finished checking operating system at" (Get-Date).DateTime
-    Write-Host ""
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
+    }
 }
 
 function GetLoopBackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
