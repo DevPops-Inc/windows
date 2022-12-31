@@ -44,7 +44,7 @@ function GetFilename([string]$filename)
 {
     if (($filename -eq $Null) -or ($filename -eq ""))
     {
-        $filename = Read-Host -Prompt "Please type the name of the file you're looked for and press `"Enter`" key (Example: devops)"
+        $filename = Read-Host -Prompt "Please type the filename you're looking for and press the `"Enter`" key (Example: devops)"
 
         Write-Host ""
         return $filename
