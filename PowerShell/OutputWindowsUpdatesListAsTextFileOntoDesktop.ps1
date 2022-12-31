@@ -66,9 +66,39 @@ function checkParameters([string]$filePath, [string]$winUpdates)
     $valid = $true
 
     Write-Host "Parameter(s):"
-    Write-Host "-------------"
-    Write-Host ("filePath: {0}" -F $filePath)
-    Write-Host 
+    Write-Host "--------------------------------"
+    Write-Host ("filePath  : {0}" -F $filePath)
+    Write-Host ("winUpdates: {0}" -F $winUpdates)
+    Write-Host "--------------------------------"
+
+    if (($filePath -eq $Null) -or ($filePath -eq ""))
+    {
+        Write-Host "filePath is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if (($winUpdates -eq $Null) -or ($winUpdates -eq ""))
+    {
+        Write-Host "winUpdates is not set." -ForegroundColor Red
+        $valid = $False
+    }
+
+    if ($valid -eq $True)
+    {
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+    }
+    else 
+    {
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        
+        break
+    }
 }
 
 function OutputWindowsUpdateListOntoDesktop()
