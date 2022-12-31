@@ -109,18 +109,18 @@ function FileFinder([string]$drive, [string]$filename)
     {
         $startDateTime = (Get-Date)
 
-        Write-Host ("Started finding file {0} in {1} drive at {2}." -F $filename, $drive, $startDateTime)
+        Write-Host ("Started finding file `"{0}`" in {1} drive at {2}." -F $filename, $drive, $startDateTime)
 
         Write-Host "Please wait since this may this a while."
         Write-Host ""
         
         Get-ChildItem -Path $drive -Name *$filename* -Recurse -Force
 
-        Write-Host ("Successfully searched for file {0} on {1}" -F $filename, $drive) -ForegroundColor Green
+        Write-Host ("Successfully searched for file `"{0}`" on {1}" -F $filename, $drive) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)        
         
-        Write-Host ("Finished finding file {0} in {1} drive at {2}" -F $filename, $drive, $finishedDateTime)
+        Write-Host ("Finished finding file `"{0}`" in {1} drive at {2}" -F $filename, $drive, $finishedDateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -130,7 +130,7 @@ function FileFinder([string]$drive, [string]$filename)
     }
     catch
     {
-        Write-Host ("Failed searching for file {0} on {1} drive" -F $filename, $drive) -ForegroundColor Red
+        Write-Host ("Failed searching for file `"{0}`" on {1} drive" -F $filename, $drive) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
