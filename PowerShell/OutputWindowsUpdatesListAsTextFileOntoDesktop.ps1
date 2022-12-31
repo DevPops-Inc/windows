@@ -1,4 +1,6 @@
-# output Windows updates list onto desktop
+# output Windows updates file
+
+# you can run this script with: .\OutputWin
 
 [CmdletBinding()]
 param (
@@ -103,23 +105,22 @@ function checkParameters([string]$filePath, [string]$winUpdates)
 
 function OutputWindowsUpdateListOntoDesktop()
 {
-    Write-Host "`nOutput list of Windows updates as text file onto desktop.`n"
+    Write-Host "`nOutput Windows updates file.`n"
     CheckOsForWindows
 
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started outputing Windows update list at" $startDateTime.DateTime
+        Write-Host "Started outputing Windows update file at" $startDateTime.DateTime
 
         $winUpdatesFile = Join-Path -Path $filePath -ChildPath "windowsupdates.txt"
-
         Get-Hotfix | Out-File  $winUpdatesFile
         Get-ChildItem $winUpdatesFile
         notepad $winUpdatesFile
-        Write-Host "Successfully output windows update list onto desktop." -ForegroundColor Green
+        Write-Host "Successfully output Windows update file." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished outputting Windows update list at" $finishedDateTime.DateTime
+        Write-Host "Finished outputting Windows update file at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -129,7 +130,7 @@ function OutputWindowsUpdateListOntoDesktop()
     }
     catch 
     {
-        Write-Host "Failed to output Windows update list onto desktop." -ForegroundColor Red
+        Write-Host "Failed to output Windows update file." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
