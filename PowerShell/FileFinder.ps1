@@ -111,7 +111,7 @@ function FileFinder([string]$drive, [string]$filename)
 
         Write-Host ("Started finding file `"{0}`" in {1} drive at {2}." -F $filename, $drive, $startDateTime)
 
-        Write-Host "Please wait since this may this a while."
+        Write-Host "Please wait since this may this a while." -ForegroundColor Blue
         Write-Host ""
         
         Get-ChildItem -Path $drive -Name *$filename* -Recurse -Force
