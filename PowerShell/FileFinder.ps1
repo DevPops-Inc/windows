@@ -78,8 +78,6 @@ function CheckParameters([string]$drive, [string]$filename)
         $valid = $False
     }
 
-
-
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
