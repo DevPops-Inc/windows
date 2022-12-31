@@ -1,11 +1,13 @@
 # remove computer from domain on Windows 
 
+# haven't tested this script yet
+
 # you can run this script with: .\RemoveComputerFromWindowsDomain.ps1 -domain < domain name > -adAdmin < Active Directory admin account > 
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $domain = ""
-    , [string] [Parameter(Mandatory = $False)] $adAdmin = ""
+      [string] [Parameter(Mandatory = $False)] $domain = "" # you can set the domain here
+    , [string] [Parameter(Mandatory = $False)] $adAdmin = "" # you can set the Active Directory admin here
 )
 
 function CheckOsForWindows()
@@ -23,11 +25,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -36,7 +38,7 @@ function GetDomain([string]$domain)
 {
     if (($domain -eq $Null) -or ($domain -eq ""))
     {
-        $domain = Read-Host -Prompt "Please type the domain you wish to remove the computer from and press `"Enter`" key (Example: developers)"
+        $domain = Read-Host -Prompt "Please type the domain you wish to remove the computer from and press the `"Enter`" key (Example: developers)"
 
         Write-Host ""
         return $domain
@@ -51,7 +53,7 @@ function GetAdAdmin([string]$adAdmin)
 {
     if (($adAdmin -eq $Null) -or ($adAdmin -eq ""))
     {
-        $adAdmin = Read-Host -Prompt "Please type the Active Directory admin account and press `"Enter`" key (Example: ad.admin)"
+        $adAdmin = Read-Host -Prompt "Please type the Active Directory admin account and press the `"Enter`" key (Example: ad.admin)"
 
         Write-Host ""
         return $adAdmin
@@ -88,16 +90,19 @@ function CheckParameters([string]$domain, [string]$adAdmin)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor red
+        Write-Host "One or more parameter checks are incorrect." -ForegroundColor red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
@@ -120,16 +125,19 @@ function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished removing computer at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to remove computer from {0} domain." -F $domain) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
