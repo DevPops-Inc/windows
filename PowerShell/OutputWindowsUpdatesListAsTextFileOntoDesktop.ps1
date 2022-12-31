@@ -3,7 +3,7 @@
 [CmdletBinding()]
 param (
     [string] [Parameter(Mandatory = $False)] $filePath   = "C:\Users\$env:USERNAME\Desktop\", 
-    [string] [Parameter(Mandatory = $False)] $winUpdates = "winUpdates.txt"
+    [string] [Parameter(Mandatory = $False)] $winUpdates = "windowsupdates.txt"
 )
 
 function CheckOsForWindows()
@@ -28,6 +28,47 @@ function CheckOsForWindows()
 
         break
     }
+}
+
+function getFilePath([string]$filePath)
+{
+    if (($filePath -eq $Null) -or ($filePath -eq ""))
+    {
+        $filePath = Read-Host -Prompt "Please type the path you wish to save the Windows update file to and press the `"Enter`" key (Example: C:\Users\$env:USERNAME\Desktop\)"
+
+        Write-Host ""
+        return $filePath
+    }
+    else
+    {
+        return $filePath
+    }
+}
+
+function getWinUpdates([string]$winUpdates)
+{
+    if (($winUpdates -eq $Null) -or ($winUpdates -eq ""))
+    {
+        $winUpdates = Read-Host -Prompt "Please type the Windows updates filename and press the `"Enter`" key (Example: windowsupdates.txt)"
+
+        Write-Host ""
+        return $winUpdates
+    }
+    else 
+    {
+        return $winUpdates
+    }
+}
+
+function checkParameters([string]$filePath, [string]$winUpdates)
+{
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
+    $valid = $true
+
+    Write-Host "Parameter(s):"
+    Write-Host "-------------"
+    Write-Host ("filePath: {0}" -F $filePath)
+    Write-Host 
 }
 
 function OutputWindowsUpdateListOntoDesktop()
