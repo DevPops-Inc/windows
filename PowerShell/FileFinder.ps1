@@ -1,6 +1,6 @@
 # file finder
 
-# you can run this script with: .\FileFinder.ps1 -drive < drive > -filename < filename > 
+# you can run this script with: .\FileFinder.ps1 -drive "< drive >" -filename "< filename >" 
 
 [CmdletBinding()]
 param(
