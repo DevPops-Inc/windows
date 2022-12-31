@@ -2,7 +2,7 @@
 
 # delete folder in Python
 
-# you can run this script with: python3 deleteFolderInPython.py '< path to folder >' '< folder name >'
+# you can run this script with: python3 deleteFolderInPython.py "< path to folder >" "< folder name >"
 
 import colorama, os, sys, traceback
 from colorama import Fore, Style
