@@ -1,11 +1,13 @@
 # remove computer from domain on Windows 
 
+# haven't tested this script yet
+
 # you can run this script with: .\RemoveComputerFromWindowsDomain.ps1 -domain < domain name > -adAdmin < Active Directory admin account > 
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $domain = ""
-    , [string] [Parameter(Mandatory = $False)] $adAdmin = ""
+      [string] [Parameter(Mandatory = $False)] $domain = "" # you can set the domain here
+    , [string] [Parameter(Mandatory = $False)] $adAdmin = "" # you can set the Active Directory admin here
 )
 
 function CheckOsForWindows()
