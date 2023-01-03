@@ -90,8 +90,7 @@ function OpenPhoto([string]$photoLocation)
     
     if ((Test-Path $photoLocation) -eq $False)
     {
-        Write-Host ("{0} is invalid." -F $photoLocation) -ForegroundColor Red
-        break
+        throw ("{0} is invalid." -F $photoLocation)
     }
     
     try 
@@ -112,9 +111,9 @@ function OpenPhoto([string]$photoLocation)
     catch
     {
         Write-Host ("Failed to open photo: {0}" -F $photoLocation) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
