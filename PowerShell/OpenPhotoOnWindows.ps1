@@ -26,7 +26,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -35,7 +35,7 @@ function GetPhotoLocation([string]$photoLocation)
 {
     if (($photoLocation-eq $Null) -or ($photoLocation-eq ""))
     {
-        $photoLocation= Read-Host -Prompt "Please type the location of the photo you wish to open and press `"Enter`" key (Example: C:\Users\adminvictor\Desktop\deltatre 2019.jpg)"
+        $photoLocation= Read-Host -Prompt "Please type the location of the photo you wish to open and press the `"Enter`" key (Example: C:\Users\$Env:USERNAME\Desktop\dev.jpg)"
 
         Write-Host ""
         return $photoLocation
