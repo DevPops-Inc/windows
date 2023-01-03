@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $photoLocation= "" # you can set the photo location here
+    [string] [Parameter(Mandatory = $False)] $photoLocation = "" # you can set the photo location here
 )
 
 function CheckOsForWindows()
