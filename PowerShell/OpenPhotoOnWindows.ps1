@@ -65,16 +65,19 @@ function CheckParameters([string]$photoLocation)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameter checks incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function OpenPhoto([string]$photoLocation)
