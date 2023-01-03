@@ -98,15 +98,17 @@ function OpenPhoto([string]$photoLocation)
         $startDateTime = (Get-Date)
         Write-Host "Started opening photo at" $startDateTime.DateTime
 
-        Start-Process -Path $photoLocation
-
+        Start-Process $photoLocation
         Write-Host ("Successfully opened photo: {0}" -F $photoLocation) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished opening photo at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
