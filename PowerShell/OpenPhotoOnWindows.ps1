@@ -1,10 +1,10 @@
 # open photo on Windows
 
-# you can run this script with: .\OpenPhotoOnWindows.ps1 -photoLocation < photo location >
+# you can run this script with: .\OpenPhotoOnWindows.ps1 -photoLocation "< photo location >""
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $photoLocation= ""
+    [string] [Parameter(Mandatory = $False)] $photoLocation= "" # you can set the photo location here
 )
 
 function CheckOsForWindows()
