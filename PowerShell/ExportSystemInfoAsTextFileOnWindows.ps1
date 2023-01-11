@@ -1,11 +1,11 @@
 # export system info to text file
 
-# you can run this script with: .\ExportSystemInfoAsTextFileOnWindows.ps1 -systemInfoFile < system info filename > -fileDestination < file destination >
+# you can run this script with: .\ExportSystemInfoAsTextFileOnWindows.ps1 -systemInfoFile "< system info filename >" -fileDestination "< file destination >"
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $systemInfoFile = ""
-    , [string] [Parameter(Mandatory = $False)] $fileDestination = ""
+      [string] [Parameter(Mandatory = $False)] $systemInfoFile = "" # you can set system info file here
+    , [string] [Parameter(Mandatory = $False)] $fileDestination = "" # you can set file path here
 )
 
 function CheckOsForWindows()
@@ -28,6 +28,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -36,8 +37,9 @@ function GetSystemInfoFile([string]$systemInfoFile)
 {
     if (($systemInfoFile -eq $Null) -or ($systemInfoFile -eq ""))
     {
-        $systemInfoFile = Read-Host -Prompt "`nPlease type filename for system info text file and press `"Enter`" key (Example: systeminfo.txt)"
+        $systemInfoFile = Read-Host -Prompt "Please type system info filename and press the `"Enter`" key (Example: systeminfo.txt)"
 
+        Write-Host ""
         return $systemInfoFile
     }
     else 
@@ -50,8 +52,10 @@ function GetFileDestination([string]$fileDestination)
 {
     if (($fileDestination -eq $Null) -or ($fileDestination -eq ""))
     {
-        $fileDestination = Read-Host -Prompt "`nPlease type file destination for system info file and press `"Enter`" key (Example: C:\Users\`$Env:Username\Desktop\)"
+        $fileDestination = Read-Host -Prompt "Please type the file destination for system info file and press the `"Enter`" key (Example: C:\Users\`$Env:Username\Desktop\)"
 
+        $fileDestination = $ExecutionContext.InvokeCommand.ExpandString($fileDestination)
+        Write-Host ""
         return $fileDestination
     }
     else 
@@ -62,10 +66,10 @@ function GetFileDestination([string]$fileDestination)
 
 function CheckParameters([string]$systemInfoFile, [string]$fileDestination)
 {
-    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameter(s):"
+    Write-Host "Parameter(s):"
     Write-Host "-------------------------------------------"
     Write-Host ("systemInfoFile : {0}" -F $systemInfoFile)
     Write-Host ("fileDestination: {0}" -F $fileDestination)
@@ -87,13 +91,19 @@ function CheckParameters([string]$systemInfoFile, [string]$fileDestination)
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter check(s) passed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameters at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
 }
 
@@ -111,26 +121,27 @@ function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestin
         $startDateTime = (Get-Date)
         Write-Host "Started exporting system info to text file at" $startDateTime.DateTime
 
-        systeminfo | Out-File $fileDestination + "\" $systemInfoFile
+        $systemInfoFilePath = Join-Path $fileDestination $systemInfoFile
+        systeminfo | Out-File $systemInfoFilePath
+        Get-Content -Path $systemInfoFilePath 
 
-        Write-Host ("`nSuccessfully exported system info text file as {0} at this location: {1}`n" -F $systemInfoFile, $fileDestination) -ForegroundColor Green
-
-        Get-ChildItem -Path $fileDestination
+        Write-Host "Successfully exported system info text file." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished exporting systme info to text file at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host ("`nFailed to export system info text file as {0} at this location: {1}`n" -F $systemInfoFile, $fileDestination)
-
+        Write-Host "Failed to export system info text file." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
-        
-        Get-ChildItem -Path $fileDestination
+        Write-Host ""
     }
 }
 
