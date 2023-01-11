@@ -35,21 +35,24 @@ function EnableWsl()
         Write-Host "Started enabling Windows Subsystem for Linux at" $startDateTime.DateTime
 
         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -Force
-        
-        Write-Host "`nSuccessfully enabled Windows Subsystem for Linux.`n" -ForegroundColor Green
+        Write-Host "Successfully enabled Windows Subsystem for Linux." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished enabling Windows Subsystem for Linux at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host "`nFailed to enable Windows Subsystem for Linux.`n" -ForegroundColor Red
+        Write-Host "Failed to enable Windows Subsystem for Linux." -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
