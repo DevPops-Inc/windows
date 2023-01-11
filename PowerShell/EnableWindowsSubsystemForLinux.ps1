@@ -34,7 +34,7 @@ function EnableWsl()
         $startDateTime = (Get-Date)
         Write-Host "Started enabling Windows Subsystem for Linux at" $startDateTime.DateTime
 
-        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 
+        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux # will prompt if you want to restart
         Write-Host "Successfully enabled Windows Subsystem for Linux." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
