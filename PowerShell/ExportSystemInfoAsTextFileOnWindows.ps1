@@ -36,8 +36,9 @@ function GetSystemInfoFile([string]$systemInfoFile)
 {
     if (($systemInfoFile -eq $Null) -or ($systemInfoFile -eq ""))
     {
-        $systemInfoFile = Read-Host -Prompt "`nPlease type filename for system info text file and press `"Enter`" key (Example: systeminfo.txt)"
+        $systemInfoFile = Read-Host -Prompt "Please type system info filename and press the `"Enter`" key (Example: systeminfo.txt)"
 
+        Write-Host ""
         return $systemInfoFile
     }
     else 
@@ -50,8 +51,9 @@ function GetFileDestination([string]$fileDestination)
 {
     if (($fileDestination -eq $Null) -or ($fileDestination -eq ""))
     {
-        $fileDestination = Read-Host -Prompt "`nPlease type file destination for system info file and press `"Enter`" key (Example: C:\Users\`$Env:Username\Desktop\)"
+        $fileDestination = Read-Host -Prompt "Please type the file destination for system info file and press the `"Enter`" key (Example: C:\Users\`$Env:Username\Desktop\)"
 
+        Write-Host ""
         return $fileDestination
     }
     else 
