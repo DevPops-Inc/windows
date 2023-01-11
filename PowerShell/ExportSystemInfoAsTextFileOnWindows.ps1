@@ -54,8 +54,8 @@ function GetFileDestination([string]$fileDestination)
     {
         $fileDestination = Read-Host -Prompt "Please type the file destination for system info file and press the `"Enter`" key (Example: C:\Users\`$Env:Username\Desktop\)"
 
+        $fileDestination = $ExecutionContext.InvokeCommand.ExpandString($fileDestination)
         Write-Host ""
-        $fileDestination = [System.Environment]::ExpandEnvironmentVariables($fileDestination)
         return $fileDestination
     }
     else 
