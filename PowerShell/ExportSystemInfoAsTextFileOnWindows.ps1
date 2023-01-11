@@ -123,9 +123,7 @@ function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestin
         systeminfo | Out-File $systemInfoFilePath
         Get-Content -Path $systemInfoFilePath 
 
-        Write-Host ("Successfully exported system info text file as {0} at this location: {1}" -F $systemInfoFile, $fileDestination) -ForegroundColor Green
-
-        Get-ChildItem -Path $fileDestination
+        Write-Host "Successfully exported system info text file." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished exporting systme info to text file at" $finishedDateTime.DateTime
@@ -138,12 +136,10 @@ function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestin
     }
     catch
     {
-        Write-Host ("Failed to export system info text file as {0} at this location: {1}" -F $systemInfoFile, $fileDestination)
-
+        Write-Host "Failed to export system info text file." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
-        
-        Get-ChildItem -Path $fileDestination
+        Write-Host ""
     }
 }
 
