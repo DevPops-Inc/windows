@@ -119,7 +119,9 @@ function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestin
         $startDateTime = (Get-Date)
         Write-Host "Started exporting system info to text file at" $startDateTime.DateTime
 
-        systeminfo | Out-File $fileDestination + "\" $systemInfoFile
+        $systemInfoFilePath = Join-Path $fileDestination $systemInfoFile
+        systeminfo | Out-File $systemInfoFilePath
+        Get-Content -Path $systemInfoFilePath 
 
         Write-Host ("Successfully exported system info text file as {0} at this location: {1}" -F $systemInfoFile, $fileDestination) -ForegroundColor Green
 
