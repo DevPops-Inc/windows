@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $systemInfoFile = ""
-    , [string] [Parameter(Mandatory = $False)] $fileDestination = ""
+      [string] [Parameter(Mandatory = $False)] $systemInfoFile = "" # you can set system info file here
+    , [string] [Parameter(Mandatory = $False)] $fileDestination = "" # you can set file path here
 )
 
 function CheckOsForWindows()
