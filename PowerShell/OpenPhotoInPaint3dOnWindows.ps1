@@ -100,16 +100,19 @@ function OpenPhotoInPaint3d([string]$fileLocation)
 
         $finishedDateTme = (Get-Date)
         Write-Host "Finished opening photo in Paint 3D at" $finishedDateTme
+
         $duration = New-TimeSpan $startDateTime $finishedDateTme
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to open {0} in Paint 3D." -F $fileLocation) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
