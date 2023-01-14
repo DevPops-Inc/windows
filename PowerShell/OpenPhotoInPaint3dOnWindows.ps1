@@ -26,7 +26,7 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-        
+
         break
     }
 }
@@ -35,9 +35,10 @@ function GetFileLocation([string]$fileLocation)
 {
     if (($fileLocation -eq $Null) -or ($fileLocation -eq ""))
     {
-        $fileLocation = Read-Host -Prompt "Please type the location of the file you wish to open in Paint 3D and press `"Enter`" key (Example: C:\Users\adminvictor\Desktop\deltatre 2019.jpg)"
+        $fileLocation = Read-Host -Prompt "Please type the location of the file you wish to open in Paint 3D and press the `"Enter`" key (Example: C:\Users\$Env:Username\Desktop\dev.jpg)"
 
         Write-Host ""
+        $fileLocation = $ExecutionContext.InvokeCommand.ExpandString($fileLocation)
         return $fileLocation
     }
     else
