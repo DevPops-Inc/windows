@@ -1,10 +1,10 @@
 # open photo in Paint 3D on Windows
 
-# .\OpenPhotoInPaint3dOnWindows.ps1 -fileLocation < file location > 
+# .\OpenPhotoInPaint3dOnWindows.ps1 -fileLocation "< file location >""
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $fileLocation = ""
+    [string] [Parameter(Mandatory = $False)] $fileLocation = "" # you can set the file location here
 )
 
 function CheckOsForWindows()
@@ -22,11 +22,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+
         break
     }
 }
@@ -35,9 +35,10 @@ function GetFileLocation([string]$fileLocation)
 {
     if (($fileLocation -eq $Null) -or ($fileLocation -eq ""))
     {
-        $fileLocation = Read-Host -Prompt "Please type the location of the file you wish to open in Paint 3D and press `"Enter`" key (Example: C:\Users\adminvictor\Desktop\deltatre 2019.jpg)"
+        $fileLocation = Read-Host -Prompt "Please type the location of the file you wish to open in Paint 3D and press the `"Enter`" key (Example: C:\Users\$Env:Username\Desktop\dev.jpg)"
 
         Write-Host ""
+        $fileLocation = $ExecutionContext.InvokeCommand.ExpandString($fileLocation)
         return $fileLocation
     }
     else
@@ -65,16 +66,19 @@ function CheckParameters([string]$fileLocation)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameter checks incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function OpenPhotoInPaint3d([string]$fileLocation)
@@ -96,16 +100,19 @@ function OpenPhotoInPaint3d([string]$fileLocation)
 
         $finishedDateTme = (Get-Date)
         Write-Host "Finished opening photo in Paint 3D at" $finishedDateTme
+
         $duration = New-TimeSpan $startDateTime $finishedDateTme
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
         Write-Host ("Failed to open {0} in Paint 3D." -F $fileLocation) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
