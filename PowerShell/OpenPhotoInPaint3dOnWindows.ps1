@@ -1,10 +1,10 @@
 # open photo in Paint 3D on Windows
 
-# .\OpenPhotoInPaint3dOnWindows.ps1 -fileLocation < file location > 
+# .\OpenPhotoInPaint3dOnWindows.ps1 -fileLocation "< file location >""
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $fileLocation = ""
+    [string] [Parameter(Mandatory = $False)] $fileLocation = "" # you can set the file location here
 )
 
 function CheckOsForWindows()
