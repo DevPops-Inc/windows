@@ -43,6 +43,7 @@ function GetFileLocation([string]$fileLocation)
     }
     else
     {
+        $fileLocation = $ExecutionContext.InvokeCommand.ExpandString($fileLocation)
         return $fileLocation
     }
 }
@@ -93,6 +94,11 @@ function OpenPhotoInPaint3d([string]$fileLocation)
     {
         $startDateTime = (Get-Date)
         Write-Host "Started opening photo in Paint 3D at" $startDateTime.DateTime
+
+        if (-Not (Test-Path -Path $fileLocation))
+        {
+            throw ("{0} isn't valid." -F $fileLocation)
+        }
 
         Start-Process -FilePath "mspaint" -ArgumentList """$fileLocation /ForceBootstrapPaint3D"""
 
