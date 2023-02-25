@@ -2,7 +2,7 @@
 
 # stop and relaunch Outlook on Windows 
 
-import colorama, os, sys, traceback
+import colorama, os, sys, time, traceback
 from colorama import Fore, Style 
 from datetime import datetime
 from pathlib import PureWindowsPath
@@ -29,27 +29,45 @@ def checkOsForWindows():
         exit("")
 
 
+def checkOutlook(): 
+    print("Started checking Outlook at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
+    outlookPath = PureWindowsPath("C:/Program Files/Microsoft Office/root/Office16/OUTLOOK.EXE")
+
+    if os.path.exists(outlookPath) == True: 
+        print(Fore.GREEN + "Outlook is installed." + Style.RESET_ALL)
+
+        print("Finished checking Outlook at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+        print("")
+
+    else: 
+        print(Fore.RED + "Outlook is not installed." + Style.RESET_ALL)
+
+        print("Finished checking Outlook at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+        exit("")
+
+
 def stopAndRelaunchOutlook(): 
     print("\nStop and relaunch Outlook on Windows.\n")
+    
     checkOsForWindows()
+    checkOutlook()
 
     outlookApp = 'outlook.exe'
     stopOutlook = 'taskkill /F /IM {0}'.format(outlookApp)
     outlookPath = PureWindowsPath("C:/Program Files/Microsoft Office/root/Office16/OUTLOOK.EXE")
-    relaunchOutlook = 'explorer {0}'.format(outlookPath)
+    launchOutlook = 'explorer {0}'.format(outlookPath)
 
     try: 
         startDateTime = datetime.now()
         
         print("Started stopping and relauching Outlook at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
-        if os.path.exists(outlookPath) == False: 
-            raise Exception("OUTLOOK.EXE path is not valid.")
+        if os.system(stopOutlook) == 0: 
+                print(Fore.BLUE + "Stopped Outlook and relaunching in 5 seconds.")
+                time.sleep(5)
 
-        outlookTasks = [ stopOutlook, relaunchOutlook]
-
-        for task in outlookTasks: 
-            os.system(task)
+        os.system(launchOutlook)
             
         print(Fore.GREEN + "Successfully stopped and relaunched Outlook." + Style.RESET_ALL)
 
