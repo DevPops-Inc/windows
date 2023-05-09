@@ -2,6 +2,8 @@
 
 # draw circle in Python
 
+# this doesn't work on Python 3.9+
+
 import colorama, os, sys, traceback, turtle
 from colorama import Fore, Style
 from datetime import datetime
@@ -51,7 +53,6 @@ def drawCircle():
 
     except Exception: 
         print(Fore.RED + "Failed to draw circle.")
-        
         traceback.print_exc()
         exit("" + Style.RESET_ALL)
 
