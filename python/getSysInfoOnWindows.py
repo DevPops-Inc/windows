@@ -38,7 +38,7 @@ def getSystemInfo():
         print("Started getting system information at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         if os.system('systeminfo') != 0: 
-            raise Exception("Attempt threw an error!")
+            raise Exception("Error occurred when getting system information.")
 
         print(Fore.GREEN + "Successfully got system information." + Style.RESET_ALL)
 
@@ -52,7 +52,6 @@ def getSystemInfo():
 
     except Exception: 
         print(Fore.RED + "Failed to get system information.")
-        
         traceback.print_exc()
         exit("" + Style.RESET_ALL)
 
