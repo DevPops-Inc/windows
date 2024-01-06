@@ -98,37 +98,33 @@ function ObtainIpAutomatically([string]$ipType)
         $adapter = Get-NetAdapter | ? {$_.Status -eq "up"}
         $interface = $adapter | Get-NetIPInterface -AddressFamily $ipType
         
-        # obtain IP address
         if ($interface.Dhcp -eq "Disabled") 
         {
-            # Remove existing gateway
             if (($interface | Get-NetIPConfiguration).Ipv4DefaultGateway) 
             {
                 $interface | Remove-NetRoute -Confirm:$false
             }
-            # Enable DHCP
-            $interface | Set-NetIPInterface -DHCP Enabled
-            
-            # Configure the DNS Servers automatically
-            $interface | Set-DnsClientServerAddress -ResetServerAddresses
 
+            $interface | Set-NetIPInterface -DHCP Enabled
+            $interface | Set-DnsClientServerAddress -ResetServerAddresses
             Write-Host "Successfully obtained IP address automatically." -ForegroundColor Green
         }
 
         $finishedDateTime = (Get-Date)
-        
         Write-Host "Finished obtaining IP address automatically at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to obtain IP address automatically" -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
