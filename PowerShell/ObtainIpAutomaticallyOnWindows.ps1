@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $ipType = ""
+    [string] [Parameter(Mandatory = $False)] $ipType = "" # you can set IPv4 or IPv6 here 
 )
 
 function CheckOsForWindows()
