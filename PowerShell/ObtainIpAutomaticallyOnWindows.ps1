@@ -78,8 +78,6 @@ function CheckParameters([string]$ipType)
 
         break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 }
 
 function ObtainIpAutomatically([string]$ipType)
