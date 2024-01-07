@@ -4,10 +4,10 @@
 
 [CmdletBinding()]
 param(
-      [string]       [Parameter(Mandatory = $False)] $email = ""
-    , [securestring] [Parameter(Mandatory = $False)] $password = $Null
-    , [string]       [Parameter(Mandatory = $False)] $firstName = ""
-    , [string]       [Parameter(Mandatory = $False)] $lastName = ""
+      [string]       [Parameter(Mandatory = $False)] $email = "" # you can set the email you wish to create here
+    , [securestring] [Parameter(Mandatory = $False)] $password = $Null # you can set the password for the email here 
+    , [string]       [Parameter(Mandatory = $False)] $firstName = "" # you can set the user's first name here 
+    , [string]       [Parameter(Mandatory = $False)] $lastName = "" # you can set the user's last name here 
 )
 
 function CheckOsForWindows()
@@ -25,7 +25,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -132,15 +131,18 @@ function CheckParameters([string]      $email,
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 }
 
 function NewRemoteMailboxInExchange([string]      $email, 
@@ -168,6 +170,7 @@ function NewRemoteMailboxInExchange([string]      $email,
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished creating remote mailbox at" (Get-Date)
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
@@ -175,9 +178,9 @@ function NewRemoteMailboxInExchange([string]      $email,
     catch 
     {
         Write-Host ("Failed to create new mailbox: {0}" -F $email) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
