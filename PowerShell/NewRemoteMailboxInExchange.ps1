@@ -170,6 +170,7 @@ function NewRemoteMailboxInExchange([string]      $email,
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished creating remote mailbox at" (Get-Date)
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
@@ -177,9 +178,9 @@ function NewRemoteMailboxInExchange([string]      $email,
     catch 
     {
         Write-Host ("Failed to create new mailbox: {0}" -F $email) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
