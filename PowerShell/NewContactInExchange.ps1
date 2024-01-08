@@ -1,12 +1,12 @@
 # create new contact in Exchange 
 
-# you can run this script with: .\NewContactInExchange.ps1 -contactName < contact name > -externalEmail < contact email > -orgUnit < organizational unit >
+# you can run this script with: .\NewContactInExchange.ps1 -contactName '< contact name >' -externalEmail < contact email > -orgUnit < organizational unit >
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $contactName = "", 
-    [string] [Parameter(Mandatory = $False)] $externalEmail = "", 
-    [string] [Parameter(Mandatory = $False)] $orgUnit = ""
+    [string] [Parameter(Mandatory = $False)] $contactName = "", # you can set the contact name here
+    [string] [Parameter(Mandatory = $False)] $externalEmail = "", # you can set the contact's email here 
+    [string] [Parameter(Mandatory = $False)] $orgUnit = "" # you can set the contact's organizational unit here 
 )
 
 function CheckOsForWindows()
@@ -24,7 +24,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -113,16 +112,18 @@ function CheckParameters([string]$contactName,
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else
     {
         Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function NewContactInExchange([string]$contactName, 
@@ -148,9 +149,12 @@ function NewContactInExchange([string]$contactName,
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished creating new contact at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
@@ -158,6 +162,7 @@ function NewContactInExchange([string]$contactName,
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
