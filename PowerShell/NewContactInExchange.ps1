@@ -4,9 +4,9 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $contactName = "", 
-    [string] [Parameter(Mandatory = $False)] $externalEmail = "", 
-    [string] [Parameter(Mandatory = $False)] $orgUnit = ""
+    [string] [Parameter(Mandatory = $False)] $contactName = "", # you can set the contact name here
+    [string] [Parameter(Mandatory = $False)] $externalEmail = "", # you can set the contact's email here 
+    [string] [Parameter(Mandatory = $False)] $orgUnit = "" # you can set the contact's organizational unit here 
 )
 
 function CheckOsForWindows()
