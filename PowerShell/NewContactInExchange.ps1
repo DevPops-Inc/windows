@@ -1,6 +1,6 @@
 # create new contact in Exchange 
 
-# you can run this script with: .\NewContactInExchange.ps1 -contactName < contact name > -externalEmail < contact email > -orgUnit < organizational unit >
+# you can run this script with: .\NewContactInExchange.ps1 -contactName '< contact name >' -externalEmail < contact email > -orgUnit < organizational unit >
 
 [CmdletBinding()]
 param(
