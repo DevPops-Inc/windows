@@ -107,15 +107,18 @@ function CheckParameters([string]$username, [string]$newGroup, [string]$oldGroup
    if ($valid -eq $True)
    {
       Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+      Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+      Write-Host ""
    }
    else 
    {
       Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
 
-      exit -1
+      Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+      Write-Host ""
+      break 
    }
-   Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-   Write-Host ""
 }
 
 function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, [string]$oldGroup)
