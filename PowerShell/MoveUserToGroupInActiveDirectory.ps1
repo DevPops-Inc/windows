@@ -4,9 +4,9 @@
 
 [CmdletBinding()]
 param(
-     [string] [Parameter(Mandatory = $False)] $username = ""
-   , [string] [Parameter(Mandatory = $False)] $newGroup = ""
-   , [string] [Parameter(Mandatory = $False)] $oldGroup = ""
+     [string] [Parameter(Mandatory = $False)] $username = "" # you can set the username here 
+   , [string] [Parameter(Mandatory = $False)] $newGroup = "" # you can set the new group here 
+   , [string] [Parameter(Mandatory = $False)] $oldGroup = "" # you can set the old group here 
 )
 
 function CheckOsForWindows()
@@ -24,7 +24,6 @@ function CheckOsForWindows()
    else 
    {
       Write-Host "Operating System:" $hostOs
-       
       Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
       Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -108,18 +107,23 @@ function CheckParameters([string]$username, [string]$newGroup, [string]$oldGroup
    if ($valid -eq $True)
    {
       Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+      Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+      Write-Host ""
    }
    else 
    {
       Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
 
-      exit -1
+      Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+      Write-Host ""
+      break 
    }
-   Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-   Write-Host ""
 }
 
-function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, [string]$oldGroup)
+function MoveUserToGroupInActiveDirectory([string]$username, 
+                                          [string]$newGroup, 
+                                          [string]$oldGroup)
 {
    Write-Host "`nMove user to group in Active Directory.`n"
    CheckOsForWindows
@@ -156,6 +160,8 @@ function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, 
       $duration = New-TimeSpan $startDateTime $finishedDateTime
 
       Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+      Write-Host ""
    }
    catch 
    {
@@ -163,6 +169,7 @@ function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, 
       
       Write-Host $_ -ForegroundColor Red
       Write-Host $_.ScriptStackTrace -ForegroundColor Red
+      Write-Host ""
    }
 }
 
