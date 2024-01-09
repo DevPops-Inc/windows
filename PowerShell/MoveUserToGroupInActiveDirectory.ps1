@@ -121,7 +121,9 @@ function CheckParameters([string]$username, [string]$newGroup, [string]$oldGroup
    }
 }
 
-function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, [string]$oldGroup)
+function MoveUserToGroupInActiveDirectory([string]$username, 
+                                          [string]$newGroup, 
+                                          [string]$oldGroup)
 {
    Write-Host "`nMove user to group in Active Directory.`n"
    CheckOsForWindows
@@ -158,6 +160,8 @@ function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, 
       $duration = New-TimeSpan $startDateTime $finishedDateTime
 
       Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+      Write-Host ""
    }
    catch 
    {
@@ -165,6 +169,7 @@ function MoveUserToGroupInActiveDirectory([string]$username, [string]$newGroup, 
       
       Write-Host $_ -ForegroundColor Red
       Write-Host $_.ScriptStackTrace -ForegroundColor Red
+      Write-Host ""
    }
 }
 
