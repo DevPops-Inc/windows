@@ -1,10 +1,10 @@
 # map drive on Windows
 
-# you can run this script with: .\MapDriveOnWindows.ps1 -driveLetter < drive letter > -path < path > 
+# you can run this script with: .\MapDriveOnWindows.ps1 -driveLetter < drive letter > -path '< path >'
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $driveLetter = ""
+      [string] [Parameter(Mandatory = $False)] $driveLetter = "" 
     , [string] [Parameter(Mandatory = $False)] $path = ""
 )
 
