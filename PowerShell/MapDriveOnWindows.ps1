@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $driveLetter = "" 
-    , [string] [Parameter(Mandatory = $False)] $path = ""
+      [string] [Parameter(Mandatory = $False)] $driveLetter = "" # you can set the drive letter here 
+    , [string] [Parameter(Mandatory = $False)] $path = "" # you can set the path here 
 )
 
 function CheckOsForWindows()
