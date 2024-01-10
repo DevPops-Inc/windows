@@ -121,12 +121,13 @@ function MapDrive([string]$driveLetter, [string]$path)
         Get-PSDrive
 
         $finishedDateTime = (Get-Date)
-        
         Write-Host ("Finished mapping {0} drive at {1}" -F $driveLetter, $finishedDateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
@@ -137,6 +138,7 @@ function MapDrive([string]$driveLetter, [string]$path)
 
         Write-Host "The drives on this computer are: "
         Get-PSDrive
+        Write-Host ""
     }
 }
 
