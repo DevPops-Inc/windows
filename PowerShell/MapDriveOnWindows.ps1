@@ -1,11 +1,11 @@
 # map drive on Windows
 
-# you can run this script with: .\MapDriveOnWindows.ps1 -driveLetter < drive letter > -path < path > 
+# you can run this script with: .\MapDriveOnWindows.ps1 -driveLetter < drive letter > -path '< path >'
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $driveLetter = ""
-    , [string] [Parameter(Mandatory = $False)] $path = ""
+    [string] [Parameter(Mandatory = $False)] $driveLetter = "", # you can set the drive letter here 
+    [string] [Parameter(Mandatory = $False)] $path = "" # you can set the path here 
 )
 
 function CheckOsForWindows()
@@ -23,7 +23,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -86,16 +85,18 @@ function CheckParameters([string]$driveLetter, [string]$path)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+        
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break 
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function MapDrive([string]$driveLetter, [string]$path)
@@ -120,12 +121,13 @@ function MapDrive([string]$driveLetter, [string]$path)
         Get-PSDrive
 
         $finishedDateTime = (Get-Date)
-        
         Write-Host ("Finished mapping {0} drive at {1}" -F $driveLetter, $finishedDateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
@@ -136,6 +138,7 @@ function MapDrive([string]$driveLetter, [string]$path)
 
         Write-Host "The drives on this computer are: "
         Get-PSDrive
+        Write-Host ""
     }
 }
 
