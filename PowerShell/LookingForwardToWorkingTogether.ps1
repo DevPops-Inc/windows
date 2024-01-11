@@ -44,7 +44,7 @@ function CheckParameters([string]$buddy)
     Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameter(s):"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------"
     Write-Host ("buddy: {0}" -F $buddy)
     Write-Host "-----------------------"
@@ -58,16 +58,18 @@ function CheckParameters([string]$buddy)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameter checks are incorret, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break 
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function LookingForward()
