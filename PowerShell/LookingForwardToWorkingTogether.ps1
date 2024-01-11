@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $buddy = ""
+    [string] [Parameter(Mandatory = $False)] $buddy = "" # you can set your buddy's name here 
 )
 
 function CheckOs()
