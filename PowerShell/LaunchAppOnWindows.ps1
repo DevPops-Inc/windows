@@ -83,6 +83,7 @@ function LaunchApp([string]$appName)
 
     Write-Host "The applications on this computer are:"
     Get-ChildItem -Path "C:\Program Files*" -Name "*exe" -Recurse -Force
+    Write-Host ""
 
     $appName = GetAppName $appName
     CheckParameters $appName
@@ -92,12 +93,14 @@ function LaunchApp([string]$appName)
         $startDateTime = (Get-Date)
         Write-Host ("Started launching {0} application at {1}" -F $appName, $startDateTime)
 
-        if ((Test-Path $appName) -eq $False)
+        $appPath = Join-Path "C:\Program Files" $appName
+
+        if ((Test-Path $appPath) -eq $False)
         {
             throw ("{0} does not exist" -F $appName)
         }
 
-        Start-Process -FilePath $appName
+        Start-Process -FilePath $appPath
         
         Write-Host ("Successfully launched {0} application." -F $appName) -ForegroundColor Green
 
