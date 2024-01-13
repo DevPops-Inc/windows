@@ -102,17 +102,21 @@ function LaunchApp([string]$appName)
         Write-Host ("Successfully launched {0} application." -F $appName) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
+
         Write-Host ("Finished launching {0} application at {1}" -F $appName, $finishedDateTime)
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host ("Failed to launch {0} application." -F $appName) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
