@@ -33,7 +33,7 @@ function GetAppName([string]$appName)
 {
     if (($appName -eq $Null) -or ($appName -eq ""))
     {
-        $appName = Read-Host -Prompt "`Please type the application would you like launch and press `"Enter`" key (Example: chrome.exe)"
+        $appName = Read-Host -Prompt "`Please type the application would you like launch and press `"Enter`" key (Example: Google\Chrome\Application\chrome.exe)"
 
         return $appName
     }
@@ -93,7 +93,7 @@ function LaunchApp([string]$appName)
         $startDateTime = (Get-Date)
         Write-Host ("Started launching {0} application at {1}" -F $appName, $startDateTime)
 
-        $appPath = Join-Path "C:\Program Files" $appName
+        $appPath = Join-Path "C:\Program Files\" $appName
 
         if ((Test-Path $appPath) -eq $False)
         {
