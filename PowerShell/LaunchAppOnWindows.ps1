@@ -20,7 +20,7 @@ function CheckOsForWindows()
     }
     else 
     {
-        Write-Host "Operating System:" $hostOs
+        Write-Host "Operating System:" $hostOs 
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -48,7 +48,7 @@ function CheckParameters([string]$appName)
     Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameter(s):"
+    Write-Host "Parameter(s):"
     Write-Host "---------------------------"
     Write-Host ("appName: {0}" -F $appName)
     Write-Host "---------------------------"
@@ -62,17 +62,18 @@ function CheckParameters([string]$appName)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
+        Write-Host "One or more parameter checks incorrect." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-
-    Write-Host ""
 }
 
 function LaunchApp([string]$appName)
