@@ -2,8 +2,8 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $domainName = ""
-    , [string] [Parameter(Mandatory = $False)] $domainAdmin = ""
+    [string] [Parameter(Mandatory = $False)] $domainName = "", # you can set the domain name here 
+    [string] [Parameter(Mandatory = $False)] $domainAdmin = "" # you can set the domain admin here 
 )
 
 function CheckOsForWindows()
@@ -21,7 +21,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -63,7 +62,7 @@ function CheckParameters([string]$domainName, [string]$domainAdmin)
     Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameter(s):"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("domainName : {0}" -F $domainName)
     Write-Host ("domainAdmin: {0}" -F $domainAdmin)
@@ -84,15 +83,18 @@ function CheckParameters([string]$domainName, [string]$domainAdmin)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break 
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 }
 
 function JoinWindowsDomain([string]$domainName, [string]$domainAdmin)
@@ -115,9 +117,12 @@ function JoinWindowsDomain([string]$domainName, [string]$domainAdmin)
 
         $finishedDateTime = (Get-Date)
         Write-Host ("Finished joining {0} domain at {1}" -F $domainName, $finishedDateTime)
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -126,6 +131,7 @@ function JoinWindowsDomain([string]$domainName, [string]$domainAdmin)
         
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
