@@ -2,8 +2,8 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $domainName = ""
-    , [string] [Parameter(Mandatory = $False)] $domainAdmin = ""
+    [string] [Parameter(Mandatory = $False)] $domainName = "", # you can set the domain name here 
+    [string] [Parameter(Mandatory = $False)] $domainAdmin = "" # you can set the domain admin here 
 )
 
 function CheckOsForWindows()
