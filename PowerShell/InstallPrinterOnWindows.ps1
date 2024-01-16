@@ -36,7 +36,7 @@ function GetIpAddress([string]$ipAddress)
 {
     if (($ipAddress -eq $Null) -or ($ipAddress -eq ""))
     {
-        $ipAddress = Read-Host -Prompt "`nPlease type the IP address of the printer you wish to add and press `"Enter`" key (Example: 10.4.2.8)"
+        $ipAddress = Read-Host -Prompt "Please type the IP address of the printer you wish to add and press `"Enter`" key (Example: 10.4.2.8)"
 
         return $ipAddress
     }
@@ -50,8 +50,9 @@ function GetPrinterName([string]$printerName)
 {
     if (($printerName -eq $Null) -or ($printerName -eq ""))
     {
-        $printerName = Read-Host -Prompt "`nPlease type the name of the printer you wish to install and press `"Enter`" key (Example: Office-Printer)"
+        $printerName = Read-Host -Prompt "Please type the name of the printer you wish to install and press `"Enter`" key (Example: Office-Printer)"
 
+        Write-Host ""
         return $printerName
     }
     else 
@@ -64,8 +65,9 @@ function GetDriverName([string]$driverName)
 {
     if (($printerName -eq $Null) -or ($printerName -eq ""))
     {
-        $driverName = Read-Host -Prompt "`nPlease type the driver name you wish to install for this printer and press `"Enter`" key (Example: CanonMF4320)"
+        $driverName = Read-Host -Prompt "Please type the driver name you wish to install for this printer and press `"Enter`" key (Example: CanonMF4320)"
 
+        Write-Host ""
         return $driverName
     }
     else 
@@ -76,10 +78,10 @@ function GetDriverName([string]$driverName)
 
 function CheckParameters([string]$ipAddress, [string]$printerName, [string]$driverName)
 {
-    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameter(s):"
+    Write-Host "Parameter(s):"
     Write-Host "-----------------------------------"
     Write-Host ("ipAddress  : {0}" -F $ipAddress)
     Write-Host ("printerName: {0}" -F $printerName)
@@ -106,16 +108,19 @@ function CheckParameters([string]$ipAddress, [string]$printerName, [string]$driv
 
     if ($valid -eq $True)
     {
-        Write-Host "All parameter check(s) passed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
         
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break 
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
 }
 
 function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$driverName)
