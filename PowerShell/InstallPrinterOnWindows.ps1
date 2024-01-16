@@ -4,9 +4,9 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $ipAddress = ""
-    , [string] [Parameter(Mandatory = $False)] $printerName = ""
-    , [string] [Parameter(Mandatory = $False)] $driverName = ""
+    [string] [Parameter(Mandatory = $False)] $ipAddress = "", # you can set the printe's IP address here 
+    [string] [Parameter(Mandatory = $False)] $printerName = "", # you can set the printer name here 
+    [string] [Parameter(Mandatory = $False)] $driverName = "" # you can set the printer driver here 
 )
 
 function CheckOsForWindows()
@@ -24,7 +24,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
