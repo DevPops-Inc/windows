@@ -139,7 +139,6 @@ function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$drive
         Write-Host ("Started installing {0} printer at {1}" -F $printerName, $startDateTime)
 
         Add-PrinterPort -Name $ipAddress -PrinterHostAddress $ipAddress
-
         Add-Printer -Name $printerName -DriverName $driverName -PortName $ipAddress
 
         Write-Host ("Successfully installed {0} printer on this computer." -F $printerName) -ForegroundColor Green
@@ -149,9 +148,12 @@ function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$drive
 
         $finishedDateTime = (Get-Date)
         Write-Host ("Finished installing {0} printer at {1}" -F $printerName, $finishedDateTime)
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
@@ -159,6 +161,7 @@ function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$drive
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
