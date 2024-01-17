@@ -23,7 +23,7 @@ function CheckOsForWindows()
     }
 }
 
-function InstallOpenSshClientAndServer()
+function InstallOpenSshClient()
 {
     Write-Host "Started installing OpenSSH client at" (Get-Date).DateTime
     
@@ -31,7 +31,10 @@ function InstallOpenSshClientAndServer()
     
     Write-Host "Finished installing OpenSSH client at" (Get-Date).DateTime
     Write-Host ""
+}
 
+function InstallOpenSshServer()
+{
     Write-Host "Started installing OpenSSH server at" (Get-Date).DateTime
     
     Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
@@ -62,7 +65,6 @@ function StartOpenSshServices()
     Write-Host "Finished starting OpenSSH services at" (Get-Date).DateTime
 }
 
-# define main function 
 function InstallOpenSsh()
 {
     Write-Host "`nInstall OpenSSH on Windows.`n`nPowerShell has to be version 6 and up.`nPowerShell must be ran in Administrator mode: Start-Process PowerShell -Verb RunAs`n"
@@ -76,7 +78,8 @@ function InstallOpenSsh()
 
         Get-WindowsCapability -Online | ? Name -like 'OpenSSH*'
         
-        InstallOpenSshClientAndServer
+        InstallOpenSshClient
+        InstallOpenSshServer
         AutoStartOpehSshServices
         StartOpenSshServices
 
