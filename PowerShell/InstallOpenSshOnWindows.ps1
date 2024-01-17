@@ -51,7 +51,6 @@ function AutoStartOpehSshServices()
     Set-Service sshd -StartupType Automatic
 
     Write-Host "Finished setting OpenSSH servers to autostart at" (Get-Date).DateTime
-
     Write-Host ""
 }
 
@@ -63,6 +62,7 @@ function StartOpenSshServices()
     Start-Service sshd
 
     Write-Host "Finished starting OpenSSH services at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function InstallOpenSsh()
