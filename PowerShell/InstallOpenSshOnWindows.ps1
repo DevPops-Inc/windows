@@ -1,5 +1,8 @@
 # install OpenSSH on Windows
 
+# PowerShell has to be version 6 and up.
+# run this script as admin: Start-Process PowerShell -Verb RunAs
+
 function CheckOsForWindows()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -15,7 +18,6 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
@@ -24,7 +26,7 @@ function CheckOsForWindows()
     }
 }
 
-function InstallOpenSshClientAndServer()
+function InstallOpenSshClient()
 {
     Write-Host "Started installing OpenSSH client at" (Get-Date).DateTime
     
@@ -32,7 +34,10 @@ function InstallOpenSshClientAndServer()
     
     Write-Host "Finished installing OpenSSH client at" (Get-Date).DateTime
     Write-Host ""
+}
 
+function InstallOpenSshServer()
+{
     Write-Host "Started installing OpenSSH server at" (Get-Date).DateTime
     
     Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
@@ -49,7 +54,6 @@ function AutoStartOpehSshServices()
     Set-Service sshd -StartupType Automatic
 
     Write-Host "Finished setting OpenSSH servers to autostart at" (Get-Date).DateTime
-
     Write-Host ""
 }
 
@@ -61,13 +65,12 @@ function StartOpenSshServices()
     Start-Service sshd
 
     Write-Host "Finished starting OpenSSH services at" (Get-Date).DateTime
+    Write-Host ""
 }
 
-# define main function 
 function InstallOpenSsh()
 {
-    Write-Host "`nInstall OpenSSH on Windows.`n`nPowerShell has to be version 6 and up.`nPowerShell must be ran in Administrator mode: Start-Process PowerShell -Verb RunAs`n"
-
+    Write-Host "`nInstall OpenSSH on Windows.`n"
     CheckOsForWindows
 
     try 
@@ -75,9 +78,10 @@ function InstallOpenSsh()
         $startDateTime = (Get-Date)
         Write-Host "Started installing OpenSSH at" $startDateTime.DateTime
 
-        Get-WindowsCapability -Online | ? Name -like 'OpenSSH*'
+        Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
         
-        InstallOpenSshClientAndServer
+        InstallOpenSshClient
+        InstallOpenSshServer
         AutoStartOpehSshServices
         StartOpenSshServices
 
@@ -89,15 +93,19 @@ function InstallOpenSsh()
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished installing OpenSSH at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to install OpenSSH." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
