@@ -71,7 +71,6 @@ function StartOpenSshServices()
 function InstallOpenSsh()
 {
     Write-Host "`nInstall OpenSSH on Windows.`n"
-
     CheckOsForWindows
 
     try 
@@ -79,7 +78,7 @@ function InstallOpenSsh()
         $startDateTime = (Get-Date)
         Write-Host "Started installing OpenSSH at" $startDateTime.DateTime
 
-        Get-WindowsCapability -Online | ? Name -like 'OpenSSH*'
+        Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
         
         InstallOpenSshClient
         InstallOpenSshServer
@@ -94,15 +93,19 @@ function InstallOpenSsh()
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished installing OpenSSH at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to install OpenSSH." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
