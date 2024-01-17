@@ -1,5 +1,8 @@
 # install OpenSSH on Windows
 
+# PowerShell has to be version 6 and up.
+# run this script as admin: Start-Process PowerShell -Verb RunAs
+
 function CheckOsForWindows()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -67,7 +70,7 @@ function StartOpenSshServices()
 
 function InstallOpenSsh()
 {
-    Write-Host "`nInstall OpenSSH on Windows.`n`nPowerShell has to be version 6 and up.`nPowerShell must be ran in Administrator mode: Start-Process PowerShell -Verb RunAs`n"
+    Write-Host "`nInstall OpenSSH on Windows.`n"
 
     CheckOsForWindows
 
