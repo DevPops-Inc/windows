@@ -34,6 +34,7 @@ function ImportPSWindowsUpdateModule()
         Write-Host "Started importing PSWindowsUpdate module at" $startDateTime.DateTime
 
         Import-Module PSWindowsUpdate
+        Write-Host "Successfully imported PSWindowsUpdate module." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished importing PSWindowsUpdate module at" $finishedDateTime.DateTime
