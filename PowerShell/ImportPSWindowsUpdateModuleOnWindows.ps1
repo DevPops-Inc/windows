@@ -15,10 +15,9 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
         Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
 
-        Write-Host "Finished checking operating system."
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
         break
     }
@@ -35,19 +34,23 @@ function ImportPSWindowsUpdateModule()
         Write-Host "Started importing PSWindowsUpdate module at" $startDateTime.DateTime
 
         Import-Module PSWindowsUpdate
+        Write-Host "Successfully imported PSWindowsUpdate module." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished importing PSWindowsUpdate module at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host "Failed to import PSWindowsUpdate module." -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
