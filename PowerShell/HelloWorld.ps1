@@ -35,19 +35,24 @@ function HelloWorld()
             Write-Host -ForegroundColor $color "Hello, World!"
             Start-Sleep -s 1
         }
+
         Write-Host "Successfully ran Hello World exercise!" -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished running Hello World exercise at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host "`nFailed to run Hello World exercise." -ForegroundColor Red
+        Write-Host "Failed to run Hello World exercise." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
