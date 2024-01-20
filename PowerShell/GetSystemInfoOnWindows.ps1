@@ -24,16 +24,32 @@ function CheckOsForWindows()
 
 function GetSystemInfo()
 {
+    Write-Host "`nGet system information on Windows.`n"
+    CheckOsForWindows
+
     try 
     {
-        Write-Host "`nGet system info on Windows.`n"
+        $startDateTime = (Get-Date)
+        Write-Host "Started getting system information at" $startDateTime.DateTime
 
-        # get system info 
         systeminfo
+        Write-Host "Successfully got system information." -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished getting system information at" $finishedDateTime.DateTime
+
+        duration = New-TimeSpan $startDateTime $finishedDateTime
+
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host "`nFailed to get system info.`n" -ForegroundColor -Red
+        Write-Host "Failed to get system information." -ForegroundColor -Red
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
