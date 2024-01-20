@@ -38,7 +38,7 @@ function GetSystemInfo()
         $finishedDateTime = (Get-Date)
         Write-Host "Finished getting system information at" $finishedDateTime.DateTime
 
-        duration = New-TimeSpan $startDateTime $finishedDateTime
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
 
@@ -46,7 +46,7 @@ function GetSystemInfo()
     }
     catch 
     {
-        Write-Host "Failed to get system information." -ForegroundColor -Red
+        Write-Host "Failed to get system information." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
