@@ -43,6 +43,7 @@ function GetUserAccounts()
         $duration = New-TimeSpan $startDateTime $finishedDateTime
         
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        
         Write-Host ""
     }
     catch 
