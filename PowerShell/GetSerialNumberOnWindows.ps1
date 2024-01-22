@@ -33,8 +33,10 @@ function GetSerialNumber()
         $startDateTime = (Get-Date)
         Write-Host "Started getting serial number at" $startDateTime.DateTime
 
-        $serialNumber = Get-CimInstance win32_bios | Format-List serialnumber
-        Write-Host "The serial number of this computer is:" $serialNumber
+        $serialNumber = Get-CimInstance win32_bios | Select-Object -ExpandProperty SerialNumber
+
+        Write-Host "The serial number is:" $serialNumber -ForegroundColor Blue
+
         Write-Host "Successfully got serial number." -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
