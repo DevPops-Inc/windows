@@ -30,21 +30,23 @@ function GetRunningProcesses()
 
         Write-Host "The Processes running on this computer are: "
         Get-Process
-
-        Write-Host "`nSuccessfully got processes on this computer.`n" -ForegroundColor Green
+        Write-Host "Successfully got processes on this computer." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished getting running processes at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host "`nFailed to get processes on this computer.`n" -ForegroundColor Red
-
+        Write-Host "Failed to get processes on this computer." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
