@@ -33,7 +33,9 @@ function GetPrograms()
         $startDateTime = (Get-Date)
         Write-Host "Started getting programs at" $startDateTime.DateTime
 
-        Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName | Format-Table -Autosize
+        Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName | Format-Table -AutoSize
+
+        Get-WmiObject -Class Win32_Product | Select-Object -Property Name | Format-Table -AutoSize
 
         Write-Host "Successfully got programs." -ForegroundColor Green
 
