@@ -7,7 +7,7 @@ function CheckOsForWindows()
 
     if ($hostOs -eq "Win32NT")
     {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win_32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
 
         Write-Host "Finished checking operating system at:" (Get-Date).DateTime
         Write-Host ""
