@@ -33,7 +33,6 @@ function GetPrinterList()
         $startDateTime = (Get-Date)
         Write-Host "Started getting printer list at" $startDateTime.DateTime
 
-        Write-Host "The printers on this computer are: "
         Get-Printer
         Write-Host "Successfully got printer list on this computer." -Foreground Green
 
