@@ -34,9 +34,7 @@ function GetLocalUsers()
         $startDateTime = (Get-Date)
         Write-Host "Started getting local users at" $startDateTime.DateTime
 
-        Write-Host "The users on this computer are: "
-        Get-LocalUser
-
+        Get-LocalUser | Out-String
         Write-Host "Successfully got local users on this computer." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
