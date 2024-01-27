@@ -34,23 +34,24 @@ function GetLocalUsers()
         $startDateTime = (Get-Date)
         Write-Host "Started getting local users at" $startDateTime.DateTime
 
-        Write-Host "The users on this computer are: "
-        Get-LocalUser
-
-        Write-Host "`nSuccessfully got local users on this computer." -ForegroundColor Green
+        Get-LocalUser | Out-String
+        Write-Host "Successfully got local users on this computer." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished getting local users at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host "`nFailed getting local users on this computer.`n" -ForegroundColor Red
-        
+        Write-Host "Failed getting local users on this computer." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
