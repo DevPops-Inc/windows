@@ -23,7 +23,7 @@ function CheckOsForWindows()
     }
 }
 
-function GetApps()
+function GetAllApps()
 {
     Write-Host "`nGet applications on Windows.`n"
     CheckOsForWindows
@@ -54,4 +54,4 @@ function GetApps()
     }
 }
 
-GetApps
+GetAllApps
