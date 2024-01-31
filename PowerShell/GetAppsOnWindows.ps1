@@ -25,32 +25,32 @@ function CheckOsForWindows()
 
 function GetAllApps()
 {
-    Write-Host "`nGet applications on Windows.`n"
+    Write-Host "`nGet all applications on Windows.`n"
     CheckOsForWindows
 
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting applications on Windows at" $startDateTime.DateTime
+        Write-Host "Started getting all applications on Windows at" $startDateTime.DateTime
 
-        Write-Host "The applications on this computer are:"
-        Get-ChildItem -Path "C:\Program Files*" -Name "*exe" -Recurse -Force
-        
-        Write-Host "Successfully got applications on Windows." -ForegroundColor Green
+        Get-ChildItem -Path "C:\Program Files*" -Name "*exe" -Recurse -Force        
+        Write-Host "Successfully got all applications on Windows." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        
-        Write-Host "Finished getting applications on Windows at" $finishedDateTime.DateTime
+        Write-Host "Finished getting all applications on Windows at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host "Failed to get applications on Windows." -ForegroundColor Red
+        Write-Host "Failed to get all applications on Windows." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
