@@ -93,7 +93,7 @@ function ReturnFirstRecurringChar([string]$string)
 
 function ReturnFirstRecurringCharInString([string]$string)
 {
-    Write-Host "`nReturn first recurring character in string."
+    Write-Host "`nReturn first recurring character in string.`n"
     CheckOs
 
     $string = GetString $string
@@ -107,15 +107,17 @@ function ReturnFirstRecurringCharInString([string]$string)
 
         $bar = ReturnFirstRecurringChar $string
         
-        Write-Host ("`nThe first recurring character in `"{0}`" string is `"{1}`"." -F $string, $bar) -ForegroundColor Yellow
+        Write-Host ("The first recurring character in `"{0}`" string is `"{1}`"." -F $string, $bar) -ForegroundColor Blue
         
         $finishedDateTime = (Get-Date)
         
-        Write-Host ("`nFinished returning first recurrning character in `"{0}`" string at {1}" -F $string, $finishedDateTime)
+        Write-Host ("Finished returning first recurrning character in `"{0}`" string at {1}" -F $string, $finishedDateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        
+        Write-Host ""
     }
     catch 
     {
@@ -123,6 +125,7 @@ function ReturnFirstRecurringCharInString([string]$string)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
