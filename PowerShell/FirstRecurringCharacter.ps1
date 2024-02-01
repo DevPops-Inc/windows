@@ -41,31 +41,34 @@ function GetString([string]$string)
 
 function CheckParameters([string]$string)
 {
-    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
-    Write-Host "`nParameter(s):"
-    Write-Host "-------------------"
+    Write-Host "Parameter(s):"
+    Write-Host "-------------------------"
     Write-Host ("string: {0}" -F $string)
-    Write-Host "-------------------"
+    Write-Host "-------------------------"
 
     if (($string -eq $Null) -or ($string -eq ""))
     {
-        Write-Host "foo is not set." -ForegroundColor Red
+        Write-Host "string is not set." -ForegroundColor Red
         $valid = $False
     }
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-
     if ($valid -eq $True)
     {
-        Write-Host "All parameter check(s) passed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
-
-        exit -1
+        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
+        
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break
     }
 }
 
