@@ -128,7 +128,7 @@ function ReturnFirstRecurringCharInString([string]$string)
     }
     catch 
     {
-        Write-Host ("Failed to return first recurring character in {0} string" -F $string) -ForegroundColor Red
+        Write-Host ("Failed to return first recurring character in `"{0}`" string" -F $string) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
