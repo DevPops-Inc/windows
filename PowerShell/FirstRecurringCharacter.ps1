@@ -1,10 +1,10 @@
 # return first recurring character in string 
 
-# you can run this script with: .\ReturnFirstRecurringCharInString.ps1 -foo < string > 
+# you can run this script with: .\ReturnFirstRecurringCharInString.ps1 -string < string > 
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $foo = ""
+    [string] [Parameter(Mandatory = $False)] $string = ""
 )
 
 function CheckOs()
@@ -25,31 +25,31 @@ function CheckOs()
     Write-Host ""
 }
 
-function GetString([string]$foo)
+function GetString([string]$string)
 {
-    if (($foo -eq $Null) -or ($foo -eq ""))
+    if (($string -eq $Null) -or ($string -eq ""))
     {
-        $foo = Read-Host -Prompt "Please type a string you would like the first recurring character for and press `"Enter`" key on Windows or `"return`" key on Mac or Linux (Example: foobar)"
+        $string = Read-Host -Prompt "Please type a string you would like the first recurring character for and press `"Enter`" key on Windows or `"return`" key on Mac or Linux (Example: foobar)"
 
-        return $foo
+        return $string
     }
     else
     {
-        return $foo
+        return $string
     }
 }
 
-function CheckParameters([string]$foo)
+function CheckParameters([string]$string)
 {
     Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
     Write-Host "`nParameter(s):"
     Write-Host "-------------------"
-    Write-Host ("foo: {0}" -F $foo)
+    Write-Host ("string: {0}" -F $string)
     Write-Host "-------------------"
 
-    if (($foo -eq $Null) -or ($foo -eq ""))
+    if (($string -eq $Null) -or ($string -eq ""))
     {
         Write-Host "foo is not set." -ForegroundColor Red
         $valid = $False
@@ -69,46 +69,46 @@ function CheckParameters([string]$foo)
     }
 }
 
-function ReturnFirstRecurringChar([string]$foo)
+function ReturnFirstRecurringChar([string]$string)
 {
-    $fooHash= @{}
+    $stringHash= @{}
 
-    foreach ($character in $foo.ToCharArray())
+    foreach ($character in $string.ToCharArray())
     {
-        if ($fooHash.ContainsKey($character))
+        if ($stringHash.ContainsKey($character))
         {
             return $character
         } 
         else 
         {
-            $fooHash.Add($character,0)
+            $stringHash.Add($character,0)
         }
     }
     
     return '0'
 }
 
-function ReturnFirstRecurringCharInString([string]$foo)
+function ReturnFirstRecurringCharInString([string]$string)
 {
     Write-Host "`nReturn first recurring character in string."
     CheckOs
 
-    $foo = GetString $foo
-    CheckParameters $foo
+    $string = GetString $string
+    CheckParameters $string
 
     try 
     {
         $startDateTime = (Get-Date)
         
-        Write-Host ("Started returning first recurring character in `"{0}`" string at {1}" -F $foo, $startDateTime)
+        Write-Host ("Started returning first recurring character in `"{0}`" string at {1}" -F $string, $startDateTime)
 
-        $bar = ReturnFirstRecurringChar $foo
+        $bar = ReturnFirstRecurringChar $string
         
-        Write-Host ("`nThe first recurring character in `"{0}`" string is `"{1}`"." -F $foo, $bar) -ForegroundColor Yellow
+        Write-Host ("`nThe first recurring character in `"{0}`" string is `"{1}`"." -F $string, $bar) -ForegroundColor Yellow
         
         $finishedDateTime = (Get-Date)
         
-        Write-Host ("`nFinished returning first recurrning character in `"{0}`" string at {1}" -F $foo, $finishedDateTime)
+        Write-Host ("`nFinished returning first recurrning character in `"{0}`" string at {1}" -F $string, $finishedDateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -116,11 +116,11 @@ function ReturnFirstRecurringCharInString([string]$foo)
     }
     catch 
     {
-        Write-Host ("Failed to return first recurring character in {0} string" -F $foo) -ForegroundColor Red
+        Write-Host ("Failed to return first recurring character in {0} string" -F $string) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
     }
 }
 
-ReturnFirstRecurringCharInString $foo
+ReturnFirstRecurringCharInString $string
