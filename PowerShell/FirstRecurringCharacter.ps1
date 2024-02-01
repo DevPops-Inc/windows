@@ -105,9 +105,16 @@ function ReturnFirstRecurringCharInString([string]$string)
         
         Write-Host ("Started returning first recurring character in `"{0}`" string at {1}" -F $string, $startDateTime)
 
-        $bar = ReturnFirstRecurringChar $string
+        $firstRecurringChar = ReturnFirstRecurringChar $string
         
-        Write-Host ("The first recurring character in `"{0}`" string is `"{1}`"." -F $string, $bar) -ForegroundColor Blue
+        if ($firstRecurringChar -ne 0)
+        {
+            Write-Host ("The first recurring character in `"{0}`" string is `"{1}`"." -F $string, $firstRecurringChar) -ForegroundColor Blue
+        }
+        else 
+        {
+            throw ("The `"{0}`" string doesn't contain a recurring character." -F $string) 
+        }
         
         $finishedDateTime = (Get-Date)
         
