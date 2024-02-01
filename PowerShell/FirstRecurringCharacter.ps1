@@ -14,7 +14,7 @@ function CheckOs()
 
     if ($hostOs -eq "Win32NT")
     {
-        Write-Host "Operating System:" (Get-Instance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
     }
     else
     {
@@ -84,7 +84,7 @@ function ReturnFirstRecurringChar([string]$string)
         } 
         else 
         {
-            $stringHash.Add($character,0)
+            $stringHash.Add($character, 0)
         }
     }
     
