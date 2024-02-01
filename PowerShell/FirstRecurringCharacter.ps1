@@ -1,6 +1,6 @@
 # return first recurring character in string 
 
-# you can run this script with: .\ReturnFirstRecurringCharInString.ps1 -string < string > 
+# you can run this script with: .\ReturnFirstRecurringCharInString.ps1 -string '< string >' 
 
 [CmdletBinding()]
 param(
