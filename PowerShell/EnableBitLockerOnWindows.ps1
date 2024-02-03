@@ -50,7 +50,7 @@ function CheckParameters([string]$driveLetter)
     Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
     
-    Write-Host "`nParameter(s):"
+    Write-Host "Parameter(s):"
     Write-Host "----------------------------------------"
     Write-Host ("driveLetter: {0}" -F $driveLetter)
     Write-Host "----------------------------------------"
