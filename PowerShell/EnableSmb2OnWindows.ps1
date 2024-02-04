@@ -15,11 +15,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+        break
     }
 }
 
@@ -34,19 +34,23 @@ function EnableSmb2OnWindows()
         Write-Host "Started enabling SMB2 at" $startDateTime.DateTime
 
         Get-SmbServerConfiguration | Select-Object EnableSMB2Protocol
+        Write-Host "Successfully enabled SMB2." -ForegroundColor Green
 
-        Write-Host "`nSuccessfully enabled SMB2.`n" -ForegroundColor Green
         $finishedDateTime = (Get-Date)
         Write-Host "Finished enabling SMB2 at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host "`nFailed to enable SMB2.`n" -ForegroundColor Red
+        Write-Host "Failed to enable SMB2." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
