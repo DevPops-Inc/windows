@@ -1,11 +1,11 @@
 # enable SMB1 and map drive on Windows
 
-# you can run this script with: .\EnableSmb1AndMapDriveOnWindows.ps1 -driveLetter < drive letter > -path < network share path >
+# you can run this script with: .\EnableSmb1AndMapDriveOnWindows.ps1 -driveLetter < drive letter > -path '< network share path >'
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $driveLetter = ""
-    , [string] [Parameter(Mandatory = $False)] $path = ""
+    [string] [Parameter(Mandatory = $False)] $driveLetter = "", # you can set the drive letter here 
+    [string] [Parameter(Mandatory = $False)] $path = "" # you can set the path here 
 )
 
 function CheckOsForWindows()
