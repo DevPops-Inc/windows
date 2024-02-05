@@ -27,16 +27,29 @@ function CheckOsForWindows()
 function EnableSmb1()
 {
     Write-Host "`nEnable SMB1 on Windows.`n"
+    CheckOsForWindows
 
     try
     {
-        Enable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol" -All
+        $startDateTime = (Get-Date)
+        Write-Host "Started enabling SMB1 at" $startDateTime.DateTime
 
-        Write-Host "`nSuccessfully enabled SMB1.`n" -ForegroundColor Green
+        Enable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol" -All
+        Write-Host "Successfully enabled SMB1." -ForegroundColor Green
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished enabling SMB1 at" $finishedDateTime.DateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
-        Write-Host "`nFailed to enable SMB1.`n" -ForegroundColor Red
+        Write-Host "Failed to enable SMB1." -ForegroundColor Red
+        
     }
 }
 
