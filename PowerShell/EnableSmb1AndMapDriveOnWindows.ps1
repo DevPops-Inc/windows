@@ -35,11 +35,12 @@ function GetDriveLetter([string]$driveLetter)
 {
     if (($driveLetter -eq $Null) -or ($driveLetter -eq ""))
     {
-        Write-Host "`nThe drives on this computer are: `n"
+        Write-Host "The drives on this computer are:"
         Get-PSDrive
 
-        $driveLetter = Read-Host -Prompt "`nPlease type the drive letter you would like to map the drive to and press `"Enter`" key (Example: G)"
+        $driveLetter = Read-Host -Prompt "Please type the drive letter you would like to map the drive to and press `"Enter`" key (Example: G)"
 
+        Write-Host ""
         return $driveLetter
     }
     else 
@@ -52,8 +53,9 @@ function GetPath([string]$path)
 {
     if (($path -eq $Null) -or ($path -eq ""))
     {
-        $path = Read-Host -Prompt "`nPlease type the path to the drive and press `"Enter`" key (Example: \\networkshare\Scans)"
+        $path = Read-Host -Prompt "Please type the path to the drive and press `"Enter`" key (Example: \\networkshare\Scans)"
 
+        Write-Host ""
         return $path
     }
     else 
