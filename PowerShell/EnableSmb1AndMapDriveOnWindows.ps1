@@ -66,7 +66,7 @@ function GetPath([string]$path)
 
 function CheckParameters([string]$driveLetter, [string]$path)
 {
-    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
     Write-Host "Parameter(s):"
@@ -87,17 +87,20 @@ function CheckParameters([string]$driveLetter, [string]$path)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-
     if ($valid -eq $True)
     {
-        Write-Host "All parameter check(s) passsed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passsed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break
     }
 }
 
