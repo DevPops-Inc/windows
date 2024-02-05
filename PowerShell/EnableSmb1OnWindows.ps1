@@ -49,7 +49,9 @@ function EnableSmb1()
     catch 
     {
         Write-Host "Failed to enable SMB1." -ForegroundColor Red
-        
+        Write-Host $_ -ForegroundColor Red
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
