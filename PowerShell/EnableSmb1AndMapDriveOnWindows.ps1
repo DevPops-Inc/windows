@@ -119,26 +119,29 @@ function EnableSmb1AndMapDrive([string]$driveLetter, [string]$path)
         Write-Host "Started enabling SMB1 and mapping drive at" $startDateTime.DateTime
 
         Enable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol" -All
-
         New-PSDrive -Name "$driveLetter" -PSProvider FileSystem -Root "$path" -Persist
         
-        Write-Host ("`nSuccessfully enabled SMB1 and mapped {0} drive with this path: {1}`n" -F $driveLetter, $path) -ForegroundColor Green
+        Write-Host ("Successfully enabled SMB1 and mapped {0} drive with this path: {1}" -F $driveLetter, $path) -ForegroundColor Green
         
-        Write-Host "`nThe drives on this computer are: `n"
+        Write-Host "The drives on this computer are:"
         Get-PSDrive
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished enabling SMB1 and mapping drive at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host ("`nFailed to enable SMB1 and map {0} drive with this path: {1}`n" -F $driveLetter, $path) -ForegroundColor Red
+        Write-Host ("Failed to enable SMB1 and map {0} drive with this path: {1}" -F $driveLetter, $path) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
