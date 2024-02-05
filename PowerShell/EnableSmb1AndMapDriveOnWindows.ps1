@@ -1,11 +1,11 @@
 # enable SMB1 and map drive on Windows
 
-# you can run this script with: .\EnableSmb1AndMapDriveOnWindows.ps1 -driveLetter < drive letter > -path < network share path >
+# you can run this script with: .\EnableSmb1AndMapDriveOnWindows.ps1 -driveLetter < drive letter > -path '< network share path >'
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $driveLetter = ""
-    , [string] [Parameter(Mandatory = $False)] $path = ""
+    [string] [Parameter(Mandatory = $False)] $driveLetter = "", # you can set the drive letter here 
+    [string] [Parameter(Mandatory = $False)] $path = "" # you can set the path here 
 )
 
 function CheckOsForWindows()
@@ -23,11 +23,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-
         Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
+        break
     }
 }
 
@@ -35,11 +35,12 @@ function GetDriveLetter([string]$driveLetter)
 {
     if (($driveLetter -eq $Null) -or ($driveLetter -eq ""))
     {
-        Write-Host "`nThe drives on this computer are: `n"
+        Write-Host "The drives on this computer are:"
         Get-PSDrive
 
-        $driveLetter = Read-Host -Prompt "`nPlease type the drive letter you would like to map the drive to and press `"Enter`" key (Example: G)"
+        $driveLetter = Read-Host -Prompt "Please type the drive letter you would like to map the drive to and press `"Enter`" key (Example: G)"
 
+        Write-Host ""
         return $driveLetter
     }
     else 
@@ -52,8 +53,9 @@ function GetPath([string]$path)
 {
     if (($path -eq $Null) -or ($path -eq ""))
     {
-        $path = Read-Host -Prompt "`nPlease type the path to the drive and press `"Enter`" key (Example: \\networkshare\Scans)"
+        $path = Read-Host -Prompt "Please type the path to the drive and press `"Enter`" key (Example: \\networkshare\Scans)"
 
+        Write-Host ""
         return $path
     }
     else 
@@ -64,7 +66,7 @@ function GetPath([string]$path)
 
 function CheckParameters([string]$driveLetter, [string]$path)
 {
-    Write-Host "`nStarted checking parameter(s) at" (Get-Date).DateTime
+    Write-Host "Started checking parameter(s) at" (Get-Date).DateTime
     $valid = $True
 
     Write-Host "Parameter(s):"
@@ -85,17 +87,20 @@ function CheckParameters([string]$driveLetter, [string]$path)
         $valid = $False
     }
 
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-
     if ($valid -eq $True)
     {
-        Write-Host "All parameter check(s) passsed.`n" -ForegroundColor Green
+        Write-Host "All parameter check(s) passsed." -ForegroundColor Green
+
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
         Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
 
-        exit -1
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
+        break
     }
 }
 
@@ -114,26 +119,29 @@ function EnableSmb1AndMapDrive([string]$driveLetter, [string]$path)
         Write-Host "Started enabling SMB1 and mapping drive at" $startDateTime.DateTime
 
         Enable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol" -All
-
         New-PSDrive -Name "$driveLetter" -PSProvider FileSystem -Root "$path" -Persist
         
-        Write-Host ("`nSuccessfully enabled SMB1 and mapped {0} drive with this path: {1}`n" -F $driveLetter, $path) -ForegroundColor Green
+        Write-Host ("Successfully enabled SMB1 and mapped {0} drive with this path: {1}" -F $driveLetter, $path) -ForegroundColor Green
         
-        Write-Host "`nThe drives on this computer are: `n"
+        Write-Host "The drives on this computer are:"
         Get-PSDrive
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished enabling SMB1 and mapping drive at" $finishedDateTime.DateTime
+        
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
-        Write-Host ("`nFailed to enable SMB1 and map {0} drive with this path: {1}`n" -F $driveLetter, $path) -ForegroundColor Red
+        Write-Host ("Failed to enable SMB1 and map {0} drive with this path: {1}" -F $driveLetter, $path) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
