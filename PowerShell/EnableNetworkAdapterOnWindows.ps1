@@ -11,11 +11,12 @@ function GetNetworkAdapter([string]$networkAdapter)
 {
     if (($networkAdapter -eq $Null) -or ($networkAdapter -eq ""))
     {
-        Write-Host "`nThe network adapters on this computer are: `n"
+        Write-Host "The network adapters on this computer are:"
         Get-NetAdapter | Format-Table
 
         $networkAdapter = Read-Host -Prompt "`nPlease type the network adapter would you like to enable (Example: Ethernet)"
 
+        Write-Host ""
         return $networkAdapter
     }
     else 
