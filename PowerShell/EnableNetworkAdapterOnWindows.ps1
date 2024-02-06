@@ -51,22 +51,38 @@ function GetNetworkAdapter([string]$networkAdapter)
 function EnableNetworkAdapter([string]$networkAdapter)
 {
     Write-Host "`nEnable network adapter on Windows.`n"
+    CheckOsForWindows
 
     $networkAdapter = GetNetworkAdapter $networkAdapter
 
     try
     {
+        $startDateTime = (Get-Date)
+        Write-Host "Started enabling network adapter at" $startDateTime.DateTime
+
         Enable-NetAdapter -Name $networkAdapter -Confirm:$false
 
-        Write-Host ("`nSuccessfully enabled {0} network adapter.`n" -F $networkAdapter) -ForegroundColor Green
+        Write-Host ("Successfully enabled {0} network adapter.`n" -F $networkAdapter) -ForegroundColor Green
         
         Get-NetAdapter -Name $networkAdapter
+
+        $finishedDateTime = (Get-Date)
+        Write-Host "Finished enabling network adapter at" $finishedDateTime.DateTime
+
+        $duration = New-TimeSpan $startDateTime $finishedDateTime
+        
+        Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $durations.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch 
     {
         Write-Host ("`nFailed to enable {0} network adapter.`n" -F $networkAdapter) -ForegroundColor Red
 
         Get-NetAdapter -Name $networkAdapter
+        Write-Host $_. -ForegroundColor
+        Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
