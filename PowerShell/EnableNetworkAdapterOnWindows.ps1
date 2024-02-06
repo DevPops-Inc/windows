@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $networkAdapter = ""
+    [string] [Parameter(Mandatory = $False)] $networkAdapter = "" # you can set the network adapter here
 )
 
 function GetNetworkAdapter([string]$networkAdapter)
