@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $driveLetter = ""
+    [string] [Parameter(Mandatory = $False)] $driveLetter = "" # you can set the drive you want to enable BitLocker on here 
 )
 
 function CheckOsForWindows()
