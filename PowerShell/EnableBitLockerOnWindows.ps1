@@ -34,8 +34,9 @@ function GetDriveLetter([string]$driveLetter)
 {
     if (($driveLetter -eq $Null) -or ($driveLetter -eq ""))
     {
-        $driveLetter = Read-Host -Prompt "`nPlease type the drive letter you would like to enable BitLocker on and press `"Enter`" key (Example: C:)"
+        $driveLetter = Read-Host -Prompt "Please type the drive letter you would like to enable BitLocker on and press `"Enter`" key (Example: C:)"
         
+        Write-Host ""
         return $driveLetter
     }
     else
