@@ -9,7 +9,7 @@ param(
 
 function CheckOsForWindows()
 {
-    Write-Host "`nStarted checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
@@ -93,20 +93,24 @@ function EnableBitLocker([string]$driveLetter)
 
         Enable-BitLocker -MountPoint "$driveLetter"
 
-        Write-Host ("`nSuccessfully enabled BitLocker on drive {0}.`n" -F $driveLetter) -ForegroundColor Green
+        Write-Host ("Successfully enabled BitLocker on drive {0}." -F $driveLetter) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
         Write-Host "Finished enabling BitLocker at" $finishedDateTime.DateTime
+
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        
+        Write-Host ""
     }
     catch 
     {
-        Write-Host ("`nFailed to enable BitLocker on drive {0}.`n" -F $driveLetter) -ForegroundColor Red
+        Write-Host ("Failed to enable BitLocker on drive {0}." -F $driveLetter) -ForegroundColor Red
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
