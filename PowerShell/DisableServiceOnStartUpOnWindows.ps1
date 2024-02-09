@@ -81,7 +81,6 @@ function CheckParameters([string]$serviceName)
 
         Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 }
@@ -101,7 +100,7 @@ function DisableServiceOnStartUp([string]$serviceName)
 
         Set-Service $serviceName -StartupType Disabled
 
-        Write-Host ("`nSuccessfully disabled {0} service on startup.`n" -F $serviceName) -ForegroundColor Green
+        Write-Host ("Successfully disabled {0} service on startup." -F $serviceName) -ForegroundColor Green
 
         Get-Service -Name $serviceName
 
