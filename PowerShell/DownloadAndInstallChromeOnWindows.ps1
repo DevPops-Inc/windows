@@ -23,7 +23,6 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 }
@@ -72,7 +71,6 @@ function CheckParameters([string]$chromeUrl)
 
         Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 
@@ -92,9 +90,7 @@ function DownloadAndInstallChrome([string]$chromeUrl)
         $Download = Join-Path $env:temp\chromeinstall chrome_installer.exe
         
         Invoke-WebRequest $chromeUrl -OutFile $Download
-        
         Invoke-Expression "$Download /silent /install"
-
         Write-Host "Successfully downloaded and installed Chrome." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)

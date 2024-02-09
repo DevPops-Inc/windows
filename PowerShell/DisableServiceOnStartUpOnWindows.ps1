@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $serviceName = ""
+    [string] [Parameter(Mandatory = $False)] $serviceName = "" # you can set the service you want to disable here
 )
 
 function CheckOsForWindows()
@@ -26,7 +26,6 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-	    
         break
     }
 }
@@ -41,12 +40,14 @@ function GetServiceOnStartUp([string]$serviceName)
         $serviceName = Read-Host -Prompt "Please type the service would you like to disable on startup and press `"Enter`" key"
 
         Get-Service -Name $serviceName        
+        Write-Host ""
         return $serviceName
     }
     else
     {
         Write-Host "{0} service will be disabled on startup." -F $serviceName
         Get-Service -Name $serviceName
+        Write-Host ""
         return $serviceName
     }
 }
@@ -80,7 +81,6 @@ function CheckParameters([string]$serviceName)
 
         Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 }
@@ -100,7 +100,7 @@ function DisableServiceOnStartUp([string]$serviceName)
 
         Set-Service $serviceName -StartupType Disabled
 
-        Write-Host ("`nSuccessfully disabled {0} service on startup.`n" -F $serviceName) -ForegroundColor Green
+        Write-Host ("Successfully disabled {0} service on startup." -F $serviceName) -ForegroundColor Green
 
         Get-Service -Name $serviceName
 
