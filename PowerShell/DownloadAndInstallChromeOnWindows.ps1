@@ -71,7 +71,6 @@ function CheckParameters([string]$chromeUrl)
 
         Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 
