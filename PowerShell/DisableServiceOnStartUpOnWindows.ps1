@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $serviceName = ""
+    [string] [Parameter(Mandatory = $False)] $serviceName = "" # you can set the service you want to disable here
 )
 
 function CheckOsForWindows()
