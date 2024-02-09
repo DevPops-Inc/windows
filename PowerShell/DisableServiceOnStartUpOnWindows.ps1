@@ -26,7 +26,6 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-	    
         break
     }
 }
@@ -41,12 +40,14 @@ function GetServiceOnStartUp([string]$serviceName)
         $serviceName = Read-Host -Prompt "Please type the service would you like to disable on startup and press `"Enter`" key"
 
         Get-Service -Name $serviceName        
+        Write-Host ""
         return $serviceName
     }
     else
     {
         Write-Host "{0} service will be disabled on startup." -F $serviceName
         Get-Service -Name $serviceName
+        Write-Host ""
         return $serviceName
     }
 }
