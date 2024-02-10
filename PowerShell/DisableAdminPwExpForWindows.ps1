@@ -77,7 +77,6 @@ function CheckParameters([string]$localAdmin)
         
         Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 }
