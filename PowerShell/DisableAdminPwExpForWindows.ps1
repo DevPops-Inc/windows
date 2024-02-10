@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $localAdmin = ""
+    [string] [Parameter(Mandatory = $False)] $localAdmin = "" # you can set the local admin here
 )
 
 function CheckOsForWindows()
