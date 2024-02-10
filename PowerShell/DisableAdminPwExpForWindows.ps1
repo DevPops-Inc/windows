@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $localAdmin = ""
+    [string] [Parameter(Mandatory = $False)] $localAdmin = "" # you can set the local admin here
 )
 
 function CheckOsForWindows()
@@ -26,7 +26,6 @@ function CheckOsForWindows()
 
         Write-Host "Finished checking operating system at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 }
@@ -78,7 +77,6 @@ function CheckParameters([string]$localAdmin)
         
         Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
         Write-Host ""
-
         break
     }
 }
@@ -94,7 +92,6 @@ function DisablePwExpForAdmin([string]$localAdmin)
     try
     {
         $startDatetime = (Get-Date)
-
         Write-Host "Started disabling password expiration for admin at" $startDateTime.DateTime
 
         Set-LocalUser -Name "$localAdmin" -PasswordNeverExpires 1
