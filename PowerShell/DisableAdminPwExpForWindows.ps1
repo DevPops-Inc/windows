@@ -92,7 +92,6 @@ function DisablePwExpForAdmin([string]$localAdmin)
     try
     {
         $startDatetime = (Get-Date)
-
         Write-Host "Started disabling password expiration for admin at" $startDateTime.DateTime
 
         Set-LocalUser -Name "$localAdmin" -PasswordNeverExpires 1
