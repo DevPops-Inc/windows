@@ -26,12 +26,7 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
@@ -97,12 +92,7 @@ function CheckParameters([string]$email, [string]$distroList)
     }
     else
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-        
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
@@ -139,7 +129,6 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
     catch
     {
         Write-Host ("Failed to add {0} to {1}" -F $email, $distroList) -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-HOst ""
