@@ -1,6 +1,6 @@
 # Windows Server Back up
 
-# you can run this script with: .\BackUpWinServ.ps1 -fileSpecPath < file spec path > -volumePath < volume path > 
+# you can run this script with: .\BackUpWinServ.ps1 -fileSpecPath '< file spec path >' -volumePath '< volume path >' 
 
 [CmdletBinding()]
 param(
