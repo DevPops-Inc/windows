@@ -2,7 +2,7 @@
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
 
-# you can run this script with: .\ActivateWindows.ps1 -computerName < computer name > -licenseKey < license key >
+# you can run this script with: .\ActivateWin.ps1 -computerName < computer name > -licenseKey < license key >
 
 [CmdletBinding()]
 param 
@@ -97,7 +97,7 @@ function CheckParameters([string]$computerName, [string]$licenseKey)
     }
 }
 
-function ActivateWindows([string]$computerName, [string]$licenseKey)
+function ActivateWin([string]$computerName, [string]$licenseKey)
 {
     Write-Host "`nActivate Windows in PowerShell`n"
     CheckOsForWindows
@@ -137,4 +137,4 @@ function ActivateWindows([string]$computerName, [string]$licenseKey)
     }
 }
 
-ActivateWindows $computerName $licenseKey
+ActivateWin $computerName $licenseKey
