@@ -1,6 +1,6 @@
 # change local user's password on Windows
 
-# run this script with: .\ChangeLocalUsersPasswordOnWindows.ps1 -localUser < local user > -newPassword < new password >
+# run this script with: .\ChangeLocalUserPwOnWin.ps1 -localUser < local user > -newPassword < new password >
 
 [CmdletBinding()]
 param (
@@ -93,7 +93,7 @@ function CheckParameters([string]$localUser, [securestring]$newPassword)
     }
 }
 
-function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword) 
+function ChangeLocalUserPw([string]$localUser, [securestring]$newPassword) 
 {
     Write-Host "`nChange local user's password on Windows.`n"
     CheckOsForWindows
@@ -134,4 +134,4 @@ function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword
     }
 }
 
-ChangeLocalUsersPassword $localUser $newPassword
+ChangeLocalUserPw $localUser $newPassword
