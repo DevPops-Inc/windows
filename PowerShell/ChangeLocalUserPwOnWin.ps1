@@ -1,6 +1,6 @@
 # change local user's password on Windows
 
-# run this script with: .\ChangeLocalUsersPasswordOnWindows.ps1 -localUser < local user > -newPassword < new password >
+# run this script with: .\ChangeLocalUserPwOnWin.ps1 -localUser < local user > -newPassword < new password >
 
 [CmdletBinding()]
 param (
@@ -23,12 +23,7 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
@@ -94,16 +89,11 @@ function CheckParameters([string]$localUser, [securestring]$newPassword)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
-function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword) 
+function ChangeLocalUserPw([string]$localUser, [securestring]$newPassword) 
 {
     Write-Host "`nChange local user's password on Windows.`n"
     CheckOsForWindows
@@ -144,4 +134,4 @@ function ChangeLocalUsersPassword([string]$localUser, [securestring]$newPassword
     }
 }
 
-ChangeLocalUsersPassword $localUser $newPassword
+ChangeLocalUserPw $localUser $newPassword
