@@ -2,7 +2,7 @@
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
 
-# you can run this script with: .\AssignMemberToDistributionListOnExchange.ps1 -email < email > -distroList < distribution list >
+# you can run this script with: .\AssignMemberToDlOnExchange.ps1 -email < email > -distroList < distribution list >
 
 [CmdletBinding()]
 param
@@ -96,7 +96,7 @@ function CheckParameters([string]$email, [string]$distroList)
     }
 }
 
-function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
+function AssignMemberToDl([string]$email,[string]$distroList)
 {
     Write-Host "`nAssign member to distribution list on Exchange.`n"
     CheckOsForWindows
@@ -135,4 +135,4 @@ function AssignMemberToDistributionGroup([string]$email,[string]$distroList)
     }
 }
 
-AssignMemberToDistributionGroup $email $distroList
+AssignMemberToDl $email $distroList
