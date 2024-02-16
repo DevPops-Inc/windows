@@ -1,6 +1,6 @@
 # change user password on Active Directory
 
-# you can run this script with: .\ChangeUserPasswordOnActiveDirectory.ps1 -userName < username > -newPassword < new password > 
+# you can run this script with: .\ChangeAdUserPw.ps1 -userName < username > -newPassword < new password > 
 
 [CmdletBinding()]
 param
