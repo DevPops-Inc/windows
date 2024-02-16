@@ -1,6 +1,6 @@
 # change user password on Active Directory
 
-# you can run this script with: .\ChangeUserPasswordOnActiveDirectory.ps1 -userName < username > -newPassword < new password > 
+# you can run this script with: .\ChangeAdUserPw.ps1 -userName < username > -newPassword < new password > 
 
 [CmdletBinding()]
 param
@@ -24,12 +24,7 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
@@ -95,12 +90,7 @@ function CheckParameters([string]$userName, [securestring]$newPassword)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        
-        break
+        throw "One or more parameters are incorrect."
     }
 }
 
