@@ -109,7 +109,7 @@ function CheckProgram()
     Write-Host "`nCheck Chrome on Windows.`n"
     CheckForWindows
 
-    $checkProgram = GetCheckProgram $checkProgram
+    $checkProgram    = GetCheckProgram $checkProgram
     $winProgramsList = GetWinPrograms
     CheckParameters $checkProgram 
 
