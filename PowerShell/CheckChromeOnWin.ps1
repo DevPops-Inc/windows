@@ -104,7 +104,7 @@ function CheckParameters([string]$checkProgram)
     }
 }
 
-function CheckProgram()
+function CheckChrome()
 {
     Write-Host "`nCheck Chrome on Windows.`n"
     CheckForWindows
@@ -148,4 +148,4 @@ function CheckProgram()
     }
 }
 
-CheckProgram
+CheckChrome
