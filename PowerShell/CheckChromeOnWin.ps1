@@ -20,12 +20,7 @@ function CheckForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        
-        break
+        throw "Sorry but this script only runs on Windows."
     }
 }
 
@@ -105,28 +100,22 @@ function CheckParameters([string]$checkProgram)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-        
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
-function CheckProgram()
+function CheckChrome()
 {
     Write-Host "`nCheck Chrome on Windows.`n"
     CheckForWindows
 
-    $checkProgram = GetCheckProgram $checkProgram
+    $checkProgram    = GetCheckProgram $checkProgram
     $winProgramsList = GetWinPrograms
     CheckParameters $checkProgram 
 
     try
     {
         $startDateTime = (Get-Date)
-
         Write-Host ("Started checking {0} at {1}" -F $checkProgram, $startDateTime.DateTime)
 
         if ($winProgramsList -contains $checkProgram)
@@ -159,4 +148,4 @@ function CheckProgram()
     }
 }
 
-CheckProgram
+CheckChrome
