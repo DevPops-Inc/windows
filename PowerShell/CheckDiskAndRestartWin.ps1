@@ -15,12 +15,7 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
@@ -36,10 +31,8 @@ function CheckDiskAndRestartWindows()
         Write-Host "Started checking disk and restarting Windows at: " $startDateTime.DateTime.DateTime
 
         Write-Output y | chkdsk /f/r c:
-
         Write-Host "Please save your documents and close applications."
         Pause
-    
         Write-Host "Successfully checked disk and restarted Windows." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
