@@ -31,10 +31,8 @@ function CheckDiskAndRestartWindows()
         Write-Host "Started checking disk and restarting Windows at: " $startDateTime.DateTime.DateTime
 
         Write-Output y | chkdsk /f/r c:
-
         Write-Host "Please save your documents and close applications."
         Pause
-    
         Write-Host "Successfully checked disk and restarted Windows." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
