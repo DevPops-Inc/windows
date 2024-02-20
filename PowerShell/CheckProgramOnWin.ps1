@@ -1,13 +1,13 @@
 # check program on Windows
 
-# you can run this script with: .\CheckProgramOnWindows.ps1 -checkProgram "< program >"
+# you can run this script with: .\CheckProgramOnWin.ps1 -checkProgram "< program >"
 
 [CmdletBinding()]
 param (
-    [string] [Parameter(Mandatory = $False)] $checkProgram = ""
+    [string] [Parameter(Mandatory = $False)] $checkProgram = "" # you can set the program you wish to check here 
 )
 
-function CheckForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
@@ -22,12 +22,7 @@ function CheckForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        
-        break
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
@@ -107,28 +102,22 @@ function CheckParameters([string]$checkProgram)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-        
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
 function CheckProgram()
 {
     Write-Host "`nCheck program on Windows.`n"
-    CheckForWindows
+    CheckOsForWin
 
-    $checkProgram = GetCheckProgram $checkProgram
+    $checkProgram    = GetCheckProgram $checkProgram
     $winProgramsList = GetWinPrograms
     CheckParameters $checkProgram 
 
     try
     {
         $startDateTime = (Get-Date)
-        
         Write-Host ("Started checking {0} at {1}" -F $checkProgram, $startDateTime.DateTime)
 
         if ($winProgramsList -contains $checkProgram)
