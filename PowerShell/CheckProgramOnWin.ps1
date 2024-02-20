@@ -111,7 +111,7 @@ function CheckProgram()
     Write-Host "`nCheck program on Windows.`n"
     CheckForWindows
 
-    $checkProgram = GetCheckProgram $checkProgram
+    $checkProgram    = GetCheckProgram $checkProgram
     $winProgramsList = GetWinPrograms
     CheckParameters $checkProgram 
 
