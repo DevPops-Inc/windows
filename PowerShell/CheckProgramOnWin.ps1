@@ -118,7 +118,6 @@ function CheckProgram()
     try
     {
         $startDateTime = (Get-Date)
-        
         Write-Host ("Started checking {0} at {1}" -F $checkProgram, $startDateTime.DateTime)
 
         if ($winProgramsList -contains $checkProgram)
