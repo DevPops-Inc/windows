@@ -1,6 +1,6 @@
 # check program on Windows
 
-# you can run this script with: .\CheckProgramOnWindows.ps1 -checkProgram "< program >"
+# you can run this script with: .\CheckProgramOnWin.ps1 -checkProgram "< program >"
 
 [CmdletBinding()]
 param (
