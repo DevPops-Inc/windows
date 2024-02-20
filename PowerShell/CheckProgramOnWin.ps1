@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param (
-    [string] [Parameter(Mandatory = $False)] $checkProgram = ""
+    [string] [Parameter(Mandatory = $False)] $checkProgram = "" # you can set the program you wish to check here 
 )
 
 function CheckForWindows()
