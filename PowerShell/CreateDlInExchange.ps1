@@ -1,6 +1,6 @@
 # create distribution group in Exchange
 
-# you can run this script with: .\CreateDistributionGroundInExchange.ps1 -distroList < distribution group > -orgUnit < organizational unit > 
+# you can run this script with: .\CreateDlInExchange.ps1 -distroList < distribution group > -orgUnit < organizational unit > 
 
 [CmdletBinding()]
 param
