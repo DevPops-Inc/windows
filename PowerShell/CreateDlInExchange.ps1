@@ -1,6 +1,6 @@
 # create distribution group in Exchange
 
-# you can run this script with: .\CreateDistributionGroundInExchange.ps1 -distroList < distribution group > -orgUnit < organizational unit > 
+# you can run this script with: .\CreateDlInExchange.ps1 -distroList < distribution group > -orgUnit < organizational unit > 
 
 [CmdletBinding()]
 param
@@ -24,12 +24,7 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
@@ -95,16 +90,11 @@ function CheckParameters([string]$distroList, [string]$orgUnit)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-        
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
-function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
+function CreateDistroList([string]$distroList, [string]$orgUnit)
 {
     Write-Host "`nCreate distribution group in Exchange.`n"
     CheckOsForWindows
@@ -119,12 +109,12 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
         Write-Host "Started creating distribution group at: " $startDateTime.DateTime.DateTime
 
         New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
-
         Set-DistributionGroup -Identity $distroList -RequireSenderAuthenticationEnabled $false
     
         Write-Host ("Succesfully created {0} in Exchange." -F $distroList) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
+        
         Write-Host "Finished creating distribution group at: " $finishedDateTime.DateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
@@ -142,4 +132,4 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
     }
 }
 
-CreateDistroGroupInExchange $distroList $orgUnit
+CreateDistroList $distroList $orgUnit
