@@ -104,7 +104,7 @@ function CheckParameters([string]$distroList, [string]$orgUnit)
     }
 }
 
-function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
+function CreateDistroList([string]$distroList, [string]$orgUnit)
 {
     Write-Host "`nCreate distribution group in Exchange.`n"
     CheckOsForWindows
@@ -142,4 +142,4 @@ function CreateDistroGroupInExchange([string]$distroList, [string]$orgUnit)
     }
 }
 
-CreateDistroGroupInExchange $distroList $orgUnit
+CreateDistroList $distroList $orgUnit
