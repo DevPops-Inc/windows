@@ -109,12 +109,12 @@ function CreateDistroList([string]$distroList, [string]$orgUnit)
         Write-Host "Started creating distribution group at: " $startDateTime.DateTime.DateTime
 
         New-DistributionGroup -Name $distroList -OrganizationalUnit $orgUnit
-
         Set-DistributionGroup -Identity $distroList -RequireSenderAuthenticationEnabled $false
     
         Write-Host ("Succesfully created {0} in Exchange." -F $distroList) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
+        
         Write-Host "Finished creating distribution group at: " $finishedDateTime.DateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
