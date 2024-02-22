@@ -1,6 +1,6 @@
 # create local admin on Windows
 
-# you can run this script with: .\CreateLocalAdminOnWindows.ps1 -localAdmin < new admin > -password < new password > -description < admin description >
+# you can run this script with: .\CreateLocalAdminOnWin.ps1 -localAdmin < new admin > -password < new password > -description < admin description >
 
 [CmdletBinding()]
 param(
