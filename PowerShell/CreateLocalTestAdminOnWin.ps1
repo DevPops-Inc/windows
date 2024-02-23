@@ -121,9 +121,7 @@ function CreateTestAdmin([string]      $testAdmin,
         New-LocalUser "$testAdmin" -Password $testAdminPassword -FullName "$testAdmin" -Description "$testAdminDescription"
 
         Add-LocalGroupMember -Group "Administrators" -Member "$testAdmin"
-
         Set-LocalUser -Name "$testAdmin" -PasswordNeverExpires 1
-
         Write-Host ("Successfully created {0} account." -F $testAdmin) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
