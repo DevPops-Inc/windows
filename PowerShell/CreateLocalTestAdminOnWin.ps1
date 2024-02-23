@@ -1,6 +1,6 @@
 # create local testadmin on Windows
 
-# run this script with: .\CreateLocalTestAdminOnWindows.ps1 -testAdminPassword < test admin password >
+# run this script with: .\CreateLocalTestAdminOnWin.ps1 -testAdminPassword < test admin password >
 
 [CmdletBinding()]
 param(
