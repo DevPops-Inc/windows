@@ -1,6 +1,6 @@
 # create remote mailbox in Exchange
 
-# you can run this script with: .\CreateRemoteMailboxInExchange.ps1 -email < email > -password < password > -firstName < first name > -lastName < last name >
+# you can run this script with: .\CreateExchangeRemoteMailbox.ps1 -email < email > -password < password > -firstName < first name > -lastName < last name >
 
 [CmdletBinding()]
 param(
@@ -25,12 +25,7 @@ function CheckOsForWindows()
     else 
     { 
         Write-Host "Operating System: " $hostOs
-        Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-	    
-        break
+        throw"Sorry but this script only works in Windows."
     }
 }
 
@@ -143,16 +138,11 @@ function CheckParameters([string]      $email,
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect."
     }
 }
 
-function CreateRemoteMailboxInExchange([string]      $email, 
+function CreateRemoteMailbox([string]      $email, 
                                        [securestring]$password, 
                                        [string]      $firstName, 
                                        [string]      $lastName)
@@ -193,4 +183,4 @@ function CreateRemoteMailboxInExchange([string]      $email,
     }
 }
 
-CreateRemoteMailboxInExchange $email $password $firstName $lastName
+CreateRemoteMailbox $email $password $firstName $lastName
