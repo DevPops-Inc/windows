@@ -105,7 +105,6 @@ function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
     try
     {
         $startDateTime = (Get-Date)
-        
         Write-Host "Started creating new Active Directory user at: " $startDateTime.DateTime.DateTime
 
         New-ADUser $newAdUser 
@@ -115,7 +114,6 @@ function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
         Write-Host ("Successfully created new Active Directory user {0}." -F $newAdUser) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        
         Write-Host "Finished creating new Active Directory user at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
