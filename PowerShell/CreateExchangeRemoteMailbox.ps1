@@ -1,6 +1,6 @@
 # create remote mailbox in Exchange
 
-# you can run this script with: .\CreateRemoteMailboxInExchange.ps1 -email < email > -password < password > -firstName < first name > -lastName < last name >
+# you can run this script with: .\CreateExchangeRemoteMailbox.ps1 -email < email > -password < password > -firstName < first name > -lastName < last name >
 
 [CmdletBinding()]
 param(
@@ -152,7 +152,7 @@ function CheckParameters([string]      $email,
     }
 }
 
-function CreateRemoteMailboxInExchange([string]      $email, 
+function CreateRemoteMailbox([string]      $email, 
                                        [securestring]$password, 
                                        [string]      $firstName, 
                                        [string]      $lastName)
@@ -193,4 +193,4 @@ function CreateRemoteMailboxInExchange([string]      $email,
     }
 }
 
-CreateRemoteMailboxInExchange $email $password $firstName $lastName
+CreateRemoteMailbox $email $password $firstName $lastName
