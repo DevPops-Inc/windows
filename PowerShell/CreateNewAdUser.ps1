@@ -23,12 +23,7 @@ function CheckOsForWindows()
     else
     {
         Write-Host "Operating System: " $hostOs
-        Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
-        
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works in Windows." 
     }
 }
 
@@ -94,12 +89,7 @@ function CheckParameters([string]$newAdUser, [securestring]$newPassword)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
@@ -115,7 +105,6 @@ function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
     try
     {
         $startDateTime = (Get-Date)
-        
         Write-Host "Started creating new Active Directory user at: " $startDateTime.DateTime.DateTime
 
         New-ADUser $newAdUser 
@@ -125,7 +114,6 @@ function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
         Write-Host ("Successfully created new Active Directory user {0}." -F $newAdUser) -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        
         Write-Host "Finished creating new Active Directory user at: " $finishedDateTime.DateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
