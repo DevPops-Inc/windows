@@ -1,7 +1,8 @@
 # create standard user on Windows
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
-# you can run this script with: .\CreateStandardUserOnWindows.ps1 -standardUser < standard user > -password < password > -description < description >
+
+# you can run this script with: .\CreateStandardUserOnWin.ps1 -standardUser < standard user > -password < password > -description < description >
 
 [CmdletBinding()]
 param(
