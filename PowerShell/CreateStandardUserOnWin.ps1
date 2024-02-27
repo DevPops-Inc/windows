@@ -1,7 +1,8 @@
 # create standard user on Windows
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
-# you can run this script with: .\CreateStandardUserOnWindows.ps1 -standardUser < standard user > -password < password > -description < description >
+
+# you can run this script with: .\CreateStandardUserOnWin.ps1 -standardUser < standard user > -password < password > -description < description >
 
 [CmdletBinding()]
 param(
@@ -25,12 +26,7 @@ function CheckOsForWindows()
   else 
   {
     Write-Host "Operating System:" $hostOs 
-    Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
-
-    Write-Host "Finished checking operating system at" (Get-Date).DateTime
-    Write-Host ""
-
-    break
+    throw "Sorry but this script only works in Windows." 
   }
 }
 
@@ -120,12 +116,7 @@ function CheckParameters([string]      $standardUser,
   }
   else 
   {
-    Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
-
-    break
+    throw "One or more parameters are incorrect." 
   }
 }
 
