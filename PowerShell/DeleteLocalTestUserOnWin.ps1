@@ -1,6 +1,6 @@
 # delete local test user on Windows 
 
-# run this script with: .\DeleteLocalTestUserOnWindows.ps1 -testUser < test user >
+# run this script with: .\DeleteLocalTestUserOnWin.ps1 -testUser < test user >
 
 [CmdletBinding()]
 param(
