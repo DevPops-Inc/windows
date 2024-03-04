@@ -31,6 +31,8 @@ function GetLocalUser([string]$localUser)
 {
     if (($localUser -eq $Null) -or ($localUser -eq ""))
     {
+        Get-LocalUser | Out-String
+        
         $localUser = Read-Host -Prompt "Please type the local user you would like to delete and press the `"Enter`" key (Example: LocalUser)"
 
         Write-Host ""
