@@ -1,7 +1,7 @@
 # delete local user on Windows 
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
-# you can run this script with: .\DeleteLocalUserOnWindows.ps1 -localUser < local user >
+# you can run this script with: .\DeleteLocalUserOnWin.ps1 -localUser < local user >
 
 [CmdletBinding()]
 param(
@@ -23,12 +23,7 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works in Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works in Windows."
     }
 }
 
@@ -36,6 +31,8 @@ function GetLocalUser([string]$localUser)
 {
     if (($localUser -eq $Null) -or ($localUser -eq ""))
     {
+        Get-LocalUser | Out-String
+        
         $localUser = Read-Host -Prompt "Please type the local user you would like to delete and press the `"Enter`" key (Example: LocalUser)"
 
         Write-Host ""
@@ -72,12 +69,7 @@ function CheckParameters([string]$localUser)
     }
     else
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
