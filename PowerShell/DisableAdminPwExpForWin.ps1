@@ -1,6 +1,6 @@
 # disable password expiration for admin on windows
 
-# you can run script with: .\DisablePwExpForAdminOnWindows.ps1 -localAdmin < local admin > 
+# you can run script with: .\DisablePwExpForAdminOnWin.ps1 -localAdmin < local admin > 
 
 [CmdletBinding()]
 param(
