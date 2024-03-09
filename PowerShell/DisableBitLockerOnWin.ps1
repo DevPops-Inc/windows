@@ -1,6 +1,6 @@
 # disable BitLocker on Windows
 
-# you can run this script with: .\DisableBitLockerOnWindows.ps1 -driveLetter < drive letter >
+# you can run this script with: .\DisableBitLockerOnWin.ps1 -driveLetter < drive letter >
 
 [CmdletBinding()]
 param
