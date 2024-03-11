@@ -1,6 +1,6 @@
 # disable network adapter on Windows 
 
-# you can run this script with: .\DisableNetworkAdapterOnWindows.ps1 -networkAdapter < network adapter >
+# you can run this script with: .\DisableNetworkAdapterOnWin.ps1 -networkAdapter < network adapter >
 
 [CmdletBinding()]
 param(
