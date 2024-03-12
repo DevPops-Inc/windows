@@ -1,6 +1,6 @@
 # disable service on startup on Windows
 
-# you can run this script with: .\DisableServiceOnStartUpOnWindows.ps1 -serviceName < service name >
+# you can run this script with: .\DisableServiceOnStartUpOnWin.ps1 -serviceName < service name >
 
 [CmdletBinding()]
 param(
