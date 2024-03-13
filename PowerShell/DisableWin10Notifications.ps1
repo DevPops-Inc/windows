@@ -1,4 +1,4 @@
-# disable Window 10 Notifications
+# disable Windows 10 Notifications
 
 function CheckOsForWindows()
 {
