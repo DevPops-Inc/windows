@@ -1,6 +1,6 @@
 # enable BitLocker on Windows 
 
-# you can run this script with: .\EnableBitLockerOnWindows.ps1 -driveLetter < drive letter >
+# you can run this script with: .\EnableBitLockerOnWind.ps1 -driveLetter < drive letter >
 
 [CmdletBinding()]
 param(
