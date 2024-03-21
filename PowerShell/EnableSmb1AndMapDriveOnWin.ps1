@@ -1,6 +1,6 @@
 # enable SMB1 and map drive on Windows
 
-# you can run this script with: .\EnableSmb1AndMapDriveOnWindows.ps1 -driveLetter < drive letter > -path '< network share path >'
+# you can run this script with: .\EnableSmb1AndMapDriveOnWin.ps1 -driveLetter < drive letter > -path '< network share path >'
 
 [CmdletBinding()]
 param(
