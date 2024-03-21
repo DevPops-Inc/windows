@@ -1,6 +1,6 @@
 # enable SMB1 and map drive on Windows
 
-# you can run this script with: .\EnableSmb1AndMapDriveOnWindows.ps1 -driveLetter < drive letter > -path '< network share path >'
+# you can run this script with: .\EnableSmb1AndMapDriveOnWin.ps1 -driveLetter < drive letter > -path '< network share path >'
 
 [CmdletBinding()]
 param(
@@ -23,11 +23,7 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs in Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only runs in Windows." 
     }
 }
 
