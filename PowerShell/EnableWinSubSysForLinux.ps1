@@ -33,6 +33,7 @@ function EnableWsl()
         Write-Host "Successfully enabled Windows Subsystem for Linux." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
+        
         Write-Host "Finished enabling Windows Subsystem for Linux at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
@@ -44,7 +45,6 @@ function EnableWsl()
     catch 
     {
         Write-Host "Failed to enable Windows Subsystem for Linux." -ForegroundColor Red
-
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
