@@ -1,6 +1,6 @@
 # export system info to text file
 
-# you can run this script with: .\ExportSystemInfoAsTextFileOnWindows.ps1 -systemInfoFile "< system info filename >" -fileDestination "< file destination >"
+# you can run this script with: .\ExportSysInfoTxtFileOnWin.ps1 -systemInfoFile "< system info filename >" -fileDestination "< file destination >"
 
 [CmdletBinding()]
 param(
