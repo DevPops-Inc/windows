@@ -1,10 +1,10 @@
 # return first recurring character in string 
 
-# you can run this script with: .\ReturnFirstRecurringCharInString.ps1 -string '< string >' 
+# you can run this script with: .\ReturnFirstRecurringChar.ps1 -string '< string >' 
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $string = ""
+    [string] [Parameter(Mandatory = $False)] $string = "" # you can set the string here
 )
 
 function CheckOs()
@@ -31,6 +31,7 @@ function GetString([string]$string)
     {
         $string = Read-Host -Prompt "Please type a string you would like the first recurring character for and press `"Enter`" key on Windows or `"return`" key on Mac or Linux (Example: foobar)"
 
+        Write-Host ""
         return $string
     }
     else
@@ -64,11 +65,7 @@ function CheckParameters([string]$string)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-        
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
@@ -116,6 +113,8 @@ function ReturnFirstRecurringCharInString([string]$string)
             throw ("The `"{0}`" string doesn't contain a recurring character." -F $string) 
         }
         
+        Write-Host ("Successfully returned first recurring character in `"{0}`" string." -F $string) -ForegroundColor Green
+
         $finishedDateTime = (Get-Date)
         
         Write-Host ("Finished returning first recurrning character in `"{0}`" string at {1}" -F $string, $finishedDateTime)
