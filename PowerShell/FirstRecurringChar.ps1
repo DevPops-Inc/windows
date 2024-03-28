@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $string = ""
+    [string] [Parameter(Mandatory = $False)] $string = "" # you can set the string here
 )
 
 function CheckOs()
