@@ -31,6 +31,7 @@ function GetString([string]$string)
     {
         $string = Read-Host -Prompt "Please type a string you would like the first recurring character for and press `"Enter`" key on Windows or `"return`" key on Mac or Linux (Example: foobar)"
 
+        Write-Host ""
         return $string
     }
     else
