@@ -1,4 +1,4 @@
-# get printer list on Windows
+# get list printers on Windows
 
 function CheckOsForWindows()
 {
@@ -19,21 +19,21 @@ function CheckOsForWindows()
     }
 }
 
-function GetPrinterList()
+function ListPrinters()
 {
-    Write-Host "`nGet printer list on Windows.`n"
+    Write-Host "`nList printers on Windows.`n"
     CheckOsForWindows
 
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started getting printer list at" $startDateTime.DateTime
+        Write-Host "Started listing printers at" $startDateTime.DateTime
 
-        Get-Printer
-        Write-Host "Successfully got printer list on this computer." -Foreground Green
+        Get-Printer | Out-String
+        Write-Host "Successfully listed printers on this computer." -Foreground Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished getting printer list at" $finishedDateTime.DateTime
+        Write-Host "Finished listing printers at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -43,11 +43,11 @@ function GetPrinterList()
     }
     catch 
     {
-        Write-Host "Failed to get printers on this computer." -ForegroundColor Red
+        Write-Host "Failed to list printers on this computer." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
     }
 }
 
-GetPrinterList
+ListPrinters
