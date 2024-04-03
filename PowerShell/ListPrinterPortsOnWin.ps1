@@ -1,4 +1,4 @@
-# get printer ports on Windows
+# list printer ports on Windows
 
 function CheckOsForWindows()
 {
@@ -15,15 +15,11 @@ function CheckOsForWindows()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
-function GetPrinterPortsOnWindows()
+function ListPrinterPorts()
 {
     Write-Host "`nGet printer ports on Windows.`n"
     CheckOsForWindows
@@ -33,7 +29,7 @@ function GetPrinterPortsOnWindows()
         $startDateTime = (Get-Date)
         Write-Host "Started getting printer ports at" $startDateTime.DateTime
         
-        Get-PrinterPort
+        Get-PrinterPort | Out-String
         Write-Host "Successfuly got printer ports on this computer." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
@@ -54,4 +50,4 @@ function GetPrinterPortsOnWindows()
     }
 }
 
-GetPrinterPortsOnWindows
+ListPrinterPorts
