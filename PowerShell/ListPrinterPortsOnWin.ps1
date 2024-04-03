@@ -29,7 +29,7 @@ function ListPrinterPorts()
         $startDateTime = (Get-Date)
         Write-Host "Started getting printer ports at" $startDateTime.DateTime
         
-        Get-PrinterPort
+        Get-PrinterPort | Out-String
         Write-Host "Successfuly got printer ports on this computer." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
