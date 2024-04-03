@@ -1,4 +1,4 @@
-# get printer ports on Windows
+# list printer ports on Windows
 
 function CheckOsForWindows()
 {
@@ -23,7 +23,7 @@ function CheckOsForWindows()
     }
 }
 
-function GetPrinterPortsOnWindows()
+function ListPrinterPorts()
 {
     Write-Host "`nGet printer ports on Windows.`n"
     CheckOsForWindows
@@ -54,4 +54,4 @@ function GetPrinterPortsOnWindows()
     }
 }
 
-GetPrinterPortsOnWindows
+ListPrinterPorts
