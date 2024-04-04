@@ -27,7 +27,7 @@ function GetListOfDrives()
         $startDateTime = (Get-Date)
         Write-Host "Started listing drives at" $startDateTime.DateTime
 
-        Get-PSDrive 
+        Get-PSDrive | Out-String
         Write-Host "Successfully listed drives." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
