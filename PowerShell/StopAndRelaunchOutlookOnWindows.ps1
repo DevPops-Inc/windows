@@ -7,7 +7,7 @@ param(
     [string] [Parameter(Mandatory = $False)] $applicationPath = "C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE" # path to Outlook may be different on your computer
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

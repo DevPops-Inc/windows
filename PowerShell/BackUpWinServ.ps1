@@ -8,7 +8,7 @@ param(
     [string] [Parameter(Mandatory = $False)] $volumePath   = "" # you can set the volume path here
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

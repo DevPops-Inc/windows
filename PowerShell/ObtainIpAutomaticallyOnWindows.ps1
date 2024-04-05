@@ -7,7 +7,7 @@ param(
     [string] [Parameter(Mandatory = $False)] $ipType = "" # you can set IPv4 or IPv6 here 
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

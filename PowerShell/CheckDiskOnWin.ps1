@@ -1,6 +1,6 @@
 # check disk on Windows
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started hecking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

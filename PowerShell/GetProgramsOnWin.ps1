@@ -1,6 +1,6 @@
 # get programs on Windows
 
-function CheckForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

@@ -1,6 +1,6 @@
 # enable Windows Subsystem for Linux (WSL)
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

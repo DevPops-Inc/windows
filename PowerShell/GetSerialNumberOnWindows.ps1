@@ -1,6 +1,6 @@
 # get serial number on Windows
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Stared checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

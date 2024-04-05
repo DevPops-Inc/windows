@@ -79,7 +79,7 @@ function CheckParameters([string]$newAlias, [string]$app)
     }
 }
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

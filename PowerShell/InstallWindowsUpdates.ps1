@@ -2,7 +2,7 @@
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

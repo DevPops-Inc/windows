@@ -6,7 +6,7 @@
     [string] [Parameter(Mandatory = $False)] $appName = "" # you can set your app here 
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

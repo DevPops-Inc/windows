@@ -9,7 +9,7 @@ param(
    , [string] [Parameter(Mandatory = $False)] $oldGroup = "" # you can set the old group here 
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
    Write-Host "Started checking operating system at" (Get-Date).DateTime
    $hostOs = [System.Environment]::OSVersion.Platform

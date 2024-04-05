@@ -9,7 +9,7 @@ param(
     [string] [Parameter(Mandatory = $False)] $newName = ""
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "`nStarted checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
