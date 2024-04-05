@@ -10,7 +10,7 @@ param(
     , [string] [Parameter(Mandatory = $False)] $adAdmin = "" # you can set the Active Directory admin here
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Start checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

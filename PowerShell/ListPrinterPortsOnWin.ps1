@@ -1,6 +1,6 @@
 # list printer ports on Windows
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Start checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

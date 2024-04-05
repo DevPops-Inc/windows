@@ -4,7 +4,7 @@
 param(
     [string] [Parameter(Mandatory = $False)] $chromeUrl = 'http://dl.google.com/chrome/install/375.126/chrome_installer.exe'
 )
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

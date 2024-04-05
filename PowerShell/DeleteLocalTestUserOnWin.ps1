@@ -7,7 +7,7 @@ param(
     [string] [Parameter(Mandatory = $False)] $testUser = "" # you can set the test user here
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

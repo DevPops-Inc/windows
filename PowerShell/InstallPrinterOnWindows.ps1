@@ -9,7 +9,7 @@ param(
     [string] [Parameter(Mandatory = $False)] $driverName = "" # you can set the printer driver here 
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

@@ -10,7 +10,7 @@ param(
     [string] [Parameter(Mandatory = $False)] $excludePath = "" # you can set the .lnk file you wish to exclude from deletion here
 )
 
-function CheckOsForWindows() 
+function CheckOsForWin() 
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

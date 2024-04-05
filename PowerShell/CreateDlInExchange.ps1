@@ -9,7 +9,7 @@ param
     [string] [Parameter(Mandatory = $False)] $orgUnit    = "" # you can set the organizational unit here
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

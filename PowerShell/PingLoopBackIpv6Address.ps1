@@ -7,7 +7,7 @@ param(
     [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopBackIpv6Address = "::1" 
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform

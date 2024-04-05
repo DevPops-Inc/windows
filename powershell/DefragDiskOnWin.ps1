@@ -1,6 +1,6 @@
 # defrag disk on Windows
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOS = [System.Environment]::OSVersion.Platform

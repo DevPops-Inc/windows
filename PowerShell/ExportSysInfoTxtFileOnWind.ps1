@@ -8,7 +8,7 @@ param(
     , [string] [Parameter(Mandatory = $False)] $fileDestination = "" # you can set file path here
 )
 
-function CheckOsForWindows()
+function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
