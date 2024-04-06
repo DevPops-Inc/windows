@@ -107,7 +107,7 @@ function CheckOsForWin()
 function SetViForNotepad([string]$newAlias, [string]$app)
 {
     Write-Host "`nSet vi for Notepad on Windows`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $newAlias = GetNewAlias $newAlias
     $app = GetApp $app

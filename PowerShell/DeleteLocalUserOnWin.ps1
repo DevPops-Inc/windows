@@ -76,7 +76,7 @@ function CheckParameters([string]$localUser)
 function DeleteLocalUser([string]$localUser)
 {
     Write-Host "`nDelete local user on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $localUser = GetLocalUser $localUser
     CheckParameters $localUser

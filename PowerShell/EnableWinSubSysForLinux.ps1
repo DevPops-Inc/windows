@@ -22,7 +22,7 @@ function CheckOsForWin()
 function EnableWsl()
 {
     Write-Host "`nEnable Windows Subsystem for Linux.`n"
-    CheckOsForWindows 
+    CheckOsForWin 
 
     try
     {

@@ -123,7 +123,7 @@ function CheckParameters([string]      $standardUser,
 function CreateStandardUser([string]$standardUser, [securestring]$password, [string]$description)
 {
   Write-Host "`nCreate standard user on Windows.`n"
-  CheckOsForWindows
+  CheckOsForWin
 
   $standardUser = GetStandardUser $standardUser
   $password     = GetPassword $password

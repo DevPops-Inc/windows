@@ -84,7 +84,7 @@ function CheckParameters([string]$ipAddress)
 function RemovePrinterPort([string]$ipAddress)
 {
     Write-Host "`nRemove printer port on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "The printer ports are:"
     Get-PrinterPort

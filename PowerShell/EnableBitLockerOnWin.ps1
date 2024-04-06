@@ -73,7 +73,7 @@ function CheckParameters([string]$driveLetter)
 function EnableBitLocker([string]$driveLetter)
 {
     Write-Host "`nEnable BitLocker on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $driveLetter = GetDriveLetter $driveLetter
     CheckParameters $driveLetter

@@ -29,7 +29,7 @@ function CheckOsForWin()
 function RestartPrinterSpooler()
 {
     Write-Host "`nRestart printer spooler on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

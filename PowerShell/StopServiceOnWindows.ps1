@@ -84,7 +84,7 @@ function CheckParameters([string]$serviceName)
 function StopService([string]$serviceName)
 {
     Write-Host "`nStop Service on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "The services on this computer are: "
     Get-Service | Format-Table -AutoSize

@@ -47,7 +47,7 @@ function GetNetworkAdapter([string]$networkAdapter)
 function EnableNetworkAdapter([string]$networkAdapter)
 {
     Write-Host "`nEnable network adapter on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $networkAdapter = GetNetworkAdapter $networkAdapter
 

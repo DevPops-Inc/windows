@@ -22,7 +22,7 @@ function CheckOsForWin()
 function EnableLocalAdmin()
 {
     Write-Host "`nEnable local Administrator account on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

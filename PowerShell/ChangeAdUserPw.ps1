@@ -97,7 +97,7 @@ function CheckParameters([string]$userName, [securestring]$newPassword)
 function ChangeUserPw([string]$userName, [securestring]$newPassword)
 {
     Write-Host "`nChange user password on Active Directory.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $userName    = GetUserName $userName
     $newPassword = GetNewPassword $newPassword

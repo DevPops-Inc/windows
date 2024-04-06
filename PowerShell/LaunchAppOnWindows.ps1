@@ -79,7 +79,7 @@ function CheckParameters([string]$appName)
 function LaunchApp([string]$appName)
 {
     Write-Host "`nLaunch application in Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "The applications on this computer are:"
     Get-ChildItem -Path "C:\Program Files*" -Name "*exe" -Recurse -Force

@@ -85,7 +85,7 @@ function CheckParameters([string]$newName)
 function RenameComputer([string]$newName)
 {
     Write-Host "`nRename computer on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $newName = GetNewName $newName
     CheckParameters $newName

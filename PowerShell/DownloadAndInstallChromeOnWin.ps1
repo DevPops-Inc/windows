@@ -71,7 +71,7 @@ function CheckParameters([string]$chromeUrl)
 function DownloadAndInstallChrome([string]$chromeUrl) 
 {
     Write-Host "`nDownload and Install Chrome on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

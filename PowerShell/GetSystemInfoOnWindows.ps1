@@ -25,7 +25,7 @@ function CheckOsForWin()
 function GetSystemInfo()
 {
     Write-Host "`nGet system information on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

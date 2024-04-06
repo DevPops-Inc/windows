@@ -22,7 +22,7 @@ function CheckOsForWin()
 function CheckDisk()
 {
     Write-Host "`nCheck disk on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try
     {

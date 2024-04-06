@@ -131,7 +131,7 @@ function NewContactInExchange([string]$contactName,
                               [string]$orgUnit)
 {
     Write-Host "`nCreate New Contact in Exchange.`n"
-    CheckOsForWindows
+    CheckOsForWin
     
     $contactName = GetContactName $contactName
     $externalEmail = GetExternalEmail $externalEmail

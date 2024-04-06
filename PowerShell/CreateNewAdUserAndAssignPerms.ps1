@@ -124,7 +124,7 @@ function CreateNewAdUser([string]      $newAdUser,
                          [string]      $groupName)
 {
     Write-Host "`nCreate new Active Directory user and assign permissions.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $newAdUser   = GetNewAdUser $newADUser
     $newPassword = GetNewPassword $newPassword

@@ -33,7 +33,7 @@ $disableNotificationsInWinReg =
 function DisableWindows10Notifications()
 {
     Write-Host "`nDisable Windows 10 notifications.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try
     {

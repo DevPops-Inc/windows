@@ -26,7 +26,7 @@ function CheckOsForWin()
 function ImportPSWindowsUpdateModule()
 {
     Write-Host "`nImport PSWindowsUpdate module on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

@@ -84,7 +84,7 @@ function CheckParameters([System.Net.IPAddress]$loopBackIpv6Address)
 function PingLoopbackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
 {
     Write-Host "`nPing loopback IPv6 address on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $loopBackIpv6Address = GetLoopBackIpv6Address $loopBackIpv6Address
     CheckParameters $loopBackIpv6Address

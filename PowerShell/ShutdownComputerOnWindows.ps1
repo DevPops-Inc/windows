@@ -26,7 +26,7 @@ function CheckOsForWin()
 function ShutdownComputer()
 {
     Write-Host "`nShutdown computer on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

@@ -100,7 +100,7 @@ function CheckParameters([string]$computerName, [string]$licenseKey)
 function ActivateWin([string]$computerName, [string]$licenseKey)
 {
     Write-Host "`nActivate Windows in PowerShell`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $computerName = GetComputerName $computerName
     $licenseKey   = GetLicenseKey $licenseKey

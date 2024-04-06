@@ -102,7 +102,7 @@ function CheckParameters([string]$driveLetter, [string]$path)
 function MapDrive([string]$driveLetter, [string]$path)
 {
     Write-Host "`nMap drive on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $driveLetter = GetDriveLetter $driveLetter
     $path = GetPath $path

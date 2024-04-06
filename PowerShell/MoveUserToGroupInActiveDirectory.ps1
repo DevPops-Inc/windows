@@ -126,7 +126,7 @@ function MoveUserToGroupInActiveDirectory([string]$username,
                                           [string]$oldGroup)
 {
    Write-Host "`nMove user to group in Active Directory.`n"
-   CheckOsForWindows
+   CheckOsForWin
 
    $username = GetUserName $username
    $newGroup = GetNewGroup $newGroup

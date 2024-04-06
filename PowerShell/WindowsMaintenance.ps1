@@ -81,7 +81,7 @@ function WindowsMaintenance()
 {
     Write-Host "`nWindows maintenance.`n"
 
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

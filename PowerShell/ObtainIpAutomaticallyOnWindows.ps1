@@ -83,7 +83,7 @@ function CheckParameters([string]$ipType)
 function ObtainIpAutomatically([string]$ipType)
 {
     Write-Host "`nObtain IP address automatically on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $ipType = GetIpType $ipType
     CheckParameters $ipType

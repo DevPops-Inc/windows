@@ -84,7 +84,7 @@ function CheckParameters([string]$processName)
 function StopProcess([string]$processName)
 {
     Write-Host "`nStop process on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "The processes running on this computer are:"
     Get-Process | Format-Table -AutoSize

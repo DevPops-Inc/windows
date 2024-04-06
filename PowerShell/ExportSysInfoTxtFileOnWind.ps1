@@ -99,7 +99,7 @@ function CheckParameters([string]$systemInfoFile, [string]$fileDestination)
 function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestination)
 {
     Write-Host "`nExport system info to text file on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $systemInfoFile = GetSystemInfoFile $systemInfoFile
     $fileDestination = GetFileDestination $fileDestination

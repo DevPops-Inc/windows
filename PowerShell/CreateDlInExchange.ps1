@@ -97,7 +97,7 @@ function CheckParameters([string]$distroList, [string]$orgUnit)
 function CreateDistroList([string]$distroList, [string]$orgUnit)
 {
     Write-Host "`nCreate distribution group in Exchange.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $distroList = GetDistroList $distroList
     $orgUnit    = GetOrgUnit $orgUnit

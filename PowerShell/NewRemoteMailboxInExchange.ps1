@@ -151,7 +151,7 @@ function NewRemoteMailboxInExchange([string]      $email,
                                     [string]      $lastName)
 {
     Write-Host "`nCreate remote mailbox in Exchange.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $email = GetEmail $email
     $password = GetPassword $password

@@ -22,7 +22,7 @@ function CheckOsForWin()
 function GetPrograms()
 {
     Write-Host "`nGet programs on Windows.`n"
-    CheckForWindows
+    CheckOsForWin
 
     try
     {

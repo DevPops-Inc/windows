@@ -19,4 +19,4 @@ function CheckOsForWin()
     }
 }
 
-CheckOsForWindows
+CheckOsForWin

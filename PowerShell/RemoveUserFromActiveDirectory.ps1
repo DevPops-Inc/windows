@@ -84,7 +84,7 @@ function CheckParameters([string]$username)
 function RemoveUserFromAd([string]$username)
 {
     Write-Host "`nRemove user from Active Directory.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $username = GetUsername $username
     CheckParameters $username

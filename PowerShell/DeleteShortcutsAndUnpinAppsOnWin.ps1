@@ -112,7 +112,7 @@ function UnpinAppsFromTaskbar()
 function DeleteShortcutsAndUnpinApps([string]$deletePath) 
 {
     Write-Host "`nDelete shortcuts except Firefox and unpin apps on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $deletePath = GetDeletePath $deletePath
     CheckParameters $deletePath 

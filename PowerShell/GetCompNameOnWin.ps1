@@ -22,7 +22,7 @@ function CheckOsForWin()
 function GetComputerName()
 {
     Write-Host "`nGet computer name on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
     
     try 
     {

@@ -76,7 +76,7 @@ function CheckParameters([string]$localAdmin)
 function DisablePwExpForAdmin([string]$localAdmin)
 {
     Write-Host "`nDisable password expiration for admin on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $localAdmin = GetLocalAdmin $localAdmin
     CheckParameters $localAdmin

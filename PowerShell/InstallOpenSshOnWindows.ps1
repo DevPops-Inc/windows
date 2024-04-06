@@ -71,7 +71,7 @@ function StartOpenSshServices()
 function InstallOpenSsh()
 {
     Write-Host "`nInstall OpenSSH on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

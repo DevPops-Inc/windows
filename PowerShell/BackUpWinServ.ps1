@@ -96,7 +96,7 @@ function CheckParameters([string]$fileSpecPath, [string]$volumePath)
 function BackUpWindowsServer([string]$fileSpecPath, [string]$volumePath)
 {
     Write-Host "`nWindows Server Back up.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $fileSpecPath = GetFileSpecPath $fileSpecPath
     $volumePath   = GetVolumePath $volumePath

@@ -106,7 +106,7 @@ function checkParameters([string]$filePath, [string]$winUpdates)
 function OutputWindowsUpdateListOntoDesktop()
 {
     Write-Host "`nOutput Windows updates file.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

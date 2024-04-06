@@ -77,7 +77,7 @@ function CheckParameters([string]$networkAdapter)
 function DisableNetworkAdapter([string]$networkAdapter)
 {
     Write-Host "`nDisable network adapter on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $networkAdapter = GetNetworkAdapter $networkAdapter
     CheckParameters $networkAdapter

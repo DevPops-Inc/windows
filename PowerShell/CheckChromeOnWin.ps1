@@ -107,7 +107,7 @@ function CheckParameters([string]$checkProgram)
 function CheckChrome()
 {
     Write-Host "`nCheck Chrome on Windows.`n"
-    CheckForWindows
+    CheckOsForWin
 
     $checkProgram    = GetCheckProgram $checkProgram
     $winProgramsList = GetWinPrograms

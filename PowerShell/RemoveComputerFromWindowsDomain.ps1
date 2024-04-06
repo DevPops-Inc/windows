@@ -108,7 +108,7 @@ function CheckParameters([string]$domain, [string]$adAdmin)
 function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
 {
     Write-Host "`nRemove computer from Windows domain.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $domain = GetDomain $domain
     $adAdmin = GetAdAdmin $adAdmin

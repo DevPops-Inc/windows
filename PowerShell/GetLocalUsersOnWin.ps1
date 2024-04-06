@@ -22,7 +22,7 @@ function CheckOsForWin()
 function GetLocalUsers()
 {
     Write-Host "`nGet local users on Windows.`n" 
-    CheckOsForWindows
+    CheckOsForWin
     
     try 
     {

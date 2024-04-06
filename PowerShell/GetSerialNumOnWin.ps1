@@ -15,18 +15,14 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
-function GetSerialNumber()
+function GetSerialNum()
 {
     Write-Host "`nGet serial numbers on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {
@@ -36,7 +32,6 @@ function GetSerialNumber()
         $serialNumber = Get-CimInstance win32_bios | Select-Object -ExpandProperty SerialNumber
 
         Write-Host "The serial number is:" $serialNumber -ForegroundColor Blue
-
         Write-Host "Successfully got serial number." -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
@@ -57,4 +52,4 @@ function GetSerialNumber()
     }
 }
 
-GetSerialNumber
+GetSerialNum
