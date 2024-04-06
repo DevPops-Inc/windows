@@ -22,7 +22,7 @@ function CheckOsForWin()
 function CheckDiskAndRestartWindows()
 {
     Write-Host "`nCheck disk and restart on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try
     {

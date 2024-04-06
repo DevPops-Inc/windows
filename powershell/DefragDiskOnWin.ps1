@@ -22,7 +22,7 @@ function CheckOsForWin()
 function DefragDisk()
 {
     Write-Host "`nDefrag disk on Windows`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try
     {

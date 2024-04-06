@@ -106,7 +106,7 @@ function CheckParameters([string]$sourceFilePath, [string]$destinationPath)
 function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
 {
     Write-Host "`nUnpack file on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $sourceFilePath = GetSourceFilePath $sourceFilePath
     $destinationPath = GetDestinationPath $destinationPath

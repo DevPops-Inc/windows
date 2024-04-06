@@ -99,7 +99,7 @@ function CheckParameters([string]$email, [string]$distroList)
 function AssignMemberToDl([string]$email,[string]$distroList)
 {
     Write-Host "`nAssign member to distribution list on Exchange.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $email      = GetEmail $email
     $distroList = GetDistroList $distroList

@@ -85,7 +85,7 @@ function CheckParameters([string]$printerName)
 function RemovePrinter([string]$printerName)
 {
     Write-Host "`nRemove printer on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "The printers on this computer are:"
     Get-Printer | Format-Table -AutoSize

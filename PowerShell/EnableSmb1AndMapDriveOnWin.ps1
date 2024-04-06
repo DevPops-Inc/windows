@@ -103,7 +103,7 @@ function CheckParameters([string]$driveLetter, [string]$path)
 function EnableSmb1AndMapDrive([string]$driveLetter, [string]$path)
 {
     Write-Host "`nEnable SMB1 and map drive on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $driveLetter = GetDriveLetter $driveLetter
     $path = GetPath $path

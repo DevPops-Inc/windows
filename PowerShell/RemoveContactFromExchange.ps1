@@ -83,7 +83,7 @@ function CheckParameters([string]$contactName)
 function RemoveContact([string]$contactName)
 {
     Write-Host "`nRemove contact from Exchange.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $contactName = GetContactName $contactName
     CheckParameters $contactName

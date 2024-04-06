@@ -84,7 +84,7 @@ function CheckParameters([string]$distroGroup)
 function RemoveDistroGroup([string]$distroGroup)
 {
     Write-Host "`nRemove distribution group in Exchange.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $distroGroup = GetDistroGroup $distroGroup
     CheckParameters $distroGroup

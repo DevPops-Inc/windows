@@ -22,7 +22,7 @@ function CheckOsForWin()
 function ListPrinters()
 {
     Write-Host "`nList printers on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

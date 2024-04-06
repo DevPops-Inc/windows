@@ -79,7 +79,7 @@ function CheckParameters([string]$adUser)
 function SetPwToNeverExpireInActiveDirectory([string]$adUser)
 {
     Write-Host "`nSet password to never expire on Active Directory.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $adUser = GetAdUser $adUser
     CheckParameters $adUser

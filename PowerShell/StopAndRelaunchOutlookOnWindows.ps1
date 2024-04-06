@@ -131,7 +131,7 @@ function StopAndRelaunchOutlook([string]$processName,
                                 [string]$applicationPath)
 {
     Write-Host "`nStop and relaunch Outlook on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $processName     = GetProcessName $processName
     $seconds         = GetSeconds $seconds

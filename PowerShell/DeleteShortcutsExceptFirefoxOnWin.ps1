@@ -96,7 +96,7 @@ function CheckParameters([string]$deletePath, [string]$excludePath)
 function DeleteShortcuts([string]$deletePath, [string]$excludePath)
 {
     Write-Host "`nDelete shortcuts except Firefox on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $deletePath  = GetDeletePath $deletePath
     $excludePath = GetExcludePath $excludePath

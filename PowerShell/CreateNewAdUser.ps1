@@ -96,7 +96,7 @@ function CheckParameters([string]$newAdUser, [securestring]$newPassword)
 function CreateNewAdUser([string]$newAdUser, [securestring]$newPassword)
 {
     Write-Host "`nCreate new Active Directory user.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $newAdUser   = GetNewAdUser $newAdUser
     $newPassword = GetNewPassword $newPassword

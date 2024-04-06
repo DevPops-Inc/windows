@@ -26,7 +26,7 @@ function CheckOsForWin()
 function LogOutProfile()
 {
     Write-Host "`nLog out of profile in Windows.`n"
-    CheckOsForWindows 
+    CheckOsForWin 
 
     try 
     {

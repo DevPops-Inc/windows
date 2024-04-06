@@ -80,7 +80,7 @@ function CheckParameters([string]$serviceName)
 function DisableServiceOnStartUp([string]$serviceName)
 {
     Write-Host "Disable service on startup on Windows."
-    CheckOsForWindows
+    CheckOsForWin
 
     $serviceName = GetServiceOnStartUp $serviceName
     CheckParameters $serviceName

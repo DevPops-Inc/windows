@@ -26,7 +26,7 @@ function CheckOsForWin()
 function GetUserAccounts()
 {
     Write-Host "`nGet user accounts on Windows.`n" 
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

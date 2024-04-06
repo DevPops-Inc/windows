@@ -96,7 +96,7 @@ function CheckParameters([string]$localUser, [securestring]$newPassword)
 function ChangeLocalUserPw([string]$localUser, [securestring]$newPassword) 
 {
     Write-Host "`nChange local user's password on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "The local users on this computer are:"
     Get-LocalUser

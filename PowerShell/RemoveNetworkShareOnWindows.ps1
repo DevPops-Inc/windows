@@ -85,7 +85,7 @@ function CheckParameters([string]$driveLetter)
 function RemoveNetworkShare([string]$driveLetter)
 {
     Write-Host "`nRemove network share on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "The drives on this computer are:"
     Get-PSDrive | Format-Table -Autosize

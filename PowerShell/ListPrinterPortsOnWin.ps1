@@ -22,7 +22,7 @@ function CheckOsForWin()
 function ListPrinterPorts()
 {
     Write-Host "`nGet printer ports on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try
     {

@@ -126,7 +126,7 @@ function CheckParameters([string]$ipAddress, [string]$printerName, [string]$driv
 function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$driverName)
 {
     Write-Host "`nInstall printer on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $ipAddress = GetIpAddress $ipAddress
     $printerName = GetPrinterName $printerName

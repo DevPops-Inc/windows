@@ -22,7 +22,7 @@ function CheckOsForWin()
 function EnableSmb2OnWindows()
 {
     Write-Host "`nEnable SMB2 on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     try 
     {

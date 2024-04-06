@@ -85,7 +85,7 @@ function CheckParameters([string]$fileLocation)
 function OpenPhotoInPaint3d([string]$fileLocation)
 {
     Write-Host "`nOpen photo in Paint 3D on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $fileLocation = GetFileLocation $fileLocation
     CheckParameters $fileLocation

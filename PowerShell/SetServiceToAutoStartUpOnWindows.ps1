@@ -80,7 +80,7 @@ function CheckParameters([string]$serviceName)
 function SetServiceToAutoStart([string]$serviceName)
 {
     Write-Host "`nSet service to automatic startup on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     Write-Host "Services running on this computer are:"
     Get-Service

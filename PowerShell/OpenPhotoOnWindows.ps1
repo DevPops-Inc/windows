@@ -83,7 +83,7 @@ function CheckParameters([string]$photoLocation)
 function OpenPhoto([string]$photoLocation)
 {
     Write-Host "`nOpen photo on Windows.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $photoLocation = GetPhotoLocation $photoLocation
     CheckParameters $photoLocation

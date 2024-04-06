@@ -100,7 +100,7 @@ function CheckParameters([string]$domainName, [string]$domainAdmin)
 function JoinWindowsDomain([string]$domainName, [string]$domainAdmin)
 {
     Write-Host "`nJoin Windows domain.`n"
-    CheckOsForWindows
+    CheckOsForWin
 
     $domainName = GetDomainName $domainName
     $domainAdmin = GetDomainAdmin $domainAdmin
