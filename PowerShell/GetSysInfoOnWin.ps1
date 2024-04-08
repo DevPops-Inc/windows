@@ -22,7 +22,7 @@ function CheckOsForWin()
     }
 }
 
-function GetSystemInfo()
+function GetSysInfo()
 {
     Write-Host "`nGet system information on Windows.`n"
     CheckOsForWin
@@ -53,4 +53,4 @@ function GetSystemInfo()
     }
 }
 
-GetSystemInfo
+GetSysInfo
