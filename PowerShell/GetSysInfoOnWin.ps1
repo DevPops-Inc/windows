@@ -15,14 +15,11 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
-function GetSystemInfo()
+function GetSysInfo()
 {
     Write-Host "`nGet system information on Windows.`n"
     CheckOsForWin
@@ -32,7 +29,7 @@ function GetSystemInfo()
         $startDateTime = (Get-Date)
         Write-Host "Started getting system information at" $startDateTime.DateTime
 
-        systeminfo
+        systeminfo | Out-String
         Write-Host "Successfully got system information." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
@@ -53,4 +50,4 @@ function GetSystemInfo()
     }
 }
 
-GetSystemInfo
+GetSysInfo
