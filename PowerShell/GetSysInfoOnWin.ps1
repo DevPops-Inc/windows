@@ -29,7 +29,7 @@ function GetSysInfo()
         $startDateTime = (Get-Date)
         Write-Host "Started getting system information at" $startDateTime.DateTime
 
-        systeminfo
+        systeminfo | Out-String
         Write-Host "Successfully got system information." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
