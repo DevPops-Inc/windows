@@ -30,7 +30,7 @@ function GetUserAccounts()
         Write-Host "Started getting user accounts at" $startDateTime.DateTime
 
         Write-Host "The user accounts on this computer are:"
-        Get-LocalUser
+        Get-LocalUser | Out-String
         Write-Host "Successfully got user accounts." -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
