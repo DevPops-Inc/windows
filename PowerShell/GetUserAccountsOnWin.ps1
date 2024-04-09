@@ -15,11 +15,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows."
     }
 }
 
@@ -34,7 +30,7 @@ function GetUserAccounts()
         Write-Host "Started getting user accounts at" $startDateTime.DateTime
 
         Write-Host "The user accounts on this computer are:"
-        Get-LocalUser
+        Get-LocalUser | Out-String
         Write-Host "Successfully got user accounts." -ForegroundColor Green
         
         $finishedDateTime = (Get-Date)
