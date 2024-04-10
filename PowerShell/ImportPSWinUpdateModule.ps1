@@ -1,4 +1,4 @@
-# import PSWindowsUpdate module on Windows 
+# import PSWindowsUpdate module 
 
 function CheckOsForWin()
 {
@@ -15,11 +15,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
