@@ -1,4 +1,4 @@
-# import PSWindowsUpdate module on Windows 
+# import PSWindowsUpdate module 
 
 function CheckOsForWin()
 {
