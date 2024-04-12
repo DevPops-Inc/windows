@@ -1,6 +1,6 @@
 # install printer on Windows
 
-# you can run this script with: InstallPrinterOnWindows.ps1 -ipAddress < IP address > -printerName < printer name > -driverName < driver name >
+# you can run this script with: InstallPrinterOnWin.ps1 -ipAddress < IP address > -printerName < printer name > -driverName < driver name >
 
 [CmdletBinding()]
 param(
@@ -24,11 +24,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -115,11 +111,7 @@ function CheckParameters([string]$ipAddress, [string]$printerName, [string]$driv
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-        
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break 
+        throw "One or more parameter checks are incorrect, exiting script." 
     }
 }
 
@@ -128,9 +120,9 @@ function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$drive
     Write-Host "`nInstall printer on Windows.`n"
     CheckOsForWin
 
-    $ipAddress = GetIpAddress $ipAddress
+    $ipAddress   = GetIpAddress $ipAddress
     $printerName = GetPrinterName $printerName
-    $driverName = GetDriverName $driverName
+    $driverName  = GetDriverName $driverName
     CheckParameters $ipAddress $printerName $driverName
 
     try
