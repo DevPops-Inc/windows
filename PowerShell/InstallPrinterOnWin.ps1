@@ -120,9 +120,9 @@ function InstallPrinter([string]$ipAddress, [string]$printerName, [string]$drive
     Write-Host "`nInstall printer on Windows.`n"
     CheckOsForWin
 
-    $ipAddress = GetIpAddress $ipAddress
+    $ipAddress   = GetIpAddress $ipAddress
     $printerName = GetPrinterName $printerName
-    $driverName = GetDriverName $driverName
+    $driverName  = GetDriverName $driverName
     CheckParameters $ipAddress $printerName $driverName
 
     try
