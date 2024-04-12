@@ -1,6 +1,6 @@
 # install printer on Windows
 
-# you can run this script with: InstallPrinterOnWindows.ps1 -ipAddress < IP address > -printerName < printer name > -driverName < driver name >
+# you can run this script with: InstallPrinterOnWin.ps1 -ipAddress < IP address > -printerName < printer name > -driverName < driver name >
 
 [CmdletBinding()]
 param(
