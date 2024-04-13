@@ -25,7 +25,7 @@ function CheckOsForWin()
     }
 }
 
-function InstallWinUpdates()
+function InstallUpdates()
 {
     Write-Host "`nInstall Windows Updates`n"
     CheckOsForWin
@@ -61,4 +61,4 @@ function InstallWinUpdates()
     }
 }
 
-InstallWinUpdates
+InstallUpdates
