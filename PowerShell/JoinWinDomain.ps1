@@ -21,11 +21,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -35,6 +31,7 @@ function GetDomainName([string]$domainName)
     {
         $domainName = Read-Host -Prompt "Please type the domain you want this comptuer to join and press `"Enter`" key (Example: domain.com)"
 
+        Write-Host ""
         return $domainName
     }
     else
@@ -49,6 +46,7 @@ function GetDomainAdmin([string]$domainAdmin)
     {
         $domainAdmin = Read-Host -Prompt "Please type your domain admin account and press `"Enter`" key (Example: DomainAdmin)"
 
+        Write-Host ""
         return $domainAdmin
     }
     else
@@ -89,11 +87,7 @@ function CheckParameters([string]$domainName, [string]$domainAdmin)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break 
+        throw "One or more parameter checks are incorrect, exiting script." 
     }
 }
 
@@ -102,7 +96,7 @@ function JoinWindowsDomain([string]$domainName, [string]$domainAdmin)
     Write-Host "`nJoin Windows domain.`n"
     CheckOsForWin
 
-    $domainName = GetDomainName $domainName
+    $domainName  = GetDomainName $domainName
     $domainAdmin = GetDomainAdmin $domainAdmin
     CheckParameters $domainName $domainAdmin
 
