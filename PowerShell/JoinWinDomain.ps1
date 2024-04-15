@@ -31,6 +31,7 @@ function GetDomainName([string]$domainName)
     {
         $domainName = Read-Host -Prompt "Please type the domain you want this comptuer to join and press `"Enter`" key (Example: domain.com)"
 
+        Write-Host ""
         return $domainName
     }
     else
@@ -45,6 +46,7 @@ function GetDomainAdmin([string]$domainAdmin)
     {
         $domainAdmin = Read-Host -Prompt "Please type your domain admin account and press `"Enter`" key (Example: DomainAdmin)"
 
+        Write-Host ""
         return $domainAdmin
     }
     else
