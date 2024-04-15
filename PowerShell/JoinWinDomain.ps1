@@ -96,7 +96,7 @@ function JoinWindowsDomain([string]$domainName, [string]$domainAdmin)
     Write-Host "`nJoin Windows domain.`n"
     CheckOsForWin
 
-    $domainName = GetDomainName $domainName
+    $domainName  = GetDomainName $domainName
     $domainAdmin = GetDomainAdmin $domainAdmin
     CheckParameters $domainName $domainAdmin
 
