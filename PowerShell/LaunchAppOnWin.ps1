@@ -1,6 +1,6 @@
 # launch application on Windows
 
-# you can run this script with: .\LaunchAppOnWindows.ps1 -appName '< .exe >' 
+# you can run this script with: .\LaunchAppOnWin.ps1 -appName '< .exe >' 
 
 [CmdletBinding()]param(
     [string] [Parameter(Mandatory = $False)] $appName = "" # you can set your app here 
