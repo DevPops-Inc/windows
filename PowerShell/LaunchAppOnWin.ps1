@@ -33,10 +33,12 @@ function GetAppName([string]$appName)
     {
         $appName = Read-Host -Prompt "`Please type the application would you like launch and press `"Enter`" key (Example: Google\Chrome\Application\chrome.exe)"
 
+        Write-Host ""
         return $appName
     }
     else
     {
+        Write-Host ""
         return $appName
     }
 }
