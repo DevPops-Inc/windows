@@ -1,8 +1,10 @@
 # launch application on Windows
 
-# you can run this script with: .\LaunchAppOnWindows.ps1 -appName '< .exe >' 
+# you can run this script with: .\LaunchAppOnWin.ps1 -appName '< .exe >' 
 
-[CmdletBinding()]param(
+[CmdletBinding()]
+param
+(
     [string] [Parameter(Mandatory = $False)] $appName = "" # you can set your app here 
 )
 
@@ -21,11 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs 
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -35,10 +33,12 @@ function GetAppName([string]$appName)
     {
         $appName = Read-Host -Prompt "`Please type the application would you like launch and press `"Enter`" key (Example: Google\Chrome\Application\chrome.exe)"
 
+        Write-Host ""
         return $appName
     }
     else
     {
+        Write-Host ""
         return $appName
     }
 }
@@ -68,11 +68,7 @@ function CheckParameters([string]$appName)
     }
     else 
     {
-        Write-Host "One or more parameter checks incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "One or more parameter checks incorrect." 
     }
 }
 
