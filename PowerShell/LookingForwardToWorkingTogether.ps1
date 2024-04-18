@@ -31,6 +31,7 @@ function GetBuddy([string]$buddy)
     {
         Read-Host -Prompt "Please type your buddy's name and press `"Enter`" key on Windows or `"return`" key on Mac or Linux (Example: James)" 
 
+        Write-Host ""
         return $buddy
     }
     else
@@ -64,11 +65,7 @@ function CheckParameters([string]$buddy)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorret, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break 
+        throw "One or more parameter checks are incorrect." 
     }
 }
 
