@@ -65,11 +65,7 @@ function CheckParameters([string]$buddy)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorret, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break 
+        throw "One or more parameter checks are incorret, exiting script." 
     }
 }
 
