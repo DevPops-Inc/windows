@@ -65,7 +65,7 @@ function CheckParameters([string]$buddy)
     }
     else 
     {
-        throw "One or more parameter checks are incorret, exiting script." 
+        throw "One or more parameter checks are incorrect." 
     }
 }
 
