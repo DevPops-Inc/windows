@@ -31,6 +31,7 @@ function GetBuddy([string]$buddy)
     {
         Read-Host -Prompt "Please type your buddy's name and press `"Enter`" key on Windows or `"return`" key on Mac or Linux (Example: James)" 
 
+        Write-Host ""
         return $buddy
     }
     else
