@@ -5,7 +5,7 @@
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $driveLetter = "", # you can set the drive letter here 
-    [string] [Parameter(Mandatory = $False)] $path = "" # you can set the path here 
+    [string] [Parameter(Mandatory = $False)] $path        = "" # you can set the path here 
 )
 
 function CheckOsForWin()
@@ -105,7 +105,7 @@ function MapDrive([string]$driveLetter, [string]$path)
     CheckOsForWin
 
     $driveLetter = GetDriveLetter $driveLetter
-    $path = GetPath $path
+    $path        = GetPath $path
     CheckParameters $driveLetter $path
     
     try 
