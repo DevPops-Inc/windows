@@ -33,6 +33,7 @@ function GetDriveLetter([string]$driveLetter)
     {
         $driveLetter = Read-Host -Prompt "Please type the letter would you like to map the drive with and press `"Enter`" key (Example: D)"
         
+        Write-Host ""
         return $driveLetter
     }
     else 
@@ -47,6 +48,7 @@ function GetPath([string]$path)
     {
         $path = Read-Host -Prompt "Please type the path of the drive you wish to map and press `"Enter`" key (Example: \\Network\Share)"
 
+        Write-Host ""
         return $path
     }
     else 
