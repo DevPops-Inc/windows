@@ -101,6 +101,11 @@ function MapDrive([string]$driveLetter, [string]$path)
     $driveLetter = GetDriveLetter $driveLetter
     $path        = GetPath $path
     CheckParameters $driveLetter $path
+
+    if ((Test-Path $path) -eq $False)
+    {
+        throw ("{0} is invalid." -F $path)
+    }
     
     try 
     {
