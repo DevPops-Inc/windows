@@ -112,7 +112,7 @@ function MapDrive([string]$driveLetter, [string]$path)
         Write-Host ("Successfully mapped {0} drive with path: {1}" -F $driveLetter, $path) -ForegroundColor Green
 
         Write-Host "The drives on this computer are:"
-        Get-PSDrive
+        Get-PSDrive | Out-String
 
         $finishedDateTime = (Get-Date)
         Write-Host ("Finished mapping {0} drive at {1}" -F $driveLetter, $finishedDateTime)
@@ -131,7 +131,7 @@ function MapDrive([string]$driveLetter, [string]$path)
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
 
         Write-Host "The drives on this computer are: "
-        Get-PSDrive
+        Get-PSDrive | Out-String
         Write-Host ""
     }
 }
