@@ -87,7 +87,7 @@ function CheckParameters([string]$driveLetter, [string]$path)
     }
     else 
     {
-        throw Write-Host "One or more parameter checks incorrect, exiting script." 
+        throw Write-Host "One or more parameter checks incorrect." 
     }
 }
 
