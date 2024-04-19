@@ -1,11 +1,11 @@
 # map drive on Windows
 
-# you can run this script with: .\MapDriveOnWindows.ps1 -driveLetter < drive letter > -path '< path >'
+# you can run this script with: .\MapDriveOnWin.ps1 -driveLetter < drive letter > -path '< path >'
 
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $driveLetter = "", # you can set the drive letter here 
-    [string] [Parameter(Mandatory = $False)] $path = "" # you can set the path here 
+    [string] [Parameter(Mandatory = $False)] $path        = "" # you can set the path here 
 )
 
 function CheckOsForWin()
@@ -23,11 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -37,6 +33,7 @@ function GetDriveLetter([string]$driveLetter)
     {
         $driveLetter = Read-Host -Prompt "Please type the letter would you like to map the drive with and press `"Enter`" key (Example: D)"
         
+        Write-Host ""
         return $driveLetter
     }
     else 
@@ -51,6 +48,7 @@ function GetPath([string]$path)
     {
         $path = Read-Host -Prompt "Please type the path of the drive you wish to map and press `"Enter`" key (Example: \\Network\Share)"
 
+        Write-Host ""
         return $path
     }
     else 
@@ -91,11 +89,7 @@ function CheckParameters([string]$driveLetter, [string]$path)
     }
     else 
     {
-        Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break 
+        throw Write-Host "One or more parameter checks incorrect." 
     }
 }
 
@@ -105,8 +99,13 @@ function MapDrive([string]$driveLetter, [string]$path)
     CheckOsForWin
 
     $driveLetter = GetDriveLetter $driveLetter
-    $path = GetPath $path
+    $path        = GetPath $path
     CheckParameters $driveLetter $path
+
+    if ((Test-Path $path) -eq $False)
+    {
+        throw ("{0} is invalid." -F $path)
+    }
     
     try 
     {
@@ -118,7 +117,7 @@ function MapDrive([string]$driveLetter, [string]$path)
         Write-Host ("Successfully mapped {0} drive with path: {1}" -F $driveLetter, $path) -ForegroundColor Green
 
         Write-Host "The drives on this computer are:"
-        Get-PSDrive
+        Get-PSDrive | Out-String
 
         $finishedDateTime = (Get-Date)
         Write-Host ("Finished mapping {0} drive at {1}" -F $driveLetter, $finishedDateTime)
@@ -137,7 +136,7 @@ function MapDrive([string]$driveLetter, [string]$path)
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
 
         Write-Host "The drives on this computer are: "
-        Get-PSDrive
+        Get-PSDrive | Out-String
         Write-Host ""
     }
 }
