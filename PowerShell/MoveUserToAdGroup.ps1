@@ -1,12 +1,12 @@
 # move user to group in Active Directory 
 
-# you run this script with: .\MoveUserToGroupInActiveDirectory.ps1 -username < username > -newGroup < new group > -oldGroup < old group > 
+# you run this script with: .\MoveUserToAdGroup.ps1 -username < username > -newGroup < new group > -oldGroup < old group > 
 
 [CmdletBinding()]
 param(
-     [string] [Parameter(Mandatory = $False)] $username = "" # you can set the username here 
-   , [string] [Parameter(Mandatory = $False)] $newGroup = "" # you can set the new group here 
-   , [string] [Parameter(Mandatory = $False)] $oldGroup = "" # you can set the old group here 
+   [string] [Parameter(Mandatory = $False)] $username = "", # you can set the username here 
+   [string] [Parameter(Mandatory = $False)] $newGroup = "", # you can set the new group here 
+   [string] [Parameter(Mandatory = $False)] $oldGroup = "" # you can set the old group here 
 )
 
 function CheckOsForWin()
@@ -24,11 +24,7 @@ function CheckOsForWin()
    else 
    {
       Write-Host "Operating System:" $hostOs
-      Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-      Write-Host "Finished checking operating system at" (Get-Date).DateTime
-      Write-Host ""
-      break
+      throw "Sorry but this script only works on Windows." 
    }
 }
 
@@ -38,6 +34,7 @@ function GetUserName([string]$username)
    {
       $username = Read-Host -Prompt "Please type the username you would like to move to new group and press `"Enter`" key (Example: software.dev)"
 
+      Write-Host ""
       return $username
    }
    else 
@@ -52,6 +49,7 @@ function GetNewGroup([string]$newGroup)
    {
       $newGroup = Read-Host -Prompt ("Please type the new group you wish to move {0} to and press `"Enter`" key (Example: devs)" -F $username)
 
+      Write-Host ""
       return $newGroup
    }
    else
@@ -66,6 +64,7 @@ function GetOldGroup([string]$oldGroup)
    {
       $oldGroup = Read-Host -Prompt ("Please type the old group you are moving {0} from (Example: sysadmins)" -F $username)
 
+      Write-Host ""
       return $oldGroup
    }
    else
@@ -113,15 +112,11 @@ function CheckParameters([string]$username, [string]$newGroup, [string]$oldGroup
    }
    else 
    {
-      Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
-
-      Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-      Write-Host ""
-      break 
+      throw "One or more parameter checks incorrect, exiting script." 
    }
 }
 
-function MoveUserToGroupInActiveDirectory([string]$username, 
+function MoveUserToGroup([string]$username, 
                                           [string]$newGroup, 
                                           [string]$oldGroup)
 {
@@ -143,11 +138,11 @@ function MoveUserToGroupInActiveDirectory([string]$username,
       Get-ADUserNames `
             -UserNamesString $username `
             -Separator "`n" |
-         %{Add-ADPrincipalGroupMembership `
+         ForEach-Object{Add-ADPrincipalGroupMembership `
             -MemberOf $newGroup `
             -Identity $_.ADUser `
             -PassThru} |
-         %{Remove-ADPrincipalGroupMembership `
+         ForEach-Object{Remove-ADPrincipalGroupMembership `
             -MemberOf $oldGroup `
             -Identity $_.ADUser}
 
@@ -173,4 +168,4 @@ function MoveUserToGroupInActiveDirectory([string]$username,
    }
 }
 
-MoveUserToGroupInActiveDirectory $username $newGroup $oldGroup
+MoveUserToGroup $username $newGroup $oldGroup
