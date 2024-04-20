@@ -1,6 +1,6 @@
 # move user to group in Active Directory 
 
-# you run this script with: .\MoveUserToGroupInActiveDirectory.ps1 -username < username > -newGroup < new group > -oldGroup < old group > 
+# you run this script with: .\MoveUserToAdGroup.ps1 -username < username > -newGroup < new group > -oldGroup < old group > 
 
 [CmdletBinding()]
 param(
