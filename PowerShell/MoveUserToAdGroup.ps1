@@ -121,7 +121,7 @@ function CheckParameters([string]$username, [string]$newGroup, [string]$oldGroup
    }
 }
 
-function MoveUserToGroupInActiveDirectory([string]$username, 
+function MoveUserToGroup([string]$username, 
                                           [string]$newGroup, 
                                           [string]$oldGroup)
 {
@@ -173,4 +173,4 @@ function MoveUserToGroupInActiveDirectory([string]$username,
    }
 }
 
-MoveUserToGroupInActiveDirectory $username $newGroup $oldGroup
+MoveUserToGroup $username $newGroup $oldGroup
