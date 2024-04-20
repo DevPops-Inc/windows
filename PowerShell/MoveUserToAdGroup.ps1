@@ -34,6 +34,7 @@ function GetUserName([string]$username)
    {
       $username = Read-Host -Prompt "Please type the username you would like to move to new group and press `"Enter`" key (Example: software.dev)"
 
+      Write-Host ""
       return $username
    }
    else 
@@ -48,6 +49,7 @@ function GetNewGroup([string]$newGroup)
    {
       $newGroup = Read-Host -Prompt ("Please type the new group you wish to move {0} to and press `"Enter`" key (Example: devs)" -F $username)
 
+      Write-Host ""
       return $newGroup
    }
    else
@@ -62,6 +64,7 @@ function GetOldGroup([string]$oldGroup)
    {
       $oldGroup = Read-Host -Prompt ("Please type the old group you are moving {0} from (Example: sysadmins)" -F $username)
 
+      Write-Host ""
       return $oldGroup
    }
    else
