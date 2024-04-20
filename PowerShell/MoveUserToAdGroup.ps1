@@ -4,9 +4,9 @@
 
 [CmdletBinding()]
 param(
-     [string] [Parameter(Mandatory = $False)] $username = "" # you can set the username here 
-   , [string] [Parameter(Mandatory = $False)] $newGroup = "" # you can set the new group here 
-   , [string] [Parameter(Mandatory = $False)] $oldGroup = "" # you can set the old group here 
+   [string] [Parameter(Mandatory = $False)] $username = "", # you can set the username here 
+   [string] [Parameter(Mandatory = $False)] $newGroup = "", # you can set the new group here 
+   [string] [Parameter(Mandatory = $False)] $oldGroup = "" # you can set the old group here 
 )
 
 function CheckOsForWin()
