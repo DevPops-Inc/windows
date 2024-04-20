@@ -143,11 +143,11 @@ function MoveUserToGroup([string]$username,
       Get-ADUserNames `
             -UserNamesString $username `
             -Separator "`n" |
-         %{Add-ADPrincipalGroupMembership `
+         ForEach-Object{Add-ADPrincipalGroupMembership `
             -MemberOf $newGroup `
             -Identity $_.ADUser `
             -PassThru} |
-         %{Remove-ADPrincipalGroupMembership `
+         ForEach-Object{Remove-ADPrincipalGroupMembership `
             -MemberOf $oldGroup `
             -Identity $_.ADUser}
 
