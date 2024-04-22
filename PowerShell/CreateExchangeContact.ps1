@@ -1,12 +1,12 @@
-# create new contact in Exchange 
+# create contact in Exchange 
 
-# you can run this script with: .\NewContactInExchange.ps1 -contactName '< contact name >' -externalEmail < contact email > -orgUnit < organizational unit >
+# you can run this script with: .\CreateExchangeContact.ps1 -contactName '< contact name >' -externalEmail < contact email > -orgUnit < organizational unit >
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $contactName = "", # you can set the contact name here
+    [string] [Parameter(Mandatory = $False)] $contactName   = "", # you can set the contact name here
     [string] [Parameter(Mandatory = $False)] $externalEmail = "", # you can set the contact's email here 
-    [string] [Parameter(Mandatory = $False)] $orgUnit = "" # you can set the contact's organizational unit here 
+    [string] [Parameter(Mandatory = $False)] $orgUnit       = "" # you can set the contact's organizational unit here 
 )
 
 function CheckOsForWin()
@@ -24,11 +24,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -118,24 +114,20 @@ function CheckParameters([string]$contactName,
     }
     else
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "One or more parameters are incorrect, exiting script." 
     }
 }
 
-function NewContactInExchange([string]$contactName, 
-                              [string]$externalEmail, 
-                              [string]$orgUnit)
+function CreateContact([string]$contactName, 
+                       [string]$externalEmail, 
+                       [string]$orgUnit)
 {
     Write-Host "`nCreate New Contact in Exchange.`n"
     CheckOsForWin
     
-    $contactName = GetContactName $contactName
+    $contactName   = GetContactName $contactName
     $externalEmail = GetExternalEmail $externalEmail
-    $orgUnit = GetOrgUnit $orgUnit
+    $orgUnit       = GetOrgUnit $orgUnit
     CheckParameters $contactName $externalEmail $orgUnit
     
     try
@@ -166,4 +158,4 @@ function NewContactInExchange([string]$contactName,
     }
 }
 
-NewContactInExchange $contactName, $externalEmail, $orgUnit
+CreateContact $contactName, $externalEmail, $orgUnit
