@@ -34,6 +34,7 @@ function GetEmail([string]$email)
     {
         $email = Read-Host -Prompt "Please type the new email you wish to create and press `"Enter`" key (Example: dev@vicphan.dev)"
 
+        Write-Host ""
         return $email
     }
     else
@@ -48,6 +49,7 @@ function GetPassword([securestring]$password)
     {
         $password = Read-Host -Prompt "Please type the password for the new email account and press `"Enter`" (Example: Password123)" -AsSecureString
 
+        Write-Host ""
         return $password
     }
     else
@@ -62,6 +64,7 @@ function GettFirstName([string]$firstName)
     {
         $firstName = Read-Host -Prompt "Please type the first name for the new account and press `"Enter`" key (Example: Software)"
 
+        Write-Host ""
         return $firstName
     }
     else 
