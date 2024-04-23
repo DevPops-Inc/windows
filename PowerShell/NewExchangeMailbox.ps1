@@ -4,10 +4,10 @@
 
 [CmdletBinding()]
 param(
-      [string]       [Parameter(Mandatory = $False)] $email = "" # you can set the email you wish to create here
-    , [securestring] [Parameter(Mandatory = $False)] $password = $Null # you can set the password for the email here 
+      [string]       [Parameter(Mandatory = $False)] $email     = "" # you can set the email you wish to create here
+    , [securestring] [Parameter(Mandatory = $False)] $password  = $Null # you can set the password for the email here 
     , [string]       [Parameter(Mandatory = $False)] $firstName = "" # you can set the user's first name here 
-    , [string]       [Parameter(Mandatory = $False)] $lastName = "" # you can set the user's last name here 
+    , [string]       [Parameter(Mandatory = $False)] $lastName  = "" # you can set the user's last name here 
 )
 
 function CheckOsForWin()
