@@ -1,13 +1,13 @@
 # create remote mailbox in Exchange
 
-# you can run this script with: .\CreateRemoteMailboxInExchange.ps1 -email < email > -password < password > -firstName < first name > -lastName < last name >
+# you can run this script with: .\NewExchangeMailbox.ps1 -email < email > -password < password > -firstName < first name > -lastName < last name >
 
 [CmdletBinding()]
 param(
-      [string]       [Parameter(Mandatory = $False)] $email = "" # you can set the email you wish to create here
-    , [securestring] [Parameter(Mandatory = $False)] $password = $Null # you can set the password for the email here 
+      [string]       [Parameter(Mandatory = $False)] $email     = "" # you can set the email you wish to create here
+    , [securestring] [Parameter(Mandatory = $False)] $password  = $Null # you can set the password for the email here 
     , [string]       [Parameter(Mandatory = $False)] $firstName = "" # you can set the user's first name here 
-    , [string]       [Parameter(Mandatory = $False)] $lastName = "" # you can set the user's last name here 
+    , [string]       [Parameter(Mandatory = $False)] $lastName  = "" # you can set the user's last name here 
 )
 
 function CheckOsForWin()
@@ -25,11 +25,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 function GetEmail([string]$email)
@@ -38,6 +34,7 @@ function GetEmail([string]$email)
     {
         $email = Read-Host -Prompt "Please type the new email you wish to create and press `"Enter`" key (Example: dev@vicphan.dev)"
 
+        Write-Host ""
         return $email
     }
     else
@@ -52,6 +49,7 @@ function GetPassword([securestring]$password)
     {
         $password = Read-Host -Prompt "Please type the password for the new email account and press `"Enter`" (Example: Password123)" -AsSecureString
 
+        Write-Host ""
         return $password
     }
     else
@@ -66,6 +64,7 @@ function GettFirstName([string]$firstName)
     {
         $firstName = Read-Host -Prompt "Please type the first name for the new account and press `"Enter`" key (Example: Software)"
 
+        Write-Host ""
         return $firstName
     }
     else 
@@ -80,6 +79,7 @@ function GetLastName([string]$lastName)
     {
         $lastName = Read-Host -Prompt "Please type the last name for the new account and press `"Enter`" key (Example: Developer)"
 
+        Write-Host ""
         return $lastName
     }
     else
@@ -137,15 +137,11 @@ function CheckParameters([string]      $email,
     }
     else
     {
-        Write-Host "One or more parameter checks incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "One or more parameter checks incorrect." 
     }
 }
 
-function NewRemoteMailboxInExchange([string]      $email, 
+function NewMailbox([string]      $email, 
                                     [securestring]$password, 
                                     [string]      $firstName, 
                                     [string]      $lastName)
@@ -153,10 +149,10 @@ function NewRemoteMailboxInExchange([string]      $email,
     Write-Host "`nCreate remote mailbox in Exchange.`n"
     CheckOsForWin
 
-    $email = GetEmail $email
-    $password = GetPassword $password
+    $email     = GetEmail $email
+    $password  = GetPassword $password
     $firstName = GettFirstName $firstName
-    $lastName = GetLastName $lastName
+    $lastName  = GetLastName $lastName
     CheckParameters $email $password $firstName $lastName
 
     try 
@@ -184,4 +180,4 @@ function NewRemoteMailboxInExchange([string]      $email,
     }
 }
 
-NewRemoteMailboxInExchange $email $password $firstName $lastName
+NewMailbox $email $password $firstName $lastName
