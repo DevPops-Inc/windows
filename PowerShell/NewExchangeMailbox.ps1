@@ -79,6 +79,7 @@ function GetLastName([string]$lastName)
     {
         $lastName = Read-Host -Prompt "Please type the last name for the new account and press `"Enter`" key (Example: Developer)"
 
+        Write-Host ""
         return $lastName
     }
     else
