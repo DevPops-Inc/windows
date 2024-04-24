@@ -96,6 +96,8 @@ function ObtainAutoIp([string]$ipType)
 
             $interface | Set-NetIPInterface -DHCP Enabled
             $interface | Set-DnsClientServerAddress -ResetServerAddresses
+            $ipAddress = ($interface | Get-NetIPAddress).IPAddress
+            Write-Host ("New IP Address: {0}" -F $ipAddress) -ForegroundColor Blue
             Write-Host "Successfully obtained automatic IP address." -ForegroundColor Green
         }
 
