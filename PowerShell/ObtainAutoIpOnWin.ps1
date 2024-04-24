@@ -33,6 +33,7 @@ function GetIpType([string]$ipType)
     {
         $iPType = Read-Host -Prompt "Please type which IP type you like to use and press `"Enter`" key (IPv4 or IPv6)?"
 
+        Write-Host ""
         return $ipType
     }
     else 
