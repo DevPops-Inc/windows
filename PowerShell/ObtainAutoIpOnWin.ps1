@@ -1,6 +1,6 @@
-# obtain IP address automatically on Windows
+# obtain automtic IP address on Windows
 
-# you can run this script with: ObtainIpAutomaticallyOnWindows.ps1 -ipType < IPv4 or IPv6 > 
+# you can run this script with: ObtainAutoIpOnWin.ps1 -ipType < IPv4 or IPv6 > 
 
 [CmdletBinding()]
 param(
@@ -80,9 +80,9 @@ function CheckParameters([string]$ipType)
     }
 }
 
-function ObtainIpAutomatically([string]$ipType)
+function ObtainAutoIp([string]$ipType)
 {
-    Write-Host "`nObtain IP address automatically on Windows.`n"
+    Write-Host "`nObtain automatic IP address on Windows.`n"
     CheckOsForWin
 
     $ipType = GetIpType $ipType
@@ -91,7 +91,7 @@ function ObtainIpAutomatically([string]$ipType)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started optaining IP address automatically at" $startDateTime.DateTime
+        Write-Host "Started optaining automatic IP address at" $startDateTime.DateTime
 
         $adapter = Get-NetAdapter | ? {$_.Status -eq "up"}
         $interface = $adapter | Get-NetIPInterface -AddressFamily $ipType
@@ -105,11 +105,11 @@ function ObtainIpAutomatically([string]$ipType)
 
             $interface | Set-NetIPInterface -DHCP Enabled
             $interface | Set-DnsClientServerAddress -ResetServerAddresses
-            Write-Host "Successfully obtained IP address automatically." -ForegroundColor Green
+            Write-Host "Successfully obtained automatic IP address." -ForegroundColor Green
         }
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished obtaining IP address automatically at" $finishedDateTime.DateTime
+        Write-Host "Finished obtaining automatic IP address at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -119,11 +119,11 @@ function ObtainIpAutomatically([string]$ipType)
     }
     catch 
     {
-        Write-Host "Failed to obtain IP address automatically" -ForegroundColor Red
+        Write-Host "Failed to obtain automatic IP address." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
     }
 }
 
-ObtainIpAutomatically $ipType
+ObtainAutoIp $ipType
