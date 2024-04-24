@@ -29,7 +29,7 @@ function CheckOsForWin()
 
 function GetIpType([string]$ipType)
 {
-    if (($ipType -eq $Null) -or ($ipType -eq ""))
+    if (($Null -eq $ipType) -or ($ipType -eq ""))
     {
         $iPType = Read-Host -Prompt "Please type which IP type you like to use and press `"Enter`" key (IPv4 or IPv6)?"
 
@@ -51,7 +51,7 @@ function CheckParameters([string]$ipType)
     Write-Host ("ipType: {0}" -F $ipType)
     Write-Host "-------------------------"
 
-    if (($ipType -eq $Null) -or ($ipType -eq ""))
+    if (($Null -eq $ipType) -or ($ipType -eq ""))
     {
         Write-Host "ipType is not set." -ForegroundColor Red
         $valid = $False
