@@ -1,6 +1,6 @@
-# obtain IP address automatically on Windows
+# obtain automtic IP address on Windows
 
-# you can run this script with: ObtainIpAutomaticallyOnWindows.ps1 -ipType < IPv4 or IPv6 > 
+# you can run this script with: ObtainAutoIpOnWin.ps1 -ipType < IPv4 or IPv6 > 
 
 [CmdletBinding()]
 param(
@@ -22,22 +22,18 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
 
 function GetIpType([string]$ipType)
 {
-    if (($ipType -eq $Null) -or ($ipType -eq ""))
+    if (($Null -eq $ipType) -or ($ipType -eq ""))
     {
         $iPType = Read-Host -Prompt "Please type which IP type you like to use and press `"Enter`" key (IPv4 or IPv6)?"
 
+        Write-Host ""
         return $ipType
     }
     else 
@@ -56,7 +52,7 @@ function CheckParameters([string]$ipType)
     Write-Host ("ipType: {0}" -F $ipType)
     Write-Host "-------------------------"
 
-    if (($ipType -eq $Null) -or ($ipType -eq ""))
+    if (($Null -eq $ipType) -or ($ipType -eq ""))
     {
         Write-Host "ipType is not set." -ForegroundColor Red
         $valid = $False
@@ -71,18 +67,13 @@ function CheckParameters([string]$ipType)
     }
     else
     {
-        Write-Host "One or more parameters are incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect, exiting script." 
     }
 }
 
-function ObtainIpAutomatically([string]$ipType)
+function ObtainAutoIp([string]$ipType)
 {
-    Write-Host "`nObtain IP address automatically on Windows.`n"
+    Write-Host "`nObtain automatic IP address on Windows.`n"
     CheckOsForWin
 
     $ipType = GetIpType $ipType
@@ -91,9 +82,9 @@ function ObtainIpAutomatically([string]$ipType)
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started optaining IP address automatically at" $startDateTime.DateTime
+        Write-Host "Started optaining automatic IP address at" $startDateTime.DateTime
 
-        $adapter = Get-NetAdapter | ? {$_.Status -eq "up"}
+        $adapter = Get-NetAdapter | Where-Object {$_.Status -eq "up"}
         $interface = $adapter | Get-NetIPInterface -AddressFamily $ipType
         
         if ($interface.Dhcp -eq "Disabled") 
@@ -105,11 +96,14 @@ function ObtainIpAutomatically([string]$ipType)
 
             $interface | Set-NetIPInterface -DHCP Enabled
             $interface | Set-DnsClientServerAddress -ResetServerAddresses
-            Write-Host "Successfully obtained IP address automatically." -ForegroundColor Green
         }
 
+        $ipAddress = ($interface | Get-NetIPAddress).IPAddress
+        Write-Host ("IP Address: {0}" -F $ipAddress) -ForegroundColor Blue
+        Write-Host "Successfully obtained automatic IP address." -ForegroundColor Green
+
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished obtaining IP address automatically at" $finishedDateTime.DateTime
+        Write-Host "Finished obtaining automatic IP address at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -119,11 +113,11 @@ function ObtainIpAutomatically([string]$ipType)
     }
     catch 
     {
-        Write-Host "Failed to obtain IP address automatically" -ForegroundColor Red
+        Write-Host "Failed to obtain automatic IP address." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
     }
 }
 
-ObtainIpAutomatically $ipType
+ObtainAutoIp $ipType
