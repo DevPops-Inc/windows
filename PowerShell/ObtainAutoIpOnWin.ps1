@@ -84,7 +84,7 @@ function ObtainAutoIp([string]$ipType)
         $startDateTime = (Get-Date)
         Write-Host "Started optaining automatic IP address at" $startDateTime.DateTime
 
-        $adapter = Get-NetAdapter | ? {$_.Status -eq "up"}
+        $adapter = Get-NetAdapter | Where-Object {$_.Status -eq "up"}
         $interface = $adapter | Get-NetIPInterface -AddressFamily $ipType
         
         if ($interface.Dhcp -eq "Disabled") 
