@@ -1,6 +1,6 @@
 # open photo in Paint 3D on Windows
 
-# .\OpenPhotoInPaint3dOnWindows.ps1 -fileLocation "< file location >""
+# .\OpenPhotoInPaint3dOnWin.ps1 -fileLocation "< file location >""
 
 [CmdletBinding()]
 param(
