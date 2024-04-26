@@ -1,6 +1,6 @@
 # open photo on Windows
 
-# you can run this script with: .\OpenPhotoOnWindows.ps1 -photoLocation "< photo location >""
+# you can run this script with: .\OpenPhotoOnWin.ps1 -photoLocation "< photo location >""
 
 [CmdletBinding()]
 param(
