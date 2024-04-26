@@ -1,6 +1,6 @@
 # open photo on Windows
 
-# you can run this script with: .\OpenPhotoOnWindows.ps1 -photoLocation "< photo location >""
+# you can run this script with: .\OpenPhotoOnWin.ps1 -photoLocation "< photo location >""
 
 [CmdletBinding()]
 param(
@@ -22,12 +22,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -71,12 +66,7 @@ function CheckParameters([string]$photoLocation)
     }
     else 
     {
-        Write-Host "One or more parameter checks incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks incorrect." 
     }
 }
 
