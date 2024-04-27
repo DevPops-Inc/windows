@@ -46,7 +46,7 @@ function getWinUpdates([string]$winUpdates)
 {
     if (($winUpdates -eq $Null) -or ($winUpdates -eq ""))
     {
-        $winUpdates = Read-Host -Prompt "Please type the Windows updates filename and press the `"Enter`" key (Example: windowsupdates.txt)"
+        $winUpdates = Read-Host -Prompt "Please type the Windows updates filename and press the `"Enter`" key (Example: winupdates.txt)"
 
         Write-Host ""
         return $winUpdates
@@ -115,7 +115,7 @@ function ExportWinUpdatesFileToLocation()
         $winUpdatesFile = Join-Path -Path $filePath -ChildPath $winUpdates
         Get-Hotfix | Out-File  $winUpdatesFile
         Get-ChildItem $winUpdatesFile
-        notepad $winUpdatesFile
+        Get-Content $winUpdatesFile
         Write-Host "Successfully exported Windows update file." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
