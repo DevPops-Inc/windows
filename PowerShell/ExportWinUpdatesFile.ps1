@@ -113,7 +113,7 @@ function ExportWinUpdatesFileToLocation()
         Write-Host "Started exporting Windows update file at" $startDateTime.DateTime
 
         $winUpdatesFile = Join-Path -Path $filePath -ChildPath $winUpdates
-        Get-Hotfix | Out-File  $winUpdatesFile
+        Get-Hotfix | Out-File $winUpdatesFile
         Get-ChildItem $winUpdatesFile
         Get-Content $winUpdatesFile
         Write-Host "Successfully exported Windows update file." -ForegroundColor Green
