@@ -1,6 +1,6 @@
 # output Windows updates file
 
-# you can run this script with: .\OutputWinUpdatesFile.ps1 -filePath "< file path >"" -winUpdates "< Windows update file >""
+# you can run this script with: .\ExportWinUpdatesFile.ps1 -filePath "< file path >"" -winUpdates "< Windows update file >""
 
 [CmdletBinding()]
 param (
@@ -103,24 +103,28 @@ function checkParameters([string]$filePath, [string]$winUpdates)
     }
 }
 
-function OutputWindowsUpdateListOntoDesktop()
+function ExportWinUpdatesFileToLocation()
 {
     Write-Host "`nOutput Windows updates file.`n"
     CheckOsForWin
 
+    # get functions
+    # check parameters 
+    # test-path
+
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started outputing Windows update file at" $startDateTime.DateTime
+        Write-Host "Started exporting Windows update file at" $startDateTime.DateTime
 
         $winUpdatesFile = Join-Path -Path $filePath -ChildPath "windowsupdates.txt"
         Get-Hotfix | Out-File  $winUpdatesFile
         Get-ChildItem $winUpdatesFile
         notepad $winUpdatesFile
-        Write-Host "Successfully output Windows update file." -ForegroundColor Green
+        Write-Host "Successfully exported Windows update file." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished outputting Windows update file at" $finishedDateTime.DateTime
+        Write-Host "Finished exporting Windows update file at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -130,7 +134,7 @@ function OutputWindowsUpdateListOntoDesktop()
     }
     catch 
     {
-        Write-Host "Failed to output Windows update file." -ForegroundColor Red
+        Write-Host "Failed to export Windows update file." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
@@ -138,4 +142,4 @@ function OutputWindowsUpdateListOntoDesktop()
     }
 }
 
-OutputWindowsUpdateListOntoDesktop
+ExportWinUpdatesFileToLocation
