@@ -98,8 +98,9 @@ function ExportWinUpdatesFileToLocation()
     Write-Host "`nOutput Windows updates file.`n"
     CheckOsForWin
 
-    # get functions
-    # check parameters 
+    $filePath   = getFilePath
+    $winUpdates = getWinUpdates
+    checkParameters $filePath $winUpdates
     # test-path
 
     try 
