@@ -101,14 +101,18 @@ function ExportWinUpdatesFileToLocation()
     $filePath   = getFilePath
     $winUpdates = getWinUpdates
     checkParameters $filePath $winUpdates
-    # test-path
+
+    if ((Test-Path $filePath) -eq $False)
+    {
+        throw ("{0} is invalid." -F $filePath)
+    }
 
     try 
     {
         $startDateTime = (Get-Date)
         Write-Host "Started exporting Windows update file at" $startDateTime.DateTime
 
-        $winUpdatesFile = Join-Path -Path $filePath -ChildPath "windowsupdates.txt"
+        $winUpdatesFile = Join-Path -Path $filePath -ChildPath $winUpdates
         Get-Hotfix | Out-File  $winUpdatesFile
         Get-ChildItem $winUpdatesFile
         notepad $winUpdatesFile
