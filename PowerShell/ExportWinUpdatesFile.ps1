@@ -1,6 +1,6 @@
 # output Windows updates file
 
-# you can run this script with: .\OutputWinUpdatesFile.ps1 -filePath "< file path >"" -winUpdates "< Windows update file >""
+# you can run this script with: .\ExportWinUpdatesFile.ps1 -filePath "< file path >"" -winUpdates "< Windows update file >""
 
 [CmdletBinding()]
 param (
@@ -23,12 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Your operating system is:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -51,7 +46,7 @@ function getWinUpdates([string]$winUpdates)
 {
     if (($winUpdates -eq $Null) -or ($winUpdates -eq ""))
     {
-        $winUpdates = Read-Host -Prompt "Please type the Windows updates filename and press the `"Enter`" key (Example: windowsupdates.txt)"
+        $winUpdates = Read-Host -Prompt "Please type the Windows updates filename and press the `"Enter`" key (Example: winupdates.txt)"
 
         Write-Host ""
         return $winUpdates
@@ -94,33 +89,37 @@ function checkParameters([string]$filePath, [string]$winUpdates)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-        
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
-function OutputWindowsUpdateListOntoDesktop()
+function ExportWinUpdatesFileToLocation()
 {
     Write-Host "`nOutput Windows updates file.`n"
     CheckOsForWin
 
+    $filePath   = getFilePath
+    $winUpdates = getWinUpdates
+    checkParameters $filePath $winUpdates
+
+    if ((Test-Path $filePath) -eq $False)
+    {
+        throw ("{0} is invalid." -F $filePath)
+    }
+
     try 
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started outputing Windows update file at" $startDateTime.DateTime
+        Write-Host "Started exporting Windows update file at" $startDateTime.DateTime
 
-        $winUpdatesFile = Join-Path -Path $filePath -ChildPath "windowsupdates.txt"
-        Get-Hotfix | Out-File  $winUpdatesFile
+        $winUpdatesFile = Join-Path -Path $filePath -ChildPath $winUpdates
+        Get-Hotfix | Out-File $winUpdatesFile
         Get-ChildItem $winUpdatesFile
-        notepad $winUpdatesFile
-        Write-Host "Successfully output Windows update file." -ForegroundColor Green
+        Get-Content $winUpdatesFile
+        Write-Host "Successfully exported Windows update file." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished outputting Windows update file at" $finishedDateTime.DateTime
+        Write-Host "Finished exporting Windows update file at" $finishedDateTime.DateTime
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -130,7 +129,7 @@ function OutputWindowsUpdateListOntoDesktop()
     }
     catch 
     {
-        Write-Host "Failed to output Windows update file." -ForegroundColor Red
+        Write-Host "Failed to export Windows update file." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
@@ -138,4 +137,4 @@ function OutputWindowsUpdateListOntoDesktop()
     }
 }
 
-OutputWindowsUpdateListOntoDesktop
+ExportWinUpdatesFileToLocation
