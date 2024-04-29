@@ -1,6 +1,6 @@
-# ping loopback IPv4 address 
+# ping loopback IPv4 address on Windows
 
-# you can run this script with: ./PingLoopBackIpv4Address.ps1 -loopbackIpv4Address < IPv4 loopback address > 
+# you can run this script with: ./PingLoopBackIpv4AddressOnWin.ps1 -loopbackIpv4Address < IPv4 loopback address > 
 
 [CmdletBinding()]
 param(
@@ -22,12 +22,7 @@ function CheckOs()
     else 
     {
         Write-Host "Operating System:" $hostOs -ForegroundColor Green
-        Write-Host "Sorry but this script only runs on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only runs on Windows." 
     }
 }
 
@@ -71,12 +66,7 @@ function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks are incorrect."
     }
 }
 
