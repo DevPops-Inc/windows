@@ -1,6 +1,6 @@
-# ping loopback IPv4 address 
+# ping loopback IPv4 address on Windows
 
-# you can run this script with: ./PingLoopBackIpv4Address.ps1 -loopbackIpv4Address < IPv4 loopback address > 
+# you can run this script with: ./PingLoopBackIpv4AddressOnWin.ps1 -loopbackIpv4Address < IPv4 loopback address > 
 
 [CmdletBinding()]
 param(
