@@ -70,7 +70,6 @@ function CheckParameters([System.Net.IPAddress]$loopBackIpv6Address)
     }
 }
 
-
 function PingLoopbackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
 {
     Write-Host "`nPing loopback IPv6 address on Windows.`n"
