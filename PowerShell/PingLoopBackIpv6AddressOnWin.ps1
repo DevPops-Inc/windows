@@ -1,6 +1,6 @@
-# ping loopback IPv6 address
+# ping loopback IPv6 address on Windows
 
-# you can run this script: ./PingLoopBackIpv6AddressOnWindows.ps1 -loopBackIpv6Address < IPv6 addresss > 
+# you can run this script: ./PingLoopBackIpv6AddressOnWin.ps1 -loopBackIpv6Address < IPv6 addresss > 
 
 [CmdletBinding()]
 param(
