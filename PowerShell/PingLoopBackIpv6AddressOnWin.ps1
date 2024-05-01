@@ -1,13 +1,13 @@
-# ping loopback IPv6 address on Windows
+# ping loopback IPv6 address
 
-# you can run this script: ./PingLoopBackIpv6AddressOnWin.ps1 -loopBackIpv6Address < IPv6 addresss > 
+# you can run this script: ./PingLoopBackIpv6Address.ps1 -loopBackIpv6Address < IPv6 addresss > 
 
 [CmdletBinding()]
 param(
     [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopBackIpv6Address = "::1" 
 )
 
-function CheckOsForWin()
+function CheckOs()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
@@ -16,14 +16,15 @@ function CheckOsForWin()
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
 
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
+
     }
     else 
     {
         Write-Host "Operating System:" $hostOs -ForegroundColor Green
-        throw "Sorry but this script only runs on Windows."
     }
+    
+    Write-Host "Finished checking operating system at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function GetLoopBackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
@@ -70,9 +71,9 @@ function CheckParameters([System.Net.IPAddress]$loopBackIpv6Address)
     }
 }
 
-function PingLoopbackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
+function PingLoopbackIpv6([System.Net.IPAddress]$loopBackIpv6Address)
 {
-    Write-Host "`nPing loopback IPv6 address on Windows.`n"
+    Write-Host "`nPing loopback IPv6 address.`n"
     CheckOsForWin
 
     $loopBackIpv6Address = GetLoopBackIpv6Address $loopBackIpv6Address
@@ -104,4 +105,4 @@ function PingLoopbackIpv6Address([System.Net.IPAddress]$loopBackIpv6Address)
     }
 }
 
-PingLoopbackIpv6Address $loopBackIpv6Address
+PingLoopbackIpv6 $loopBackIpv6Address

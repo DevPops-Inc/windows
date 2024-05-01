@@ -1,6 +1,6 @@
-# ping loopback IPv4 address on Windows
+# ping loopback IPv4 address
 
-# you can run this script with: ./PingLoopBackIpv4AddressOnWin.ps1 -loopbackIpv4Address < IPv4 loopback address > 
+# you can run this script with: ./PingLoopBackIpv4Address.ps1 -loopbackIpv4Address < IPv4 loopback address > 
 
 [CmdletBinding()]
 param(
@@ -15,15 +15,15 @@ function CheckOs()
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
     }
     else 
     {
         Write-Host "Operating System:" $hostOs -ForegroundColor Green
-        throw "Sorry but this script only runs on Windows." 
     }
+
+    
+    Write-Host "Finished checking operating system at" (Get-Date).DateTime
+    Write-Host ""
 }
 
 function GetLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
@@ -70,7 +70,7 @@ function CheckParameters([System.Net.IPAddress]$loopbackIpv4Address)
     }
 }
 
-function PingLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
+function PingLoopbackIpv4([System.Net.IPAddress]$loopbackIpv4Address)
 {
     Write-Host "`nPing loopback IPv4 address.`n"
     CheckOs
@@ -104,4 +104,4 @@ function PingLoopbackIpv4Address([System.Net.IPAddress]$loopbackIpv4Address)
     }
 }
 
-PingLoopbackIpv4Address $loopbackIpv4Address
+PingLoopbackIpv4 $loopbackIpv4Address
