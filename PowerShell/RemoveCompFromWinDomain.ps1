@@ -1,8 +1,8 @@
-# remove computer from domain on Windows 
+# remove computer from Windows domain
 
 # haven't tested this script yet
 
-# you can run this script with: .\RemoveComputerFromWindowsDomain.ps1 -domain < domain name > -adAdmin < Active Directory admin account > 
+# you can run this script with: .\RemoveCompFromWinDomain.ps1 -domain < domain name > -adAdmin < Active Directory admin account > 
 
 [CmdletBinding()]
 param(
