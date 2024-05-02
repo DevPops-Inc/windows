@@ -1,12 +1,12 @@
-# remove computer from domain on Windows 
+# remove computer from Windows domain
 
 # haven't tested this script yet
 
-# you can run this script with: .\RemoveComputerFromWindowsDomain.ps1 -domain < domain name > -adAdmin < Active Directory admin account > 
+# you can run this script with: .\RemoveCompFromWinDomain.ps1 -domain < domain name > -adAdmin < Active Directory admin account > 
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $domain = "" # you can set the domain here
+      [string] [Parameter(Mandatory = $False)] $domain  = "" # you can set the domain here
     , [string] [Parameter(Mandatory = $False)] $adAdmin = "" # you can set the Active Directory admin here
 )
 
@@ -25,12 +25,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -96,12 +91,7 @@ function CheckParameters([string]$domain, [string]$adAdmin)
     }
     else
     {
-        Write-Host "One or more parameter checks are incorrect." -ForegroundColor red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks are incorrect."
     }
 }
 
@@ -110,7 +100,7 @@ function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
     Write-Host "`nRemove computer from Windows domain.`n"
     CheckOsForWin
 
-    $domain = GetDomain $domain
+    $domain  = GetDomain $domain
     $adAdmin = GetAdAdmin $adAdmin
     CheckParameters $domain $adAdmin
 
@@ -135,6 +125,7 @@ function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
     catch
     {
         Write-Host ("Failed to remove computer from {0} domain." -F $domain) -ForegroundColor Red
+        
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
