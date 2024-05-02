@@ -6,7 +6,7 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $domain = "" # you can set the domain here
+      [string] [Parameter(Mandatory = $False)] $domain  = "" # you can set the domain here
     , [string] [Parameter(Mandatory = $False)] $adAdmin = "" # you can set the Active Directory admin here
 )
 
@@ -110,7 +110,7 @@ function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
     Write-Host "`nRemove computer from Windows domain.`n"
     CheckOsForWin
 
-    $domain = GetDomain $domain
+    $domain  = GetDomain $domain
     $adAdmin = GetAdAdmin $adAdmin
     CheckParameters $domain $adAdmin
 
