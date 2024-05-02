@@ -125,6 +125,7 @@ function RemoveComputerFromDomain([string]$domain, [string]$adAdmin)
     catch
     {
         Write-Host ("Failed to remove computer from {0} domain." -F $domain) -ForegroundColor Red
+        
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
