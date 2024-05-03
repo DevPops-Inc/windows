@@ -1,7 +1,7 @@
-# remove contact from Exchange
+# remove Exchange contact
 
 # haven't tested this script yet
-# you can run this script with: .\RemoveContactFromExchange.ps1 -contactName '< contact >'
+# you can run this script with: .\RemoveExchangeContact.ps1 -contactName '< contact >'
 
 [CmdletBinding()]
 param(
@@ -23,12 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Your operating system is:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -38,6 +33,7 @@ function GetContactName([string]$contactName)
     {
         $contactName = Read-Host -Prompt "Please type the contact you wish to remove and press the `"Enter`" key (Example: software.vendor)"
 
+        Write-Host ""
         return $contactName
     }
     else
@@ -71,12 +67,7 @@ function CheckParameters([string]$contactName)
     }
     else
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameters at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
@@ -109,6 +100,7 @@ function RemoveContact([string]$contactName)
     catch 
     {
         Write-Host ("Failed to remove {0} from Exchange." -F $contactName) -ForegroundColor Red
+        
         Write-Host $_ -ForegroundColor Red
         Write-host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
