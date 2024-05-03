@@ -100,6 +100,7 @@ function RemoveContact([string]$contactName)
     catch 
     {
         Write-Host ("Failed to remove {0} from Exchange." -F $contactName) -ForegroundColor Red
+        
         Write-Host $_ -ForegroundColor Red
         Write-host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
