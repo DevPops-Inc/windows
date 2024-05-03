@@ -33,6 +33,7 @@ function GetContactName([string]$contactName)
     {
         $contactName = Read-Host -Prompt "Please type the contact you wish to remove and press the `"Enter`" key (Example: software.vendor)"
 
+        Write-Host ""
         return $contactName
     }
     else
