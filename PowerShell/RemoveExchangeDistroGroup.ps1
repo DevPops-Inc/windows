@@ -2,7 +2,7 @@
 
 # haven't tested this script yet
 
-# you can run this script with: .\RemoveDistroGroupFromExchange.ps1 -distroGroup < distribution group > 
+# you can run this script with: .\RemoveExchangeDistroGroup.ps1 -distroGroup < distribution group > 
 
 [CmdletBinding()]
 param(
