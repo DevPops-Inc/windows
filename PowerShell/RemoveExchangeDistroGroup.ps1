@@ -101,6 +101,7 @@ function RemoveDistroGroup([string]$distroGroup)
     catch 
     {
         Write-Host ("Failed to remove {0} from Exchange." -F $distroGroup) -ForegroundColor Red
+        
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
