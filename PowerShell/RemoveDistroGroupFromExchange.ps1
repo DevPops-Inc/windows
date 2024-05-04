@@ -1,6 +1,7 @@
 # remove distribution group in Exchange
 
 # haven't tested this script yet
+
 # you can run this script with: .\RemoveDistroGroupFromExchange.ps1 -distroGroup < distribution group > 
 
 [CmdletBinding()]
