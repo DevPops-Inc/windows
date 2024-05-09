@@ -1,7 +1,7 @@
 # remove printer port on Windows
 
 # haven't tested this script against IP printer yet
-# you can run this script with: .\RemovePrinterPortOnWindows.ps1 -ipAddress < IP address > 
+# you can run this script with: .\RemovePrinterPortOnWin.ps1 -ipAddress < IP address > 
 
 [CmdletBinding()]
 param(
