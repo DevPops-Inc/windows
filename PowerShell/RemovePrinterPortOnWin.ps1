@@ -1,7 +1,7 @@
 # remove printer port on Windows
 
 # haven't tested this script against IP printer yet
-# you can run this script with: .\RemovePrinterPortOnWindows.ps1 -ipAddress < IP address > 
+# you can run this script with: .\RemovePrinterPortOnWin.ps1 -ipAddress < IP address > 
 
 [CmdletBinding()]
 param(
@@ -23,12 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Your operating system is:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -72,12 +67,7 @@ function CheckParameters([string]$ipAddress)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks are incorrect." 
     }
 }
 
