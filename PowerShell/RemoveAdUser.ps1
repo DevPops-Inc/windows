@@ -1,7 +1,7 @@
 # remove user from Active Directoy
 
 # haven't test this script yet
-# you can run this script with: .\RemoveUserFromActiveDirectory.ps1 -username '< username >'
+# you can run this script with: .\RemoveAdUser.ps1 -username '< username >'
 
 [CmdletBinding()]
 param(
@@ -23,12 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Your operating system is:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -72,16 +67,11 @@ function CheckParameters([string]$username)
     }
     else
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks are incorrect."
     }
 }
 
-function RemoveUserFromAd([string]$username)
+function RemoveUser([string]$username)
 {
     Write-Host "`nRemove user from Active Directory.`n"
     CheckOsForWin
@@ -117,4 +107,4 @@ function RemoveUserFromAd([string]$username)
     }
 }
 
-RemoveUserFromAd $username
+RemoveUser $username
