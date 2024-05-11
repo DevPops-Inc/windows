@@ -2,7 +2,7 @@
 
 # haven't tested this script yet
 # run this script as admin: Start-Process PowerShell -Verb RunAs
-# you can run this script with: .\RenameComputerOnWindows.ps1 -newName '< new computer name >'
+# you can run this script with: .\RenameComputerOnWin.ps1 -newName '< new computer name >'
 
 [CmdletBinding()]
 param(
@@ -11,7 +11,7 @@ param(
 
 function CheckOsForWin()
 {
-    Write-Host "`nStarted checking operating system at" (Get-Date).DateTime
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
     $hostOs = [System.Environment]::OSVersion.Platform
 
     if ($hostOs -eq "Win32NT")
@@ -24,13 +24,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system."
-        Write-Host ""
-
-        break
-    }
+        throw "Sorry but this script only works on Windows."     }
 }
 
 function GetNewName([string]$newName)
@@ -73,12 +67,7 @@ function CheckParameters([string]$newName)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks are incorrect." 
     }
 }
 
