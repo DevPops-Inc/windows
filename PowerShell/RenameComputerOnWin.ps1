@@ -2,7 +2,7 @@
 
 # haven't tested this script yet
 # run this script as admin: Start-Process PowerShell -Verb RunAs
-# you can run this script with: .\RenameComputerOnWindows.ps1 -newName '< new computer name >'
+# you can run this script with: .\RenameComputerOnWin.ps1 -newName '< new computer name >'
 
 [CmdletBinding()]
 param(
