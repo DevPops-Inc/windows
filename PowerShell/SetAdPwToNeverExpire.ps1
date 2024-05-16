@@ -1,6 +1,6 @@
-# set password to never expire in Active Directory
+# set Active Directory password to never expire
 
-# you can run this script with: .\SetPwToNeverExpireInAd.ps1 -adUser < username >
+# you can run this script with: .\SetAdPwToNeverExpire.ps1 -adUser < username >
 
 [CmdletBinding()]
 param(
@@ -76,7 +76,7 @@ function CheckParameters([string]$adUser)
     Write-Host ""
 }
 
-function SetPwToNeverExpireInActiveDirectory([string]$adUser)
+function SetPwToNeverExpireInAd([string]$adUser)
 {
     Write-Host "`nSet password to never expire on Active Directory.`n"
     CheckOsForWin
@@ -110,4 +110,4 @@ function SetPwToNeverExpireInActiveDirectory([string]$adUser)
     }
 }
 
-SetPwToNeverExpireInActiveDirectory $adUser
+SetPwToNeverExpireInAd $adUser
