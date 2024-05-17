@@ -1,6 +1,6 @@
 # set service to automatic startup on Windows 
 
-# run this script with: .\SetSetToAutoStartUpOnWindows.ps1 -serviceName < service name >
+# run this script with: .\AutostartServiceOnWin.ps1 -serviceName < service name >
 
 [CmdletBinding()]
 param(
