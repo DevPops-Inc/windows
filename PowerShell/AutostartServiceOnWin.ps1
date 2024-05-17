@@ -1,6 +1,6 @@
 # set service to automatic startup on Windows 
 
-# run this script with: .\SetSetToAutoStartUpOnWindows.ps1 -serviceName < service name >
+# run this script with: .\AutostartServiceOnWin.ps1 -serviceName < service name >
 
 [CmdletBinding()]
 param(
@@ -22,12 +22,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -65,16 +60,14 @@ function CheckParameters([string]$serviceName)
     if ($valid -eq $True)
     {
         Write-Host "All parameter check(s) passed." -ForegroundColor Green
+        
+        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
+        Write-Host ""
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-
-        exit -1
+        throw "One or more parameter checks are incorrect."
     }
-
-    Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-    Write-Host ""
 }
 
 function SetServiceToAutoStart([string]$serviceName)
@@ -107,6 +100,8 @@ function SetServiceToAutoStart([string]$serviceName)
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+
+        Write-Host ""
     }
     catch
     {
@@ -114,6 +109,7 @@ function SetServiceToAutoStart([string]$serviceName)
 
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
+        Write-Host ""
     }
 }
 
