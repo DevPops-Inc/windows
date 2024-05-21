@@ -5,7 +5,7 @@
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $newAlias = "vi", 
-    [string] [Parameter(Mandatory = $False)] $app = "notepad"
+    [string] [Parameter(Mandatory = $False)] $app      = "notepad"
 )
 
 function GetNewAlias([string]$newAlias)
@@ -110,7 +110,7 @@ function SetViForNotepad([string]$newAlias, [string]$app)
     CheckOsForWin
 
     $newAlias = GetNewAlias $newAlias
-    $app = GetApp $app
+    $app      = GetApp $app
     CheckParameters $newAlias $app
 
     try 
