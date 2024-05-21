@@ -5,8 +5,27 @@
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $newAlias = "vi", 
-    [string] [Parameter(Mandatory = $False)] $app = "notepad"
+    [string] [Parameter(Mandatory = $False)] $app      = "notepad"
 )
+
+function CheckOsForWin()
+{
+    Write-Host "Started checking operating system at" (Get-Date).DateTime
+    $hostOs = [System.Environment]::OSVersion.Platform
+
+    if ($hostOs -eq "Win32NT")
+    {
+        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
+
+        Write-Host "Finished checking operating system at" (Get-Date).DateTime
+        Write-Host "'"
+    }
+    else 
+    {
+        Write-Host "Operating System:" $hostOs
+        throw "Sorry but this script only works on Windows." 
+    }
+}
 
 function GetNewAlias([string]$newAlias)
 {
@@ -70,37 +89,7 @@ function CheckParameters([string]$newAlias, [string]$app)
     }
     else
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
-    }
-}
-
-function CheckOsForWin()
-{
-    Write-Host "Started checking operating system at" (Get-Date).DateTime
-    $hostOs = [System.Environment]::OSVersion.Platform
-
-    if ($hostOs -eq "Win32NT")
-    {
-        Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host "'"
-    }
-    else 
-    {
-        Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect."
     }
 }
 
@@ -110,7 +99,7 @@ function SetViForNotepad([string]$newAlias, [string]$app)
     CheckOsForWin
 
     $newAlias = GetNewAlias $newAlias
-    $app = GetApp $app
+    $app      = GetApp $app
     CheckParameters $newAlias $app
 
     try 
