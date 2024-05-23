@@ -1,7 +1,7 @@
 # start service on Windows 
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
-# you can run this script with: .\StartServiceOnWindows.ps1 -serviceName < service > 
+# you can run this script with: .\StartServiceOnWin.ps1 -serviceName < service > 
 
 [CmdletBinding()]
 param(
