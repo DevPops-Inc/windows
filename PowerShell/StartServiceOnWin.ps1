@@ -95,7 +95,9 @@ function StartService([string]$serviceName)
         Write-Host ("Finished starting {0} at {1}" -F $serviceName, $finishedDateTime.DateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
+
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        
         Write-Host ""
     }
     catch
