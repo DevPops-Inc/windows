@@ -128,6 +128,11 @@ function StopAndRelaunchOutlook([string]$processName,
     $applicationPath = GetApplicationName $applicationPath
     CheckParameters $processName $seconds $applicationPath
 
+    if ((Test-Path $applicationPath) -eq $False)
+    {
+        throw ("{0} is invalid." -F $applicationPath)
+    }
+
     try 
     {
         $startDateTime = (Get-Date)
