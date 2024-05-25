@@ -23,12 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -72,12 +67,7 @@ function CheckParameters([string]$processName)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-        
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks are incorrect."
     }
 }
 
