@@ -1,7 +1,7 @@
 # stop process on Windows 
 
 # run this script as admin: Start-Proess PowerShell -Verb RunAs
-# you can run this script with: .\StopProcessOnWindows.ps1 -processName '< process > '
+# you can run this script with: .\StopProcessOnWin.ps1 -processName '< process > '
 
 [CmdletBinding()]
 param(
