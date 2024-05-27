@@ -1,7 +1,7 @@
 # stop service on Windows
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
-# you can run this script with: .\StopServiceOnWindows.ps1 -serviceName < service > 
+# you can run this script with: .\StopServiceOnWin.ps1 -serviceName < service > 
 
 [CmdletBinding()]
 param(
@@ -23,12 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -72,12 +67,7 @@ function CheckParameters([string]$serviceName)
     }
     else 
     {
-        Write-Host "One or more parameters are incorrect." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameters are incorrect." 
     }
 }
 
@@ -105,7 +95,9 @@ function StopService([string]$serviceName)
         Write-Host ("Finished stopping {0} at {1}" -F $serviceName, $finishedDateTime.DateTime)
 
         $duration = New-TimeSpan $startDateTime $finishedDateTime
+
         Write-Host ("Total execution time: {0} hours {1} minutes {2} seconds" -F $duration.Hours, $duration.Minutes, $duration.Seconds)
+        
         Write-Host ""
     }
     catch 
