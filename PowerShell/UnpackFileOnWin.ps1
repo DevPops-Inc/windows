@@ -1,11 +1,11 @@
 # unpack file on Windows 
 
-# you can run this script with: .\UnpackFileOnWindows.ps1 -sourceFilePath '< source path >' -destinationPath '< destination path >' 
+# you can run this script with: .\UnpackFileOnWin.ps1 -sourceFilePath '< source path >' -destinationPath '< destination path >' 
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $sourceFilePath = ""
-    , [string] [Parameter(Mandatory = $False)] $destinationPath = ""
+    [string] [Parameter(Mandatory = $False)] $sourceFilePath  = "", 
+    [string] [Parameter(Mandatory = $False)] $destinationPath = ""
 )
 
 function CheckOsForWin()
@@ -23,12 +23,7 @@ function CheckOsForWin()
     else 
     {
         Write-Host "Operating System:" $hostOs
-        Write-Host "Sorry but this script only works on Windows." -ForegroundColor Red
-
-        Write-Host "Finished checking operating system at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "Sorry but this script only works on Windows." 
     }
 }
 
@@ -94,12 +89,7 @@ function CheckParameters([string]$sourceFilePath, [string]$destinationPath)
     }
     else 
     {
-        Write-Host "One or more parameter checks are incorrect, exiting script." -ForegroundColor Red
-
-        Write-Host "Finished checking parameter(s) at" (Get-Date).DateTime
-        Write-Host ""
-
-        break
+        throw "One or more parameter checks are incorrect."
     }
 }
 
@@ -108,16 +98,16 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
     Write-Host "`nUnpack file on Windows.`n"
     CheckOsForWin
 
-    $sourceFilePath = GetSourceFilePath $sourceFilePath
+    $sourceFilePath  = GetSourceFilePath $sourceFilePath
     $destinationPath = GetDestinationPath $destinationPath
     CheckParameters $sourceFilePath $destinationPath
 
-    if (-Not (Test-Path -Path $sourceFilePath))
-        {
-            throw ("{0} isn't valid." -F $sourceFilePath)
-        }
+    if ((Test-Path -Path $sourceFilePath) -eq $False)
+    {
+        throw ("{0} isn't valid." -F $sourceFilePath)
+    }
 
-    if ((Test-Path -Path $destinationPath))
+    if ((Test-Path -Path $destinationPath) -eq $True)
     {
         throw ("{0} already exists." -F $destinationPath)
     }
