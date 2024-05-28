@@ -1,6 +1,6 @@
 # unpack file on Windows 
 
-# you can run this script with: .\UnpackFileOnWindows.ps1 -sourceFilePath '< source path >' -destinationPath '< destination path >' 
+# you can run this script with: .\UnpackFileOnWin.ps1 -sourceFilePath '< source path >' -destinationPath '< destination path >' 
 
 [CmdletBinding()]
 param(
