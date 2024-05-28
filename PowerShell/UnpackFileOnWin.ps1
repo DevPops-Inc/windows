@@ -98,16 +98,16 @@ function UnpackFile([string]$sourceFilePath, [string]$destinationPath)
     Write-Host "`nUnpack file on Windows.`n"
     CheckOsForWin
 
-    $sourceFilePath = GetSourceFilePath $sourceFilePath
+    $sourceFilePath  = GetSourceFilePath $sourceFilePath
     $destinationPath = GetDestinationPath $destinationPath
     CheckParameters $sourceFilePath $destinationPath
 
-    if (-Not (Test-Path -Path $sourceFilePath))
-        {
-            throw ("{0} isn't valid." -F $sourceFilePath)
-        }
+    if ((Test-Path -Path $sourceFilePath) -eq $False)
+    {
+        throw ("{0} isn't valid." -F $sourceFilePath)
+    }
 
-    if ((Test-Path -Path $destinationPath))
+    if ((Test-Path -Path $destinationPath) -eq $True)
     {
         throw ("{0} already exists." -F $destinationPath)
     }
