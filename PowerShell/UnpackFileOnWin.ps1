@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $sourceFilePath = ""
-    , [string] [Parameter(Mandatory = $False)] $destinationPath = ""
+    [string] [Parameter(Mandatory = $False)] $sourceFilePath  = "", 
+    [string] [Parameter(Mandatory = $False)] $destinationPath = ""
 )
 
 function CheckOsForWin()
