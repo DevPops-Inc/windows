@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # check operating system in Bash
 
