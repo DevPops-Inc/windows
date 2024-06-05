@@ -4,8 +4,8 @@
 
 [CmdletBinding()]
 param (
-      [string]       [Parameter(Mandatory = $False)] $localUser   = "" # you can set the local user here
-    , [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null # you can set the new password here
+    [string]       [Parameter(Mandatory = $False)] $localUser   = "", # you can set the local user here
+    [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null # you can set the new password here
 )
 
 function CheckOsForWin()
