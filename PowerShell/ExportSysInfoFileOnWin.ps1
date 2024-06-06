@@ -1,11 +1,11 @@
 # export system info to text file
 
-# you can run this script with: .\ExportSysInfoTxtFileOnWin.ps1 -systemInfoFile "< system info filename >" -fileDestination "< file destination >"
+# you can run this script with: .\ExportSysInfoFileOnWin.ps1 -systemInfoFile "< system info filename >" -fileDestination "< file destination >"
 
 [CmdletBinding()]
 param(
-      [string] [Parameter(Mandatory = $False)] $systemInfoFile = "" # you can set system info file here
-    , [string] [Parameter(Mandatory = $False)] $fileDestination = "" # you can set file path here
+    [string] [Parameter(Mandatory = $False)] $systemInfoFile  = "", # you can set system info file here
+    [string] [Parameter(Mandatory = $False)] $fileDestination = "" # you can set file path here
 )
 
 function CheckOsForWin()
@@ -96,28 +96,28 @@ function CheckParameters([string]$systemInfoFile, [string]$fileDestination)
     }
 }
 
-function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestination)
+function ExportSystemInfoFile([string]$systemInfoFile, [string]$fileDestination)
 {
-    Write-Host "`nExport system info to text file on Windows.`n"
+    Write-Host "`nExport system info to file on Windows.`n"
     CheckOsForWin
 
-    $systemInfoFile = GetSystemInfoFile $systemInfoFile
+    $systemInfoFile  = GetSystemInfoFile $systemInfoFile
     $fileDestination = GetFileDestination $fileDestination
     CheckParameters $systemInfoFile $fileDestination
 
     try
     {
         $startDateTime = (Get-Date)
-        Write-Host "Started exporting system info to text file at" $startDateTime.DateTime
+        Write-Host "Started exporting system info to file at" $startDateTime.DateTime
 
         $systemInfoFilePath = Join-Path $fileDestination $systemInfoFile
         systeminfo | Out-File $systemInfoFilePath
         Get-Content -Path $systemInfoFilePath 
 
-        Write-Host "Successfully exported system info text file." -ForegroundColor Green
+        Write-Host "Successfully exported system info file." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
-        Write-Host "Finished exporting systme info to text file at" $finishedDateTime.DateTime
+        Write-Host "Finished exporting systme info to file at" $finishedDateTime.DateTime
         
         $duration = New-TimeSpan $startDateTime $finishedDateTime
 
@@ -127,11 +127,11 @@ function ExportSystemInfoAsTextFile([string]$systemInfoFile, [string]$fileDestin
     }
     catch
     {
-        Write-Host "Failed to export system info text file." -ForegroundColor Red
+        Write-Host "Failed to export system info file." -ForegroundColor Red
         Write-Host $_ -ForegroundColor Red
         Write-Host $_.ScriptStackTrace -ForegroundColor Red
         Write-Host ""
     }
 }
 
-ExportSystemInfoAsTextFile $systemInfoFile $fileDestination
+ExportSystemInfoFile $systemInfoFile $fileDestination
