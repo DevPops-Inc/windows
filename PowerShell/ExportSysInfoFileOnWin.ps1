@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $systemInfoFile = "", # you can set system info file here
+    [string] [Parameter(Mandatory = $False)] $systemInfoFile  = "", # you can set system info file here
     [string] [Parameter(Mandatory = $False)] $fileDestination = "" # you can set file path here
 )
 
@@ -101,7 +101,7 @@ function ExportSystemInfoFile([string]$systemInfoFile, [string]$fileDestination)
     Write-Host "`nExport system info to file on Windows.`n"
     CheckOsForWin
 
-    $systemInfoFile = GetSystemInfoFile $systemInfoFile
+    $systemInfoFile  = GetSystemInfoFile $systemInfoFile
     $fileDestination = GetFileDestination $fileDestination
     CheckParameters $systemInfoFile $fileDestination
 
