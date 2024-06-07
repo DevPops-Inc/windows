@@ -4,9 +4,9 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $ipAddress = "", # you can set the printe's IP address here 
+    [string] [Parameter(Mandatory = $False)] $ipAddress   = "", # you can set the printe's IP address here 
     [string] [Parameter(Mandatory = $False)] $printerName = "", # you can set the printer name here 
-    [string] [Parameter(Mandatory = $False)] $driverName = "" # you can set the printer driver here 
+    [string] [Parameter(Mandatory = $False)] $driverName  = "" # you can set the printer driver here 
 )
 
 function CheckOsForWin()
