@@ -4,9 +4,9 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $ipAddress = "", # you can set the printe's IP address here 
+    [string] [Parameter(Mandatory = $False)] $ipAddress   = "", # you can set the printe's IP address here 
     [string] [Parameter(Mandatory = $False)] $printerName = "", # you can set the printer name here 
-    [string] [Parameter(Mandatory = $False)] $driverName = "" # you can set the printer driver here 
+    [string] [Parameter(Mandatory = $False)] $driverName  = "" # you can set the printer driver here 
 )
 
 function CheckOsForWin()
@@ -34,6 +34,7 @@ function GetIpAddress([string]$ipAddress)
     {
         $ipAddress = Read-Host -Prompt "Please type the IP address of the printer you wish to add and press `"Enter`" key (Example: 10.4.2.8)"
 
+        Write-Host ""
         return $ipAddress
     }
     else 
