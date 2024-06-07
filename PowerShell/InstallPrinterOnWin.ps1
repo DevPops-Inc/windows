@@ -34,6 +34,7 @@ function GetIpAddress([string]$ipAddress)
     {
         $ipAddress = Read-Host -Prompt "Please type the IP address of the printer you wish to add and press `"Enter`" key (Example: 10.4.2.8)"
 
+        Write-Host ""
         return $ipAddress
     }
     else 
