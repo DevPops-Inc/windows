@@ -2,7 +2,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $domainName = "", # you can set the domain name here 
+    [string] [Parameter(Mandatory = $False)] $domainName  = "", # you can set the domain name here 
     [string] [Parameter(Mandatory = $False)] $domainAdmin = "" # you can set the domain admin here 
 )
 
