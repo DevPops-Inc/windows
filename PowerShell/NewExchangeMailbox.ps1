@@ -4,10 +4,10 @@
 
 [CmdletBinding()]
 param(
-      [string]       [Parameter(Mandatory = $False)] $email     = "" # you can set the email you wish to create here
-    , [securestring] [Parameter(Mandatory = $False)] $password  = $Null # you can set the password for the email here 
-    , [string]       [Parameter(Mandatory = $False)] $firstName = "" # you can set the user's first name here 
-    , [string]       [Parameter(Mandatory = $False)] $lastName  = "" # you can set the user's last name here 
+    [string]       [Parameter(Mandatory = $False)] $email     = "", # you can set the email you wish to create here
+    [securestring] [Parameter(Mandatory = $False)] $password  = $Null, # you can set the password for the email here 
+    [string]       [Parameter(Mandatory = $False)] $firstName = "", # you can set the user's first name here 
+    [string]       [Parameter(Mandatory = $False)] $lastName  = "" # you can set the user's last name here 
 )
 
 function CheckOsForWin()
@@ -28,6 +28,7 @@ function CheckOsForWin()
         throw "Sorry but this script only works on Windows." 
     }
 }
+
 function GetEmail([string]$email)
 {
     if (($email -eq $Null) -or ($email -eq ""))
@@ -142,17 +143,17 @@ function CheckParameters([string]      $email,
 }
 
 function NewMailbox([string]      $email, 
-                                    [securestring]$password, 
-                                    [string]      $firstName, 
-                                    [string]      $lastName)
+                    [securestring]$password, 
+                    [string]      $firstName, 
+                    [string]      $lastName)
 {
     Write-Host "`nCreate remote mailbox in Exchange.`n"
     CheckOsForWin
 
-    $email     = GetEmail $email
-    $password  = GetPassword $password
+    $email     = GetEmail      $email
+    $password  = GetPassword   $password
     $firstName = GettFirstName $firstName
-    $lastName  = GetLastName $lastName
+    $lastName  = GetLastName   $lastName
     CheckParameters $email $password $firstName $lastName
 
     try 
