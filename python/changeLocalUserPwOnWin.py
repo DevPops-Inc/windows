@@ -62,6 +62,7 @@ def checkParameters(localUser, newPassword):
         print(Fore.GREEN + "All parameter check(s) passed." + Style.RESET_ALL)
 
         print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+        
         print("")
     else: 
         raise Exception("One or more parameters are incorrect.")
