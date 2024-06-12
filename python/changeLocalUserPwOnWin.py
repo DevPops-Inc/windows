@@ -67,7 +67,7 @@ def checkParameters(localUser, newPassword):
         raise Exception("One or more parameters are incorrect.")
 
 
-def changeLocalUserPassword():
+def changeLocalUserPw():
     print("\nChange local user password on Windows.\n")
     checkOsForWindows()
 
@@ -111,4 +111,4 @@ def changeLocalUserPassword():
         exit("" + Style.RESET_ALL)
 		
 		
-changeLocalUserPassword()
+changeLocalUserPw()
