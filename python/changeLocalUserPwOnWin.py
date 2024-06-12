@@ -33,7 +33,7 @@ def getLocalUser():
 	return localUser
 
 
-def getnewPassword(): 
+def getNewPw(): 
     newPassword = getpass.getpass("Please type the new password and press \"Enter\" key (Example: Password123): ")
 
     print("")
@@ -77,7 +77,7 @@ def changeLocalUserPw():
 
     else: 
         localUser   = getLocalUser()
-        newPassword = getnewPassword() 
+        newPassword = getNewPw() 
 
     checkParameters(localUser, newPassword)
     
