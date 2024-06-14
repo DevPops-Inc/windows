@@ -85,7 +85,7 @@ function OpenPhotoInPaint3d([string]$fileLocation)
         $startDateTime = (Get-Date)
         Write-Host "Started opening photo in Paint 3D at" $startDateTime.DateTime
 
-        if (-Not (Test-Path -Path $fileLocation))
+        if ((Test-Path $fileLocation) -eq $False)
         {
             throw ("{0} isn't valid." -F $fileLocation)
         }
