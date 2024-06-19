@@ -1,5 +1,7 @@
 # change local user's password on Windows
 
+# run this script as admin: Start-Process PowerShell -Verb RunAs
+
 # run this script with: .\ChangeLocalUserPwOnWin.ps1 -localUser < local user > -newPassword < new password >
 
 [CmdletBinding()]
