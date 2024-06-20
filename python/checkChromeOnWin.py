@@ -41,7 +41,7 @@ def checkChrome():
             print(Fore.GREEN + "Chrome is installed." + Style.RESET_ALL)
 
         else: 
-            print(Fore.RED + "Google Chrome is not installed." + Style.RESET_ALL)
+            print(Fore.RED + "Chrome is not installed." + Style.RESET_ALL)
 
         finishedDateTime = datetime.now()
         print("Finished checking Chrome at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
