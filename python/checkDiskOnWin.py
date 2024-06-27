@@ -3,7 +3,6 @@
 # check disk on Windows
 
 # run this script as administrator
-
 # haven't tested this script yet
 
 import colorama, os, sys, traceback
