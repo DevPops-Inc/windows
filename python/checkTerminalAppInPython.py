@@ -73,12 +73,8 @@ def checkParameters(terminalApp):
         print("")
 
     else: 
-        print(Fore.RED + "One or more parameters are incorrect" + Style.RESET_ALL)
-
-        print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-
-        exit("")
-
+        raise Exception(Fore.RED + "One or more parameters are incorrect")
+    
 
 def checkTerminalApp(): 
     print("\nCheck terminal application in Python.\n")
@@ -120,15 +116,7 @@ def checkTerminalApp():
                 print("")
 
             else: 
-                print(Fore.RED + "{0} is not installed.".format(terminalApp) + Style.RESET_ALL)
-                
-                finishedDateTime = datetime.now()
-
-                print("Finished checking {0} at".format(terminalApp), finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
-
-                duration = finishedDateTime - startDateTime
-                print("Total execution time: {0} second(s)".format(duration.seconds))
-                exit("")
+                raise Exception("{0} is not installed.".format(terminalApp))
 
         elif operatingSystem == "Windows": 
             
@@ -151,15 +139,7 @@ def checkTerminalApp():
                 print("")
 
             else: 
-                print(Fore.RED + "{0} is not installed.".format(terminalApp) + Style.RESET_ALL)
-                
-                finishedDateTime = datetime.now()
-
-                print("Finished checking {0} at".format(terminalApp), finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
-
-                duration = finishedDateTime - startDateTime
-                print("Total execution time: {0} second(s)".format(duration.seconds))
-                exit("")
+                raise Exception("{0} is not installed.".format(terminalApp))
                 
     except Exception: 
         print(Fore.RED + "Failed to check {0} in Python.".format(terminalApp))
