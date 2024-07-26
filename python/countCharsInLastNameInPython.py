@@ -31,6 +31,8 @@ def checkOs():
         print(Style.RESET_ALL, end="")
         operatingSystem = "Linux"
 
+    print("Finished checking oeprating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+    
     print("")
     return operatingSystem
 
