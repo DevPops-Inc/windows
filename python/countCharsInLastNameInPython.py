@@ -2,7 +2,7 @@
 
 # count characters in last name
 
-# you can run this script with: python3 countCharLastNameInPython.py < last name > 
+# you can run this script with: python3 countCharsLastNameInPython.py < last name > 
 
 import colorama, os, sys, traceback
 from colorama import Fore, Style
@@ -72,7 +72,7 @@ def checkParameters(lastName):
         exit("")
 
 
-def countCharactersInLastName(): 
+def countCharsInLastName(): 
     print("\nCount characters in last name in Python.\n")
     operatingSystem = checkOs()
 
@@ -105,4 +105,4 @@ def countCharactersInLastName():
         exit("" + Style.RESET_ALL)
 
 
-countCharactersInLastName()
+countCharsInLastName()
