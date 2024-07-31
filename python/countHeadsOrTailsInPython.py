@@ -86,7 +86,7 @@ def countHeadsOrTails():
     try: 
         startDateTime = datetime.now()
 
-        print("Started counting heads and tails in coin flips at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
+        print("Started counting heads and tails in {0} coin flip(s) at".format(coinFlip), startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         output = {"Heads":0, "Tails":0}
         coin   = list(output.keys())
@@ -97,11 +97,12 @@ def countHeadsOrTails():
         print("The results of the coin flips are:" + Fore.BLUE)
         print("Heads:", output["Heads"])
         print("Tails:", output["Tails"])
-        print(Fore.GREEN + "Successfully counted heads and tails in coin flip." + Style.RESET_ALL)
+
+        print(Fore.GREEN + "Successfully counted heads and tails in {0} coin flip(s).".format(coinFlip) + Style.RESET_ALL)
 
         finishedDateTime = datetime.now()
 
-        print("Finished counting heads and tails in coin flips at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
+        print("Finished counting heads and tails in {0} coin flip(s) at".format(coinFlip), finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         duration = finishedDateTime - startDateTime
         print("Total execution time: {0} second(s)".format(duration.seconds))
