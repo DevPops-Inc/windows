@@ -2,7 +2,7 @@
 
 # count heads or tails in coin flips in Python
 
-# you can run this script with: python3 countHeadsOrTailsInCoinFlipsInPython.py < number of coin flips > 
+# you can run this script with: python3 countHeadsOrTailsInPython.py < number of coin flips > 
 
 import colorama, random, os, sys, traceback
 from colorama import Fore, Style
@@ -73,7 +73,7 @@ def checkParameters(coinFlip):
         exit("")
 
     
-def countHeadsOrTailsInCoinFlips(): 
+def countHeadsOrTails(): 
     print("\nLet's count heads or tails in coin flips!\n")
     operatingSystem = checkOs()
 
@@ -115,4 +115,4 @@ def countHeadsOrTailsInCoinFlips():
         exit("" + Style.RESET_ALL)
 
 
-countHeadsOrTailsInCoinFlips()
+countHeadsOrTails()
