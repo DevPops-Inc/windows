@@ -32,7 +32,7 @@ def checkOs():
         operatingSystem = "Linux"
 
     print("Finished checking operating system at", datetime.now().strftime("%Y-%d-%m %H:%M %p"))
-    
+
     print("")
     return operatingSystem
 
@@ -84,10 +84,7 @@ def checkParameters(firstYear, secondYear):
         print("")
 
     else: 
-        print(Fore.RED + "One or more parameters are incorrect." + Style.RESET_ALL)
-
-        print("Finished checking parameter(s) at", datetime.now().strftime("Y-%m-%d %H:%M %p"))
-        exit("")
+        raise Exception("One or more parameters are incorrect.")
 
         
 def leapYearCounter(): 
