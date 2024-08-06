@@ -1,6 +1,6 @@
 #!/bin/python
 
-# create bubblesort in Python
+# create bubble sort in Python
 
 import colorama, os, sys, time, traceback
 from colorama import Fore, Style 
