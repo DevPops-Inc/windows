@@ -1,6 +1,6 @@
 #!/bin/python
 
-# create bubblesort in Python
+# create bubble sort in Python
 
 import colorama, os, sys, time, traceback
 from colorama import Fore, Style 
@@ -30,6 +30,7 @@ def checkOs():
         operatingSystem = "Linux"
     
     print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+    
     print("")
     return operatingSystem
 
