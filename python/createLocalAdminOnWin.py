@@ -3,7 +3,8 @@
 # create local admin on Windows
 
 # run this script as admin
-# you can run this script with: python3 createLocalAdminOnWindows.py < local admin > < password > 
+
+# you can run this script with: python3 createLocalAdminOnWin.py < local admin > < password > 
 
 import colorama, getpass, os, sys, traceback 
 from colorama import Fore, Style
