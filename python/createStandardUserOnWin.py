@@ -4,7 +4,7 @@
 
 # run this script as admin
 
-# you can run this script with: python3 createStandardUserOnWindows.py < standard user > < password > 
+# you can run this script with: python3 createStandardUserOnWin.py < standard user > < password > 
 
 import colorama, getpass, os, sys, traceback
 from colorama import Fore, Style 
