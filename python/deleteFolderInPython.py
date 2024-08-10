@@ -108,7 +108,11 @@ def deleteFolder():
         print("Started deleting {0} folder at {1}".format(folderName, startDateTime.strftime("%m-%d-%Y %I:%M %p")))
 
         deletePath="{0}/{1}".format(pathToFolder, folderName)
-        os.rmdir(deletePath)
+        
+        if os.path.isdir(deletePath):
+            os.rmdir(deletePath)
+        else: 
+            raise Exception("Folder path is invalid.")
 
         print(Fore.GREEN + "Successfully deleted {0} folder.".format(folderName) + Style.RESET_ALL)
 
