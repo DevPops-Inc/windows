@@ -2,7 +2,7 @@
 
 # delete local user on Windows 
 
-# you can run this script with: python3 deleteLocalUserOnWindows.py < local user > 
+# you can run this script with: python3 deleteLocalUserOnWin.py < local user > 
 
 import colorama, os, sys, traceback
 from colorama import Fore, Style 
