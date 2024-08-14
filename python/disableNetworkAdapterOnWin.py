@@ -2,7 +2,7 @@
 
 # disable network adapter on Windows 
 
-# you can run this script with: python3 disableNetworkAdapterOnWindows.py < network adapter >
+# you can run this script with: python3 disableNetworkAdapterOnWin.py < network adapter >
 
 import colorama, os, sys, traceback  
 from colorama import Fore, Style 
