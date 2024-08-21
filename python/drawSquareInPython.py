@@ -125,7 +125,6 @@ def drawSquare():
 
     except Exception: 
         print(Fore.RED + "Failed to draw square.")
-        
         traceback.print_exc()
         exit("" + Style.RESET_ALL)
 
