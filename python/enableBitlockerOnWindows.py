@@ -1,6 +1,6 @@
 #!/bin/python
 
-# enable BitLocker on WindowsError
+# enable BitLocker on Windows
 
 # haven't tested this on a Windows PC yet
 
