@@ -2,7 +2,7 @@
 
 # enable local admin account and set password on Windows
 
-# you can run this script with: python3 enableLocalAdminAndSetPwOnWindows.py < local admin password > 
+# you can run this script with: python3 enableLocalAdminSetPwOnWin.py < local admin password > 
 
 # haven't successfully tested this script on Windows yet since all of the test passwords I've tried don't meet the minimum security requirements of my OS
 
