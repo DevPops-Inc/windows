@@ -2,7 +2,7 @@
 
 # enable network adapter on Windows
 
-# you can run this script with: python3 enableNetworkAdapaterOnWindows.py < network adapter >
+# you can run this script with: python3 enableNetworkAdapaterOnWinn.py < network adapter >
 
 import colorama, os, sys, time, traceback
 from colorama import Fore, Style
