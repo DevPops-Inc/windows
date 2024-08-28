@@ -1,6 +1,6 @@
 #!/bin/python
 
-# find the greatest common devisor of two numbers with Euclid's algorithm in Python
+# find the greatest common divisor of two numbers with Euclid's algorithm in Python
 
 # you can run this script with euclidsAlgorithmInPython.py < first number > < second number > 
 
