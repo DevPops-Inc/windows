@@ -96,7 +96,7 @@ def greatestCommonDivisor(firstNumber, secondNumber):
     return firstNumber
 
 
-def euclidsAlgorithm():
+def euclidsAlgo():
     print("\nFind the greatest common divisor of two numbers with Euclid's Algorithm in Python.\n")
 
     operatingSystem = checkOs()
@@ -135,4 +135,4 @@ def euclidsAlgorithm():
         exit("" + Style.RESET_ALL)
 
 
-euclidsAlgorithm()
+euclidsAlgo()
