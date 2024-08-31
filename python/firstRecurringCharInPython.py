@@ -2,7 +2,7 @@
 
 # first recurring character in Python 
 
-# you can run this script with: python3 firstRecurringCharInPython.py "< random string >"
+# you can run this script with: python3 firstRecurringCharInPython.py "< string >"
 
 import colorama, os, sys, traceback
 from colorama import Fore, Style 
@@ -32,6 +32,7 @@ def checkOs():
         operatingSystem = "Linux"
 
     print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
     print("")
     return operatingSystem
 
