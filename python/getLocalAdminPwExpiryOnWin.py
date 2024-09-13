@@ -21,14 +21,10 @@ def checkOsForWindows():
         print("")
 
     else: 
-        print(Fore.RED + "Sorry but this script only runs on Windows." + Style.RESET_ALL)
-
-        print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-
-        exit("")
+        raise Excpetion("Sorry but this script only runs on Windows.")
 
 
-def getLocalAdminExpirationPolicy(): 
+def getLocalAdminExpiry(): 
     print("\nGet local admin password expiration policy on Windows.\n")
     checkOsForWindows()
 
@@ -37,7 +33,7 @@ def getLocalAdminExpirationPolicy():
         
         print("Started getting local admin password expiration policy at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
-        print(Fore.BLUE, end="")
+        print(Fore.BLUE, end="") # TODO: figure out why it isn't printing blue 
 
         if os.system('net user administrator | findstr /C:expires') != 0:
             raise Exception("Error occurred while getting local admin password expiration policy.")
@@ -58,4 +54,4 @@ def getLocalAdminExpirationPolicy():
         exit("" + Style.RESET_ALL)
 
 
-getLocalAdminExpirationPolicy()
+getLocalAdminExpiry()
