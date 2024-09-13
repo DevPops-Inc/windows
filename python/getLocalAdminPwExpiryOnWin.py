@@ -28,7 +28,7 @@ def checkOsForWindows():
         exit("")
 
 
-def getLocalAdminExpirationPolicy(): 
+def getLocalAdminExpiry(): 
     print("\nGet local admin password expiration policy on Windows.\n")
     checkOsForWindows()
 
@@ -58,4 +58,4 @@ def getLocalAdminExpirationPolicy():
         exit("" + Style.RESET_ALL)
 
 
-getLocalAdminExpirationPolicy()
+getLocalAdminExpiry()
