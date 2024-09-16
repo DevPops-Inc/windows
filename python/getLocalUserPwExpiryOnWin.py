@@ -2,7 +2,7 @@
 
 # get local user password expiration policy on Windows 
 
-# you can run this script with: python3 getLocalUserPwExpPolicyOnWindows.py "< local user >"
+# you can run this script with: python3 getLocalUserPwExpiryOnWindows.py "< local user >"
 
 import colorama, os, sys, traceback
 from colorama import Fore, Style
@@ -61,7 +61,7 @@ def checkParameters(localUser):
         exit("")
 
 
-def getLocalUserPwExpPolicy(): 
+def getLocalUserPwExpiry(): 
     print("\nGet local user password expiration policy on Windows.\n")
     checkOsForWindows()
 
@@ -100,4 +100,4 @@ def getLocalUserPwExpPolicy():
         exit("" + Style.RESET_ALL)
 
 
-getLocalUserPwExpPolicy()
+getLocalUserPwExpiry()
