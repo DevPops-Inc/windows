@@ -51,6 +51,7 @@ def checkParameters(localUser):
 
     else: 
         print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
         exit("")
 
 
@@ -89,6 +90,7 @@ def getLocalUserPwExpiry():
 
     except Exception: 
         print(Fore.RED + "Failed to get \"{0}\" password expiration policy.".format(localUser))
+        
         traceback.print_exc()
         exit("" + Style.RESET_ALL)
 
