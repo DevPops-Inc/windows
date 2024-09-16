@@ -21,12 +21,14 @@ def checkOsForWindows():
         print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 
         print("")
-
     else: 
         raise Exception("Sorry but this script only runs on Windows.")
 
 
 def getLocalUser(): 
+    if os.system('net user') != 0: 
+            raise Exception("Error occurred while getting local users.")
+    
     localUser = str(input("Please type the local user you want password expiration for and press the \"Enter\" key (Example: local.user): "))
 
     print("")
@@ -47,13 +49,14 @@ def checkParameters(localUser):
         valid = False
 
     if valid == True: 
-        raise Exception("All parameter check(s) passed.")
+        print(Fore.GREEN + "All parameter checks passed." + Style.RESET_ALL)
 
-    else: 
         print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-
-        exit("")
-
+        
+        print("")
+    else: 
+        raise Exception("All parameter check(s) passed.")
+    
 
 def getLocalUserPwExpiry(): 
     print("\nGet local user password expiration policy on Windows.\n")
@@ -90,7 +93,7 @@ def getLocalUserPwExpiry():
 
     except Exception: 
         print(Fore.RED + "Failed to get \"{0}\" password expiration policy.".format(localUser))
-        
+
         traceback.print_exc()
         exit("" + Style.RESET_ALL)
 
