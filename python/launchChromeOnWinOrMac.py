@@ -27,6 +27,7 @@ def checkOsForWinOrMac():
         print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 
         print("")
+        return operatingSystem
 
     else: 
         raise Exception("Sorry but this script only runs on Windows or Mac.")
