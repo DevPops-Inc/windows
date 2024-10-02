@@ -46,10 +46,7 @@ def checkChromeOnWinOrMac(operatingSystem):
             print("")
 
         else: 
-            print(Fore.RED + "Google Chrome is not installed." + Style.RESET_ALL)
-
-            print("Finished checking Chrome at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-            exit("")
+            raise Exception(Fore.RED + "Google Chrome is not installed.")
   
     elif operatingSystem == "macOS":
         chromeInApps = os.system('open -Ra "Google Chrome.app"')
@@ -61,10 +58,7 @@ def checkChromeOnWinOrMac(operatingSystem):
             print("")
 
         else: 
-            print(Fore.RED + "Chrome is not installed." + Style.RESET_ALL)
-
-            print("Finished checking Chrome at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-            exit("")  
+            raise Exception("Chrome is not installed.")
 
 
 def launchYouTubeInChrome(): 
