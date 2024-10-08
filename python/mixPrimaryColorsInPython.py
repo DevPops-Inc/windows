@@ -131,7 +131,7 @@ def mixPrimaryColors():
 
 		primaryColors = [ "red", "blue", "yellow" ]
 
-		if color1 != primaryColors or color2 != primaryColors:
+		if color1 not in primaryColors or color2 not in primaryColors:
 			raise Exception("You didn't choose a primary color!")
 				
 		print(Fore.GREEN + "Successfully mixed colors." + Style.RESET_ALL)
