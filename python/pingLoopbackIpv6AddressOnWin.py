@@ -30,6 +30,7 @@ def pingLoopbackIpv6Address():
 	
 	try: 
 		startDateTime = datetime.now()
+
 		print("Started pinging loopback IPv6 address at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 		
 		if os.system('ping ::1') != 0: 
@@ -38,6 +39,7 @@ def pingLoopbackIpv6Address():
 		print(Fore.GREEN + "Successfully pinged loopback IPv6 address." + Style.RESET_ALL)
 		
 		finishedDateTime = datetime.now()
+		
 		print("Finished pinging loopback IPv6 address at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
 		
 		duration = finishedDateTime - startDateTime

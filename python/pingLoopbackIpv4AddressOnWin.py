@@ -32,6 +32,7 @@ def pingLoopbackIpv4Address():
 
 	try: 
 		startDateTime = datetime.now()
+
 		print("Started pinging loopback IPv4 address at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
 		if os.system('ping 127.0.0.1') != 0: 
@@ -40,6 +41,7 @@ def pingLoopbackIpv4Address():
 		print(Fore.GREEN + "Successfully pinged loopback IPv4 address." + Style.RESET_ALL)
 
 		finishedDateTime = datetime.now()
+		
 		print("Finished pinging loopback IPv4 address at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
 		duration = finishedDateTime - startDateTime
