@@ -31,6 +31,7 @@ def checkOs():
         operatingSystem = "Linux"
     
     print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
     print("")
     return operatingSystem
 
@@ -39,11 +40,14 @@ def addItemsToQueue(operatingSystem):
     queue = deque()
 
     if operatingSystem == "Windows": 
+        
         answer = int(input("Please type how many items you would like to add to the queue and press the \"Enter\" key (Example: 4): "))
+
         print("")
 
         def getAppendOnWin(answer): 
             if answer > 0:
+
                 queueItem = str(input("Please type the item you wish to add into the queue and press the \"Enter\" key (Example: 1): "))
 
                 queue.append(queueItem)
@@ -52,11 +56,14 @@ def addItemsToQueue(operatingSystem):
         getAppendOnWin(answer)
             
     elif operatingSystem == "macOS" or operatingSystem == "Linux": 
+        
         answer = int(input("Please type how many items you would like to add to the queue and press the \"return\" key (Example: 4): "))
+        
         print("")
 
         def getAppendOnMacOrLinux(answer): 
             if answer > 0: 
+                
                 queueItem = str(input("Please type the item you wish to add into the queue and press the \"return\" key (Example: 1): "))
                 
                 queue.append(queueItem)
@@ -77,6 +84,7 @@ def popItemFromFrontOfQueue():
 
     try: 
         startDateTime = datetime.now()
+
         print("Started popping item from front of queue at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         frontQueueItem = queue.popleft()
@@ -85,6 +93,7 @@ def popItemFromFrontOfQueue():
         print(Fore.GREEN + "Successfully popped item from front of queue." + Style.RESET_ALL)
 
         finishedDateTime = datetime.now()
+        
         print("Finished popping item from front of queue at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         duration = finishedDateTime - startDateTime
