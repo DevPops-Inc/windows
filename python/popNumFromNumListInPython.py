@@ -111,13 +111,11 @@ def checkParameters(numberList, popNum):
         print(Fore.GREEN + "All parameter check(s) passed." + Style.RESET_ALL)
 
         print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
         print("")
 
     else: 
-        print(Fore.RED + "One or more parameters are incorrect." + Style.RESET_ALL)
-
-        print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-        exit("")
+        raise Exception("One or more parameters are incorrect.")
 
 
 def popNumFromNumList(): 
@@ -131,7 +129,7 @@ def popNumFromNumList():
     
     try:
         startDateTime = datetime.now()
-        
+
         print("Started popping item from number list at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         numberList.pop(popNum-1)
