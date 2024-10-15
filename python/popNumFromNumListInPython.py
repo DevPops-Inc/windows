@@ -30,6 +30,7 @@ def checkOs():
         operatingSystem = "Linux"
     
     print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
     print("")
     return operatingSystem
 
@@ -38,12 +39,14 @@ def createNumList(operatingSystem):
     numberList = []
 
     if operatingSystem == "Windows": 
+
         numList = int(input("Please type the number of items in the list and press the \"Enter\" key (Example: 4): "))
 
         print("")
 
         def addNumToListOnWin(numList): 
             if numList > 0: 
+
                 addItem = int(input("Please type a number you wish to add to the list and press the \"Enter\" key (Example: 1): "))
 
                 numberList.append(addItem)
@@ -52,12 +55,14 @@ def createNumList(operatingSystem):
         addNumToListOnWin(numList)
 
     else: 
+
         numList = int(input("Please type the number of items in your list and press the \"return\" key (Example: 4): "))
 
         print("")
 
         def addNumToListOnMacOrLinux(numList): 
             if numList > 0: 
+
                 addItem = int(input("Please type a number you wish to add to the list and press the \"return\" key (Example: 1): "))
 
                 numberList.append(addItem)
@@ -73,9 +78,11 @@ def getPopNum(numberList, operatingSystem):
     print(Fore.BLUE + "The number list is: {0}".format(numberList) + Style.RESET_ALL)
 
     if operatingSystem == "Windows": 
+
         popNum = int(input("Please type the item you wish to pop from the number list and press the \"Enter\" key: "))
 
     else: 
+
         popNum = int(input("Please type the item you wish to pop from the number list and press the \"return\" key: "))
     
     print("")
@@ -124,6 +131,7 @@ def popNumFromNumList():
     
     try:
         startDateTime = datetime.now()
+        
         print("Started popping item from number list at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         numberList.pop(popNum-1)
