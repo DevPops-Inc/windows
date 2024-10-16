@@ -2,7 +2,7 @@
 
 # progressively print vertical string 
 
-# you can run this script with: python3 progressivelyPrintVerticalStringInPython.py '< vertical string >'
+# you can run this script with: python3 progressivelyPrintVerticalStringInPython.py '<  string >'
 
 import colorama, os, sys, time, traceback
 from colorama import Fore, Style
@@ -32,15 +32,18 @@ def checkOs():
         operatingSystem = "Linux"
 
     print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
     print("")
     return operatingSystem
 
 
 def getVerticalString(operatingSystem): 
     if operatingSystem == "Windows": 
+    
         verticalString = str(input("Please type the string you would like to print vertically and press the \"Enter\" key (Example: Python is fun!): " ))  
 
     else: 
+    
         verticalString = str(input("Please type the string you would like to print vertically and press the \"Enter\" key (Example: Python is fun!): " ))  
 
     print("")
@@ -64,6 +67,7 @@ def checkParameters(verticalString):
         print(Fore.GREEN + "All parameter check(s) passed." + Style.RESET_ALL)
 
         print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+        
         print("")
 
     else: 
