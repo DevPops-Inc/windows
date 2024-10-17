@@ -30,6 +30,7 @@ def checkOs():
         operatingSystem = "Linux"
     
     print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
     print("")
     return operatingSystem
 
@@ -38,12 +39,14 @@ def createStack(operatingSystem):
     stack = []
 
     if operatingSystem == "Windows": 
+
         numList = int(input("Please type the number of items in the stack and press the \"Enter\" key (Example: 4): "))
 
         print("")
 
         def addItemToStackOnWin(numList): 
             if numList > 0: 
+
                 addItem = str(input("Please type an item you wish to add to the stack and press the \"Enter\" key (Example: 1): "))
 
                 stack.append(addItem)
@@ -52,12 +55,14 @@ def createStack(operatingSystem):
         addItemToStackOnWin(numList)
 
     else: 
+
         numList = int(input("Please type the number of items in the stack and press the \"return\" key (Example: 4): "))
 
         print("")
 
         def addItemToStackOnMacOrLinux(numList): 
             if numList > 0: 
+
                 addItem = str(input("Please type an item you wish to add to the stack and press the \"return\" key (Example: 1): "))
 
 
@@ -87,6 +92,7 @@ def checkParameters(stack):
         print(Fore.GREEN + "All parameter check(s) passed." + Style.RESET_ALL)
 
         print("Finished checking parameter(s) at", datetime.now().strftime("$m-%d-%Y %I:%M %p"))
+
         print("")
 
     else: 
@@ -106,15 +112,18 @@ def pushItemFromStack():
 
     try: 
         startDateTime = datetime.now()
+
         print("Started pushing item from stack at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         print(Fore.BLUE + "The stack is: {0}".format(stack) + Style.RESET_ALL)
         print("")
 
         if operatingSystem == "Windows": 
+
             popItem = str(input("Please type the item you wish to push onto the stack and press the \"Enter\" key: "))
 
         else: 
+            
             popItem = str(input("Please type the item you wish to push onto the stack and press the \"return\" key: "))
 
         stack.append(popItem)
