@@ -96,10 +96,7 @@ def checkParameters(stack):
         print("")
 
     else: 
-        print(Fore.RED + "One or more parameters are incorrect." + Style.RESET_ALL)
-
-        print("Finished checking parameter(s) at", datetime.now().strftime("$m-%d-%Y %I:%M %p"))
-        exit("")
+        raise Exception("One or more parameters are incorrect.")
 
 
 def pushItemFromStack(): 
@@ -123,7 +120,7 @@ def pushItemFromStack():
             popItem = str(input("Please type the item you wish to push onto the stack and press the \"Enter\" key: "))
 
         else: 
-            
+
             popItem = str(input("Please type the item you wish to push onto the stack and press the \"return\" key: "))
 
         stack.append(popItem)
