@@ -5,7 +5,7 @@
 # haven't tested this script on local PC without being on domain yet
 
 # run this script as admin
-# you can run this script: python3 renameComputerOnWindows.py < new name > 
+# you can run this script: python3 renameComputerOnWin.py < new name > 
 
 import colorama, os, sys, traceback
 from colorama import Fore, Style
