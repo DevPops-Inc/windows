@@ -14,6 +14,7 @@ colorama.init()
 
 
 def checkOsForWindows():
+
     print("Started checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M: %p"))
 
     if sys.platform == "win32": 
@@ -22,6 +23,7 @@ def checkOsForWindows():
         print(Style.RESET_ALL, end="")
 
         print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M: %p"))
+
         print("")
 
     else: 
@@ -36,6 +38,7 @@ def getOldName():
     oldName = os.getenv('COMPUTERNAME') 
     
     if oldName == None: 
+
         oldName = str(input("Please type the computer's current name and press the \"Enter\" key (Example: Victors-PC): "))
         
     print("")
@@ -43,6 +46,7 @@ def getOldName():
 
 
 def getNewName(): 
+
     newName = str(input("Please type the new name and press the \"Enter\" key (Example: Vics-PC): "))
 
     print("")
@@ -71,6 +75,7 @@ def checkParameters(oldName, newName):
         print(Fore.GREEN + "All parameter check(s) passed." + Style.RESET_ALL)
 
         print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M: %p"))
+
         print("")
 
     else: 
@@ -110,6 +115,7 @@ def renameComputer():
         print(Fore.GREEN + "Successfully renamed computer." + Style.RESET_ALL)
 
         finishedDateTime = datetime.now()
+        
         print("Finished renaming computer at", finishedDateTime.strftime("%m-%d-%Y %I:%M: %p"))
 
         duration = finishedDateTime - startDateTime
