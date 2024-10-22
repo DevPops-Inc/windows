@@ -106,14 +106,11 @@ def checkParameters(pathToFolder, folderName, newFolderName):
         print(Fore.GREEN + "All parameter check(s) passed." + Style.RESET_ALL)
 
         print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-        
+
         print("")
 
     else: 
-        print(Fore.RED + "One or more parameter(s) are incorrect." + Style.RESET_ALL)
-
-        print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-        exit("")
+        raise Exception("One or more parameter(s) are incorrect.")
 
 
 def renameFolder(): 
