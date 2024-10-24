@@ -24,11 +24,7 @@ def checkOsForWindows():
         print("")
 
     else: 
-        print(Fore.RED + "Sorry but this script only runs on Windows." + Style.RESET_ALL)
-
-        print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-
-        exit("")
+        raise Exception("Sorry but this script only runs on Windows.")
 
 
 def resolveMissingNetworkDrives(): 
@@ -46,7 +42,7 @@ def resolveMissingNetworkDrives():
         print(Fore.GREEN + "Successfully resolved missing network drives." + Style.RESET_ALL)
 
         finishedDateTime = datetime.now()
-        
+
         print("Finished resolving missing network drives at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         duration = finishedDateTime - startDateTime
