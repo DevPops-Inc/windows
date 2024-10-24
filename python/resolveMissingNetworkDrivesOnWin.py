@@ -11,6 +11,7 @@ colorama.init()
 
 
 def checkOsForWindows(): 
+
     print("Started checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 
     if sys.platform == "win32": 
@@ -36,6 +37,7 @@ def resolveMissingNetworkDrives():
 
     try: 
         startDateTime = datetime.now()
+
         print("Started resolving missing network drives at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         if os.system('GPUpdate /target:user /force') != 0: 
@@ -44,6 +46,7 @@ def resolveMissingNetworkDrives():
         print(Fore.GREEN + "Successfully resolved missing network drives." + Style.RESET_ALL)
 
         finishedDateTime = datetime.now()
+        
         print("Finished resolving missing network drives at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
         duration = finishedDateTime - startDateTime
