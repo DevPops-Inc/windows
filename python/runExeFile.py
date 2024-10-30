@@ -25,11 +25,7 @@ def checkOsForWindows():
         print("")
 
     else: 
-        print(Fore.RED + "Sorry but this script only runs on Windows." + Style.RESET_ALL)
-
-        print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-
-        exit("")
+        raise Exception("Sorry but this script only runs on Windows.")
 
 
 def getExeFileLocation(): 
@@ -42,7 +38,7 @@ def getExeFileLocation():
 
 
 def getExeFileName(): 
-    
+
     exeFilename = str(input("Please type the filename of the .exe and press the \"Enter\" key (Example: Docker Desktop Installer.exe): "))
 
     print("")
@@ -74,10 +70,7 @@ def checkParameters(exeFileLocation, exeFilename):
         print("")
 
     else: 
-        print(Fore.RED + "One or more parameters are incorrect." + Style.RESET_ALL)
-
-        print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-        exit("")
+        raise Exception("One or more parameters are incorrect.")
 
 
 def runExeFile(): 
