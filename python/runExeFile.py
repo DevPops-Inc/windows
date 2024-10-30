@@ -12,6 +12,7 @@ colorama.init()
 
 
 def checkOsForWindows(): 
+
     print("Started checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 
     if sys.platform == "win32": 
@@ -32,6 +33,7 @@ def checkOsForWindows():
 
 
 def getExeFileLocation(): 
+
     exeFileLocation = str(input("Please type the location of the .exe file you want to run and press the \"Enter\" key (Example: C:\\Users\\%USERNAME%\\Downloads): "))
 
     exeFileLocation = os.path.expandvars(exeFileLocation)
@@ -40,6 +42,7 @@ def getExeFileLocation():
 
 
 def getExeFileName(): 
+    
     exeFilename = str(input("Please type the filename of the .exe and press the \"Enter\" key (Example: Docker Desktop Installer.exe): "))
 
     print("")
