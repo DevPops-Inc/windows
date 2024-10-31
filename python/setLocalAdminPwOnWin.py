@@ -12,6 +12,7 @@ colorama.init()
 
 
 def checkOsForWindows(): 
+
     print("Started checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 
     if sys.platform == "win32": 
@@ -33,6 +34,7 @@ def checkOsForWindows():
 
 
 def getAdminPw(): 
+    
     adminPw = getpass.getpass("Please type the local admin default password and press the \"Enter\" key (Example: Password123): ")
 
     print("")
