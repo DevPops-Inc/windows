@@ -3,7 +3,7 @@
 # set local admin password on Windows 
 
 # run this script as administrator
-# you can run this script with: python3 setLocalAdminPwOnWindows.py < local admin password >
+# you can run this script with: python3 setLocalAdminPwOnWin.py < local admin password >
 
 import colorama, getpass, os, sys, traceback
 from colorama import Fore, Style 
