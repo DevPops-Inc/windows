@@ -17,7 +17,7 @@ def checkOs():
     if sys.platform == "win32": 
         print(Fore.GREEN + "Operating System:", end=""); sys.stdout.flush()
         os.system('ver')
-        print(Style.RESET, end="")
+        print(Style.RESET_ALL, end="")
         operatingSystem = "Windows"
 
     elif sys.platform == "darwin": 
