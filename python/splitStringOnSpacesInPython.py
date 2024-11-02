@@ -44,7 +44,7 @@ def getStringWithSpaces(operatingSystem):
         stringWithSpaces = str(input("Please type a string with spaces and press the \"Enter\" key (Example: string with spaces): "))
 
     else: 
-        
+
         stringWithSpaces = str(input("Please type a string with spaces and press the \"return\" key (Example: string with spaces): "))
 
     print("")
@@ -71,10 +71,7 @@ def checkParameters(stringWithSpaces):
         print("")
 
     else: 
-        print(Fore.RED + "One or more parameters are incorrect." + Style.RESET_ALL)
-
-        print("Finished checking parameter(s) at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-        exit("")
+        raise Exception("One or more parameters are incorrect.")
 
 
 def splitStringOnSpaces(): 
