@@ -10,6 +10,7 @@ colorama.init()
 
 
 def checkOsForWinOrMac(): 
+
     print("Started checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 
     if sys.platform == "win32": 
@@ -87,10 +88,13 @@ def stopAndRelaunchOutlook():
         if operatingSystem == "Windows": 
             outlookApp = 'outlook.exe'
             stopOutlook = 'taskkill /F /IM {0}'.format(outlookApp)
+
             outlookPath = PureWindowsPath("C:/Program Files/Microsoft Office/root/Office16/OUTLOOK.EXE")
+
             launchOutlook = 'explorer {0}'.format(outlookPath)
 
             if os.system(stopOutlook) == 0: 
+
                 print(Fore.BLUE + "Stopped Outlook and relaunching in 5 seconds.")
                 time.sleep(5)
 
@@ -101,6 +105,7 @@ def stopAndRelaunchOutlook():
             launchOutlook = 'open -a "Microsoft Outlook.app"'
 
             if os.system(stopOutlook) == 0: 
+                
                 print(Fore.BLUE + "Stopped Outlook and relaunching in 5 seconds.")
                 time.sleep(5)
 
