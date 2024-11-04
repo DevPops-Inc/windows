@@ -26,11 +26,7 @@ def checkOsForWinOrMac():
         operatingSystem = "macOS"
 
     else: 
-        print(Fore.RED + "Sorry but this script only runs on Windows or Mac." + Style.RESET_ALL)
-
-        print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-
-        exit("")
+        raise Exception(Fore.RED + "Sorry but this script only runs on Windows or Mac.")
 
     print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 
@@ -52,10 +48,7 @@ def checkOutlook(operatingSystem):
             print("")
 
         else: 
-            print(Fore.RED + "Outlook is not installed." + Style.RESET_ALL)
-
-            print("Finished checking Outlook at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
-            exit("")
+            raise Exception(Fore.RED + "Outlook is not installed.")
 
     elif operatingSystem == "macOS": 
 
@@ -65,12 +58,14 @@ def checkOutlook(operatingSystem):
             print(Fore.GREEN + "Outlook is installed." + Style.RESET_ALL)
 
             print("Finished checking Outlook at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
             print("")
 
         else: 
             print(Fore.RED + "Outlook is not installed." + Style.RESET_ALL)
 
             print("Finished checking Outlook at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+            
             exit("")
 
 
@@ -105,7 +100,7 @@ def stopAndRelaunchOutlook():
             launchOutlook = 'open -a "Microsoft Outlook.app"'
 
             if os.system(stopOutlook) == 0: 
-                
+
                 print(Fore.BLUE + "Stopped Outlook and relaunching in 5 seconds.")
                 time.sleep(5)
 
