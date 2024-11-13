@@ -12,6 +12,7 @@ colorama.init()
 
 
 def checkOs(): 
+
 	print("Started checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
 	
 	if sys.platform == "win32": 
@@ -33,15 +34,18 @@ def checkOs():
 		operatingSystem = "Linux"
 		
 	print("Finished checking operating system at", datetime.now().strftime("%m-%d-%Y %I:%M %p"))
+
 	print("")
 	return operatingSystem
 	
 	
 def getFilename(operatingSystem): 
 	if operatingSystem == "Windows": 
+
 		filename = str(input("Please type the filename and press the \"Enter\" key (Example: pi.txt): "))
 		
 	else: 
+
 		filename = str(input("Please type the filename and press the \"return\" key (Example: pi.txt): "))
 		
 	print("")
@@ -78,6 +82,7 @@ def checkParameters(filename):
 
 
 def checkIfFileExists(operatingSystem, filename): 
+
 	print(Fore.BLUE + "Do you want to overwrite the {0} file?".format(filename) + Style.RESET_ALL)
 
 	if operatingSystem == "Windows":
@@ -156,5 +161,3 @@ def writePiToFile():
 		
 		
 writePiToFile()
-
-		
