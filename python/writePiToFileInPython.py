@@ -135,8 +135,9 @@ def writePiToFile():
 		r=open(filename)
 		print(Fore.BLUE + r.read())
 		print(Fore.GREEN + "Successfully wrote the value of Pi to a file." + Style.RESET_ALL)
-
+		r.close()
 		print("")
+
 		choice = deletePiFile(operatingSystem, filename)
 		
 		if choice == "Y" or choice == "y": 
