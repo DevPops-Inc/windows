@@ -48,9 +48,10 @@ def bubbleSort(dataset):
 
 def createBubblesort():
     print("\nLet's create a bubblesort in Python!\n")
-    operatingSystem = checkOs()
 
     try: 
+        operatingSystem = checkOs()
+
         startDateTime = datetime.now()    
         print("Started creating bubbleshort at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
@@ -88,18 +89,18 @@ def createBubblesort():
 
             addItemToListOnMacOrLinux(numList)
 
-            print(Fore.BLUE + "Here is your dataset:")
-            print(list)
-            print("Here is your bubblesort:")
-            bubbleSort(list)
-            print(Fore.GREEN + "Successfully created bubblesort." + Style.RESET_ALL)
+        print(Fore.BLUE + "Here is your dataset:")
+        print(list)
+        print("Here is your bubblesort:")
+        bubbleSort(list)
+        print(Fore.GREEN + "Successfully created bubblesort." + Style.RESET_ALL)
 
-            finishedDateTime = datetime.now()
-            print("Finished creating bubblesort at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
+        finishedDateTime = datetime.now()
+        print("Finished creating bubblesort at", finishedDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
-            duration = finishedDateTime - startDateTime
-            print("Total execution time: {0} second(s)".format(duration.seconds))
-            print("")
+        duration = finishedDateTime - startDateTime
+        print("Total execution time: {0} second(s)".format(duration.seconds))
+        print("")
 
     except Exception: 
         print(Fore.RED + "Failed to create bubblesort.")
