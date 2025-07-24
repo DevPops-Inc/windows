@@ -55,7 +55,7 @@ def createBubblesort():
         startDateTime = datetime.now()    
         print("Started creating bubbleshort at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
 
-        list = []
+        numbers = []
 
         if operatingSystem == "Windows": 
             numList = int(input("Please type the number of items in your list and press the \"Enter\" key (Example: 10): "))
@@ -68,7 +68,7 @@ def createBubblesort():
 
                     print("")
 
-                    list.append(addItem)
+                    numbers.append(addItem)
                     addItemToListOnWin(numList-1)
 
             addItemToListOnWin(numList)
@@ -84,15 +84,15 @@ def createBubblesort():
 
                     print("")
 
-                    list.append(addItem)
+                    numbers.append(addItem)
                     addItemToListOnMacOrLinux(numList-1)
 
             addItemToListOnMacOrLinux(numList)
 
         print(Fore.BLUE + "Here is your dataset:")
-        print(list)
+        print(numbers)
         print("Here is your bubblesort:")
-        bubbleSort(list)
+        bubbleSort(numbers)
         print(Fore.GREEN + "Successfully created bubblesort." + Style.RESET_ALL)
 
         finishedDateTime = datetime.now()
