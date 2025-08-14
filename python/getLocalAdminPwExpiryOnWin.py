@@ -26,9 +26,10 @@ def checkOsForWindows():
 
 def getLocalAdminExpiry(): 
     print("\nGet local admin password expiration policy on Windows.\n")
-    checkOsForWindows()
 
     try:
+        checkOsForWindows()
+        
         startDateTime = datetime.now()
         
         print("Started getting local admin password expiration policy at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
