@@ -26,14 +26,13 @@ def checkOsForWindows():
 
 def getLocalAdminExpiry(): 
     print("\nGet local admin password expiration policy on Windows.\n")
-    checkOsForWindows()
 
     try:
+        checkOsForWindows()
+
         startDateTime = datetime.now()
         
         print("Started getting local admin password expiration policy at", startDateTime.strftime("%m-%d-%Y %I:%M %p"))
-
-        print(Fore.BLUE, end="") # TODO: figure out why it isn't printing blue 
 
         if os.system('net user administrator | findstr /C:expires') != 0:
             raise Exception("Error occurred while getting local admin password expiration policy.")
