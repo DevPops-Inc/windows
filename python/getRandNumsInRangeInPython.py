@@ -105,19 +105,20 @@ def checkParameters(beginNumRange, endNumRange, numRandomNum):
 
 def getRandomNumsInRange(): 
     print("\nGet random numbers in range in Python.\n")
-    operatingSystem = checkOs()
-
-    if len(sys.argv) >= 2: 
-        beginNumRange = int(sys.argv[1])
-        endNumRange   = int(sys.argv[2])
-        numRangeNum   = int(sys.argv[3])
-
-    else: 
-        beginNumRange = getBeginNumRange(operatingSystem)
-        endNumRange   = getEndNumRange(operatingSystem)
-        numRangeNum   = getNumRandomNum(operatingSystem)
 
     try: 
+        operatingSystem = checkOs()
+
+        if len(sys.argv) >= 2: 
+            beginNumRange = int(sys.argv[1])
+            endNumRange   = int(sys.argv[2])
+            numRangeNum   = int(sys.argv[3])
+
+        else: 
+            beginNumRange = getBeginNumRange(operatingSystem)
+            endNumRange   = getEndNumRange(operatingSystem)
+            numRangeNum   = getNumRandomNum(operatingSystem)
+
         checkParameters(beginNumRange, endNumRange, numRangeNum)
         
         startDateTime = datetime.now()
