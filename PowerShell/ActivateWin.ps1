@@ -11,6 +11,8 @@ param
     [string] [Parameter(Mandatory = $False)] $licenseKey   = "" # you can set the license key here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
