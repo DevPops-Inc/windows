@@ -11,6 +11,8 @@ param
     [string] [Parameter(Mandatory = $False)] $distroList = "" # you can set the distribution list here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
