@@ -4,7 +4,7 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $serviceName = ""
+    [string] [Parameter(Mandatory = $False)] $serviceName = "" # you can set the service you wish to autostart here
 )
 
 $ErrorActionPreference = "Stop"
