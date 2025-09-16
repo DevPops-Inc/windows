@@ -10,6 +10,8 @@ param (
     [securestring] [Parameter(Mandatory = $False)] $newPassword = $Null # you can set the new password here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
