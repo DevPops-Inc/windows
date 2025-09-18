@@ -5,6 +5,8 @@ param (
     [string] [Parameter(Mandatory = $False)] $checkProgram = "Google Chrome"
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
