@@ -1,5 +1,7 @@
 # check disk on Windows
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started hecking operating system at" (Get-Date).DateTime
