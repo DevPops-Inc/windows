@@ -7,6 +7,8 @@ param (
     [string] [Parameter(Mandatory = $False)] $checkProgram = "" # you can set the program you wish to check here 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
