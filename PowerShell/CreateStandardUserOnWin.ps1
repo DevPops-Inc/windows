@@ -11,6 +11,8 @@ param(
   [string]       [Parameter(Mandatory = $False)] $description  = "" # you can 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
   Write-Host "Started checking operation system at" (Get-Date).DateTime
