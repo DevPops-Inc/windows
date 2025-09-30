@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $testUser = "" # you can set the test user here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
