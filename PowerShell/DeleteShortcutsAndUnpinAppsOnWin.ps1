@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $deletePath = "C:\Users\Public\Desktop\*.lnk"
 )
 
+$ErrorActionsPreferences = "Stop"
+
 function CheckOsForWin() 
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
