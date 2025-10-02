@@ -8,6 +8,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $excludePath = "Firefox.lnk"
 )
 
+$ErrorActionsPreferences = "Stop"
+
 function CheckOsForWin() 
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
