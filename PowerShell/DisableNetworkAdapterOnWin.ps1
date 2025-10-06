@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $networkAdapter = ""
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin() 
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
