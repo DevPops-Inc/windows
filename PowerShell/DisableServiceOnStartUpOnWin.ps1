@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $serviceName = "" # you can set the service you want to disable here
 )
 
+$ErrorActionPreference ="Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
