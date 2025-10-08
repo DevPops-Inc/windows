@@ -1,5 +1,7 @@
 # disable Windows 10 Notifications
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
