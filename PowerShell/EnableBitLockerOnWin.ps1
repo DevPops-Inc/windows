@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $driveLetter = "" # you can set the drive you want to enable BitLocker on here 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
