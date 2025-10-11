@@ -1,5 +1,7 @@
 # enable local admin on Windows 
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
