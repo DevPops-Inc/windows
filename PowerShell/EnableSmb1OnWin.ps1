@@ -1,5 +1,6 @@
 # enable SMB1 on Windows 
 
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
