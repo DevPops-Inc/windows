@@ -8,6 +8,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $fileDestination = "" # you can set file path here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
