@@ -1,5 +1,7 @@
 # get serial number on Windows
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Stared checking operating system at" (Get-Date).DateTime
