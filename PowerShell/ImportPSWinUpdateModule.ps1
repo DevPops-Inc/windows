@@ -1,5 +1,7 @@
 # import PSWindowsUpdate module 
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system" (Get-Date).DateTime
@@ -29,7 +31,14 @@ function ImportPSWindowsUpdateModule()
         $startDateTime = (Get-Date)
         Write-Host "Started importing PSWindowsUpdate module at" $startDateTime.DateTime
 
+        if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate))
+        {
+            Install-Module -Name PSWindowsUpdate -Scope CurrentUser -Force
+        }
+
         Import-Module PSWindowsUpdate
+        $PSStyle.Formatting.TableHeader = ""
+        Get-Command -Module PSWindowsUpdate
         Write-Host "Successfully imported PSWindowsUpdate module." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
