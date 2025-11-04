@@ -2,6 +2,8 @@
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -34,8 +36,14 @@ function InstallUpdates()
     {
         $startDateTime = (Get-Date)
         Write-Host "Started installing Windows updates at" $startDateTime.DateTime
+
+        if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate))
+        {
+            Install-Module -Name PSWindowsUpdate -Scope CurrentUser -Force
+        }
         
         Install-Module PSWindowsUpdate -Force
+        $PSStyle.Formatting.TableHeader = ""
         Get-WindowsUpdate -AcceptAll -Install 
         Write-Host "Successfully installed Windows updates." -ForegroundColor Green
 
