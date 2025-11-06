@@ -9,6 +9,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $driverName  = "" # you can set the printer driver here 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
