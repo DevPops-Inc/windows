@@ -6,6 +6,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $domainAdmin = "" # you can set the domain admin here 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
