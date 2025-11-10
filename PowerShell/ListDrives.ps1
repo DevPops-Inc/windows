@@ -1,5 +1,7 @@
 # list drives
 
+$ErrorActionPreference = "Stop"
+
 function CheckOs()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
