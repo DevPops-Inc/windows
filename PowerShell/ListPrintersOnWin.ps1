@@ -1,4 +1,6 @@
-# get list printers on Windows
+# list printers on Windows
+
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
