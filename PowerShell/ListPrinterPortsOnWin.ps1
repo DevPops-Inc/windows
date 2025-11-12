@@ -1,5 +1,7 @@
 # list printer ports on Windows
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Start checking operating system at" (Get-Date).DateTime
