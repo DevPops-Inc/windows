@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $buddy = "" # you can set your buddy's name here 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOs()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
