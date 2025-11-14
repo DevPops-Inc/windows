@@ -90,7 +90,7 @@ function LookingForward()
         {
             Write-Host ("Looking forward to working together, {0}!" -F $buddy) -Foregroundcolor $color 
 
-            Start-Sleep -s 1 
+            Start-Sleep -s .25
         }
 
         Write-Host "Successfully finished looking forward to working together." -ForegroundColor Green 
