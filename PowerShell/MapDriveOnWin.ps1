@@ -8,6 +8,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $path        = "" # you can set the path here 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Start checking operating system at" (Get-Date).DateTime
