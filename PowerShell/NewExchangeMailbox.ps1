@@ -10,6 +10,8 @@ param(
     [string]       [Parameter(Mandatory = $False)] $lastName  = "" # you can set the user's last name here 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -161,7 +163,14 @@ function NewMailbox([string]      $email,
         $startDateTime = (Get-Date)
         Write-Host "Started creating remote mailbox at" $startDateTime.DateTime
 
-        New-Mailbox -UserPrincipalName $email  -Name $firstName$lastName -OrganizationalUnit Users -Password $password -FirstName $firstName -LastName $lastName -DisplayName "$firstName $lastName" -ResetPasswordOnNextLogon $false
+        New-Mailbox -UserPrincipalName $email `
+                    -Name $firstName$lastName `
+                    -OrganizationalUnit Users `
+                    -Password $password `
+                    -FirstName $firstName `
+                    -LastName $lastName `
+                    -DisplayName "$firstName $lastName" `
+                    -ResetPasswordOnNextLogon $false
 
         Write-Host ("Successfully created new mailbox: {0}" -F $email) -ForegroundColor Green
 
