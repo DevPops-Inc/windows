@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $fileLocation = "" # you can set the file location here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started Checking operating system at" (Get-Date).DateTime
