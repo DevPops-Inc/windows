@@ -7,6 +7,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $photoLocation = "" # you can set the photo location here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
