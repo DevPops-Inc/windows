@@ -7,6 +7,8 @@ param(
     [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopbackIpv4Address = "127.0.0.1"
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOs()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
