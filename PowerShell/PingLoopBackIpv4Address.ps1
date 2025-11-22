@@ -7,6 +7,8 @@ param(
     [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopbackIpv4Address = "127.0.0.1"
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOs()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -83,7 +85,7 @@ function PingLoopbackIpv4([System.Net.IPAddress]$loopbackIpv4Address)
         $startDateTime = (Get-Date)
         Write-Host "Started pinging loopback IPv4 address at" $startDateTime.DateTime
 
-        Test-Connection $loopbackIpv4Address
+        Test-Connection $loopbackIpv4Address | Out-String
         Write-Host "Successfully pinged loopback IPv4 address." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
