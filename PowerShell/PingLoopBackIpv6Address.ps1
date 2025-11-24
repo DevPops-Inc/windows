@@ -17,8 +17,6 @@ function CheckOs()
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
-
-
     }
     else 
     {
@@ -86,7 +84,7 @@ function PingLoopbackIpv6([System.Net.IPAddress]$loopBackIpv6Address)
         $startDateTime = (Get-Date)
         Write-Host "Started pinging loopback IPv6 address at" $startDateTime.DateTime
 
-        Test-Connection $loopBackIpv6Address
+        Test-Connection $loopBackIpv6Address | Out-String
         Write-Host "Successfully pinged loopback IPv6 address." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
