@@ -7,6 +7,8 @@ param(
     [System.Net.IPAddress] [Parameter(Mandatory = $False)] $loopBackIpv6Address = "::1" 
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOs()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
@@ -15,8 +17,6 @@ function CheckOs()
     if ($hostOs -eq "Win32NT")
     {
         Write-Host "Operating System:" (Get-CimInstance -ClassName Win32_OperatingSystem).Caption -ForegroundColor Green
-
-
     }
     else 
     {
@@ -74,7 +74,7 @@ function CheckParameters([System.Net.IPAddress]$loopBackIpv6Address)
 function PingLoopbackIpv6([System.Net.IPAddress]$loopBackIpv6Address)
 {
     Write-Host "`nPing loopback IPv6 address.`n"
-    CheckOsForWin
+    CheckOs
 
     $loopBackIpv6Address = GetLoopBackIpv6Address $loopBackIpv6Address
     CheckParameters $loopBackIpv6Address
@@ -84,7 +84,7 @@ function PingLoopbackIpv6([System.Net.IPAddress]$loopBackIpv6Address)
         $startDateTime = (Get-Date)
         Write-Host "Started pinging loopback IPv6 address at" $startDateTime.DateTime
 
-        Test-Connection $loopBackIpv6Address
+        Test-Connection $loopBackIpv6Address | Out-String
         Write-Host "Successfully pinged loopback IPv6 address." -ForegroundColor Green
 
         $finishedDateTime = (Get-Date)
