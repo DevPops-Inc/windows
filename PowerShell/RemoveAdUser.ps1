@@ -8,6 +8,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $username = "" # you can set the username here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
