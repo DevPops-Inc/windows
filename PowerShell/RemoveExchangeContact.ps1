@@ -8,6 +8,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $contactName = "" # you can set the contact name here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
