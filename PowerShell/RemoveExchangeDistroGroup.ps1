@@ -9,6 +9,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $distroGroup = "" # you can set the distribution group here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
