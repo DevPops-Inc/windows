@@ -8,6 +8,8 @@ param(
     [string] [Parameter(Mandatory = $False)] $ipAddress = "" # you can set the IP address here
 )
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
