@@ -6,8 +6,10 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $newName = ""
+    [string] [Parameter(Mandatory = $False)] $newName = "" # you can set the new computer name here
 )
+
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
