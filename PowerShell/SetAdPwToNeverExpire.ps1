@@ -4,8 +4,10 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $adUser = ""
+    [string] [Parameter(Mandatory = $False)] $adUser = "" # you can set your Actie Directory username here
 )
+
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
