@@ -5,8 +5,10 @@
 [CmdletBinding()]
 param(
     [string] [Parameter(Mandatory = $False)] $newAlias = "vi", 
-    [string] [Parameter(Mandatory = $False)] $app      = "notepad"
+    [string] [Parameter(Mandatory = $False)] $app      = "notepad" 
 )
+
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
