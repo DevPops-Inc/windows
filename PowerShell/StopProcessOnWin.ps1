@@ -5,8 +5,10 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $processName = ""
+    [string] [Parameter(Mandatory = $False)] $processName = "" # you can set the process name here (example: outlook.exe)
 )
+
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
