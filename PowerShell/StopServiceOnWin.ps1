@@ -5,8 +5,10 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $serviceName = ""
+    [string] [Parameter(Mandatory = $False)] $serviceName = "" # you can set the service you wish to stop here 
 )
+
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
