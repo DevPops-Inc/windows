@@ -4,9 +4,11 @@
 
 [CmdletBinding()]
 param(
-    [string] [Parameter(Mandatory = $False)] $sourceFilePath  = "", 
-    [string] [Parameter(Mandatory = $False)] $destinationPath = ""
+    [string] [Parameter(Mandatory = $False)] $sourceFilePath  = "", # you can set the source file path here
+    [string] [Parameter(Mandatory = $False)] $destinationPath = "" # you can set the destination path here
 )
+
+$ErrorActionPreference = "Stop"
 
 function CheckOsForWin()
 {
