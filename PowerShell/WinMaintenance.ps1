@@ -2,6 +2,8 @@
 
 # run this script as admin: Start-Process PowerShell -Verb RunAs
 
+$ErrorActionPreference = "Stop"
+
 function CheckOsForWin()
 {
     Write-Host "Started checking operating system at" (Get-Date).DateTime
