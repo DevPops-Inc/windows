@@ -67,8 +67,13 @@ function InstallWinUpdates()
 {
     Write-Host "Started installing Windows updates at" (Get-Date).DateTime
 
+    if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate))
+    {
+        Install-Module -Name PSWindowsUpdate -Scope CurrentUser -Force
+    }
+
     Install-Module PSWindowsUpdate -Force
-    Get-WindowsUpdate -AcceptAll -Install 
+    Get-WindowsUpdate -AcceptAll -Install
 
     Write-Host "Finished installing Windows updates at" (Get-Date).DateTime
     Write-Host ""
@@ -77,7 +82,6 @@ function InstallWinUpdates()
 function WindowsMaintenance()
 {
     Write-Host "`nWindows maintenance.`n"
-
     CheckOsForWin
 
     try 
